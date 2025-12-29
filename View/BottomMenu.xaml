@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MetanetA_MobileApp.View.BottomMenu"
+             HeightRequest="70"
+             BackgroundColor="White">
+
+    <Border >
+    <Grid ColumnDefinitions="*,*,*,*,*"
+          Padding="20,8"
+          VerticalOptions="Center">
+
+
+        <ImageButton Grid.Column="0"
+                     Source="house_button.png"
+                     Style="{StaticResource BottomIconStyle}"
+                     HorizontalOptions="Center"
+                     VerticalOptions="Center"
+                     Command="{Binding HomeCommand}" />
+
+        <ImageButton Grid.Column="1"
+                     Source="product.png"
+                     Style="{StaticResource BottomIconStyle}"
+                     HorizontalOptions="Center"
+                     VerticalOptions="Center"
+                     Command="{Binding ProductsCommand}" />
+        <ImageButton Grid.Column="2"
+                     Source="qr_code.png"
+                     Style="{StaticResource BottomIconStyle}"
+                     HorizontalOptions="Center"
+                     VerticalOptions="Center"
+                     Command="{Binding QrCommand}" />
+
+        <ImageButton Grid.Column="3"
+                     Source="profile.png"
+                     Style="{StaticResource BottomIconStyle}"
+                     HorizontalOptions="Center"
+                     VerticalOptions="Center"
+                     Command="{Binding ProfileCommand}" />
+
+            <ImageButton Grid.Column="4"
+                    Source="other_icon.png"
+                    Style="{StaticResource BottomIconStyle}"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+            
+                    Command="{Binding OtherCommand}" />
+        </Grid>
+    </Border>
+</ContentView>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MetanetA_MobileApp.View.ProfilePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:MetanetA_MobileApp.View"
+    Title="">
+
+    <!-- 2 sətirli Grid: yuxarıda kontent, aşağıda sabit menyu -->
+    <Grid RowDefinitions="*,Auto">
+
+        <!-- Yuxarı hissə: profil formu -->
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="20" Spacing="24">
+
+                <!-- Başlıq + Bonus -->
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                    <VerticalStackLayout Spacing="2">
+     
+                        <Label Text="İstifadəçi məlumatları"
+                               Opacity="0.7" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="1"
+                                         HorizontalOptions="End"
+                                         VerticalOptions="Center"
+                                         Spacing="0">
+        
+                    </VerticalStackLayout>
+                </Grid>
+
+                <!-- Form Grid-i, sənin yazdığın kimi -->
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                      ColumnDefinitions="120,*"
+                      RowSpacing="16"
+                      ColumnSpacing="12">
+
+                    <!-- Name -->
+                    <Label Grid.Row="0" Grid.Column="0" Text="Ad"
+                           VerticalTextAlignment="Center" />
+                    <Entry Grid.Row="0" Grid.Column="1"
+                           Placeholder="adınızı daxil edin"
+                           Text="{Binding UserInfo.Name, Mode=TwoWay}" />
+
+                    <!-- Surname -->
+                    <Label Grid.Row="1" Grid.Column="0" Text="Soyad"
+                           VerticalTextAlignment="Center" />
+                    <Entry Grid.Row="1" Grid.Column="1"
+                           Placeholder="Soyadı daxil edin"
+                           Text="{Binding UserInfo.Surname, Mode=TwoWay}" />
+
+                    <!-- Father name -->
+                    <Label Grid.Row="2" Grid.Column="0" Text="Ata adı"
+                           VerticalTextAlignment="Center" />
+                    <Entry Grid.Row="2" Grid.Column="1"
+                           Placeholder="Ata adını daxil edin"
+                           Text="{Binding UserInfo.FatherName, Mode=TwoWay}" />
+
+                    <!-- City -->
+                    <Label Grid.Row="3" Grid.Column="0" Text="Şəhər"
+                           VerticalTextAlignment="Center" />
+                    <Entry Grid.Row="3" Grid.Column="1"
+                           Placeholder="Şəhərinizi daxil edin"
+                           Text="{Binding UserInfo.City, Mode=TwoWay}" />
+
+                    <!-- Village -->
+                    <Label Grid.Row="4" Grid.Column="0" Text="Kənd"
+                           VerticalTextAlignment="Center" />
+                    <Entry Grid.Row="4" Grid.Column="1"
+                           Placeholder="Kəndinizi daxil edin"
+                           Text="{Binding UserInfo.Village, Mode=TwoWay}" />
+
+                    <!-- Job -->
+                    <Label Grid.Row="5" Grid.Column="0" Text="İş"
+                           VerticalTextAlignment="Center" />
+                    <Entry Grid.Row="5" Grid.Column="1"
+                           Placeholder="İşinizi daxil edin"
+                           Text="{Binding UserInfo.Job, Mode=TwoWay}" />
+
+                    <!-- Phone -->
+                    <Label Grid.Row="6" Grid.Column="0" Text="Telefon nömrəsi"
+                           VerticalTextAlignment="Center" />
+                    <Entry Grid.Row="6" Grid.Column="1"
+                           Placeholder="994 50 123 45 67"
+                           Keyboard="Telephone"
+                           Text="{Binding UserInfo.PhoneNumber, Mode=TwoWay}" />
+
+                    <!-- Birth date -->
+                    <Label Grid.Row="7" Grid.Column="0" Text="Birth date"
+                           VerticalTextAlignment="Center" />
+                    <DatePicker Grid.Row="7" Grid.Column="1"
+                                Date="{Binding UserInfo.BirthDate, Mode=TwoWay}" />
+
+                    <!-- Düymələr -->
+                    <Grid Grid.Row="9"
+                          Grid.ColumnSpan="2"
+                          
+                          ColumnDefinitions="*,*">
+                        
+                        <Button Text="Yadda saxla"
+                                StyleClass="Primary"
+                                Grid.Column="1"
+                                Margin="3"
+                                BackgroundColor="ForestGreen"
+                                Command="{Binding SaveCommand}" />
+                        <Button Text="sıfırla"
+                                 Grid.Column="0"
+                                Margin="3"
+                                BackgroundColor="ForestGreen"
+                                Command="{Binding ResetCommand}" />
+                    </Grid>
+                </Grid>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Aşağı hissə: sabit bottom menu -->
+        <controls:BottomMenu Grid.Row="1" />
+    </Grid>
+</ContentPage>

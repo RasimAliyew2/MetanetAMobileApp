@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MetanetA_MobileApp.View"
+             x:Class="MetanetA_MobileApp.View.BonusesPage">
+
+    <Grid RowDefinitions="Auto,*">
+    <VerticalStackLayout Padding="20" Spacing="24" Grid.Row="0">
+
+        <Label Text="Bonuses"
+               FontSize="24"
+               FontAttributes="Bold" />
+
+        <Grid ColumnDefinitions="Auto,*,Auto"
+              RowDefinitions="Auto,Auto,Auto"
+              ColumnSpacing="16"
+              RowSpacing="16">
+
+            <!-- Bonus collected -->
+            <Label Grid.Row="0" Grid.Column="0"
+                   Text="Bonus collected"
+                   VerticalTextAlignment="Center" />
+
+            <Label Grid.Row="0" Grid.Column="1"
+                   Text="{Binding UserInfo.BonusOfProfile.CollectedBonus}"   
+                   FontAttributes="Bold"
+                   VerticalTextAlignment="Center" />
+
+            <!-- Bonus spent -->
+            <Label Grid.Row="1" Grid.Column="0"
+                   Text="Bonus spent"
+                   VerticalTextAlignment="Center" />
+
+            <Label Grid.Row="1" Grid.Column="1"
+                   Text="{Binding UserInfo.BonusOfProfile.BonusUsed}"
+                   FontAttributes="Bold"
+                   VerticalTextAlignment="Center" />
+
+            <!-- Current bonus + button on the right -->
+            <Label Grid.Row="2" Grid.Column="0"
+                   Text="Current bonus"
+                   VerticalTextAlignment="Center" />
+
+            <Label Grid.Row="2" Grid.Column="1"
+                   Text="{Binding UserInfo.BonusOfProfile.CurrentBonus}"
+                   FontAttributes="Bold"
+                   VerticalTextAlignment="Center" />
+
+            <Button Grid.Row="2" Grid.Column="2"
+                    Text="Convert to gift"
+                    Command="{Binding ConvertToGiftCommand}" />
+        </Grid>
+
+    </VerticalStackLayout>
+        <!-- Aşağı hissə: sabit bottom menu -->
+        <controls:BottomMenu Grid.Row="1" VerticalOptions="End" />
+    </Grid>
+</ContentPage>

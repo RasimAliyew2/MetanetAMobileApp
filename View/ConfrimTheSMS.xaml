@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ViewModel="clr-namespace:MetanetA_MobileApp.ViewModels"
+             x:Class="MetanetA_MobileApp.View.ConfrimTheSMS"
+             Title="">
+
+    <Grid Padding="24">
+        <!-- Mərkəzdə şaquli yığım -->
+        <VerticalStackLayout
+            Spacing="14"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+
+            <!-- Başlıq -->
+            <Label
+                Text="Kodu daxil edin"
+                FontSize="24"
+                HorizontalTextAlignment="Center"
+                HorizontalOptions="Center"/>
+
+            <!-- Entry-ni sərhəd (Border) içində saxlayırıq ki, rəngini dəyişə bilək -->
+            <Border
+                x:Name="CodeBorder"
+                StrokeThickness="2"
+                Stroke="LightGray"
+                Padding="8"
+                WidthRequest="260">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="12"/>
+                </Border.StrokeShape>
+
+                <Entry x:Name="CodeEntry"
+                       Text="{Binding Code, Mode=TwoWay}"
+                       ReturnType="Done"
+                       ReturnCommand="{Binding CompletedEditingCommand}"
+                       ReturnCommandParameter="{Binding Text, Source={x:Reference CodeEntry}}"/>
+
+            </Border>
+
+            <!-- Taymer -->
+            <Label
+                x:Name="TimerLabel"
+                Text="{Binding TimerText}"
+                FontSize="18"
+                TextColor="Red"
+                
+                HorizontalTextAlignment="Center"
+                HorizontalOptions="Center"/>
+
+            <!-- Səhv mətni -->
+            <Label
+                x:Name="ErrorLabel"
+                Text="Kod səhv daxil edilib"
+                TextColor="Red"
+                FontSize="12"
+                IsVisible="{Binding IsVisibleErrorLabel}"
+                HorizontalTextAlignment="Center"
+                HorizontalOptions="Center"/>
+
+            <Grid ColumnDefinitions="*,*">
+  
+                <Button Text="Geri qayıt"
+                      Grid.Column="0"
+                      Margin="5"
+                    Background="ForestGreen"
+                       Command="{Binding ReturnPreviousPageCommand}"/>
+
+                <Button Text="Təsdiq et"
+                  
+                  Grid.Column="1"
+                  Background="ForestGreen"
+                  Margin="5"
+                  Command="{Binding AprroveTheSMSCommand}"/>
+            </Grid>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

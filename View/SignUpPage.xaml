@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="MetanetA_MobileApp.View.SignUpPage">
+    
+    <VerticalStackLayout>
+
+        <Grid ColumnDefinitions="*,*">
+
+            <Grid Grid.Column="0" RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="1"/>
+                </Grid.RowDefinitions>
+
+                <Entry Grid.Row="0"
+           Placeholder="Ad"
+           Margin="5"
+           Text="{Binding UserInfo.Name}"
+           HorizontalOptions="Fill" />
+
+                <!-- Alt xətt -->
+                <BoxView Grid.Row="1"
+             HeightRequest="1"
+             HorizontalOptions="Fill"
+             BackgroundColor="Black">
+                    <BoxView.Triggers>
+                        <!-- IsNameValid == False isə qırmızı olsun -->
+                        <DataTrigger TargetType="BoxView"
+                         Binding="{Binding IsNameValid}"
+                         Value="False">
+                            <Setter Property="BackgroundColor" Value="Red" />
+                        </DataTrigger>
+                    </BoxView.Triggers>
+                </BoxView>
+            </Grid>
+
+
+
+            <Grid Grid.Column="1" RowSpacing="0" Margin="5,0,0,0"> 
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="1"/>
+                </Grid.RowDefinitions>
+
+                <Entry Grid.Row="0"
+                       Placeholder="Soyad"
+                       Margin="5"
+                       Text="{Binding UserInfo.Surname}"
+                       Style="{StaticResource NiceEntry}"
+                       HorizontalOptions="FillAndExpand" />
+
+                <BoxView Grid.Row="1"
+             HeightRequest="1"
+             HorizontalOptions="Fill"
+             BackgroundColor="Black" />
+            </Grid>
+
+
+        </Grid>
+
+        <Grid ColumnDefinitions="*,*">
+
+
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="1"/>
+                </Grid.RowDefinitions>
+
+                <Entry Grid.Row="0"
+                       Placeholder="Ata adı"
+                       
+                       Style="{StaticResource NiceEntry}"
+                       Text="{Binding UserInfo.FatherName}" />
+                       
+                            <BoxView Grid.Row="1"
+                                     Margin="0,-26,0,0"
+                                     HeightRequest="1"
+                                     HorizontalOptions="Fill"
+                                     BackgroundColor="Black" />
+            </Grid>
+
+
+
+
+            <Picker Title="Seçin"
+                    Margin="5"
+                    Grid.Column="1"
+                    ItemsSource="{Binding Cities}"
+                    SelectedItem="{Binding UserInfo.City, Mode=TwoWay}"/>
+        </Grid>
+
+        
+        <Grid ColumnDefinitions="*,*">
+            <Grid ColumnDefinitions="Auto,*" Padding="0">
+                <!-- Ülke kodu (sabit) -->
+
+            
+                <!-- Prefix seçici -->
+               
+                    <Picker
+            Title="Prefix"
+            ItemsSource="{Binding Prefixes}"
+            SelectedItem="{Binding SelectedPrefix, Mode=TwoWay}"
+            HorizontalOptions="Fill"   />
+              
+
+                <!-- Abone numarası -->
+                <Border Grid.Column="1" StrokeThickness="2" Stroke="#E0E0E0" Padding="0" >
+                    <Entry
+                      
+                         Placeholder="XXXXXXX"
+                         Keyboard="Numeric"
+                         MaxLength="9"    
+                         Style="{StaticResource NiceEntry}" 
+                         Text="{Binding LineNumber, Mode=TwoWay}"
+                         HorizontalOptions="FillAndExpand" />
+                </Border>
+            </Grid>
+
+            <!-- Dilersen bir de birleşmiş numarayı göster -->
+            <Label
+                Margin="0,6,0,0"
+                Text="{Binding FullPhoneNumber}"
+                FontAttributes="Bold" />
+
+
+            <DatePicker 
+                    Grid.Column="1"
+                    Margin="5"
+                    Format="dd.MM.yyyy"
+                    Date="{Binding UserInfo.BirthDate, Mode=TwoWay}"
+                    MinimumDate="{Binding MinBirthDate}"
+                    MaximumDate="{Binding MaxBirthDate}" />
+        </Grid>
+
+        <Picker Title="Seçin"
+               Margin="5"
+               Grid.Column="1"
+               ItemsSource="{Binding Jobs}"
+               SelectedItem="{Binding UserInfo.Job, Mode=TwoWay}"/>
+        
+        <HorizontalStackLayout>
+            <CheckBox HorizontalOptions="Start"/>
+            <Label VerticalTextAlignment="Center" Text="Qəbul edirəm"/>
+        </HorizontalStackLayout>
+
+
+        <Button Text="Qediyyatdan keç"
+                Background="ForestGreen"
+                BackgroundColor="ForestGreen"
+                Command="{Binding SignUpCommand}"/>
+    </VerticalStackLayout>
+</ContentPage>

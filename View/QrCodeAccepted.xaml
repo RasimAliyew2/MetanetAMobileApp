@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MetanetA_MobileApp.View.QrCodeAccepted"
+             Title="">
+    <VerticalStackLayout
+            VerticalOptions="CenterAndExpand"
+            HorizontalOptions="Center"
+            Spacing="20">
+
+        <!-- Böyük yaşıl quş (şəkili Resources/Images-ə əlavə et: green_bird.png) -->
+        <Image
+                Source="green_bird.png"
+                WidthRequest="200"
+                HeightRequest="200"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+
+        <!-- BonusCount + 'əlavə olundu' -->
+        <HorizontalStackLayout
+                HorizontalOptions="Center"
+                Spacing="8">
+
+            <Label
+                    Text="{Binding BonusCount}"
+                    FontSize="24"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center" />
+
+            <Label
+                    Text="əlavə olundu"
+                    FontSize="24"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center" />
+        </HorizontalStackLayout>
+
+        <!-- Go To Main Page düyməsi -->
+        <Button
+                Text="Go To Main Page"
+                HorizontalOptions="Center"
+                Command="{Binding GoToMainPageCommand}" />
+    </VerticalStackLayout>
+
+</ContentPage>

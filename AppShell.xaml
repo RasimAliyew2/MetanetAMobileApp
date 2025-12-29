@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MetanetA_MobileApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MetanetA_MobileApp.View"
+    xmlns:localGifts="clr-namespace:MetanetA_MobileApp.View.Gifts"
+    xmlns:localProducts="clr-namespace:MetanetA_MobileApp.View.Products"
+    xmlns:localSing="clr-namespace:MetanetA_MobileApp.View.Sign"
+    Shell.FlyoutBehavior="Disabled"
+    Title="MetanetA_MobileApp">
+
+    <ShellContent Route="SignInPage"
+                  ContentTemplate="{DataTemplate local:SignInPage}" />
+    
+    <ShellContent
+        Title=""
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+    <ShellContent
+        Title=""
+        ContentTemplate="{DataTemplate local:SignUpPage}"
+        Route="SignUpPage"/>
+
+    <ShellContent
+        Title=""
+        ContentTemplate="{DataTemplate local:ConfrimTheSMS}"
+        Route="ConfrimTheSMS"/>
+
+    <ShellContent
+       Title=""
+       ContentTemplate="{DataTemplate local:QrScannerPage}"
+       Route="QrScannerPage"/>
+
+    <ShellContent
+       Title=""
+       ContentTemplate="{DataTemplate local:ProfilePage}"
+       Route="ProfilePage"/>
+
+    <ShellContent
+       Title=""
+       ContentTemplate="{DataTemplate local:QRCodeNotAccepted}"
+       Route="QRCodeNotAccepted"/>
+
+
+    <ShellContent
+    Title=""
+    ContentTemplate="{DataTemplate local:QrCodeAccepted}"
+    Route="QrCodeAccepted"/>
+
+    <ShellContent
+    Title=""
+    ContentTemplate="{DataTemplate local:BonusesPage}"
+    Route="BonusesPage"/>
+
+    <ShellContent
+    Title=""
+    ContentTemplate="{DataTemplate localGifts:GiftsPage}"
+    Route="GiftsPage"/>
+
+    <ShellContent
+    Title=""
+    ContentTemplate="{DataTemplate localGifts:GiftDetailPage}"
+    Route="GiftDetailPage"/>
+
+    <ShellContent
+    Title=""
+    ContentTemplate="{DataTemplate localProducts:ProductPage}"
+    Route="ProductPage"/>
+
+    <ShellContent
+   Title=""
+   ContentTemplate="{DataTemplate localSing:SetPasswordPage}"
+   Route="SetPasswordPage"/>
+    
+</Shell> 
