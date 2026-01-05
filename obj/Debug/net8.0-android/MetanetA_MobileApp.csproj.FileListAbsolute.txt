@@ -1097,3 +1097,4 @@ C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Debug\net8
 C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Debug\net8.0-android\stamp\_GeneratePackageManagerJava.stamp
 C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Debug\net8.0-android\stamp\_ResolveLibraryProjectImports.stamp
 C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Debug\net8.0-android\android\assets\System.Private.CoreLib.dll
+C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Debug\net8.0-android\MetanetA_MobileApp.sourcelink.json

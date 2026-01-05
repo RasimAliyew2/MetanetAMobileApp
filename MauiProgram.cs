@@ -14,6 +14,8 @@ using MetanetA_MobileApp.View.Products;
 using MetanetA_MobileApp.ViewModels.ProductsViewModels;
 using MetanetA_MobileApp.ViewModels.Sign;
 using MetanetA_MobileApp.View.Sign;
+using MetanetA_MobileApp.ViewModel;
+
 
 
 
@@ -59,26 +61,32 @@ namespace MetanetA_MobileApp
             builder.Services.AddSingleton<QrScannerPage>();
             builder.Services.AddSingleton<ConfrimTheSMS>(); 
             builder.Services.AddSingleton<ProfilePage>();
-            builder.Services.AddSingleton<QRCodeNotAccepted>();
             builder.Services.AddSingleton<QrCodeAccepted>();
+            builder.Services.AddSingleton<QRCodeNotAccepted>();
+            builder.Services.AddSingleton<ForgetPasswordPage>();
+            builder.Services.AddSingleton<RequestAcceptedPage>(); 
+
 
             //View Models
-            builder.Services.AddSingleton<MainViewModel>();
-            builder.Services.AddSingleton<SignInViewModel>();
-            builder.Services.AddSingleton<SignUpViewModel>();
-            builder.Services.AddSingleton<SetPasswordViewModel>();
-            builder.Services.AddSingleton<BonusesViewModel>();
-            builder.Services.AddSingleton<ConfrimSMSViewModel>();
-            builder.Services.AddSingleton<QrScannerViewModel>(); 
-            builder.Services.AddSingleton<ProfileViewModel>();
-            builder.Services.AddSingleton<GiftsViewModel>();
-            builder.Services.AddSingleton<ProductViewModel>();
-            builder.Services.AddSingleton<GiftDetailViewModel>();
-            builder.Services.AddSingleton<QRCodeNotAcceptedViewModel>();
-            builder.Services.AddSingleton<QRCodeAcceptedViewModel>(); 
-  
+            builder.Services.AddTransient<MainViewModel>();
+            builder.Services.AddTransient<SignInViewModel>();
+            builder.Services.AddTransient<SignUpViewModel>();
+            builder.Services.AddTransient<SetPasswordViewModel>();
+            builder.Services.AddTransient<BonusesViewModel>();
+            builder.Services.AddTransient<ConfrimSMSViewModel>();
+            builder.Services.AddTransient<QrScannerViewModel>(); 
+            builder.Services.AddTransient<ProfileViewModel>();
+            builder.Services.AddTransient<GiftsViewModel>();
+            builder.Services.AddTransient<ProductViewModel>();
+            builder.Services.AddTransient<GiftDetailViewModel>();
+            builder.Services.AddTransient<ForgetPasswordViewModel>();
+            builder.Services.AddTransient<RequestAcceptedViewModel>();
+            builder.Services.AddTransient<QRCodeNotAcceptedViewModel>();
+            builder.Services.AddTransient<QRCodeAcceptedViewModel>();
+            
+
             //Services
-            builder.Services.AddSingleton<IUserSession, UserSession>(); 
+            builder.Services.AddSingleton<IUserSession, UserSession>();  
             builder.Services.AddSingleton<IQrCode, QrCode>(); 
 
             //Models

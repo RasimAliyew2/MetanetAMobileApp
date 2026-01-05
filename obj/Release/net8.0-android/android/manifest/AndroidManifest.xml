@@ -25,7 +25,7 @@
   </queries>
   <permission android:name="com.companyname.metaneta_mobileapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" android:protectionLevel="signature" />
   <uses-permission android:name="com.companyname.metaneta_mobileapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-  <application android:name="crc64e3396b20b1df5ee9.MainApplication" android:allowBackup="true" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:extractNativeLibs="true" android:icon="@mipmap/appicon" android:label="MatanatA" android:roundIcon="@mipmap/appicon">
+  <application android:name="crc64e3396b20b1df5ee9.MainApplication" android:allowBackup="true" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:extractNativeLibs="true" android:icon="@mipmap/appicon" android:label="MatanatA" android:roundIcon="@mipmap/appicon" android:usesCleartextTraffic="true">
     <provider android:name="microsoft.maui.essentials.fileProvider" android:authorities="com.companyname.metaneta_mobileapp.fileProvider" android:exported="false" android:grantUriPermissions="true">
       <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/microsoft_maui_essentials_fileprovider_file_paths" />
     </provider>

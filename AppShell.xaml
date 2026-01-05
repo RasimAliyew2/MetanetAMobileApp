@@ -73,5 +73,18 @@
    Title=""
    ContentTemplate="{DataTemplate localSing:SetPasswordPage}"
    Route="SetPasswordPage"/>
+
+
+    <ShellContent
+    Title=""
+    ContentTemplate="{DataTemplate local:RequestAcceptedPage}"
+    Route="RequestAcceptedPage"/>
+
+    <ShellContent
+    Title=""
+    ContentTemplate="{DataTemplate local:ForgetPasswordPage}"
+    Route="ForgetPasswordPage"/>
+
     
+
 </Shell> 

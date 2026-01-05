@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
+using MetanetA_MobileApp.Model;
 using MetanetA_MobileApp.Services.Abstractions;
 
 namespace MetanetA_MobileApp.Services
@@ -12,5 +13,7 @@ namespace MetanetA_MobileApp.Services
     {
         [ObservableProperty] private string? phoneNumber;
         [ObservableProperty] private string? otpCode;
+
+        public UserInfo? CurrentUser { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using MetanetA_MobileApp.Model;
 using MetanetA_MobileApp.Services;
+using MetanetA_MobileApp.Services.Abstractions;
 using MetanetA_MobileApp.View.Products;
 
 
@@ -20,7 +21,7 @@ public partial class ProfileViewModel : ObservableObject
 
     // Optional: track whether there are unsaved changes.
     [ObservableProperty] private bool hasChanges;
-    [ObservableProperty] UserInfo userInfo;
+    [ObservableProperty] IUserSession userSession;
     // When any property changes, mark HasChanges = true.
    //partial void OnNameChanged(string value) => HasChanges = true;
    //partial void OnSurnameChanged(string value) => HasChanges = true;
@@ -31,9 +32,9 @@ public partial class ProfileViewModel : ObservableObject
    //partial void OnBirthDateChanged(DateTime value) => HasChanges = true;
    //partial void OnVillageChanged(string value) => HasChanges = true;
 
-    public ProfileViewModel(UserInfo user)
+    public ProfileViewModel(IUserSession userSession)
     {
-        UserInfo = user;
+        this.userSession = userSession;
         HasChanges = false;
     }
 

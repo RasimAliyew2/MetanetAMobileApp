@@ -111,8 +111,8 @@
         <member name="P:MetanetA_MobileApp.ViewModels.BonusesViewModel.BonusSpent">
             <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.BonusesViewModel.bonusSpent"/>
         </member>
-        <member name="P:MetanetA_MobileApp.ViewModels.BonusesViewModel.UserInfo">
-            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.BonusesViewModel.userInfo"/>
+        <member name="P:MetanetA_MobileApp.ViewModels.BonusesViewModel.UserSession">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.BonusesViewModel.userSession"/>
         </member>
         <member name="F:MetanetA_MobileApp.ViewModels.BonusesViewModel.convertToGiftCommand">
             <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.BonusesViewModel.ConvertToGiftCommand"/>.</summary>
@@ -143,6 +143,22 @@
         </member>
         <member name="P:MetanetA_MobileApp.ViewModels.BonusesViewModel.ProfileCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.BonusesViewModel.Profile"/>.</summary>
+        </member>
+        <member name="T:MetanetA_MobileApp.ViewModels.ForgetPasswordViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.ForgetPasswordViewModel.PhoneNumber">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ForgetPasswordViewModel.phoneNumber"/>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.ForgetPasswordViewModel.PhoneNotNumberNotFound">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ForgetPasswordViewModel.phoneNotNumberNotFound"/>
+        </member>
+        <member name="F:MetanetA_MobileApp.ViewModels.ForgetPasswordViewModel.approveTheNumberCommand">
+            <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.ForgetPasswordViewModel.ApproveTheNumberCommand"/>.</summary>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.ForgetPasswordViewModel.ApproveTheNumberCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.ForgetPasswordViewModel.ApproveTheNumber"/>.</summary>
         </member>
         <member name="T:MetanetA_MobileApp.ViewModels.GiftDetailViewModel">
             <inheritdoc/>
@@ -273,8 +289,8 @@
         <member name="P:MetanetA_MobileApp.ViewModels.ProfileViewModel.HasChanges">
             <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ProfileViewModel.hasChanges"/>
         </member>
-        <member name="P:MetanetA_MobileApp.ViewModels.ProfileViewModel.UserInfo">
-            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ProfileViewModel.userInfo"/>
+        <member name="P:MetanetA_MobileApp.ViewModels.ProfileViewModel.UserSession">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ProfileViewModel.userSession"/>
         </member>
         <member name="F:MetanetA_MobileApp.ViewModels.ProfileViewModel.saveCommand">
             <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.ProfileViewModel.SaveCommand"/>.</summary>
@@ -340,6 +356,15 @@
         <member name="P:MetanetA_MobileApp.ViewModels.QrScannerViewModel.GoToMainCommandCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.QrScannerViewModel.GoToMainCommand"/>.</summary>
         </member>
+        <member name="T:MetanetA_MobileApp.ViewModels.RequestAcceptedViewModel">
+            <inheritdoc/>
+        </member>
+        <member name="F:MetanetA_MobileApp.ViewModels.RequestAcceptedViewModel.goToSignInPageCommand">
+            <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.RequestAcceptedViewModel.GoToSignInPageCommand"/>.</summary>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.RequestAcceptedViewModel.GoToSignInPageCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.RequestAcceptedViewModel.GoToSignInPage"/>.</summary>
+        </member>
         <member name="T:MetanetA_MobileApp.ViewModels.ConfrimSMSViewModel">
             <inheritdoc/>
             <inheritdoc/>
@@ -356,6 +381,9 @@
         </member>
         <member name="P:MetanetA_MobileApp.ViewModels.ConfrimSMSViewModel.IsVisibleErrorLabel">
             <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ConfrimSMSViewModel.isVisibleErrorLabel"/>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.ConfrimSMSViewModel.OperationType">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ConfrimSMSViewModel.operationType"/>
         </member>
         <member name="F:MetanetA_MobileApp.ViewModels.ConfrimSMSViewModel.completedEditingCommand">
             <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.ConfrimSMSViewModel.CompletedEditingCommand"/>.</summary>
@@ -403,6 +431,9 @@
         <member name="P:MetanetA_MobileApp.ViewModels.Sign.SetPasswordViewModel.MismatchText">
             <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.Sign.SetPasswordViewModel.mismatchText"/>
         </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.Sign.SetPasswordViewModel.OperationType">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.Sign.SetPasswordViewModel.operationType"/>
+        </member>
         <member name="M:MetanetA_MobileApp.ViewModels.Sign.SetPasswordViewModel.OnPasswordChanged(System.String)">
             <summary>Executes the logic for when <see cref="P:MetanetA_MobileApp.ViewModels.Sign.SetPasswordViewModel.Password"/> just changed.</summary>
             <param name="value">The new property value that was set.</param>
@@ -419,32 +450,6 @@
         <member name="P:MetanetA_MobileApp.ViewModels.Sign.SetPasswordViewModel.ConfirmCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.Sign.SetPasswordViewModel.ConfirmAsync"/>.</summary>
         </member>
-        <member name="T:MetanetA_MobileApp.ViewModels.SignInViewModel">
-            <inheritdoc/>
-            <inheritdoc/>
-            <inheritdoc/>
-        </member>
-        <member name="P:MetanetA_MobileApp.ViewModels.SignInViewModel.Username">
-            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.SignInViewModel.username"/>
-        </member>
-        <member name="P:MetanetA_MobileApp.ViewModels.SignInViewModel.UserInfo">
-            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.SignInViewModel.userInfo"/>
-        </member>
-        <member name="P:MetanetA_MobileApp.ViewModels.SignInViewModel.IsVisible">
-            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.SignInViewModel.isVisible"/>
-        </member>
-        <member name="F:MetanetA_MobileApp.ViewModels.SignInViewModel.signInCommand">
-            <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.SignInViewModel.SignInCommand"/>.</summary>
-        </member>
-        <member name="P:MetanetA_MobileApp.ViewModels.SignInViewModel.SignInCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.SignInViewModel.SignIn"/>.</summary>
-        </member>
-        <member name="F:MetanetA_MobileApp.ViewModels.SignInViewModel.signUpCommand">
-            <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.SignInViewModel.SignUpCommand"/>.</summary>
-        </member>
-        <member name="P:MetanetA_MobileApp.ViewModels.SignInViewModel.SignUpCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.SignInViewModel.SignUp"/>.</summary>
-        </member>
         <member name="T:MetanetA_MobileApp.ViewModels.SignUpViewModel">
             <inheritdoc/>
             <inheritdoc/>
@@ -458,17 +463,85 @@
         <member name="P:MetanetA_MobileApp.ViewModels.SignUpViewModel.IsNameValid">
             <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.SignUpViewModel.isNameValid"/>
         </member>
-        <member name="P:MetanetA_MobileApp.ViewModels.SignUpViewModel.ThicknessBorder">
-            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.SignUpViewModel.thicknessBorder"/>
+        <member name="P:MetanetA_MobileApp.ViewModels.SignUpViewModel.IsSurnameValid">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.SignUpViewModel.isSurnameValid"/>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.SignUpViewModel.IsPhoneValid">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.SignUpViewModel.isPhoneValid"/>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.SignUpViewModel.IsCityValid">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.SignUpViewModel.isCityValid"/>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.SignUpViewModel.IsJobValid">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.SignUpViewModel.isJobValid"/>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.SignUpViewModel.IsTermsValid">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.SignUpViewModel.isTermsValid"/>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.SignUpViewModel.HasSubmitted">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.SignUpViewModel.hasSubmitted"/>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.SignUpViewModel.IsValidationVisible">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.SignUpViewModel.isValidationVisible"/>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.SignUpViewModel.ValidationMessage">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.SignUpViewModel.validationMessage"/>
         </member>
         <member name="P:MetanetA_MobileApp.ViewModels.SignUpViewModel.SelectedPrefix">
             <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.SignUpViewModel.selectedPrefix"/>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.SignUpViewModel.IsTermsAccepted">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.SignUpViewModel.isTermsAccepted"/>
+        </member>
+        <member name="M:MetanetA_MobileApp.ViewModels.SignUpViewModel.OnLineNumberChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:MetanetA_MobileApp.ViewModels.SignUpViewModel.LineNumber"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:MetanetA_MobileApp.ViewModels.SignUpViewModel.LineNumber"/> is changed.</remarks>
+        </member>
+        <member name="M:MetanetA_MobileApp.ViewModels.SignUpViewModel.OnSelectedPrefixChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:MetanetA_MobileApp.ViewModels.SignUpViewModel.SelectedPrefix"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:MetanetA_MobileApp.ViewModels.SignUpViewModel.SelectedPrefix"/> is changed.</remarks>
+        </member>
+        <member name="M:MetanetA_MobileApp.ViewModels.SignUpViewModel.OnIsTermsAcceptedChanged(System.Boolean)">
+            <summary>Executes the logic for when <see cref="P:MetanetA_MobileApp.ViewModels.SignUpViewModel.IsTermsAccepted"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:MetanetA_MobileApp.ViewModels.SignUpViewModel.IsTermsAccepted"/> is changed.</remarks>
         </member>
         <member name="F:MetanetA_MobileApp.ViewModels.SignUpViewModel.signUpCommand">
             <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.SignUpViewModel.SignUpCommand"/>.</summary>
         </member>
         <member name="P:MetanetA_MobileApp.ViewModels.SignUpViewModel.SignUpCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.SignUpViewModel.SignUp"/>.</summary>
+        </member>
+        <member name="T:MetanetA_MobileApp.ViewModel.SignInViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModel.SignInViewModel.PhoneNumber">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModel.SignInViewModel.phoneNumber"/>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModel.SignInViewModel.Password">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModel.SignInViewModel.password"/>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModel.SignInViewModel.FillTheArea">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModel.SignInViewModel.fillTheArea"/>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModel.SignInViewModel.InvalidCredentials">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModel.SignInViewModel.invalidCredentials"/>
+        </member>
+        <member name="F:MetanetA_MobileApp.ViewModel.SignInViewModel.signInCommand">
+            <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModel.SignInViewModel.SignInCommand"/>.</summary>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModel.SignInViewModel.SignInCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModel.SignInViewModel.SignIn"/>.</summary>
+        </member>
+        <member name="F:MetanetA_MobileApp.ViewModel.SignInViewModel.signUpCommand">
+            <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModel.SignInViewModel.SignUpCommand"/>.</summary>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModel.SignInViewModel.SignUpCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModel.SignInViewModel.SignUp"/>.</summary>
         </member>
         <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Button.TextColorTo(Microsoft.Maui.Controls.Button,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
             <summary>
@@ -659,8 +732,11 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.BonusSpent">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "BonusSpent" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.UserInfo">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "UserInfo" generated properties.</summary>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.UserSession">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "UserSession" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.PhoneNotNumberNotFound">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "PhoneNotNumberNotFound" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Gift">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Gift" generated properties.</summary>
@@ -680,6 +756,9 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsVisibleErrorLabel">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsVisibleErrorLabel" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.OperationType">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "OperationType" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ConfirmPassword">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ConfirmPassword" generated properties.</summary>
         </member>
@@ -689,20 +768,50 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.MismatchText">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "MismatchText" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Username">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Username" generated properties.</summary>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.FillTheArea">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "FillTheArea" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.InvalidCredentials">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "InvalidCredentials" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.LineNumber">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "LineNumber" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.UserInfo">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "UserInfo" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsNameValid">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsNameValid" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ThicknessBorder">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ThicknessBorder" generated properties.</summary>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsSurnameValid">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsSurnameValid" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsPhoneValid">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsPhoneValid" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsCityValid">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsCityValid" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsJobValid">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsJobValid" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsTermsValid">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsTermsValid" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HasSubmitted">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HasSubmitted" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsValidationVisible">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsValidationVisible" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ValidationMessage">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ValidationMessage" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedPrefix">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedPrefix" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsTermsAccepted">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsTermsAccepted" generated properties.</summary>
         </member>
         <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs">
             <summary>
@@ -773,8 +882,11 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.BonusSpent">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "BonusSpent" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.UserInfo">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "UserInfo" generated properties.</summary>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.UserSession">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "UserSession" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.PhoneNotNumberNotFound">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "PhoneNotNumberNotFound" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Gift">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Gift" generated properties.</summary>
@@ -794,6 +906,9 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsVisibleErrorLabel">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsVisibleErrorLabel" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.OperationType">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "OperationType" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ConfirmPassword">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ConfirmPassword" generated properties.</summary>
         </member>
@@ -803,20 +918,50 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.MismatchText">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "MismatchText" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Username">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Username" generated properties.</summary>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.FillTheArea">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "FillTheArea" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.InvalidCredentials">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "InvalidCredentials" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.LineNumber">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "LineNumber" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.UserInfo">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "UserInfo" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsNameValid">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsNameValid" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ThicknessBorder">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ThicknessBorder" generated properties.</summary>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsSurnameValid">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsSurnameValid" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsPhoneValid">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsPhoneValid" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsCityValid">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsCityValid" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsJobValid">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsJobValid" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsTermsValid">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsTermsValid" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HasSubmitted">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HasSubmitted" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsValidationVisible">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsValidationVisible" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ValidationMessage">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ValidationMessage" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedPrefix">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedPrefix" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsTermsAccepted">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsTermsAccepted" generated properties.</summary>
         </member>
     </members>
 </doc>

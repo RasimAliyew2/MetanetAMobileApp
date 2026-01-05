@@ -8,6 +8,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 using MetanetA_MobileApp.Model;
+using MetanetA_MobileApp.Services;
 using MetanetA_MobileApp.Services.Abstractions;
 using MetanetA_MobileApp.Services.GetDataFromServer;
 using MetanetA_MobileApp.View;
@@ -16,40 +17,55 @@ namespace MetanetA_MobileApp.ViewModel
 {
     public partial class SignInViewModel : ObservableObject
     {
-        [ObservableProperty]
-        public string username;
+
 
         public Bonus UserBonus;
 
         [ObservableProperty]
-        UserInfo userInfo;
+        string phoneNumber;
+
 
         [ObservableProperty]
-        bool isVisible;
+        string password;
 
-        public SignInViewModel(UserInfo userInfo)
+        [ObservableProperty]
+        bool fillTheArea = false;
+
+        [ObservableProperty]
+        bool invalidCredentials = false;
+
+
+        IUserSession userSession;
+
+        public SignInViewModel(IUserSession userSession)
         {
-            this.userInfo = userInfo;
+            this.userSession = userSession;
             // username = "test";
         }
 
         [RelayCommand] 
         public async Task SignIn()
         {
-            if (string.IsNullOrEmpty(userInfo.PhoneNumber) || string.IsNullOrEmpty(userInfo.Password))
+            if (string.IsNullOrEmpty(PhoneNumber) || string.IsNullOrEmpty(Password))
                 return;
 
 
-            if (!userInfo.PhoneNumber.StartsWith("994"))
-                userInfo.PhoneNumber = "994" + userInfo.PhoneNumber.Remove(0,1);
-            string json = await GetAndPostAllDataForUser.GetAsyncUserInfo(userInfo);
-            if (string.IsNullOrEmpty(json))
+            PhoneNumber = AdjustUserInfo.AdjustPhoneNumber(PhoneNumber);
+
+            string text = await GetAndPostAllDataForUser.GetAsyncUserInfo(new UserInfo() { Password = password, PhoneNumber = phoneNumber });
+            if (string.IsNullOrEmpty(text))
             {
-                isVisible = true;
+                FillTheArea = true;
+                InvalidCredentials = false;
+            }
+            else if (text == "Invalid credentials")
+            {
+                InvalidCredentials = true;
+                FillTheArea = false;
             }
             else
             {
-                var _userInfo = JsonSerializer.Deserialize<UserInfo>(json);
+                userSession.CurrentUser = JsonSerializer.Deserialize<UserInfo[]>(text)[0];
                 await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
             }
 

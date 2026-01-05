@@ -492,3 +492,4 @@ C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Release\ne
 C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Release\net8.0-android\resizetizer\r\mipmap-xxxhdpi\appicon_background.png
 C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Release\net8.0-android\resizetizer\r\mipmap-xxxhdpi\appicon_foreground.png
 C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Release\net8.0-android\resizetizer\r\mipmap-xxxhdpi\appicon_round.png
+C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Release\net8.0-android\MetanetA_MobileApp.sourcelink.json

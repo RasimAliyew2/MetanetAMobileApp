@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MetanetA_MobileApp.Model;
+using MetanetA_MobileApp.Services;
+using MetanetA_MobileApp.Services.Abstractions;
 using MetanetA_MobileApp.Services.GetDataFromServer;
 using MetanetA_MobileApp.View;
 
 namespace MetanetA_MobileApp.ViewModels.Sign
 {
+    [QueryProperty(nameof(OperationType), "OperationType")]
     public partial class SetPasswordViewModel : ObservableObject
     {
         [ObservableProperty]
@@ -25,7 +28,12 @@ namespace MetanetA_MobileApp.ViewModels.Sign
         [ObservableProperty]
         private string mismatchText = "uyğun gəlmir";
 
-        private UserInfo userInfo;
+        [ObservableProperty]
+        private OperationType operationType;
+
+
+
+        private IUserSession userSession;
         partial void OnPasswordChanged(string value) => UpdateMismatch();
         partial void OnConfirmPasswordChanged(string value) => UpdateMismatch();
 
@@ -36,9 +44,9 @@ namespace MetanetA_MobileApp.ViewModels.Sign
                          && !string.Equals(Password, ConfirmPassword, StringComparison.Ordinal);
         }
 
-        public SetPasswordViewModel(UserInfo userInfo)
+        public SetPasswordViewModel(IUserSession userSession)
         {
-            this.userInfo = userInfo;
+            this.userSession = userSession;
         }
 
         [RelayCommand]
@@ -57,14 +65,27 @@ namespace MetanetA_MobileApp.ViewModels.Sign
                 return;
             }
 
-            userInfo.Password = Password;
+            userSession.CurrentUser.Password = Password;
 
-            await GetAndPostAllDataForUser.PostAsyncUserInfo(userInfo);
+            if (OperationType == OperationType.SetPassword)
+                await SetPassword();
+            else if (OperationType == OperationType.ChangePassword)
+            {
+                userSession.CurrentUser.PhoneNumber = AdjustUserInfo.AdjustPhoneNumber(userSession.CurrentUser.PhoneNumber);
+                var text = await GetAndPostAllDataForUser.PostAsyncUserInfoUnique(userSession.CurrentUser, "UpdateUserInfo");
+                await Shell.Current.GoToAsync($"//{nameof(SignInPage)}");
+            }
+
+
+        }
+        private async Task SetPassword()
+        {
+
+            userSession.CurrentUser.PhoneNumber = AdjustUserInfo.AdjustPhoneNumber(userSession.CurrentUser.PhoneNumber);
+            var text = await GetAndPostAllDataForUser.PostAsyncUserInfo(userSession.CurrentUser);
             // Shell istifadə edirsənsə:
-            await Shell.Current.GoToAsync($"//{nameof(SignInPage)}");
+            await Shell.Current.GoToAsync($"//{nameof(RequestAcceptedPage)}");
 
-            // Əgər Shell yoxdursa (NavigationPage):
-            // await Application.Current.MainPage.Navigation.PushAsync(new SignInPage());
         }
     }
 }

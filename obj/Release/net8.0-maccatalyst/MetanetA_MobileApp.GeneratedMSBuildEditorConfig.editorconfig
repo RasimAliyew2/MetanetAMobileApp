@@ -71,6 +71,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.Co
 build_metadata.AdditionalFiles.TargetPath = View\ConfrimTheSMS.xaml
 build_metadata.AdditionalFiles.RelativePath = View\ConfrimTheSMS.xaml
 
+[C:/Users/Rasim/source/repos/MetanetA_MobileApp/MetanetA_MobileApp/View/ForgetPasswordPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.ForgetPasswordPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\ForgetPasswordPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\ForgetPasswordPage.xaml
+
 [C:/Users/Rasim/source/repos/MetanetA_MobileApp/MetanetA_MobileApp/View/Gifts/GiftDetailPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.Gifts.GiftDetailPage.xaml
@@ -118,6 +124,12 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.QrScannerPage.xaml
 build_metadata.AdditionalFiles.TargetPath = View\QrScannerPage.xaml
 build_metadata.AdditionalFiles.RelativePath = View\QrScannerPage.xaml
+
+[C:/Users/Rasim/source/repos/MetanetA_MobileApp/MetanetA_MobileApp/View/RequestAcceptedPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.RequestAcceptedPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\RequestAcceptedPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\RequestAcceptedPage.xaml
 
 [C:/Users/Rasim/source/repos/MetanetA_MobileApp/MetanetA_MobileApp/View/SignInPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml

@@ -6,12 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MetanetA_MobileApp.Services;
 using MetanetA_MobileApp.Services.Abstractions;
 using MetanetA_MobileApp.View;
 using MetanetA_MobileApp.View.Sign;
 
 namespace MetanetA_MobileApp.ViewModels
 {
+    [QueryProperty(nameof(OperationType), "OperationType")]
     public partial class ConfrimSMSViewModel : ObservableObject
     {
         IUserSession userSession;
@@ -22,6 +24,9 @@ namespace MetanetA_MobileApp.ViewModels
         [ObservableProperty] private string timerText = "00:59";
         [ObservableProperty]
         public bool isVisibleErrorLabel;
+
+        [ObservableProperty]
+        private OperationType operationType;
         public ConfrimSMSViewModel(IUserSession userInfo) 
         {
             this.userSession = userInfo;
@@ -31,8 +36,12 @@ namespace MetanetA_MobileApp.ViewModels
         private async Task CompletedEditing(string? textFromEntry)
         {
             userSession.OtpCode = userSession.OtpCode?.Replace("code:", "");
-            if ( userSession.OtpCode == textFromEntry)
-                await Shell.Current.GoToAsync($"//{nameof(SetPasswordPage)}");
+            if (userSession.OtpCode == textFromEntry)
+                await Shell.Current.GoToAsync($"//{nameof(SetPasswordPage)}", new Dictionary<string, object>
+                {
+                    ["OperationType"] = OperationType
+                });
+
             else
                 IsVisibleErrorLabel = true;
         }
@@ -71,7 +80,10 @@ namespace MetanetA_MobileApp.ViewModels
         {
             userSession.OtpCode = userSession.OtpCode?.Replace("code:", "");
             if (userSession.OtpCode == Code)
-                await Shell.Current.GoToAsync($"//{nameof(SetPasswordPage)}");
+                await Shell.Current.GoToAsync($"//{nameof(SetPasswordPage)}", new Dictionary<string, object>
+              {
+                    ["OperationType"] = OperationType
+                });
             else
                 IsVisibleErrorLabel = true;
         }

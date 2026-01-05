@@ -294,3 +294,4 @@ C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Release\ne
 C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Release\net8.0-maccatalyst\maccatalyst-x64\MetanetA_MobileApp.genruntimeconfig.cache
 C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Release\net8.0-maccatalyst\maccatalyst-x64\ref\MetanetA_MobileApp.dll
 C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Release\net8.0-maccatalyst\maccatalyst-x64\resizetizer\r\Resources\other_icon.png
+C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Release\net8.0-maccatalyst\maccatalyst-x64\MetanetA_MobileApp.sourcelink.json

@@ -7,6 +7,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MetanetA_MobileApp.Model;
 using MetanetA_MobileApp.Services;
+using MetanetA_MobileApp.Services.Abstractions;
 using MetanetA_MobileApp.View;
 using MetanetA_MobileApp.View.Products;
 
@@ -22,17 +23,18 @@ namespace MetanetA_MobileApp.ViewModels
         [ObservableProperty]
         private float bonusSpent;
 
+
         [ObservableProperty]
-        private UserInfo userInfo;
+        private IUserSession userSession;
         // Current bonus (collected - spent)
         public float CurrentBonus => BonusCollected - BonusSpent;
 
-        public BonusesViewModel(UserInfo userInfo)
+        public BonusesViewModel(UserInfo userInfo,IUserSession userSession)
         {
             // For now some demo values; later you can load from UserInfo or API.
             BonusCollected = 120;
             BonusSpent = 35;
-            this.userInfo = userInfo;
+            this.userSession = userSession;
         }
 
 

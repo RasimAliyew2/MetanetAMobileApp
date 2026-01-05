@@ -22,7 +22,7 @@
                    VerticalTextAlignment="Center" />
 
             <Label Grid.Row="0" Grid.Column="1"
-                   Text="{Binding UserInfo.BonusOfProfile.CollectedBonus}"   
+                   Text="{Binding  UserSession.CurrentUser.BonusOfProfile.CollectedBonus}"   
                    FontAttributes="Bold"
                    VerticalTextAlignment="Center" />
 
@@ -32,7 +32,7 @@
                    VerticalTextAlignment="Center" />
 
             <Label Grid.Row="1" Grid.Column="1"
-                   Text="{Binding UserInfo.BonusOfProfile.BonusUsed}"
+                   Text="{Binding  UserSession.CurrentUser.BonusOfProfile.BonusUsed}"
                    FontAttributes="Bold"
                    VerticalTextAlignment="Center" />
 
@@ -42,7 +42,7 @@
                    VerticalTextAlignment="Center" />
 
             <Label Grid.Row="2" Grid.Column="1"
-                   Text="{Binding UserInfo.BonusOfProfile.CurrentBonus}"
+                   Text="{Binding  UserSession.CurrentUser.BonusOfProfile.CurrentBonus}"
                    FontAttributes="Bold"
                    VerticalTextAlignment="Center" />
 

@@ -33,3 +33,5 @@ namespace MetanetA_MobileApp.Model
         private ProfileBonus bonusOfProfile = new ProfileBonus();
     }
 }
+
+

@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MetanetA_MobileApp.Model;
 using MetanetA_MobileApp.Services;
 using MetanetA_MobileApp.Services.Abstractions;
+using MetanetA_MobileApp.Services.GetDataFromServer;
 using MetanetA_MobileApp.View;
 
 namespace MetanetA_MobileApp.ViewModels
@@ -18,35 +17,150 @@ namespace MetanetA_MobileApp.ViewModels
         public DateTime MinBirthDate => DateTime.Today.AddYears(-120);
         public DateTime MaxBirthDate => DateTime.Today;
 
-        private IUserSession userSession;
+        private readonly IUserSession userSession;
 
+        [ObservableProperty] private string lineNumber;
+        [ObservableProperty] private UserInfo userInfo;
 
-        [ObservableProperty]
-        string lineNumber;
+        // Required sahələr üçün valid flag-lar
+        [ObservableProperty] private bool isNameValid = true;
+        [ObservableProperty] private bool isSurnameValid = true;
+        [ObservableProperty] private bool isPhoneValid = true;
+        [ObservableProperty] private bool isCityValid = true;
+        [ObservableProperty] private bool isJobValid = true;
+        [ObservableProperty] private bool isTermsValid = true;
 
-        [ObservableProperty]
-        private UserInfo userInfo;
+        // UI: yalnız "submit" cəhdindən sonra qırmızı göstərmək üçün
+        [ObservableProperty] private bool hasSubmitted;
 
-        [ObservableProperty]
-        public bool isNameValid = true;
+        // Warning panel
+        [ObservableProperty] private bool isValidationVisible;
+        [ObservableProperty] private string validationMessage;
 
-        [ObservableProperty]
-        private int thicknessBorder = 0;
+        [ObservableProperty] private string selectedPrefix = "+994 50";
+        [ObservableProperty] private bool isTermsAccepted;
 
-        [ObservableProperty]
-        private string selectedPrefix = "050";
         public ObservableCollection<string> Cities { get; } = new();
-
         public ObservableCollection<string> Prefixes { get; } = new();
         public ObservableCollection<string> Jobs { get; } = new();
-        public SignUpViewModel(IUserSession userSession,UserInfo userInfo)
+
+        public string FullPhoneNumber => BuildPhoneNumber();
+
+        public SignUpViewModel(IUserSession userSession, UserInfo userInfo)
         {
-            this.userInfo = userInfo;
             this.userSession = userSession;
+            UserInfo = userInfo;
+
+            // qeydiyyat zamanı da session-da current user eyni reference olsun
+            this.userSession.CurrentUser = UserInfo;
+
             SetCities();
             SetJobs();
             SetPrefixes();
         }
+
+        partial void OnSelectedPrefixChanged(string value) => OnPropertyChanged(nameof(FullPhoneNumber));
+        partial void OnLineNumberChanged(string value) => OnPropertyChanged(nameof(FullPhoneNumber));
+        partial void OnIsTermsAcceptedChanged(bool value)
+        {
+            if (HasSubmitted)
+            {
+                IsTermsValid = value;
+                UpdateValidationPanel();
+            }
+        }
+
+        private string BuildPhoneNumber()
+        {
+            var prefixDigits = (SelectedPrefix ?? "")
+                .Replace("+", "")
+                .Replace(" ", "")
+                .Trim();
+
+            var lineDigits = new string((LineNumber ?? "").Where(char.IsDigit).ToArray());
+            if (string.IsNullOrWhiteSpace(prefixDigits) && string.IsNullOrWhiteSpace(lineDigits))
+                return string.Empty;
+
+            return prefixDigits + lineDigits;
+        }
+
+        private bool ValidateForm()
+        {
+            HasSubmitted = true;
+
+            // trim
+            UserInfo.Name = UserInfo.Name?.Trim();
+            UserInfo.Surname = UserInfo.Surname?.Trim();
+
+            IsNameValid = !string.IsNullOrWhiteSpace(UserInfo.Name);
+            IsSurnameValid = !string.IsNullOrWhiteSpace(UserInfo.Surname);
+
+            // Telefon: prefix seçilib + lineNumber 7 rəqəm
+            var phone = BuildPhoneNumber();
+            var lineDigits = new string((LineNumber ?? "").Where(char.IsDigit).ToArray());
+            IsPhoneValid = !string.IsNullOrWhiteSpace(phone) && phone.StartsWith("994") && lineDigits.Length == 7;
+
+            // Rayon və Peşə
+            IsCityValid = !string.IsNullOrWhiteSpace(UserInfo.City);
+            IsJobValid = !string.IsNullOrWhiteSpace(UserInfo.Job);
+
+            // Checkbox
+            IsTermsValid = IsTermsAccepted;
+
+            UpdateValidationPanel();
+
+            return IsNameValid && IsSurnameValid && IsPhoneValid && IsCityValid && IsJobValid && IsTermsValid;
+        }
+
+        private void UpdateValidationPanel()
+        {
+            if (!HasSubmitted)
+            {
+                IsValidationVisible = false;
+                ValidationMessage = string.Empty;
+                return;
+            }
+
+            // Prioritetli mesajlar
+            if (!IsNameValid || !IsSurnameValid)
+            {
+                IsValidationVisible = true;
+                ValidationMessage = "Zəhmət olmasa Ad və Soyad xanalarını doldurun.";
+                return;
+            }
+
+            if (!IsPhoneValid)
+            {
+                IsValidationVisible = true;
+                ValidationMessage = "Telefon nömrəsini düzgün daxil edin (Prefix + 7 rəqəm).";
+                return;
+            }
+
+            if (!IsCityValid)
+            {
+                IsValidationVisible = true;
+                ValidationMessage = "Zəhmət olmasa Rayon seçin.";
+                return;
+            }
+
+            if (!IsJobValid)
+            {
+                IsValidationVisible = true;
+                ValidationMessage = "Zəhmət olmasa Peşə seçin.";
+                return;
+            }
+
+            if (!IsTermsValid)
+            {
+                IsValidationVisible = true;
+                ValidationMessage = "Davam etmək üçün qaydaları qəbul etməlisiniz.";
+                return;
+            }
+
+            IsValidationVisible = false;
+            ValidationMessage = string.Empty;
+        }
+
         public void SetCities()
         {
             Cities.Add("Abşeron");
@@ -117,12 +231,14 @@ namespace MetanetA_MobileApp.ViewModels
             Cities.Add("Zəngilan");
             Cities.Add("Zərdab");
         }
+
         public void SetJobs()
         {
             Jobs.Add("Malyar");
-            Jobs.Add("pol - pataloq");
-            Jobs.Add("universal");
+            Jobs.Add("Pol - pataloq");
+            Jobs.Add("Universal");
         }
+
         public void SetPrefixes()
         {
             Prefixes.Add("+994 50");
@@ -134,24 +250,36 @@ namespace MetanetA_MobileApp.ViewModels
             Prefixes.Add("+994 77");
             Prefixes.Add("+994 99");
         }
+
         [RelayCommand]
         public async Task SignUp()
         {
-            userInfo.PhoneNumber = selectedPrefix.Replace("+","").Replace(" ","") + lineNumber; 
-            if (string.IsNullOrEmpty(userInfo.Name))
+            // 1) required validation
+            if (!ValidateForm())
+                return;
+
+            // 2) phone build
+            UserInfo.PhoneNumber = BuildPhoneNumber();
+
+            // 3) server check
+            var response = await GetAndPostAllDataForUser.PostAsyncUserInfoUnique(UserInfo, "CheckIfUserExists");
+
+            if (response == "user_already_exists")
             {
-                IsNameValid = false;
-                ThicknessBorder = 1;
+                IsValidationVisible = true;
+                ValidationMessage = "Bu nömrə ilə daha öncə qeydiyyatdan keçilib!";
+                IsPhoneValid = false; // qırmızı göstərsin
+                return;
             }
-            else
+
+            // 4) send otp
+            userSession.OtpCode = await SendEmail.SendSmsAsync(UserInfo.PhoneNumber);
+
+            // 5) go next
+            await Shell.Current.GoToAsync($"//{nameof(ConfrimTheSMS)}", new Dictionary<string, object>
             {
-                IsNameValid = true;
-                ThicknessBorder = 0;
-            }
-         
-            userSession.OtpCode = await SendEmail.SendSmsAsync(userInfo.PhoneNumber);
-            await Shell.Current.GoToAsync($"//{nameof(ConfrimTheSMS)}");
-            //await Shell.Current.GoToAsync($"//{nameof(SignInPage)}");
+                ["OperationType"] = OperationType.SetPassword
+            });
         }
     }
 }

@@ -21,6 +21,13 @@ namespace MetanetA_MobileApp.Services.GetDataFromServer
             var data = JsonSerializer.Serialize(userInfo);
             return await PostAsync(url, data);
         }
+        public static async Task<string> PostAsyncUserInfoUnique(UserInfo userInfo,string type)
+        {
+            string url = "http://webrequests.matanata.com/InfoBase/hs/WebRequestForMobileApp/tasks?Type=" + type;
+            var data = JsonSerializer.Serialize(userInfo);
+            return await PostAsync(url, data);
+        }
+
 
         public static async Task<string> GetAsyncUserInfo(UserInfo userInfo)
         {
@@ -50,12 +57,14 @@ namespace MetanetA_MobileApp.Services.GetDataFromServer
                 using HttpResponseMessage response = await _client.SendAsync(requestMessage);
                 return await response.Content.ReadAsStringAsync();
             }
-            catch (HttpRequestException ex)
+            catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(ex.ToString());
-                System.Diagnostics.Debug.WriteLine(ex.InnerException?.ToString());
+                var msg = ex.ToString();
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                    Shell.Current.DisplayAlert("HTTP ERROR", msg, "OK"));
                 throw;
             }
+
         }
         public static async Task<string> GetAsync(string uri, string data, string contentType = "application/json")
         {

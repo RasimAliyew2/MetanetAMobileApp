@@ -24,6 +24,9 @@
     <MauiXaml Update="View\BottomMenu.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="View\ForgetPasswordPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="View\Gifts\GiftDetailPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
@@ -49,6 +52,9 @@
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="View\ConfrimTheSMS.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="View\RequestAcceptedPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="View\SignInPage.xaml">

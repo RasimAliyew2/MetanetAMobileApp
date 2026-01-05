@@ -491,3 +491,4 @@ C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Release\ne
 C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Release\net9.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-150.png
 C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Release\net9.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-200.png
 C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Release\net9.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-400.png
+C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Release\net9.0-windows10.0.19041.0\win10-x64\MetanetA_MobileApp.sourcelink.json
