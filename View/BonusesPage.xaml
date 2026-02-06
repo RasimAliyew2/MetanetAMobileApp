@@ -2,57 +2,190 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:MetanetA_MobileApp.View"
-             x:Class="MetanetA_MobileApp.View.BonusesPage">
+             x:Class="MetanetA_MobileApp.View.BonusesPage"
+             BackgroundColor="#F3F4F6"
+             Title="Bonuslar">
 
-    <Grid RowDefinitions="Auto,*">
-    <VerticalStackLayout Padding="20" Spacing="24" Grid.Row="0">
+    <ContentPage.Resources>
 
-        <Label Text="Bonuses"
-               FontSize="24"
-               FontAttributes="Bold" />
+        <Style x:Key="Card" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="StrokeThickness" Value="0"/>
+            <Setter Property="StrokeShape" Value="RoundRectangle 18"/>
+            <Setter Property="Padding" Value="16"/>
+            <Setter Property="Shadow">
+                <Setter.Value>
+                    <Shadow Opacity="0.12" Radius="18" Offset="0,8"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-        <Grid ColumnDefinitions="Auto,*,Auto"
-              RowDefinitions="Auto,Auto,Auto"
-              ColumnSpacing="16"
-              RowSpacing="16">
+        <Style x:Key="PrimaryButton" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#16A34A"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="HeightRequest" Value="48"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
 
-            <!-- Bonus collected -->
-            <Label Grid.Row="0" Grid.Column="0"
-                   Text="Bonus collected"
-                   VerticalTextAlignment="Center" />
+        <Style x:Key="SmallGray" TargetType="Label">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="TextColor" Value="#6B7280"/>
+        </Style>
 
-            <Label Grid.Row="0" Grid.Column="1"
-                   Text="{Binding  UserSession.CurrentUser.BonusOfProfile.CollectedBonus}"   
+    </ContentPage.Resources>
+
+    <!-- Root Grid -->
+    <Grid RowDefinitions="Auto,*,Auto"
+          Padding="18"
+          RowSpacing="14">
+
+        <!-- HEADER + SUMMARY -->
+        <VerticalStackLayout Grid.Row="0" Spacing="10">
+
+            <Label Text="Bonuslar"
+                   FontSize="22"
                    FontAttributes="Bold"
-                   VerticalTextAlignment="Center" />
+                   TextColor="#111827"/>
 
-            <!-- Bonus spent -->
-            <Label Grid.Row="1" Grid.Column="0"
-                   Text="Bonus spent"
-                   VerticalTextAlignment="Center" />
+            <Border Style="{StaticResource Card}">
+                <Grid RowDefinitions="Auto,Auto,Auto"
+                      ColumnDefinitions="*,Auto"
+                      RowSpacing="10"
+                      ColumnSpacing="12">
 
-            <Label Grid.Row="1" Grid.Column="1"
-                   Text="{Binding  UserSession.CurrentUser.BonusOfProfile.BonusUsed}"
+                    <!-- Collected -->
+                    <Label Grid.Row="0" Grid.Column="0"
+                           Text="Qazanılan bonus"
+                           Style="{StaticResource SmallGray}"/>
+
+                    <Label Grid.Row="0" Grid.Column="1"
+                           Text="{Binding ProfileBonus.BonusCollected, StringFormat='{0:0.##}'}"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           TextColor="#111827"/>
+
+                    <!-- Spent -->
+                    <Label Grid.Row="1" Grid.Column="0"
+                           Text="Xərclənən bonus"
+                           Style="{StaticResource SmallGray}"/>
+
+                    <Label Grid.Row="1" Grid.Column="1"
+                           Text="{Binding ProfileBonus.UsedBonus, StringFormat='{0:0.##}'}"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           TextColor="#111827"/>
+
+
+
+
+                    <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Spacing="10" HorizontalOptions="End">
+
+                        <Button Text="Məhsullar"
+                                Style="{StaticResource PrimaryButton}"
+                                HeightRequest="38"
+                                Padding="14,0"
+                                Command="{Binding ProductsCommand}" />
+
+                    </HorizontalStackLayout>
+
+
+
+
+
+
+
+
+                    <!-- Current -->
+                    <Label Grid.Row="2" Grid.Column="0"
+                           Text="Cari bonus"
+                           Style="{StaticResource SmallGray}"/>
+
+                    <HorizontalStackLayout Grid.Row="2" Grid.Column="1" Spacing="10" HorizontalOptions="End">
+                        <Label Text="{Binding CurrentBonus, StringFormat='{0:0.##}'}"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="#16A34A"/>
+
+                        <Button Text="Hədiyyəyə çevir"
+                                Style="{StaticResource PrimaryButton}"
+                                HeightRequest="38"
+                                Padding="14,0"
+                                Command="{Binding ConvertToGiftCommand}" />
+                        
+                    </HorizontalStackLayout>
+                    
+
+                </Grid>
+            </Border>
+
+            <Label Text="Bonus tarixçəsi"
+                   FontSize="16"
                    FontAttributes="Bold"
-                   VerticalTextAlignment="Center" />
+                   TextColor="#111827"
+                   Margin="2,4,0,0"/>
 
-            <!-- Current bonus + button on the right -->
-            <Label Grid.Row="2" Grid.Column="0"
-                   Text="Current bonus"
-                   VerticalTextAlignment="Center" />
+        </VerticalStackLayout>
 
-            <Label Grid.Row="2" Grid.Column="1"
-                   Text="{Binding  UserSession.CurrentUser.BonusOfProfile.CurrentBonus}"
-                   FontAttributes="Bold"
-                   VerticalTextAlignment="Center" />
+        <!-- HISTORY LIST -->
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding BonusHistory}"
+                        SelectionMode="None">
 
-            <Button Grid.Row="2" Grid.Column="2"
-                    Text="Convert to gift"
-                    Command="{Binding ConvertToGiftCommand}" />
-        </Grid>
+            <CollectionView.EmptyView>
+                <Label Text="Hələ bonus əməliyyatı yoxdur."
+                       TextColor="#6B7280"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Margin="0,20,0,0"/>
+            </CollectionView.EmptyView>
 
-    </VerticalStackLayout>
-        <!-- Aşağı hissə: sabit bottom menu -->
-        <controls:BottomMenu Grid.Row="1" VerticalOptions="End" />
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+
+                    <Border Margin="0,8,0,0"
+                            Padding="12"
+                            BackgroundColor="White"
+                            Stroke="#E5E7EB"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 16">
+
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="{Binding Description}"
+                                       FontSize="14"
+                                       FontAttributes="Bold"
+                                       TextColor="#111827"/>
+
+                                <Label Text="{Binding DateText}"
+                                       FontSize="12"
+                                       TextColor="#6B7280"/>
+
+                                <Label Text="{Binding TypeText}"
+                                       FontSize="12"
+                                       TextColor="#6B7280"/>
+                            </VerticalStackLayout>
+
+                            <Label Grid.Column="1"
+                                   Text="{Binding AmountText}"
+                                   FontSize="15"
+                                   FontAttributes="Bold"
+                                   TextColor="{Binding AmountColor}"
+                                   VerticalTextAlignment="Center"/>
+
+                        </Grid>
+                    </Border>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Bottom menu -->
+        <controls:BottomMenu Grid.Row="2"
+                             VerticalOptions="End"
+                             Margin="0,0,0,6"/>
+
     </Grid>
 </ContentPage>

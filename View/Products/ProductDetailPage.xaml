@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MetanetA_MobileApp.View.Products.ProductDetailPage"
+             Title="ProductDetailPage">
+
+    <Grid RowDefinitions="Auto,Auto,*">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Margin="20" Spacing="16">
+
+                <Image Source="{Binding Gift.ImageUrl}"
+                   HeightRequest="160"
+                   Aspect="AspectFit"
+                   HorizontalOptions="Center" />
+
+                <Label Text="{Binding Gift.Name}"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+                <Label Text="{Binding Gift.Price, StringFormat=' {0} ₼'}"
+                   FontSize="18"
+                   TextColor="Gray"
+                   HorizontalOptions="Center" />
+
+                <!-- Əlavə məlumat -->
+                <Label Text="{Binding Description}"
+                   FontSize="16"
+                   TextColor="Black" />
+
+
+                <Label Text="20 Bonus"/>
+            </VerticalStackLayout>
+
+        </ScrollView>
+
+        <Grid ColumnDefinitions="*,*" Grid.Row="1"
+              VerticalOptions="Center"
+              RowDefinitions="*,Auto">
+            <Button Text="Al"
+                    Grid.Column="1"
+                    Margin="5"
+                    Background="ForestGreen"
+                    Command="{Binding BuyCommand}"/>
+            <Button Text="Ləğv et"
+                    Grid.Column="0"
+                    Margin="5"
+                    BackgroundColor="ForestGreen"
+                    Command="{Binding DeclineCommand}"/>
+
+            <Label Text="Hesabınızda yetərincə bonus yoxdur"
+                   TextColor="Red"
+                   Margin="5"
+                   Grid.ColumnSpan="2"
+                   IsVisible="{Binding IsVisible}"
+                   Grid.Row="1"/>
+        </Grid>
+    </Grid>
+</ContentPage>

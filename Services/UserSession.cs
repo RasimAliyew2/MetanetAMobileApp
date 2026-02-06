@@ -15,5 +15,6 @@ namespace MetanetA_MobileApp.Services
         [ObservableProperty] private string? otpCode;
 
         public UserInfo? CurrentUser { get; set; }
+        public int SelectedBottomMenuItem { get; set; }
     }
 }

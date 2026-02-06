@@ -34,7 +34,12 @@ namespace MetanetA_MobileApp.ViewModel
         [ObservableProperty]
         bool invalidCredentials = false;
 
+        // Eye toggle state-lər
+        [ObservableProperty]
+        private bool isPasswordHidden = true;
 
+        [ObservableProperty]
+        private bool isConfirmPasswordHidden = true;
         IUserSession userSession;
 
         public SignInViewModel(IUserSession userSession)
@@ -70,9 +75,17 @@ namespace MetanetA_MobileApp.ViewModel
             }
 
         }
+
+        [RelayCommand]
+        private void TogglePasswordVisibility()
+        {
+            IsPasswordHidden = !IsPasswordHidden;
+        }
         [RelayCommand]
         public async Task SignUp()
         {
+            //await Shell.Current.GoToAsync(nameof(SignUpPage));
+
             await Shell.Current.GoToAsync($"//{nameof(SignUpPage)}");
         }
     }

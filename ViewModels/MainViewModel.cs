@@ -1,61 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MetanetA_MobileApp.Services.Cart;
+using MetanetA_MobileApp.Services.UIState;
 using MetanetA_MobileApp.View;
-using MetanetA_MobileApp.View.Gifts;
-using MetanetA_MobileApp.View.Products;
+using MetanetA_MobileApp.View.Sales;
 
 namespace MetanetA_MobileApp.ViewModels
 {
-    public partial class MainViewModel : ObservableObject
+    public partial class MainViewModel : BaseViewModel
     {
-        [RelayCommand]
-        public async Task GoTobonusPage()
+        [ObservableProperty]
+        public CartState cart;
+
+
+        [ObservableProperty]
+        public CartService cartService;
+
+
+        public MainViewModel(BottomMenuState menuState, CartState cart,CartService cartService) : base(menuState)
         {
-            await Shell.Current.GoToAsync($"//{nameof(BonusesPage)}");
+            Cart = cart;
+            CartService = cartService;
         }
+
         [RelayCommand]
-        public async Task Qr()
+        public async Task OpenCart()
         {
-            await Shell.Current.GoToAsync($"//{nameof(QrScannerPage)}");
+            await Shell.Current.GoToAsync($"//{nameof(CartPage)}");
         }
- 
+
         [RelayCommand]
-        public async Task Home()
+        public async Task Shop()
         {
-           // await Shell.Current.GoToAsync($"//{nameof(QrScannerPage)}");
+            await Shell.Current.GoToAsync($"//{nameof(SalesPage)}");
         }
+
         [RelayCommand]
-        public async Task Profile()
+        public async Task Training()
         {
-             await Shell.Current.GoToAsync($"//{nameof(ProfilePage)}");
+            await Shell.Current.GoToAsync($"//{nameof(VideosPage)}");
         }
-        
-        [RelayCommand]
-        public async Task Products()
-        {
-             await Shell.Current.GoToAsync($"//{nameof(ProductPage)}");
-        }
-        [RelayCommand]
-        public async Task Campaigns()
-        {
-            // await Shell.Current.GoToAsync($"//{nameof(QrScannerPage)}");
-        }
+
         [RelayCommand]
         public async Task Ads()
         {
-            // await Shell.Current.GoToAsync($"//{nameof(QrScannerPage)}");
+            await Shell.Current.GoToAsync($"//{nameof(VideosPage)}");
         }
-        [RelayCommand]
-        public async Task Gifts()
-        {
-            await Shell.Current.GoToAsync($"//{nameof(GiftsPage)}");
-        }
-        
     }
 }

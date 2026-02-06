@@ -4,6 +4,32 @@
              x:Class="MetanetA_MobileApp.View.SignInPage"
              BackgroundColor="#F3F4F6">
 
+    <ContentPage.Resources>
+        <!-- Eye icon style -->
+        <Style x:Key="EyeButtonStyle" TargetType="ImageButton">
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="WidthRequest" Value="28"/>
+            <Setter Property="HeightRequest" Value="28"/>
+            <Setter Property="HorizontalOptions" Value="End"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="Opacity" Value="0.8"/>
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal"/>
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="Opacity" Value="0.55"/>
+                                <Setter Property="Scale" Value="0.92"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
     <Grid Padding="18">
 
         <ScrollView VerticalScrollBarVisibility="Never">
@@ -66,13 +92,32 @@
                                 StrokeThickness="1"
                                 StrokeShape="RoundRectangle 14"
                                 Padding="12,10">
-                            <Entry Placeholder="Parol"
-                                   IsPassword="True"
-                                   Text="{Binding Password}"
-                                   FontSize="14"
-                                   TextColor="#111827"
-                                   PlaceholderColor="#9CA3AF"
-                                   BackgroundColor="Transparent" />
+
+                            <!-- Entry + Eye -->
+                            <Grid ColumnDefinitions="*,34" ColumnSpacing="8">
+                                <Entry Grid.Column="0"
+                                       Placeholder="Parol"
+                                       IsPassword="{Binding IsPasswordHidden}"
+                                       Text="{Binding Password}"
+                                       FontSize="14"
+                                       TextColor="#111827"
+                                       PlaceholderColor="#9CA3AF"
+                                       BackgroundColor="Transparent" />
+
+                                <ImageButton Grid.Column="1"
+                                             Source="eye_icon.png"
+                                             Style="{StaticResource EyeButtonStyle}"
+                                             Command="{Binding TogglePasswordVisibilityCommand}">
+                                    <ImageButton.Triggers>
+                                        <DataTrigger TargetType="ImageButton"
+                                                     Binding="{Binding IsPasswordHidden}"
+                                                     Value="False">
+                                            <Setter Property="Source" Value="closed_eye_icon.png" />
+                                        </DataTrigger>
+                                    </ImageButton.Triggers>
+                                </ImageButton>
+                            </Grid>
+
                         </Border>
 
                         <!-- Errors -->

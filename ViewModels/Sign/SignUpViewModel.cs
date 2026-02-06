@@ -25,6 +25,7 @@ namespace MetanetA_MobileApp.ViewModels
         // Required sahələr üçün valid flag-lar
         [ObservableProperty] private bool isNameValid = true;
         [ObservableProperty] private bool isSurnameValid = true;
+        [ObservableProperty] private bool isSFathernameValid = true;
         [ObservableProperty] private bool isPhoneValid = true;
         [ObservableProperty] private bool isCityValid = true;
         [ObservableProperty] private bool isJobValid = true;
@@ -40,9 +41,32 @@ namespace MetanetA_MobileApp.ViewModels
         [ObservableProperty] private string selectedPrefix = "+994 50";
         [ObservableProperty] private bool isTermsAccepted;
 
+        // Eye toggle state-lər
+        [ObservableProperty]
+        private bool isPasswordHidden = true;
+
+        [ObservableProperty]
+        private bool isConfirmPasswordHidden = true;
+
+
+        [ObservableProperty]
+        private bool isOtherJobSelected;
+
+        [ObservableProperty]
+        private string otherJobText;
+
         public ObservableCollection<string> Cities { get; } = new();
         public ObservableCollection<string> Prefixes { get; } = new();
         public ObservableCollection<string> Jobs { get; } = new();
+
+
+        [ObservableProperty] private Color nameBorderColor = Colors.LightGray;
+        [ObservableProperty] private Color surnameBorderColor = Colors.LightGray;
+        [ObservableProperty] private Color fatherBorderColor = Colors.LightGray;
+        [ObservableProperty] private Color phoneBorderColor = Colors.LightGray;
+        [ObservableProperty] private Color cityBorderColor = Colors.LightGray;
+        [ObservableProperty] private Color jobBorderColor = Colors.LightGray;
+
 
         public string FullPhoneNumber => BuildPhoneNumber();
 
@@ -58,6 +82,34 @@ namespace MetanetA_MobileApp.ViewModels
             SetJobs();
             SetPrefixes();
         }
+
+        [ObservableProperty]
+        private string selectedJob;
+
+
+        partial void OnSelectedJobChanged(string value)
+        {
+            // Picker dəyişəndə bura düşəcək
+            IsOtherJobSelected = value == "Digər";
+
+            if (!IsOtherJobSelected)
+            {
+                OtherJobText = null;
+                UserInfo.Job = value; // normal seçim
+            }
+            else
+            {
+                // Digər seçiləndə UserInfo.Job hələlik boş qala bilər
+                UserInfo.Job = OtherJobText?.Trim();
+            }
+        }
+
+        partial void OnOtherJobTextChanged(string value)
+        {
+            if (IsOtherJobSelected)
+                UserInfo.Job = value?.Trim();
+        }
+
 
         partial void OnSelectedPrefixChanged(string value) => OnPropertyChanged(nameof(FullPhoneNumber));
         partial void OnLineNumberChanged(string value) => OnPropertyChanged(nameof(FullPhoneNumber));
@@ -94,11 +146,24 @@ namespace MetanetA_MobileApp.ViewModels
 
             IsNameValid = !string.IsNullOrWhiteSpace(UserInfo.Name);
             IsSurnameValid = !string.IsNullOrWhiteSpace(UserInfo.Surname);
-
+            IsSFathernameValid = !string.IsNullOrWhiteSpace(UserInfo.FatherName);
             // Telefon: prefix seçilib + lineNumber 7 rəqəm
             var phone = BuildPhoneNumber();
             var lineDigits = new string((LineNumber ?? "").Where(char.IsDigit).ToArray());
             IsPhoneValid = !string.IsNullOrWhiteSpace(phone) && phone.StartsWith("994") && lineDigits.Length == 7;
+
+            // Peşə
+            if (UserInfo.Job == "Digər")
+            {
+                IsOtherJobSelected = true;
+                IsJobValid = !string.IsNullOrWhiteSpace(OtherJobText);
+            }
+            else
+            {
+                IsOtherJobSelected = false;
+                IsJobValid = !string.IsNullOrWhiteSpace(UserInfo.Job);
+            }
+
 
             // Rayon və Peşə
             IsCityValid = !string.IsNullOrWhiteSpace(UserInfo.City);
@@ -106,6 +171,8 @@ namespace MetanetA_MobileApp.ViewModels
 
             // Checkbox
             IsTermsValid = IsTermsAccepted;
+
+
 
             UpdateValidationPanel();
 
@@ -126,6 +193,12 @@ namespace MetanetA_MobileApp.ViewModels
             {
                 IsValidationVisible = true;
                 ValidationMessage = "Zəhmət olmasa Ad və Soyad xanalarını doldurun.";
+                return;
+            }
+            if (!isSFathernameValid)
+            {
+                IsValidationVisible = true;
+                ValidationMessage = "Zəhmət olmasa ata adı xanasını doldurun.";
                 return;
             }
 
@@ -237,6 +310,7 @@ namespace MetanetA_MobileApp.ViewModels
             Jobs.Add("Malyar");
             Jobs.Add("Pol - pataloq");
             Jobs.Add("Universal");
+            Jobs.Add("Digər");
         }
 
         public void SetPrefixes()
@@ -250,10 +324,28 @@ namespace MetanetA_MobileApp.ViewModels
             Prefixes.Add("+994 77");
             Prefixes.Add("+994 99");
         }
+        [RelayCommand]
+        public async Task OpenUrl()
+        {
+
+        }
 
         [RelayCommand]
         public async Task SignUp()
         {
+           
+            // Job "Digər" seçilibsə, Entry-də yazılanı əsas job kimi qəbul et
+            if (UserInfo.Job == "Digər")
+            {
+                IsOtherJobSelected = true;
+                UserInfo.Job = OtherJobText?.Trim();
+            }
+            else
+            {
+                IsOtherJobSelected = false;
+                OtherJobText = null;
+            }
+
             // 1) required validation
             if (!ValidateForm())
                 return;

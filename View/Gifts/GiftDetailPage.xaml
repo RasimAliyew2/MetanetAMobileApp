@@ -18,7 +18,7 @@
                    FontAttributes="Bold"
                    HorizontalOptions="Center" />
 
-            <Label Text="{Binding Gift.Price, StringFormat=' {0} ₼'}"
+            <Label Text="{Binding Gift.Price, StringFormat=' {0} bonus'}"
                    FontSize="18"
                    TextColor="Gray"
                    HorizontalOptions="Center" />

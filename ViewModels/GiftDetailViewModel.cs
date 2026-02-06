@@ -2,12 +2,13 @@
 using CommunityToolkit.Mvvm.Input;
 using MetanetA_MobileApp.Model;
 using MetanetA_MobileApp.Services.Abstractions;
+using MetanetA_MobileApp.Services.UIState;
 using MetanetA_MobileApp.View;
 
 namespace MetanetA_MobileApp.ViewModels
 {
     [QueryProperty(nameof(Gift), "Gift")]
-    public partial class GiftDetailViewModel : ObservableObject
+    public partial class GiftDetailViewModel : BaseViewModel
     {
         // Bütün məlumatı saxlayan obyekt
         [ObservableProperty]
@@ -23,7 +24,7 @@ namespace MetanetA_MobileApp.ViewModels
 
         // Əgər GiftItem-də Description əlavə etsən:
         // public string Description => Gift?.Description;
-        public GiftDetailViewModel(UserInfo userInfo)
+        public GiftDetailViewModel(UserInfo userInfo, BottomMenuState bottomMenu) : base(bottomMenu)
         {
             this.userInfo = userInfo;
         }

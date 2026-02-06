@@ -10,13 +10,19 @@
 
     <ContentPage.Resources>
 
-        <!-- Card container -->
-        <Style x:Key="CardContainer" TargetType="Border">
+        <!-- Colors -->
+        <Color x:Key="TextDark">#111827</Color>
+        <Color x:Key="TextGray">#6B7280</Color>
+        <Color x:Key="BorderGray">#E5E7EB</Color>
+        <Color x:Key="BgSoft">#F3F4F6</Color>
+        <Color x:Key="PrimaryGreen">#16A34A</Color>
+
+        <!-- Top card -->
+        <Style x:Key="TopCard" TargetType="Border">
             <Setter Property="BackgroundColor" Value="White"/>
             <Setter Property="StrokeThickness" Value="0"/>
-            <Setter Property="StrokeShape" Value="RoundRectangle 18"/>
+            <Setter Property="StrokeShape" Value="RoundRectangle 22"/>
             <Setter Property="Padding" Value="14"/>
-            <Setter Property="Margin" Value="0"/>
             <Setter Property="Shadow">
                 <Setter.Value>
                     <Shadow Opacity="0.12" Radius="18" Offset="0,8" />
@@ -24,44 +30,23 @@
             </Setter>
         </Style>
 
-        <!-- Home action card button -->
-        <Style x:Key="HomeActionButton" TargetType="Button">
-            <Setter Property="HeightRequest" Value="112"/>
-            <Setter Property="CornerRadius" Value="18"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="FontAttributes" Value="Bold"/>
-            <Setter Property="TextColor" Value="#111827"/>
-            <Setter Property="Padding" Value="16"/>
-            <Setter Property="BorderWidth" Value="0"/>
-            <Setter Property="HorizontalOptions" Value="Fill"/>
-            <Setter Property="VerticalOptions" Value="Fill"/>
-            <Setter Property="VisualStateManager.VisualStateGroups">
-                <VisualStateGroupList>
-                    <VisualStateGroup x:Name="CommonStates">
-                        <VisualState x:Name="Normal"/>
-                        <VisualState x:Name="Pressed">
-                            <VisualState.Setters>
-                                <Setter Property="Opacity" Value="0.86"/>
-                                <Setter Property="Scale" Value="0.985"/>
-                            </VisualState.Setters>
-                        </VisualState>
-                        <VisualState x:Name="Disabled">
-                            <VisualState.Setters>
-                                <Setter Property="Opacity" Value="0.5"/>
-                            </VisualState.Setters>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateGroupList>
-            </Setter>
+        <!-- Search container -->
+        <Style x:Key="SearchContainer" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="#F9FAFB"/>
+            <Setter Property="Stroke" Value="{StaticResource BorderGray}"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="StrokeShape" Value="RoundRectangle 18"/>
+            <Setter Property="Padding" Value="12,0"/>
+            <Setter Property="HeightRequest" Value="44"/>
         </Style>
 
         <!-- Top icon -->
         <Style x:Key="TopIconStyle" TargetType="ImageButton">
-            <Setter Property="WidthRequest" Value="34"/>
-            <Setter Property="HeightRequest" Value="34"/>
-            <Setter Property="CornerRadius" Value="12"/>
-            <Setter Property="BackgroundColor" Value="#EEF2FF"/>
-            <Setter Property="Padding" Value="6"/>
+            <Setter Property="WidthRequest" Value="40"/>
+            <Setter Property="HeightRequest" Value="40"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="BackgroundColor" Value="#F3F4F6"/>
+            <Setter Property="Padding" Value="8"/>
             <Setter Property="VisualStateManager.VisualStateGroups">
                 <VisualStateGroupList>
                     <VisualStateGroup x:Name="CommonStates">
@@ -69,7 +54,7 @@
                         <VisualState x:Name="Pressed">
                             <VisualState.Setters>
                                 <Setter Property="Opacity" Value="0.65"/>
-                                <Setter Property="Scale" Value="0.92"/>
+                                <Setter Property="Scale" Value="0.95"/>
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -77,120 +62,242 @@
             </Setter>
         </Style>
 
-        <!-- Section title -->
-        <Style x:Key="SectionTitle" TargetType="Label">
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="FontAttributes" Value="Bold"/>
-            <Setter Property="TextColor" Value="#111827"/>
-            <Setter Property="Margin" Value="2,6,0,0"/>
+        <!-- Tile card -->
+        <Style x:Key="TileCard" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="StrokeThickness" Value="0"/>
+            <Setter Property="StrokeShape" Value="RoundRectangle 18"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Shadow">
+                <Setter.Value>
+                    <Shadow Opacity="0.10" Radius="14" Offset="0,6"/>
+                </Setter.Value>
+            </Setter>
         </Style>
 
-        <!-- Big promo buttons -->
-        <Style x:Key="PromoButton" TargetType="Button" BasedOn="{StaticResource HomeActionButton}">
-            <Setter Property="HeightRequest" Value="150"/>
-            <Setter Property="FontSize" Value="20"/>
+        <!-- Transparent tile button (text overlay) -->
+        <Style x:Key="TileOverlayButton" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="CornerRadius" Value="18"/>
+            <Setter Property="HeightRequest" Value="118"/>
+            <Setter Property="Padding" Value="14"/>
+            <Setter Property="HorizontalOptions" Value="Fill"/>
+            <Setter Property="VerticalOptions" Value="Fill"/>
+            <Setter Property="TextTransform" Value="None"/>
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal"/>
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="Opacity" Value="0.85"/>
+                                <Setter Property="Scale" Value="0.985"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+
+        <!-- Big promo card -->
+        <Style x:Key="PromoCard" TargetType="Border" BasedOn="{StaticResource TileCard}">
+            <Setter Property="StrokeShape" Value="RoundRectangle 20"/>
+        </Style>
+
+        <Style x:Key="PromoOverlayButton" TargetType="Button" BasedOn="{StaticResource TileOverlayButton}">
+            <Setter Property="HeightRequest" Value="158"/>
+            <Setter Property="FontSize" Value="22"/>
             <Setter Property="CornerRadius" Value="20"/>
-            <Setter Property="TextColor" Value="#111827"/>
+            <Setter Property="Padding" Value="18"/>
+        </Style>
+
+        <Style x:Key="SectionTitle" TargetType="Label">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="{StaticResource TextDark}"/>
+            <Setter Property="Margin" Value="2,6,0,0"/>
         </Style>
 
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="Auto,*" Padding="18" RowSpacing="14">
+    <!-- ✅ Root grid: TopBar / Content / BottomMenu -->
+    <Grid RowDefinitions="Auto,*,Auto"
+          Padding="18"
+          RowSpacing="14">
 
-        <!-- TOP BAR (card) -->
-        <Border Grid.Row="0" Style="{StaticResource CardContainer}" Padding="14,12">
-            <Grid ColumnDefinitions="110,*,Auto" ColumnSpacing="12" VerticalOptions="Center">
+        <!-- ✅ TOP BAR -->
+        <Border Grid.Row="0" Style="{StaticResource TopCard}" >
 
-                <Image Source="matanat_logo.png"
-                       WidthRequest="100"
-                       HeightRequest="28"
-                       Aspect="AspectFit"
-                       VerticalOptions="Center" />
+            <Grid RowDefinitions="Auto,Auto"
+                  RowSpacing="12">
 
-                <!-- Search pill -->
-                <Border Grid.Column="1"
-                        BackgroundColor="#F3F4F6"
-                        Stroke="#E5E7EB"
-                        StrokeThickness="1"
-                        StrokeShape="RoundRectangle 18"
-                        Padding="10,0"
-                        HeightRequest="40"
-                        VerticalOptions="Center">
+                <!-- Row 0: Logo + icons -->
+                <Grid Grid.Row="0"
+                      ColumnDefinitions="*,Auto,Auto"
+                      ColumnSpacing="10"
+                      VerticalOptions="Center">
+
+                    <Image Source="masters_club_icon.png"
+                           WidthRequest="180"
+                           HeightRequest="40"
+                           Aspect="AspectFit"
+                           VerticalOptions="Center"/>
+
+                    <!-- Basket + Badge -->
+                    <Grid Grid.Column="1" WidthRequest="40" HeightRequest="40" Margin="10">
+
+                        <ImageButton Source="basket.png"
+                 Style="{StaticResource TopIconStyle}"
+                 Command="{Binding OpenCartCommand}" />
+
+                        <Border IsVisible="True"
+                                BackgroundColor="#EF4444"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 999"
+                                HorizontalOptions="End"
+                                VerticalOptions="Start"
+                                Margin="0,-6,-6,0"
+                                WidthRequest="18"
+                                HeightRequest="18">
+                                
+                            <Border.Triggers>
+                                <DataTrigger TargetType="Border"
+                                             Binding="{Binding CartService.TotalCount}"
+                                             Value="0">
+                                    <Setter Property="IsVisible" Value="False" />
+                                </DataTrigger>
+                            </Border.Triggers>
+
+                            <Label Text="{Binding CartService.TotalCount}"
+                                   FontSize="10"
+                                   TextColor="White"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center"/>
+                        </Border>
+
+
+                    </Grid>
+
+
+                    <ImageButton Grid.Column="2"
+                                 Source="noticifation_button.png"
+                                 Style="{StaticResource TopIconStyle}" />
+                </Grid>
+
+                <!-- ✅ Row 1: Full width search -->
+                <Border Grid.Row="1" Style="{StaticResource SearchContainer}">
                     <SearchBar Placeholder="Axtarış..."
-                               HeightRequest="40"
+                               HeightRequest="44"
                                BackgroundColor="Transparent"
-                               CancelButtonColor="#6B7280"
-                               TextColor="#111827"
+                               CancelButtonColor="{StaticResource TextGray}"
+                               TextColor="{StaticResource TextDark}"
                                PlaceholderColor="#9CA3AF" />
-                    <!-- Əgər binding istəyirsənsə:
-                         Text="{Binding SearchText}"
-                         SearchCommand="{Binding SearchCommand}" -->
                 </Border>
 
-                <ImageButton Grid.Column="2"
-                             Source="noticifation_button.png"
-                             Style="{StaticResource TopIconStyle}"
-                             VerticalOptions="Center" />
-                <!-- Command="{Binding NotificationsCommand}" -->
             </Grid>
+
         </Border>
 
-        <!-- CONTENT -->
-        <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Never">
+        <!-- ✅ CONTENT -->
+        <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Always">
             <VerticalStackLayout Spacing="14">
 
-                <!-- Quick Actions -->
+ 
+                <!-- ✅ Quick actions 2x2 -->
                 <Grid ColumnDefinitions="*,*"
                       RowDefinitions="Auto,Auto"
                       ColumnSpacing="12"
                       RowSpacing="12">
 
-                    <Button Grid.Row="0" Grid.Column="0"
-                            Text="Alış-veriş"
-                            BackgroundColor="#D8EDE2"
-                            Style="{StaticResource HomeActionButton}" />
-                    <!-- Command="{Binding ShopCommand}" -->
+                    <!-- Alış-veriş -->
+                    <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource TileCard}">
+                        <Grid>
+                            <Image Source="sales"
+                                   Aspect="AspectFill"
+                                   InputTransparent="True"/>
+                            <Button 
+                                    Style="{StaticResource TileOverlayButton}"
+                                    Command="{Binding ShopCommand}" />
+                        </Grid>
+                    </Border>
 
-                    <Button Grid.Row="0" Grid.Column="1"
-                            Text="Bonus"
-                            BackgroundColor="#E7F2F4"
-                            Style="{StaticResource HomeActionButton}"
-                            Command="{Binding GoTobonusPageCommand}" />
+                    <!-- Bonus -->
+                    <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource TileCard}">
+                        <Grid>
+                            <Image Source="bonuses"
+                                   Aspect="AspectFill"
+                                   InputTransparent="True"/>
+                            <Button 
+                                    Style="{StaticResource TileOverlayButton}"
+                                    Command="{Binding GoTobonusPageCommand}" />
+                        </Grid>
+                    </Border>
 
-                    <Button Grid.Row="1" Grid.Column="0"
-                            Text="Hədiyyələr"
-                            BackgroundColor="#E8F0EA"
-                            Style="{StaticResource HomeActionButton}"
-                            Command="{Binding GiftsCommand}" />
+                    <!-- Hədiyyələr -->
+                    <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource TileCard}">
+                        <Grid>
+                            <Image Source="gifts"
+                                   Aspect="AspectFill"
+                                   InputTransparent="True"/>
+                            <Button
+                                    Style="{StaticResource TileOverlayButton}"
+                                    Command="{Binding GiftsCommand}" />
+                        </Grid>
+                    </Border>
 
-                    <Button Grid.Row="1" Grid.Column="1"
-                            Text="Təlim videolar"
-                            BackgroundColor="#F7F3D8"
-                            Style="{StaticResource HomeActionButton}" />
-                    <!-- Command="{Binding TrainingCommand}" -->
+                    <!-- Təlim -->
+                    <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource TileCard}">
+                        <Grid>
+                            <Image Source="tutorial"
+                                   Aspect="AspectFill"
+                                   InputTransparent="True"/>
+                            <Button
+                                    Style="{StaticResource TileOverlayButton}"
+                                    Command="{Binding TrainingCommand}" />
+                        </Grid>
+                    </Border>
+
                 </Grid>
 
-                <!-- Reklamlar -->
-                <Button Text="Reklamlar"
-                        BackgroundColor="#D7E4F2"
-                        Style="{StaticResource PromoButton}"
-                        Command="{Binding AdsCommand}" />
 
-                <!-- Kampaniyalar -->
-                <Button Text="Kampaniyalar"
-                        BackgroundColor="#DADDED"
-                        Style="{StaticResource PromoButton}"
-                        Command="{Binding CampaignsCommand}" />
+                <!-- ✅ Reklamlar -->
+                <Border Style="{StaticResource PromoCard}">
+                    <Grid>
+                        <Image Source="news"
+                               Aspect="AspectFill"
+                               InputTransparent="True"/>
+                        <Button
+                                Style="{StaticResource PromoOverlayButton}"
+                                Command="{Binding AdsCommand}" />
+                    </Grid>
+                </Border>
 
-                <!-- BottomMenu aşağıda qalacaq deyə bir az boşluq -->
-                <BoxView HeightRequest="14" Opacity="0"/>
+
+                <!-- ✅ Kampaniyalar -->
+                <Border Style="{StaticResource PromoCard}">
+                    <Grid>
+                        <Image Source="Campaigns.png"
+                               Aspect="AspectFill"
+                               InputTransparent="True"/>
+                        <Button
+                                Style="{StaticResource PromoOverlayButton}"
+                                Command="{Binding CampaignsCommand}" />
+                    </Grid>
+                </Border>
+
+                <!-- bottom menu üçün biraz boşluq -->
+                <BoxView HeightRequest="10" Opacity="0"/>
 
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Bottom menu -->
-        <controls:BottomMenu Grid.Row="1"
+        <!-- ✅ Bottom menu fixed -->
+        <controls:BottomMenu Grid.Row="2"
                              VerticalOptions="End"
                              Margin="0,0,0,6"/>
     </Grid>
+
 </ContentPage>

@@ -28813,6 +28813,35 @@
           }
         }
       },
+      "Plugin.Firebase.CloudMessaging/4.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Plugin.Firebase.Core": "4.0.0"
+        },
+        "compile": {
+          "lib/net9.0/Plugin.Firebase.CloudMessaging.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Plugin.Firebase.CloudMessaging.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Plugin.Firebase.Core/4.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/Plugin.Firebase.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Plugin.Firebase.Core.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.Speech/8.0.0": {
         "type": "package",
         "compile": {
@@ -29512,6 +29541,35 @@
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
         }
       },
+      "Plugin.Firebase.CloudMessaging/4.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Plugin.Firebase.Core": "4.0.0"
+        },
+        "compile": {
+          "lib/net9.0/Plugin.Firebase.CloudMessaging.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Plugin.Firebase.CloudMessaging.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Plugin.Firebase.Core/4.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/Plugin.Firebase.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Plugin.Firebase.Core.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.Speech/8.0.0": {
         "type": "package",
         "compile": {
@@ -30203,6 +30261,35 @@
         "build": {
           "buildTransitive/Microsoft.WindowsAppSDK.props": {},
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
+        }
+      },
+      "Plugin.Firebase.CloudMessaging/4.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Plugin.Firebase.Core": "4.0.0"
+        },
+        "compile": {
+          "lib/net9.0/Plugin.Firebase.CloudMessaging.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Plugin.Firebase.CloudMessaging.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Plugin.Firebase.Core/4.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/Plugin.Firebase.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Plugin.Firebase.Core.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Speech/8.0.0": {
@@ -30898,6 +30985,35 @@
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
         }
       },
+      "Plugin.Firebase.CloudMessaging/4.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Plugin.Firebase.Core": "4.0.0"
+        },
+        "compile": {
+          "lib/net9.0/Plugin.Firebase.CloudMessaging.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Plugin.Firebase.CloudMessaging.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Plugin.Firebase.Core/4.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/Plugin.Firebase.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Plugin.Firebase.Core.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.Speech/8.0.0": {
         "type": "package",
         "compile": {
@@ -31589,6 +31705,35 @@
         "build": {
           "buildTransitive/Microsoft.WindowsAppSDK.props": {},
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
+        }
+      },
+      "Plugin.Firebase.CloudMessaging/4.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Plugin.Firebase.Core": "4.0.0"
+        },
+        "compile": {
+          "lib/net9.0/Plugin.Firebase.CloudMessaging.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Plugin.Firebase.CloudMessaging.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Plugin.Firebase.Core/4.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/Plugin.Firebase.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Plugin.Firebase.Core.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Speech/8.0.0": {
@@ -32284,6 +32429,35 @@
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
         }
       },
+      "Plugin.Firebase.CloudMessaging/4.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Plugin.Firebase.Core": "4.0.0"
+        },
+        "compile": {
+          "lib/net9.0/Plugin.Firebase.CloudMessaging.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Plugin.Firebase.CloudMessaging.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Plugin.Firebase.Core/4.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/Plugin.Firebase.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Plugin.Firebase.Core.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.Speech/8.0.0": {
         "type": "package",
         "compile": {
@@ -32975,6 +33149,35 @@
         "build": {
           "buildTransitive/Microsoft.WindowsAppSDK.props": {},
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
+        }
+      },
+      "Plugin.Firebase.CloudMessaging/4.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Plugin.Firebase.Core": "4.0.0"
+        },
+        "compile": {
+          "lib/net9.0/Plugin.Firebase.CloudMessaging.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Plugin.Firebase.CloudMessaging.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Plugin.Firebase.Core/4.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/Plugin.Firebase.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Plugin.Firebase.Core.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Speech/8.0.0": {
@@ -33677,6 +33880,35 @@
         "build": {
           "buildTransitive/Microsoft.WindowsAppSDK.props": {},
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
+        }
+      },
+      "Plugin.Firebase.CloudMessaging/4.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Plugin.Firebase.Core": "4.0.0"
+        },
+        "compile": {
+          "lib/net9.0/Plugin.Firebase.CloudMessaging.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Plugin.Firebase.CloudMessaging.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Plugin.Firebase.Core/4.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/Plugin.Firebase.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Plugin.Firebase.Core.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Speech/8.0.0": {
@@ -36675,6 +36907,43 @@
         "tools/x86/GenXbf.dll"
       ]
     },
+    "Plugin.Firebase.CloudMessaging/4.0.0": {
+      "sha512": "rZH2AhvQsyDsnhweRL2KKCH7iITHwo4yMO0O+tXlKgLbzoXMcfuJeIFe0qLiDJTerbQ/rO3sITSqpKCIL1ZXjg==",
+      "type": "package",
+      "path": "plugin.firebase.cloudmessaging/4.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "cloud_messaging.md",
+        "icon.png",
+        "lib/net9.0-android35.0/Plugin.Firebase.CloudMessaging.dll",
+        "lib/net9.0-android35.0/Plugin.Firebase.CloudMessaging.xml",
+        "lib/net9.0-ios18.0/Plugin.Firebase.CloudMessaging.dll",
+        "lib/net9.0-ios18.0/Plugin.Firebase.CloudMessaging.xml",
+        "lib/net9.0/Plugin.Firebase.CloudMessaging.dll",
+        "lib/net9.0/Plugin.Firebase.CloudMessaging.xml",
+        "plugin.firebase.cloudmessaging.4.0.0.nupkg.sha512",
+        "plugin.firebase.cloudmessaging.nuspec"
+      ]
+    },
+    "Plugin.Firebase.Core/4.0.0": {
+      "sha512": "4rAE373I3asy+gmcPUSNZqjGeYo0Jyp9XR60nkX2qbww2wglAsDReHH+Dwx6zaYQkXmEn7YszRXSINDwUHqobA==",
+      "type": "package",
+      "path": "plugin.firebase.core/4.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/net9.0-android35.0/Plugin.Firebase.Core.dll",
+        "lib/net9.0-android35.0/Plugin.Firebase.Core.xml",
+        "lib/net9.0-ios18.0/Plugin.Firebase.Core.dll",
+        "lib/net9.0-ios18.0/Plugin.Firebase.Core.xml",
+        "lib/net9.0/Plugin.Firebase.Core.dll",
+        "lib/net9.0/Plugin.Firebase.Core.xml",
+        "plugin.firebase.core.4.0.0.nupkg.sha512",
+        "plugin.firebase.core.nuspec"
+      ]
+    },
     "System.Diagnostics.DiagnosticSource/9.0.0": {
       "sha512": "ddppcFpnbohLWdYKr/ZeLZHmmI+DXFgZ3Snq+/E7SwcdW4UnvxmaugkwGywvGVWkHPGCSZjCP+MLzu23AL5SDw==",
       "type": "package",
@@ -39042,6 +39311,7 @@
       "CommunityToolkit.Mvvm >= 8.4.0",
       "Microsoft.Extensions.Logging.Debug >= 9.0.0",
       "Microsoft.Maui.Controls >= 9.0.0",
+      "Plugin.Firebase.CloudMessaging >= 4.0.0",
       "ZXing.Net.Maui.Controls >= 0.4.0"
     ]
   },
@@ -39335,6 +39605,10 @@
           "Microsoft.Maui.Controls": {
             "target": "Package",
             "version": "[9.0.0, )"
+          },
+          "Plugin.Firebase.CloudMessaging": {
+            "target": "Package",
+            "version": "[4.0.0, )"
           },
           "ZXing.Net.Maui.Controls": {
             "target": "Package",

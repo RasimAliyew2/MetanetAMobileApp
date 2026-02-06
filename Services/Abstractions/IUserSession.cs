@@ -12,5 +12,7 @@ namespace MetanetA_MobileApp.Services.Abstractions
         UserInfo? CurrentUser { get; set; }
         string? PhoneNumber { get; set; }
         string? OtpCode { get; set; }
+
+        int SelectedBottomMenuItem { get; set; }
     }
 }

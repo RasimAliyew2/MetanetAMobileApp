@@ -1,0 +1,198 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MetanetA_MobileApp.View"
+             x:Class="MetanetA_MobileApp.View.Products.ProductPreSelectedPage"
+             BackgroundColor="#F3F4F6"
+             Title="">
+
+    <ContentPage.Resources>
+
+        <!-- Colors -->
+        <Color x:Key="TextDark">#111827</Color>
+        <Color x:Key="TextGray">#6B7280</Color>
+        <Color x:Key="BorderGray">#E5E7EB</Color>
+        <Color x:Key="BgSoft">#F3F4F6</Color>
+        <Color x:Key="PrimaryGreen">#16A34A</Color>
+
+        <!-- Top card -->
+        <Style x:Key="TopCard" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="StrokeThickness" Value="0"/>
+            <Setter Property="StrokeShape" Value="RoundRectangle 22"/>
+            <Setter Property="Padding" Value="14"/>
+            <Setter Property="Shadow">
+                <Setter.Value>
+                    <Shadow Opacity="0.12" Radius="18" Offset="0,8" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Search container -->
+        <Style x:Key="SearchContainer" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="#F9FAFB"/>
+            <Setter Property="Stroke" Value="{StaticResource BorderGray}"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="StrokeShape" Value="RoundRectangle 18"/>
+            <Setter Property="Padding" Value="12,0"/>
+            <Setter Property="HeightRequest" Value="44"/>
+        </Style>
+
+        <!-- Top icon -->
+        <Style x:Key="TopIconStyle" TargetType="ImageButton">
+            <Setter Property="WidthRequest" Value="40"/>
+            <Setter Property="HeightRequest" Value="40"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="BackgroundColor" Value="#F3F4F6"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal"/>
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="Opacity" Value="0.65"/>
+                                <Setter Property="Scale" Value="0.95"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+
+        <!-- Tile card -->
+        <Style x:Key="TileCard" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="StrokeThickness" Value="0"/>
+            <Setter Property="StrokeShape" Value="RoundRectangle 18"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Shadow">
+                <Setter.Value>
+                    <Shadow Opacity="0.10" Radius="14" Offset="0,6"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Transparent tile button (text overlay) -->
+        <Style x:Key="TileOverlayButton" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="CornerRadius" Value="18"/>
+            <Setter Property="HeightRequest" Value="118"/>
+            <Setter Property="Padding" Value="14"/>
+            <Setter Property="HorizontalOptions" Value="Fill"/>
+            <Setter Property="VerticalOptions" Value="Fill"/>
+            <Setter Property="TextTransform" Value="None"/>
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal"/>
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="Opacity" Value="0.85"/>
+                                <Setter Property="Scale" Value="0.985"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+
+        <!-- Big promo card -->
+        <Style x:Key="PromoCard" TargetType="Border" BasedOn="{StaticResource TileCard}">
+            <Setter Property="StrokeShape" Value="RoundRectangle 20"/>
+        </Style>
+
+        <Style x:Key="PromoOverlayButton" TargetType="Button" BasedOn="{StaticResource TileOverlayButton}">
+            <Setter Property="HeightRequest" Value="158"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="Padding" Value="18"/>
+        </Style>
+
+        <Style x:Key="SectionTitle" TargetType="Label">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="{StaticResource TextDark}"/>
+            <Setter Property="Margin" Value="2,6,0,0"/>
+        </Style>
+
+    </ContentPage.Resources>
+
+    <!-- ✅ Root grid: TopBar / Content / BottomMenu -->
+    <Grid RowDefinitions="*,Auto"
+          Padding="18"
+          RowSpacing="14">
+
+      
+
+                <!-- ✅ Quick actions 2x2 -->
+                <Grid
+                      RowDefinitions="*,*"
+                      ColumnDefinitions="*,*"
+                      ColumnSpacing="12"
+                      RowSpacing="12">
+
+                    
+                    <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource TileCard}">
+                        <Grid>
+                            <Image Source="product_type1"
+                                   Aspect="AspectFill"
+                                   InputTransparent="True"/>
+                            <Button 
+                                    Style="{StaticResource TileOverlayButton}"
+                                    Command="{Binding ShopCommand}" />
+                        </Grid>
+                    </Border>
+
+                    <!-- Bonus -->
+                    <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource TileCard}">
+                        <Grid>
+                            <Image Source="product_type2"
+                                   Aspect="AspectFill"
+                                   InputTransparent="True"/>
+                            <Button 
+                                    Style="{StaticResource TileOverlayButton}"
+                                    Command="{Binding GoTobonusPageCommand}" />
+                        </Grid>
+                    </Border>
+
+                    <!-- Hədiyyələr -->
+                    <Border Grid.Row="1" Grid.Column="0"  Style="{StaticResource TileCard}">
+                        <Grid>
+                            <Image Source="product_type3"
+                                   Aspect="AspectFill"
+                                   InputTransparent="True"/>
+                            <Button
+                                    Style="{StaticResource TileOverlayButton}"
+                                    Command="{Binding GiftsCommand}" />
+                        </Grid>
+                    </Border>
+
+                    <!-- Təlim -->
+                     <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource TileCard}">
+                        <Grid>
+                            <Image Source="product_type4"
+                                   Aspect="AspectFill"
+                                   InputTransparent="True"/>
+                            <Button
+                                    Style="{StaticResource TileOverlayButton}"
+                                    Command="{Binding TrainingCommand}" />
+                        </Grid>
+                    </Border>
+
+                </Grid>
+
+                <!-- bottom menu üçün biraz boşluq -->
+                <BoxView HeightRequest="10" Opacity="0"/>
+
+
+        <!-- ✅ Bottom menu fixed -->
+        <controls:BottomMenu Grid.Row="2"
+                             VerticalOptions="End"
+                             Margin="0,0,0,6"/>
+    </Grid>
+
+</ContentPage>
+

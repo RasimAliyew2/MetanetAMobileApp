@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -16,32 +14,76 @@ namespace MetanetA_MobileApp.ViewModels.Sign
     [QueryProperty(nameof(OperationType), "OperationType")]
     public partial class SetPasswordViewModel : ObservableObject
     {
-        [ObservableProperty]
-        private string password;
+        [ObservableProperty] private string password;
+        [ObservableProperty] private string confirmPassword;
 
-        [ObservableProperty]
-        private string confirmPassword;
+        [ObservableProperty] private bool isMismatch;
+        [ObservableProperty] private string mismatchText = "uyğun gəlmir";
 
-        [ObservableProperty]
-        private bool isMismatch;
+        [ObservableProperty] private OperationType operationType;
 
-        [ObservableProperty]
-        private string mismatchText = "uyğun gəlmir";
+        // Eye toggle state-lər
+        [ObservableProperty] private bool isPasswordHidden = true;
+        [ObservableProperty] private bool isConfirmPasswordHidden = true;
 
-        [ObservableProperty]
-        private OperationType operationType;
+        // NEW: password rule flags
+        [ObservableProperty] private bool isPasswordRuleInvalid;
+        [ObservableProperty] private string passwordRuleText;
 
+        private readonly IUserSession userSession;
 
+        partial void OnPasswordChanged(string value)
+        {
+            ValidatePasswordRules();
+            UpdateMismatch();
+        }
 
-        private IUserSession userSession;
-        partial void OnPasswordChanged(string value) => UpdateMismatch();
-        partial void OnConfirmPasswordChanged(string value) => UpdateMismatch();
+        partial void OnConfirmPasswordChanged(string value)
+        {
+            ValidatePasswordRules();
+            UpdateMismatch();
+        }
 
         private void UpdateMismatch()
         {
-            // istifadəçi 2-ci sahəyə nəsə yazandan sonra yoxlasın
             IsMismatch = !string.IsNullOrWhiteSpace(ConfirmPassword)
                          && !string.Equals(Password, ConfirmPassword, StringComparison.Ordinal);
+        }
+
+        private void ValidatePasswordRules()
+        {
+            var pwd = (Password ?? string.Empty).Trim();
+
+            // 8 simvol
+            bool minLen = pwd.Length >= 8;
+
+            // 1 böyük hərf
+            bool hasUpper = pwd.Any(char.IsUpper);
+
+            // boş olma vəziyyətində qayda mesajını çox aqressiv göstərməyək
+            if (string.IsNullOrWhiteSpace(pwd))
+            {
+                IsPasswordRuleInvalid = false;
+                PasswordRuleText = string.Empty;
+                return;
+            }
+
+            if (!minLen || !hasUpper)
+            {
+                IsPasswordRuleInvalid = true;
+
+                if (!minLen && !hasUpper)
+                    PasswordRuleText = "Parol minimum 8 simvol olmalı və ən azı 1 böyük hərf (A-Z) içərməlidir.";
+                else if (!minLen)
+                    PasswordRuleText = "Parol minimum 8 simvol olmalıdır.";
+                else
+                    PasswordRuleText = "Parolda ən azı 1 böyük hərf (A-Z) olmalıdır.";
+            }
+            else
+            {
+                IsPasswordRuleInvalid = false;
+                PasswordRuleText = string.Empty;
+            }
         }
 
         public SetPasswordViewModel(IUserSession userSession)
@@ -50,20 +92,41 @@ namespace MetanetA_MobileApp.ViewModels.Sign
         }
 
         [RelayCommand]
+        private void TogglePasswordVisibility()
+        {
+            IsPasswordHidden = !IsPasswordHidden;
+        }
+
+        [RelayCommand]
+        private void ToggleConfirmPasswordVisibility()
+        {
+            IsConfirmPasswordHidden = !IsConfirmPasswordHidden;
+        }
+
+        [RelayCommand]
         private async Task ConfirmAsync()
         {
+            ValidatePasswordRules();
             UpdateMismatch();
 
-            if (IsMismatch)
-                return;
-
-            // boş olmasın deyə istəsən bu şərti də əlavə et:
+            // boş ola bilməz
             if (string.IsNullOrWhiteSpace(Password) || string.IsNullOrWhiteSpace(ConfirmPassword))
             {
                 IsMismatch = true;
                 MismatchText = "parol boş ola bilməz";
                 return;
             }
+
+            // qayda ödənmirsə
+            if (IsPasswordRuleInvalid)
+            {
+                // rule text onsuz da görünür
+                return;
+            }
+
+            // mismatch varsa
+            if (IsMismatch)
+                return;
 
             userSession.CurrentUser.Password = Password;
 
@@ -72,20 +135,16 @@ namespace MetanetA_MobileApp.ViewModels.Sign
             else if (OperationType == OperationType.ChangePassword)
             {
                 userSession.CurrentUser.PhoneNumber = AdjustUserInfo.AdjustPhoneNumber(userSession.CurrentUser.PhoneNumber);
-                var text = await GetAndPostAllDataForUser.PostAsyncUserInfoUnique(userSession.CurrentUser, "UpdateUserInfo");
+                await GetAndPostAllDataForUser.PostAsyncUserInfoUnique(userSession.CurrentUser, "UpdateUserInfo");
                 await Shell.Current.GoToAsync($"//{nameof(SignInPage)}");
             }
-
-
         }
+
         private async Task SetPassword()
         {
-
             userSession.CurrentUser.PhoneNumber = AdjustUserInfo.AdjustPhoneNumber(userSession.CurrentUser.PhoneNumber);
-            var text = await GetAndPostAllDataForUser.PostAsyncUserInfo(userSession.CurrentUser);
-            // Shell istifadə edirsənsə:
+            await GetAndPostAllDataForUser.PostAsyncUserInfo(userSession.CurrentUser);
             await Shell.Current.GoToAsync($"//{nameof(RequestAcceptedPage)}");
-
         }
     }
 }

@@ -5,46 +5,131 @@
              HeightRequest="70"
              BackgroundColor="White">
 
-    <Border >
-    <Grid ColumnDefinitions="*,*,*,*,*"
-          Padding="20,8"
-          VerticalOptions="Center">
+    <Border>
+        <Grid ColumnDefinitions="*,*,*,*,*"
+              Padding="20,6"
+              VerticalOptions="Center">
 
-
-        <ImageButton Grid.Column="0"
-                     Source="house_button.png"
-                     Style="{StaticResource BottomIconStyle}"
-                     HorizontalOptions="Center"
-                     VerticalOptions="Center"
-                     Command="{Binding HomeCommand}" />
-
-        <ImageButton Grid.Column="1"
-                     Source="product.png"
-                     Style="{StaticResource BottomIconStyle}"
-                     HorizontalOptions="Center"
-                     VerticalOptions="Center"
-                     Command="{Binding ProductsCommand}" />
-        <ImageButton Grid.Column="2"
-                     Source="qr_code.png"
-                     Style="{StaticResource BottomIconStyle}"
-                     HorizontalOptions="Center"
-                     VerticalOptions="Center"
-                     Command="{Binding QrCommand}" />
-
-        <ImageButton Grid.Column="3"
-                     Source="profile.png"
-                     Style="{StaticResource BottomIconStyle}"
-                     HorizontalOptions="Center"
-                     VerticalOptions="Center"
-                     Command="{Binding ProfileCommand}" />
-
-            <ImageButton Grid.Column="4"
-                    Source="other_icon.png"
+            <!-- Home -->
+            <VerticalStackLayout Grid.Column="0"
+                                 Spacing="2"
+                                 HorizontalOptions="Center">
+                <ImageButton
+                    Source="house_button.png"
                     Style="{StaticResource BottomIconStyle}"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-            
-                    Command="{Binding OtherCommand}" />
+                    Command="{Binding HomeCommand}">
+                    <ImageButton.Triggers>
+                        <DataTrigger  TargetType="ImageButton" Value="True"  Binding="{Binding MenuState.IsHomeSelected}">
+                            <Setter Property="Source" Value="house_button_green"/>
+                        </DataTrigger>
+                    </ImageButton.Triggers>
+                </ImageButton>
+                <Label
+                    Text="Əsas"
+                    FontSize="10"
+                    TextColor="Black"
+                    HorizontalTextAlignment="Center"/>
+            </VerticalStackLayout>
+
+            <!-- Products -->
+            <VerticalStackLayout Grid.Column="1"
+                                 Spacing="2"
+                                 HorizontalOptions="Center">
+                <ImageButton
+                    Source="products.png"
+                    Style="{StaticResource BottomIconStyle}"
+                    Command="{Binding ProductsCommand}" >
+
+
+                    <ImageButton.Triggers>
+                        <DataTrigger TargetType="ImageButton"
+                     Binding="{Binding MenuState.IsProductsSelected}"
+                     Value="True">
+                            <Setter Property="Source" Value="products_green.png" />
+                        </DataTrigger>
+                    </ImageButton.Triggers>
+                </ImageButton>
+                
+                <Label
+                    Text="Məhsullar"
+                    FontSize="10"
+                    TextColor="Black"
+                    HorizontalTextAlignment="Center"/>
+            </VerticalStackLayout>
+
+            <!-- QR -->
+            <VerticalStackLayout Grid.Column="2"
+                                 Spacing="2"
+                                 HorizontalOptions="Center">
+                <ImageButton
+                    Source="qr_code.png"
+                    Style="{StaticResource BottomIconStyle}"
+                    Command="{Binding QrCommand}">
+                    <ImageButton.Triggers>
+                        <DataTrigger TargetType="ImageButton"
+                                     Binding="{Binding MenuState.IsQrSelected}"
+                                     Value="True">
+                            <Setter Property="Source" Value="qr_code_green.png" />
+                        </DataTrigger>
+                    </ImageButton.Triggers>
+                </ImageButton>
+
+                <Label
+                    Text="QR"
+                    FontSize="10"
+                    TextColor="Black"
+                    HorizontalTextAlignment="Center"/>
+            </VerticalStackLayout>
+
+            <!-- Profile -->
+            <VerticalStackLayout Grid.Column="3"
+                                 Spacing="2"
+                                 HorizontalOptions="Center">
+                <ImageButton
+                    Source="profile.png"
+                    Style="{StaticResource BottomIconStyle}"
+                    Command="{Binding ProfileCommand}">
+                    <ImageButton.Triggers>
+                        <DataTrigger TargetType="ImageButton"
+                                     Binding="{Binding MenuState.IsProfileSelected}"
+                                     Value="True">
+                            <Setter Property="Source" Value="profile_green.png" />
+                        </DataTrigger>
+                    </ImageButton.Triggers>
+                </ImageButton>
+                <Label
+                    Text="Profil"
+                    FontSize="10"
+                    TextColor="Black"
+                    HorizontalTextAlignment="Center"/>
+            </VerticalStackLayout>
+
+            <!-- Other -->
+            <VerticalStackLayout Grid.Column="4"
+                                 Spacing="2"
+                                 HorizontalOptions="Center">
+                <ImageButton
+                                 Source="other_icon.png"
+                                 Style="{StaticResource BottomIconStyle}"
+                                 Command="{Binding OtherCommand}">
+
+                    <ImageButton.Triggers>
+                        <DataTrigger TargetType="ImageButton"
+                     Binding="{Binding MenuState.IsOtherSelected}"
+                     Value="True">
+                            <Setter Property="Source" Value="other_green.png" />
+                        </DataTrigger>
+                    </ImageButton.Triggers>
+                </ImageButton>
+
+
+                <Label
+                    Text="Digər"
+                    FontSize="10"
+                    TextColor="Black"
+                    HorizontalTextAlignment="Center"/>
+            </VerticalStackLayout>
+
         </Grid>
     </Border>
 </ContentView>

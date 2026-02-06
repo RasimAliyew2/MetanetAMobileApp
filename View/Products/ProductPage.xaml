@@ -1,78 +1,248 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MetanetA_MobileApp.View"
              x:Class="MetanetA_MobileApp.View.Products.ProductPage"
-             xmlns:controls="clr-namespace:MetanetA_MobileApp.View">
+             BackgroundColor="#F3F4F6"
+             Title="Məhsullar">
 
-    <Grid RowDefinitions="Auto,*">
+    <ContentPage.Resources>
 
-        <!-- CollectionView özü scroll edir, ona görə ayrıca ScrollView lazım deyil -->
-        <CollectionView
-        Grid.Row="0"
-        ItemsSource="{Binding Products}"
-        SelectionMode="Single"
-        SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
-        Margin="16">
+        <Style x:Key="Card" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="StrokeThickness" Value="0"/>
+            <Setter Property="StrokeShape" Value="RoundRectangle 18"/>
+            <Setter Property="Padding" Value="14"/>
+            <Setter Property="Shadow">
+                <Setter.Value>
+                    <Shadow Opacity="0.12" Radius="16" Offset="0,6"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
+        <Style x:Key="SearchField" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="#F3F4F6"/>
+            <Setter Property="Stroke" Value="#E5E7EB"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="StrokeShape" Value="RoundRectangle 16"/>
+            <Setter Property="Padding" Value="12,10"/>
+        </Style>
 
-            <!-- 2 sütunlu grid layout (kart kart görünmək üçün) -->
+        <Style x:Key="CatItem" TargetType="Border">
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="Stroke" Value="#E5E7EB"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="StrokeShape" Value="RoundRectangle 14"/>
+        </Style>
+
+        <Style x:Key="SubCatItem" TargetType="Border">
+            <Setter Property="Padding" Value="10,7"/>
+            <Setter Property="BackgroundColor" Value="#F9FAFB"/>
+            <Setter Property="Stroke" Value="#E5E7EB"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="StrokeShape" Value="RoundRectangle 14"/>
+        </Style>
+
+    </ContentPage.Resources>
+
+    <!-- Row0: Search, Row1: Body, Row2: BottomMenu -->
+    <Grid RowDefinitions="Auto,*,Auto"
+          ColumnDefinitions="Auto,*"
+          Padding="16"
+          RowSpacing="12"
+          ColumnSpacing="12">
+
+        <!-- ✅ TOP SEARCH -->
+        <Border Grid.Row="0"
+                Grid.ColumnSpan="2"
+                Style="{StaticResource Card}"
+                Padding="12">
+
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                <Image Source="search.png"
+                       WidthRequest="18"
+                       HeightRequest="18"
+                       VerticalOptions="Center"
+                       Opacity="0.65"/>
+
+                <Border Grid.Column="1"
+                        Style="{StaticResource SearchField}">
+                    <Entry Placeholder="Axtarış (ad və ya bir hissəsi)..."
+                           Text="{Binding SearchText}"
+                           BackgroundColor="Transparent"
+                           TextColor="#111827"
+                           PlaceholderColor="#9CA3AF"
+                           FontSize="14"
+                           ClearButtonVisibility="WhileEditing"
+                           ReturnType="Search"/>
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- ✅ LEFT CATEGORY PANEL (Açılıb/bağlanan) -->
+        <Border Grid.Row="1"
+                Grid.Column="0"
+                Style="{StaticResource Card}"
+                Padding="12"
+                WidthRequest="{Binding CategoryPanelWidth}">
+
+            <VerticalStackLayout Spacing="10">
+
+                <!-- Header (üstünə basanda açılıb/bağlansın) -->
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ToggleCategoryPanelCommand}" />
+                    </Grid.GestureRecognizers>
+
+                    <!-- Başlıq yalnız OPEN olanda görünsün -->
+                    <Label Text="Kateqoriyalar"
+                           IsVisible="{Binding IsCategoryPanelOpen}"
+                           FontAttributes="Bold"
+                           TextColor="#111827"
+                           FontSize="14"
+                           VerticalTextAlignment="Center"/>
+
+                    <!-- Toggle icon -->
+                    <Label Grid.Column="1"
+                           Text="{Binding CategoryPanelIcon}"
+                           FontSize="18"
+                           TextColor="#6B7280"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Center"/>
+                </Grid>
+
+                <!-- Panel content yalnız OPEN olanda görünsün -->
+                <ScrollView IsVisible="{Binding IsCategoryPanelOpen}"
+                            VerticalScrollBarVisibility="Never">
+
+                    <VerticalStackLayout Spacing="10">
+
+                        <!-- Main Categories -->
+                        <CollectionView ItemsSource="{Binding Categories}"
+                                        SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"
+                                        SelectionMode="Single">
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Style="{StaticResource CatItem}">
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal"/>
+                                                <VisualState x:Name="Selected">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor" Value="#DCFCE7"/>
+                                                        <Setter Property="Stroke" Value="#16A34A"/>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+
+                                        <Label Text="{Binding .}"
+                                               TextColor="#111827"
+                                               FontSize="13"
+                                               FontAttributes="Bold"/>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                        <!-- SubCategories -->
+                        <VerticalStackLayout IsVisible="{Binding HasSubCategories}"
+                                             Spacing="8">
+
+                            <Label Text="Alt kateqoriyalar"
+                                   FontSize="12"
+                                   TextColor="#6B7280"
+                                   Margin="2,6,0,0"/>
+
+                            <CollectionView ItemsSource="{Binding SubCategories}"
+                                            SelectedItem="{Binding SelectedSubCategory, Mode=TwoWay}"
+                                            SelectionMode="Single">
+
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Style="{StaticResource SubCatItem}">
+                                            <VisualStateManager.VisualStateGroups>
+                                                <VisualStateGroup x:Name="CommonStates">
+                                                    <VisualState x:Name="Normal"/>
+                                                    <VisualState x:Name="Selected">
+                                                        <VisualState.Setters>
+                                                            <Setter Property="BackgroundColor" Value="#DBEAFE"/>
+                                                            <Setter Property="Stroke" Value="#2563EB"/>
+                                                        </VisualState.Setters>
+                                                    </VisualState>
+                                                </VisualStateGroup>
+                                            </VisualStateManager.VisualStateGroups>
+
+                                            <Label Text="{Binding .}"
+                                                   TextColor="#111827"
+                                                   FontSize="12"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                        </VerticalStackLayout>
+
+                    </VerticalStackLayout>
+                </ScrollView>
+
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- ✅ RIGHT PRODUCTS -->
+        <CollectionView Grid.Row="1"
+                        Grid.Column="1"
+                        ItemsSource="{Binding FilteredProducts}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedProduct, Mode=TwoWay}">
+
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical" Span="2" />
             </CollectionView.ItemsLayout>
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Border
-            Padding="8"
-            Margin="6"
-            Stroke="#E0E0E0"
-            StrokeThickness="1"
-            Background="White">
+                    <Border Padding="10"
+                            Margin="6"
+                            Stroke="#E5E7EB"
+                            StrokeThickness="1"
+                            BackgroundColor="White"
+                            StrokeShape="RoundRectangle 18">
+                        <Border.Shadow>
+                            <Shadow Opacity="0.10" Radius="10" Offset="0,4"/>
+                        </Border.Shadow>
 
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="16" />
-                        </Border.StrokeShape>
-
-                        <!-- Seçiləndə avtomatik "Selected" VisualState işə düşür -->
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal" />
-                                <VisualState x:Name="Selected">
-                                    <VisualState.Setters>
-                                        <!-- DİQQƏT: Border-da BackgroundColor yox, Background var -->
-                                        <Setter Property="Background" Value="#EEF0FF" />
-                                        <Setter Property="Stroke" Value="#4C4CFF" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-
-                        <VerticalStackLayout Spacing="4"
-                                 HorizontalOptions="Fill"
-                                 VerticalOptions="Center">
+                        <VerticalStackLayout Spacing="6"
+                                             HorizontalOptions="Fill"
+                                             VerticalOptions="Center">
 
                             <Image Source="{Binding ImageUrl}"
-                       HeightRequest="80"
-                       Aspect="AspectFit"
-                       HorizontalOptions="Center" />
+                                   HeightRequest="90"
+                                   Aspect="AspectFit"
+                                   HorizontalOptions="Center"/>
 
                             <Label Text="{Binding Name}"
-                       FontAttributes="Bold"
-                       FontSize="14"
-                       HorizontalOptions="Center" />
+                                   FontAttributes="Bold"
+                                   FontSize="14"
+                                   TextColor="#111827"
+                                   HorizontalOptions="Center"/>
 
-                            <Label Text="{Binding Price, StringFormat=' {0} ₼'}"
-                       FontSize="13"
-                       TextColor="Gray"
-                       HorizontalOptions="Center" />
+                            <Label Text="{Binding Price, StringFormat='{0} ₼'}"
+                                   FontSize="13"
+                                   TextColor="#6B7280"
+                                   HorizontalOptions="Center"/>
                         </VerticalStackLayout>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
 
         </CollectionView>
-        <!-- Alt menü (Image yerine ImageButton + pressed efekti) -->
-        <controls:BottomMenu Grid.Row="1" VerticalOptions="End"/>
+
+        <!-- Bottom menu -->
+        <controls:BottomMenu Grid.Row="2"
+                             Grid.ColumnSpan="2"
+                             VerticalOptions="End"/>
     </Grid>
 </ContentPage>
-    

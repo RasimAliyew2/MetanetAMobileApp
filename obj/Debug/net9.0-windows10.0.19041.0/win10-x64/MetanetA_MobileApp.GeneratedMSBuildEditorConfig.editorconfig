@@ -99,11 +99,29 @@ build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.Ma
 build_metadata.AdditionalFiles.TargetPath = View\MainPage.xaml
 build_metadata.AdditionalFiles.RelativePath = View\MainPage.xaml
 
+[C:/Users/Rasim/source/repos/MetanetA_MobileApp/MetanetA_MobileApp/View/OthersPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.OthersPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\OthersPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\OthersPage.xaml
+
+[C:/Users/Rasim/source/repos/MetanetA_MobileApp/MetanetA_MobileApp/View/Products/ProductDetailPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.Products.ProductDetailPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\Products\ProductDetailPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\Products\ProductDetailPage.xaml
+
 [C:/Users/Rasim/source/repos/MetanetA_MobileApp/MetanetA_MobileApp/View/Products/ProductPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.Products.ProductPage.xaml
 build_metadata.AdditionalFiles.TargetPath = View\Products\ProductPage.xaml
 build_metadata.AdditionalFiles.RelativePath = View\Products\ProductPage.xaml
+
+[C:/Users/Rasim/source/repos/MetanetA_MobileApp/MetanetA_MobileApp/View/Products/ProductPreSelectedPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.Products.ProductPreSelectedPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\Products\ProductPreSelectedPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\Products\ProductPreSelectedPage.xaml
 
 [C:/Users/Rasim/source/repos/MetanetA_MobileApp/MetanetA_MobileApp/View/ProfilePage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
@@ -135,6 +153,24 @@ build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.Re
 build_metadata.AdditionalFiles.TargetPath = View\RequestAcceptedPage.xaml
 build_metadata.AdditionalFiles.RelativePath = View\RequestAcceptedPage.xaml
 
+[C:/Users/Rasim/source/repos/MetanetA_MobileApp/MetanetA_MobileApp/View/Sales/CartPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.Sales.CartPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\Sales\CartPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\Sales\CartPage.xaml
+
+[C:/Users/Rasim/source/repos/MetanetA_MobileApp/MetanetA_MobileApp/View/Sales/SalesDetailPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.Sales.SalesDetailPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\Sales\SalesDetailPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\Sales\SalesDetailPage.xaml
+
+[C:/Users/Rasim/source/repos/MetanetA_MobileApp/MetanetA_MobileApp/View/Sales/SalesPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.Sales.SalesPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\Sales\SalesPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\Sales\SalesPage.xaml
+
 [C:/Users/Rasim/source/repos/MetanetA_MobileApp/MetanetA_MobileApp/View/SignInPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.SignInPage.xaml
@@ -152,3 +188,15 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.Sign.SetPasswordPage.xaml
 build_metadata.AdditionalFiles.TargetPath = View\Sign\SetPasswordPage.xaml
 build_metadata.AdditionalFiles.RelativePath = View\Sign\SetPasswordPage.xaml
+
+[C:/Users/Rasim/source/repos/MetanetA_MobileApp/MetanetA_MobileApp/View/TermsPopup.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.TermsPopup.xaml
+build_metadata.AdditionalFiles.TargetPath = View\TermsPopup.xaml
+build_metadata.AdditionalFiles.RelativePath = View\TermsPopup.xaml
+
+[C:/Users/Rasim/source/repos/MetanetA_MobileApp/MetanetA_MobileApp/View/VideosPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.VideosPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\VideosPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\VideosPage.xaml

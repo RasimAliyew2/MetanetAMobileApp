@@ -108,9 +108,9 @@ target triple = "i686-unknown-linux-android21"
 	i32 0, ; uint32_t bundled_assembly_name_width (0x0)
 	i32 2, ; uint32_t number_of_assembly_store_files (0x2)
 	i32 592, ; uint32_t number_of_dso_cache_entries (0x250)
-	i32 33555179, ; uint32_t android_runtime_jnienv_class_token (0x20002eb)
-	i32 100671058, ; uint32_t jnienv_initialize_method_token (0x6001e52)
-	i32 100671057, ; uint32_t jnienv_registerjninatives_method_token (0x6001e51)
+	i32 33555188, ; uint32_t android_runtime_jnienv_class_token (0x20002f4)
+	i32 100671129, ; uint32_t jnienv_initialize_method_token (0x6001e99)
+	i32 100671128, ; uint32_t jnienv_registerjninatives_method_token (0x6001e98)
 	i32 0, ; uint32_t jni_remapping_replacement_type_count (0x0)
 	i32 0, ; uint32_t jni_remapping_replacement_method_index_entry_count (0x0)
 	i32 0, ; uint32_t mono_components_mask (0x0)
@@ -3687,7 +3687,7 @@ target triple = "i686-unknown-linux-android21"
 @.env.0 = private unnamed_addr constant [15 x i8] c"MONO_GC_PARAMS\00", align 1
 @.env.1 = private unnamed_addr constant [21 x i8] c"major=marksweep-conc\00", align 1
 @.env.2 = private unnamed_addr constant [17 x i8] c"XAMARIN_BUILD_ID\00", align 1
-@.env.3 = private unnamed_addr constant [37 x i8] c"ce5e6ba1-e3ea-4b45-845e-32cd35132d29\00", align 1
+@.env.3 = private unnamed_addr constant [37 x i8] c"b92a77a1-7123-4603-b7c2-5cd06a1f5348\00", align 1
 @.env.4 = private unnamed_addr constant [28 x i8] c"XA_HTTP_CLIENT_HANDLER_TYPE\00", align 1
 @.env.5 = private unnamed_addr constant [42 x i8] c"Xamarin.Android.Net.AndroidMessageHandler\00", align 1
 @.env.6 = private unnamed_addr constant [29 x i8] c"__XA_PACKAGE_NAMING_POLICY__\00", align 1

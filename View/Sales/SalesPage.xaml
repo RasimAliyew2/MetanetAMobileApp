@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:MetanetA_MobileApp.ViewModels.Sales"
+    xmlns:model="clr-namespace:MetanetA_MobileApp.Model"
+    xmlns:controls="clr-namespace:MetanetA_MobileApp.View"
+    x:Class="MetanetA_MobileApp.View.Sales.SalesPage"
+    x:DataType="vm:SalesViewModel"
+    BackgroundColor="#F3F4F6"
+    Title="Satışlar">
+
+    <ContentPage.Resources>
+
+        <!-- Card -->
+        <Style x:Key="Card" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="Stroke" Value="#E5E7EB"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="StrokeShape" Value="RoundRectangle 18"/>
+            <Setter Property="Padding" Value="12"/>
+            <Setter Property="Margin" Value="0,0,0,12"/>
+            <Setter Property="Shadow">
+                <Setter.Value>
+                    <Shadow Opacity="0.10" Radius="14" Offset="0,6"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Search pill -->
+        <Style x:Key="SearchPill" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="Stroke" Value="#E5E7EB"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="StrokeShape" Value="RoundRectangle 18"/>
+            <Setter Property="Padding" Value="12,10"/>
+        </Style>
+
+        <!-- Add to cart button -->
+        <Style x:Key="AddToCartButton" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#16A34A"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="HeightRequest" Value="44"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="14,0"/>
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="Opacity" Value="0.80"/>
+                                <Setter Property="Scale" Value="0.97"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="Opacity" Value="0.45"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+
+        <!-- Secondary button -->
+        <Style x:Key="SecondaryButton" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#E5E7EB"/>
+            <Setter Property="TextColor" Value="#111827"/>
+            <Setter Property="HeightRequest" Value="44"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="18" RowSpacing="12">
+
+        <!-- TOP: Search -->
+        <Border Grid.Row="0" Style="{StaticResource SearchPill}">
+            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10" VerticalOptions="Center">
+
+                <!-- Left icon -->
+                <Image Source="search_icon.png"
+                       WidthRequest="18"
+                       HeightRequest="18"
+                       Opacity="0.75"
+                       VerticalOptions="Center"/>
+
+                <!-- Search entry -->
+                <Entry Grid.Column="1"
+                       Placeholder="Məhsul axtar..."
+                       Text="{Binding SearchText}"
+                       FontSize="14"
+                       TextColor="#111827"
+                       PlaceholderColor="#9CA3AF"
+                       BackgroundColor="Transparent"
+                       ClearButtonVisibility="Never"
+                       ReturnType="Search"/>
+
+                <!-- Clear button -->
+                <ImageButton Grid.Column="2"
+                             Source="close_icon.png"
+                             BackgroundColor="Transparent"
+                             WidthRequest="28"
+                             HeightRequest="28"
+                             Command="{Binding ClearSearchCommand}"
+                             Opacity="0.70"
+                             Padding="0">
+                    <ImageButton.Triggers>
+                        <DataTrigger TargetType="ImageButton" Binding="{Binding SearchText}" Value="">
+                            <Setter Property="IsVisible" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger TargetType="ImageButton" Binding="{Binding SearchText}" Value="{x:Null}">
+                            <Setter Property="IsVisible" Value="False"/>
+                        </DataTrigger>
+                    </ImageButton.Triggers>
+                </ImageButton>
+
+            </Grid>
+        </Border>
+
+        <!-- CONTENT -->
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding FilteredProducts}"
+                        SelectionMode="None">
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout Padding="20" Spacing="6" HorizontalOptions="Center">
+                    <Label Text="Heç nə tapılmadı"
+                           FontAttributes="Bold"
+                           FontSize="15"
+                           TextColor="#111827"
+                           HorizontalTextAlignment="Center"/>
+                    <Label Text="Axtarış sözünü dəyişin."
+                           FontSize="13"
+                           TextColor="#6B7280"
+                           HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:SalesItem">
+                    <Border Style="{StaticResource Card}">
+
+                        <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="10">
+
+                            <!-- Image -->
+                            <Border BackgroundColor="#F9FAFB"
+                                    Stroke="#E5E7EB"
+                                    StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 16"
+                                    Padding="10">
+                                <Image Source="{Binding Image}"
+                                       HeightRequest="140"
+                                       Aspect="AspectFit"
+                                       HorizontalOptions="Center" />
+                            </Border>
+
+                            <!-- Title + Price -->
+                            <Grid Grid.Row="1" ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                <Label Text="{Binding Name}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       TextColor="#111827"
+                                       LineBreakMode="TailTruncation"/>
+
+                                <Label Grid.Column="1"
+                                       Text="{Binding Price, StringFormat='{0:0.##} AZN'}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       TextColor="#0F766E"
+                                       VerticalTextAlignment="Center"/>
+                            </Grid>
+
+                            <!-- Buttons -->
+                            <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,6,0,0">
+                                <Button Grid.Column="0"
+                                        Text="Ətraflı"
+                                        Style="{StaticResource SecondaryButton}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SalesViewModel}}, Path=OpenDetailCommand}"
+                                        CommandParameter="{Binding .}" />
+
+                                <Button Grid.Column="1"
+                                        Text="Səbətə əlavə et"
+                                        Style="{StaticResource AddToCartButton}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SalesViewModel}}, Path=AddToCartCommand}"
+                                        CommandParameter="{Binding .}" />
+                            </Grid>
+
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Bottom menu -->
+        <controls:BottomMenu Grid.Row="2"
+                             VerticalOptions="End"
+                             Margin="0,0,0,6"/>
+    </Grid>
+</ContentPage>

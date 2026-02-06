@@ -13,14 +13,9 @@
             <!-- Böyük yaşıl quş (Material Icon: "bird") -->
             <Image
                 WidthRequest="140"
-                HeightRequest="140">
-                <Image.Source>
-                    <FontImageSource
-                        FontFamily="MaterialIcons"
-                        Glyph="&#xEAF6;"
-                        Color="#16A34A"
-                        Size="140" />
-                </Image.Source>
+                HeightRequest="140"
+                Source="mail">
+                
             </Image>
 
             <Label

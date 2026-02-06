@@ -1,4 +1,5 @@
-﻿using MetanetA_MobileApp.ViewModels;
+﻿using CommunityToolkit.Maui.Views;
+using MetanetA_MobileApp.ViewModels;
 
 namespace MetanetA_MobileApp.View;
 
@@ -18,4 +19,10 @@ public partial class SignUpPage : ContentPage
 
         return true; // default back işləməsin, app çıxmasın
     }
+    private async void OpenTerms_Tapped(object sender, TappedEventArgs e)
+    {
+        await this.ShowPopupAsync(new TermsPopup());
+    }
+ 
+
 }

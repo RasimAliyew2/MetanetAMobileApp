@@ -33,7 +33,16 @@
     <MauiXaml Update="View\Gifts\GiftsPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="View\OthersPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="View\Products\ProductDetailPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="View\Products\ProductPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="View\Products\ProductPreSelectedPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="View\QrCodeAccepted.xaml">
@@ -57,6 +66,15 @@
     <MauiXaml Update="View\RequestAcceptedPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="View\Sales\CartPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="View\Sales\SalesDetailPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="View\Sales\SalesPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="View\SignInPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
@@ -64,6 +82,12 @@
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="View\Sign\SetPasswordPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="View\TermsPopup.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="View\VideosPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
   </ItemGroup>

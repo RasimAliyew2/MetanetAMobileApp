@@ -1,86 +1,107 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MetanetA_MobileApp.Model;
-using MetanetA_MobileApp.Services;
 using MetanetA_MobileApp.Services.Abstractions;
-using MetanetA_MobileApp.View;
-using MetanetA_MobileApp.View.Products;
+using MetanetA_MobileApp.Services.UIState;
 
 namespace MetanetA_MobileApp.ViewModels
 {
-    public partial class BonusesViewModel : ObservableObject
+    public partial class BonusesViewModel : BaseViewModel
     {
-        // Total collected bonus
-        [ObservableProperty]
-        private float bonusCollected;
+        [ObservableProperty] private float bonusCollected;
+        [ObservableProperty] private float bonusSpent;
 
-        // Total spent bonus
-        [ObservableProperty]
-        private float bonusSpent;
+        [ObservableProperty] private ProfileBonus profileBonus;
 
+        [ObservableProperty] private IUserSession userSession;
 
-        [ObservableProperty]
-        private IUserSession userSession;
-        // Current bonus (collected - spent)
-        public float CurrentBonus => BonusCollected - BonusSpent;
+        public float CurrentBonus => ProfileBonus.CollectedBonus - ProfileBonus.UsedBonus;
 
-        public BonusesViewModel(UserInfo userInfo,IUserSession userSession)
+        public ObservableCollection<BonusTransaction> BonusHistory { get; } = new();
+
+        public BonusesViewModel(IUserSession userSession,ProfileBonus profileBonus, BottomMenuState bottomMenu) : base(bottomMenu)
         {
-            // For now some demo values; later you can load from UserInfo or API.
-            BonusCollected = 120;
-            BonusSpent = 35;
-            this.userSession = userSession;
+            UserSession = userSession;
+            this.ProfileBonus = profileBonus;
+            // Əgər sənin real datan varsa buradan götürə bilərsən:
+            // BonusCollected = userSession?.CurrentUser?.BonusOfProfile?.CollectedBonus ?? 0;
+            // BonusSpent = userSession?.CurrentUser?.BonusOfProfile?.BonusUsed ?? 0;
+
+            // Demo tarixçə (sonra API-dən doldurarsan)
+            //BonusHistory.Add(new BonusTransaction
+            //{
+            //    Date = System.DateTime.Today.AddDays(-3),
+            //    Type = BonusTransactionType.Earned,
+            //    Amount = 30,
+            //    Description = "Alış-veriş bonusu"
+            //});
+
+            //BonusHistory.Add(new BonusTransaction
+            //{
+            //    Date = System.DateTime.Today.AddDays(-2),
+            //    Type = BonusTransactionType.Spent,
+            //    Amount = 10,
+            //    Description = "Hədiyyə alındı"
+            //});
+
+            //BonusHistory.Add(new BonusTransaction
+            //{
+            //    Date = System.DateTime.Today.AddDays(-1),
+            //    Type = BonusTransactionType.Earned,
+            //    Amount = 20,
+            //    Description = "Kampaniya bonusu"
+            //});
+
+            RecalculateTotals();
         }
 
+        partial void OnBonusCollectedChanged(float value) => OnPropertyChanged(nameof(CurrentBonus));
+        partial void OnBonusSpentChanged(float value) => OnPropertyChanged(nameof(CurrentBonus));
+
+
+        public void RecalculateTotals()
+        {
+            BonusCollected = BonusHistory
+                .Where(x => x.Type == BonusTransactionType.Earned)
+                .Sum(x => x.Amount);
+
+            BonusSpent = BonusHistory
+                .Where(x => x.Type == BonusTransactionType.Spent)
+                .Sum(x => x.Amount);
+
+            OnPropertyChanged(nameof(CurrentBonus));
+        }
 
         [RelayCommand]
         private async Task ConvertToGift()
         {
-            // TODO: implement conversion logic (API call, etc.)
-            // Example: deduct some bonus and show dialog
             if (CurrentBonus <= 0)
             {
-                await Application.Current.MainPage.DisplayAlert(
-                    "Info",
-                    "You don't have enough bonus to convert.",
+                await App.Current.MainPage.DisplayAlert(
+                    "Məlumat",
+                    "Hədiyyəyə çevirmək üçün kifayət qədər bonus yoxdur.",
                     "OK");
                 return;
             }
 
-            await Application.Current.MainPage.DisplayAlert(
-                "Success",
-                "Your bonus has been converted to a gift.",
+            await App.Current.MainPage.DisplayAlert(
+                "Uğurlu",
+                "Bonus hədiyyəyə çevrildi.",
                 "OK");
 
-            // Example: mark all bonus as spent
-            BonusSpent += CurrentBonus;
-        }
-        [RelayCommand]
-        public async Task Qr()
-        {
-            await BottomMenuFunctions.Qr();
-        }
+            // example: hamısını xərclə (demo)
+            BonusHistory.Add(new BonusTransaction
+            {
+                Date = System.DateTime.Now,
+                Type = BonusTransactionType.Spent,
+                Amount = CurrentBonus,
+                Description = "Hədiyyəyə çevrildi"
+            });
 
-        [RelayCommand]
-        public async Task Home()
-        {
-            await BottomMenuFunctions.Home();
-        }
-
-        [RelayCommand]
-        public async Task Products()
-        {
-            await Shell.Current.GoToAsync($"//{nameof(ProductPage)}");
-        }
-        [RelayCommand]
-        public async Task Profile()
-        {
-             await Shell.Current.GoToAsync($"//{nameof(ProfilePage)}");
+            RecalculateTotals();
         }
     }
 }

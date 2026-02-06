@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:MetanetA_MobileApp.ViewModels.Sales"
+    x:DataType="vm:SalesDetailViewModel"
+    x:Class="MetanetA_MobileApp.View.Sales.SalesDetailPage"
+    BackgroundColor="#F3F4F6"
+    Title="Məhsul">
+
+    <Grid Padding="18" RowDefinitions="*,Auto" RowSpacing="12">
+
+        <ScrollView Grid.Row="0">
+            <Border BackgroundColor="White"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 18"
+                    Padding="16">
+                <Border.Shadow>
+                    <Shadow Opacity="0.12" Radius="16" Offset="0,6"/>
+                </Border.Shadow>
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Image Source="{Binding Item.Image}"
+                           HeightRequest="220"
+                           Aspect="AspectFit"
+                           HorizontalOptions="Center"/>
+
+                    <Label Text="{Binding Item.Name}"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="#111827"/>
+
+                    <Label Text="{Binding Item.Category}"
+                           FontSize="13"
+                           TextColor="#6B7280"/>
+
+                    <Label Text="{Binding Item.Description}"
+                           FontSize="13"
+                           TextColor="#374151"
+                           LineBreakMode="WordWrap"/>
+
+                    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="10" Margin="0,8,0,0">
+                        <Label Text="{Binding Item.Price, StringFormat='{0:0.##} AZN'}"
+                               FontSize="22"
+                               FontAttributes="Bold"
+                               TextColor="#0F766E"/>
+
+                        <Label Text="20 bonus" FontSize="20" FontAttributes="Bold" VerticalOptions="End" Grid.Row="1"/>
+
+                        <Label Grid.Column="1"
+                               Text="{Binding Item.OldPrice, StringFormat='{0:0.##} AZN'}"
+                               FontSize="14"
+                               TextColor="#6B7280"
+                               TextDecorations="Strikethrough"
+                               VerticalTextAlignment="End"/>
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Border>
+        </ScrollView>
+
+        <!-- Buttons -->
+        <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="12">
+            <Button Text="Ləğv et"
+                    BackgroundColor="#E5E7EB"
+                    TextColor="#111827"
+                    HeightRequest="52"
+                    CornerRadius="16"
+                    FontAttributes="Bold"
+                    Command="{Binding CancelCommand}"/>
+
+            <Button Grid.Column="1"
+                    Text="Səbətə əlavə et"
+                    BackgroundColor="#16A34A"
+                    TextColor="White"
+                    HeightRequest="52"
+                    CornerRadius="16"
+                    FontAttributes="Bold"
+                    Command="{Binding AddToCartCommand}"/>
+        </Grid>
+
+    </Grid>
+</ContentPage>

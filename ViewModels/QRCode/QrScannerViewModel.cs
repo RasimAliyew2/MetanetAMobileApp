@@ -3,15 +3,16 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MetanetA_MobileApp.Model;
 using MetanetA_MobileApp.Services.Abstractions;
+using MetanetA_MobileApp.Services.UIState;
 using MetanetA_MobileApp.View;
 
 namespace MetanetA_MobileApp.ViewModels;
 
-public partial class QrScannerViewModel : ObservableObject
+public partial class QrScannerViewModel : BaseViewModel
 {
     bool _handling;
     public UserInfo _userInfo;
-
+    public BonusesViewModel _bonusesViewModel;
     //private async void QrDetected(string? value)
     //{
     //    if (handled || string.IsNullOrWhiteSpace(value)) return;
@@ -24,9 +25,10 @@ public partial class QrScannerViewModel : ObservableObject
     //    //    ["QrValue"] = value
     //    //});
     //}
-    public QrScannerViewModel(UserInfo userInfo)
+    public QrScannerViewModel(UserInfo userInfo, BonusesViewModel bonusViewModel, BottomMenuState bottomMenu) : base(bottomMenu)
     {
         _userInfo = userInfo;
+        _bonusesViewModel = bonusViewModel;
     }
     [RelayCommand]
     private void QrDetected(string? value)
@@ -56,6 +58,16 @@ public partial class QrScannerViewModel : ObservableObject
                     _userInfo.Bonus += bonus;
                     _userInfo.BonusOfProfile.CurrentBonus += bonus;
                     _userInfo.BonusOfProfile.CollectedBonus += bonus;
+                    _bonusesViewModel.BonusHistory.Add(new BonusTransaction
+                    {
+                        Date = System.DateTime.Today,
+                        Type = BonusTransactionType.Earned,
+                        Amount = bonus,
+                        Description = "QrCode bonus"
+                    });
+
+                    _bonusesViewModel.RecalculateTotals();
+
                     await Shell.Current.GoToAsync($"//{nameof(QrCodeAccepted)}");
                 }
             }
@@ -94,7 +106,7 @@ public partial class QrScannerViewModel : ObservableObject
     }
     private float GetbonusBasedOnProductType(string productTypeCode)
     {
-        return 5.5f;
+        return 20f;
     }
     private bool IsThisBonusUsed(string QrCode)
     {

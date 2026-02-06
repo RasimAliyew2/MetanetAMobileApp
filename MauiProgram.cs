@@ -15,6 +15,24 @@ using MetanetA_MobileApp.ViewModels.ProductsViewModels;
 using MetanetA_MobileApp.ViewModels.Sign;
 using MetanetA_MobileApp.View.Sign;
 using MetanetA_MobileApp.ViewModel;
+using MetanetA_MobileApp.Services.UIState;
+using MetanetA_MobileApp.View.Sales;
+using MetanetA_MobileApp.ViewModels.Sales;
+using MetanetA_MobileApp.Services.Sales;
+using MetanetA_MobileApp.Services.Cart;
+using MetanetA_MobileApp.ViewModels.GiftsViewModels;
+
+
+#if ANDROID
+using Android.Webkit;
+using Android.OS;
+
+#endif
+
+#if IOS
+using WebKit;
+using Microsoft.Maui.Platform;
+#endif
 
 
 
@@ -49,6 +67,49 @@ namespace MetanetA_MobileApp
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
+
+
+
+
+            builder.ConfigureMauiHandlers(handlers =>
+            {
+                WebViewHandler.Mapper.AppendToMapping("YouTubeFix", (handler, view) =>
+                {
+#if ANDROID
+                    var wv = handler.PlatformView;
+
+                    // JS + storage
+                    wv.Settings.JavaScriptEnabled = true;
+                    wv.Settings.DomStorageEnabled = true;
+                    wv.Settings.JavaScriptCanOpenWindowsAutomatically = true;
+
+                    // Video autoplay/inline
+                    wv.Settings.MediaPlaybackRequiresUserGesture = false;
+
+                    // Mixed content bəzən lazımdır
+                    if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
+                        wv.Settings.MixedContentMode = MixedContentHandling.AlwaysAllow;
+
+                    // YouTube iframe üçün WebChromeClient şərtdir
+                    wv.SetWebChromeClient(new WebChromeClient());
+                    wv.SetWebViewClient(new WebViewClient());
+
+                    // 3rd party cookies (ən çox 153-ü bu həll edir)
+                    var cookieMgr = CookieManager.Instance;
+                    cookieMgr.SetAcceptCookie(true);
+                    if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
+                        cookieMgr.SetAcceptThirdPartyCookies(wv, true);
+
+                    // User-Agent: YouTube bəzən default webview UA-da problem çıxarır
+                    wv.Settings.UserAgentString =
+                        "Mozilla/5.0 (Linux; Android 14; Mobile) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36";
+
+                    // Cache təmiz (test üçün)
+                    wv.ClearCache(true);
+#endif
+                });
+            });
+
             //Pages
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<BonusesPage>();
@@ -56,23 +117,49 @@ namespace MetanetA_MobileApp
             builder.Services.AddSingleton<SignUpPage>();
             builder.Services.AddSingleton<SetPasswordPage>();
             builder.Services.AddSingleton<ProductPage>();
+            builder.Services.AddSingleton<VideosPage>();
             builder.Services.AddSingleton<GiftsPage>();
             builder.Services.AddSingleton<GiftDetailPage>();
+            builder.Services.AddSingleton<ProductDetailPage>();
             builder.Services.AddSingleton<QrScannerPage>();
             builder.Services.AddSingleton<ConfrimTheSMS>(); 
             builder.Services.AddSingleton<ProfilePage>();
+            builder.Services.AddSingleton<OthersPage>();
             builder.Services.AddSingleton<QrCodeAccepted>();
             builder.Services.AddSingleton<QRCodeNotAccepted>();
-            builder.Services.AddSingleton<ForgetPasswordPage>();
-            builder.Services.AddSingleton<RequestAcceptedPage>(); 
+            builder.Services.AddSingleton<ForgetPasswordPage>(); 
+            builder.Services.AddSingleton<RequestAcceptedPage>();
+
+
+            builder.Services.AddSingleton<CartState>();
+            builder.Services.AddTransient<SalesPage>();
+            builder.Services.AddTransient<CartPage>();
+            builder.Services.AddTransient<SalesDetailPage>();
+            builder.Services.AddTransient<ProductPreSelectedPage>();
 
 
             //View Models
+
+            builder.Services.AddTransient<OthersPage>();
+            builder.Services.AddTransient<BaseViewModel>(); 
             builder.Services.AddTransient<MainViewModel>();
+            builder.Services.AddTransient<VideosViewModel>();
+            builder.Services.AddTransient<ProductPreSelectedViewModel>();
+
+
+
+
+
+            builder.Services.AddSingleton<CartState>();
+            builder.Services.AddTransient<SalesViewModel>();
+            builder.Services.AddTransient<SalesDetailViewModel>();
+            builder.Services.AddTransient<CartViewModel>();
+
             builder.Services.AddTransient<SignInViewModel>();
             builder.Services.AddTransient<SignUpViewModel>();
+            builder.Services.AddTransient<ProductDetailViewModel>();
             builder.Services.AddTransient<SetPasswordViewModel>();
-            builder.Services.AddTransient<BonusesViewModel>();
+            builder.Services.AddSingleton<BonusesViewModel>();
             builder.Services.AddTransient<ConfrimSMSViewModel>();
             builder.Services.AddTransient<QrScannerViewModel>(); 
             builder.Services.AddTransient<ProfileViewModel>();
@@ -80,6 +167,7 @@ namespace MetanetA_MobileApp
             builder.Services.AddTransient<ProductViewModel>();
             builder.Services.AddTransient<GiftDetailViewModel>();
             builder.Services.AddTransient<ForgetPasswordViewModel>();
+            builder.Services.AddTransient<OthersPageViewModel>();
             builder.Services.AddTransient<RequestAcceptedViewModel>();
             builder.Services.AddTransient<QRCodeNotAcceptedViewModel>();
             builder.Services.AddTransient<QRCodeAcceptedViewModel>();
@@ -87,13 +175,19 @@ namespace MetanetA_MobileApp
 
             //Services
             builder.Services.AddSingleton<IUserSession, UserSession>();  
-            builder.Services.AddSingleton<IQrCode, QrCode>(); 
+            builder.Services.AddSingleton<IQrCode, QrCode>();
+            builder.Services.AddSingleton<BottomMenuState>(); 
+            builder.Services.AddSingleton<SalesCatalogService>();
+            builder.Services.AddSingleton<CartService>();
+            
 
             //Models
             builder.Services.AddSingleton<IBonus, Bonus>();
             builder.Services.AddSingleton<UserInfo>();
             builder.Services.AddSingleton<ProfileBonus>();
-            builder.Services.AddSingleton<IGiftItem, GiftItem>(); 
+            builder.Services.AddSingleton<IGiftItem, GiftItem>();
+
+
 
             return builder.Build();
         }

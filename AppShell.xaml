@@ -7,6 +7,7 @@
     xmlns:localGifts="clr-namespace:MetanetA_MobileApp.View.Gifts"
     xmlns:localProducts="clr-namespace:MetanetA_MobileApp.View.Products"
     xmlns:localSing="clr-namespace:MetanetA_MobileApp.View.Sign"
+    xmlns:localSales="clr-namespace:MetanetA_MobileApp.View.Sales"
     Shell.FlyoutBehavior="Disabled"
     Title="MetanetA_MobileApp">
 
@@ -70,6 +71,16 @@
     Route="ProductPage"/>
 
     <ShellContent
+    Title=""
+    ContentTemplate="{DataTemplate localProducts:ProductDetailPage}"
+    Route="ProductDetailPage"/>
+
+    <ShellContent
+    Title=""
+    ContentTemplate="{DataTemplate localProducts:ProductPreSelectedPage}"
+    Route="ProductPreSelectedPage"/>
+
+    <ShellContent
    Title=""
    ContentTemplate="{DataTemplate localSing:SetPasswordPage}"
    Route="SetPasswordPage"/>
@@ -85,6 +96,29 @@
     ContentTemplate="{DataTemplate local:ForgetPasswordPage}"
     Route="ForgetPasswordPage"/>
 
-    
+    <ShellContent
+    Title=""
+    ContentTemplate="{DataTemplate local:OthersPage}"
+    Route="OthersPage"/>
+
+    <ShellContent
+             Title=""
+             ContentTemplate="{DataTemplate local:VideosPage}"
+             Route="VideosPage"/>
+
+    <ShellContent
+             Title=""
+             ContentTemplate="{DataTemplate localSales:SalesPage}"
+             Route="SalesPage"/>
+
+    <ShellContent
+             Title=""
+             ContentTemplate="{DataTemplate localSales:SalesDetailPage}"
+             Route="SalesDetailPage"/>
+
+    <ShellContent
+           Title=""
+           ContentTemplate="{DataTemplate localSales:CartPage}"
+           Route="CartPage"/>
 
 </Shell> 
