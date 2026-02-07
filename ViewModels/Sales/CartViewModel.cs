@@ -18,6 +18,9 @@ namespace MetanetA_MobileApp.ViewModels.Sales
         [ObservableProperty]
         private bool isEmpty;
 
+        // ✅ Button enable/disable üçün
+        public bool HasItems => !IsEmpty;
+
         [ObservableProperty]
         private bool isOrderPopupVisible;
 
@@ -59,6 +62,7 @@ namespace MetanetA_MobileApp.ViewModels.Sales
         {
             IsEmpty = !cart.Items.Any();
 
+            OnPropertyChanged(nameof(HasItems));
             OnPropertyChanged(nameof(TotalPrice));
             OnPropertyChanged(nameof(TotalCount));
 
@@ -93,7 +97,7 @@ namespace MetanetA_MobileApp.ViewModels.Sales
             if (!cart.Items.Any())
                 return;
 
-            // ✅ sifariş qeydə alındı -> cart təmizlə
+            // ✅ cart təmizlə (page boş görünsün)
             cart.Clear();
             Refresh();
 

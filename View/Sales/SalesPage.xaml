@@ -82,14 +82,12 @@
         <Border Grid.Row="0" Style="{StaticResource SearchPill}">
             <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10" VerticalOptions="Center">
 
-                <!-- Left icon -->
                 <Image Source="search_icon.png"
                        WidthRequest="18"
                        HeightRequest="18"
                        Opacity="0.75"
                        VerticalOptions="Center"/>
 
-                <!-- Search entry -->
                 <Entry Grid.Column="1"
                        Placeholder="Məhsul axtar..."
                        Text="{Binding SearchText}"
@@ -100,7 +98,6 @@
                        ClearButtonVisibility="Never"
                        ReturnType="Search"/>
 
-                <!-- Clear button -->
                 <ImageButton Grid.Column="2"
                              Source="close_icon.png"
                              BackgroundColor="Transparent"
@@ -147,16 +144,27 @@
 
                         <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="10">
 
-                            <!-- Image -->
+                            <!-- ✅ Image (Tap = open detail) -->
                             <Border BackgroundColor="#F9FAFB"
                                     Stroke="#E5E7EB"
                                     StrokeThickness="1"
                                     StrokeShape="RoundRectangle 16"
                                     Padding="10">
-                                <Image Source="{Binding Image}"
-                                       HeightRequest="140"
-                                       Aspect="AspectFit"
-                                       HorizontalOptions="Center" />
+
+                                <!-- Bu Grid-in üstünə basanda detail açılacaq -->
+                                <Grid>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenDetailCommand}"
+                                            CommandParameter="{Binding .}" />
+                                    </Grid.GestureRecognizers>
+
+                                    <Image Source="{Binding Image}"
+                                           HeightRequest="140"
+                                           Aspect="AspectFit"
+                                           HorizontalOptions="Center" />
+                                </Grid>
+
                             </Border>
 
                             <!-- Title + Price -->
@@ -180,13 +188,13 @@
                                 <Button Grid.Column="0"
                                         Text="Ətraflı"
                                         Style="{StaticResource SecondaryButton}"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SalesViewModel}}, Path=OpenDetailCommand}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenDetailCommand}"
                                         CommandParameter="{Binding .}" />
 
                                 <Button Grid.Column="1"
                                         Text="Səbətə əlavə et"
                                         Style="{StaticResource AddToCartButton}"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SalesViewModel}}, Path=AddToCartCommand}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AddToCartCommand}"
                                         CommandParameter="{Binding .}" />
                             </Grid>
 

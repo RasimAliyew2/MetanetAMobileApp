@@ -6,14 +6,46 @@
              BackgroundColor="#F3F4F6"
              Title="Səbət">
 
-    <!-- 4 sıra: Header / List / Footer button / BottomMenu -->
-    <Grid RowDefinitions="Auto,*,Auto,Auto"
-          Padding="18"
-          RowSpacing="12">
+    <ContentPage.Resources>
+        <Style x:Key="PrimaryBtn" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#00CE46"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="HeightRequest" Value="46"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal"/>
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="Opacity" Value="0.75"/>
+                                <Setter Property="Scale" Value="0.98"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="Opacity" Value="0.55"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SecondaryBtn" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#E5E7EB"/>
+            <Setter Property="TextColor" Value="#111827"/>
+            <Setter Property="HeightRequest" Value="46"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*,Auto,Auto" Padding="18" RowSpacing="12">
 
         <!-- Header card -->
-        <Border Grid.Row="0"
-                BackgroundColor="White"
+        <Border BackgroundColor="White"
                 StrokeThickness="0"
                 StrokeShape="RoundRectangle 18"
                 Padding="14">
@@ -57,8 +89,7 @@
         <!-- Items -->
         <CollectionView Grid.Row="1"
                         ItemsSource="{Binding Items}"
-                        SelectionMode="None"
-                        IsVisible="{Binding IsEmpty, Converter={StaticResource InverseBoolConverter}}">
+                        SelectionMode="None">
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -131,62 +162,34 @@
 
         <!-- Footer: Complete order -->
         <Border Grid.Row="2"
-        BackgroundColor="White"
-        StrokeThickness="0"
-        StrokeShape="RoundRectangle 18"
-        Padding="12">
+                BackgroundColor="White"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 18"
+                Padding="12">
             <Border.Shadow>
                 <Shadow Opacity="0.08" Radius="12" Offset="0,4"/>
             </Border.Shadow>
 
             <Grid ColumnDefinitions="*,Auto"
-          ColumnSpacing="12"
-          VerticalOptions="Center">
+                  ColumnSpacing="12"
+                  VerticalOptions="Center">
 
                 <VerticalStackLayout Grid.Column="0" Spacing="2">
                     <Label Text="{Binding TotalPrice, StringFormat='Ümumi: {0} ₼'}"
-                   FontSize="14"
-                   FontAttributes="Bold"
-                   TextColor="#111827"/>
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           TextColor="#111827"/>
 
                     <Label Text="Sifarişi təsdiqləmək üçün tamamla."
-                   FontSize="12"
-                   TextColor="#6B7280"/>
+                           FontSize="12"
+                           TextColor="#6B7280"/>
                 </VerticalStackLayout>
 
-                <Button Grid.Column="1"
-                Text="Sifarişi tamamla"
-                Command="{Binding CompleteOrderCommand}"
-                BackgroundColor="#00CE46"
-                TextColor="White"
-                HeightRequest="46"
-                CornerRadius="16"
-                Padding="18,0"
-                FontAttributes="Bold"
-                FontSize="14"
-                HorizontalOptions="End"
-                MinimumWidthRequest="170"
-                IsEnabled="{Binding IsEmpty, Converter={StaticResource InverseBoolConverter}}">
-                    <Button.VisualStateManager.VisualStateGroups>
-                        <VisualStateGroupList>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal"/>
-                                <VisualState x:Name="Pressed">
-                                    <VisualState.Setters>
-                                        <Setter Property="Opacity" Value="0.75"/>
-                                        <Setter Property="Scale" Value="0.98"/>
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="Disabled">
-                                    <VisualState.Setters>
-                                        <Setter Property="Opacity" Value="0.45"/>
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateGroupList>
-                    </Button.VisualStateManager.VisualStateGroups>
-                </Button>
-
+                <Button Text="Sifarişi tamamla"
+                        Grid.Column="1"
+                        Style="{StaticResource PrimaryBtn}"
+                        IsEnabled="{Binding HasItems}"
+                        Command="{Binding CompleteOrderCommand}"/>
             </Grid>
         </Border>
 
@@ -195,11 +198,16 @@
                              VerticalOptions="End"
                              Margin="0,0,0,6"/>
 
-        <!-- ✅ Big popup overlay -->
-        <Grid Grid.Row="0"
+        <!-- ✅ POPUP OVERLAY (ən sonda olmalıdır) -->
+        <Grid IsVisible="{Binding IsOrderPopupVisible}"
               Grid.RowSpan="4"
-              IsVisible="{Binding IsOrderPopupVisible}"
-              BackgroundColor="#80000000">
+              BackgroundColor="#80000000"
+              Padding="24">
+
+            <!-- Çöldə basanda da bağlansın -->
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding DismissOrderPopupCommand}" />
+            </Grid.GestureRecognizers>
 
             <Border BackgroundColor="White"
                     StrokeThickness="0"
@@ -208,31 +216,30 @@
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
                     WidthRequest="320">
-
                 <Border.Shadow>
-                    <Shadow Opacity="0.20" Radius="22" Offset="0,10"/>
+                    <Shadow Opacity="0.18" Radius="18" Offset="0,10"/>
                 </Border.Shadow>
 
-                <VerticalStackLayout Spacing="12" HorizontalOptions="Fill">
+                <!-- İçəridə tap overlay-i bağlamasın -->
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding DismissOrderPopupCommand}" NumberOfTapsRequired="2"/>
+                </Border.GestureRecognizers>
 
+                <VerticalStackLayout Spacing="12">
                     <Label Text="Sifarişiniz qeydə alındı"
                            FontSize="18"
                            FontAttributes="Bold"
                            TextColor="#111827"
                            HorizontalTextAlignment="Center"/>
 
-                    <Label Text="Tezliklə sizinlə əlaqə saxlanılacaq."
+                    <Label Text="Sifarişiniz üçün təşəkkür edirik."
                            FontSize="13"
                            TextColor="#6B7280"
                            HorizontalTextAlignment="Center"/>
 
                     <Button Text="Təşəkkür edirəm"
-                            Command="{Binding DismissOrderPopupCommand}"
-                            BackgroundColor="#00CE46"
-                            TextColor="White"
-                            HeightRequest="46"
-                            CornerRadius="16"
-                            FontAttributes="Bold"/>
+                            Style="{StaticResource PrimaryBtn}"
+                            Command="{Binding DismissOrderPopupCommand}"/>
                 </VerticalStackLayout>
             </Border>
         </Grid>

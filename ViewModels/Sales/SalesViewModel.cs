@@ -21,10 +21,8 @@ namespace MetanetA_MobileApp.ViewModels.Sales
         private readonly SalesCatalogService _catalog;
         private readonly CartService _cartService;
 
-        // Bütün məhsullar: _catalog.Products içindədir
         public ObservableCollection<SalesItem> Products => _catalog.Products;
 
-        // UI-da göstərilən (filter olunmuş) siyahı
         public ObservableCollection<SalesItem> FilteredProducts { get; } = new();
 
         [ObservableProperty]
@@ -36,10 +34,8 @@ namespace MetanetA_MobileApp.ViewModels.Sales
             _catalog = catalog;
             _cartService = cartService;
 
-            // İlk açılışda hamısını göstər
             ApplyFilter();
 
-            // Catalog dəyişsə (gələcəkdə API ilə update etsən) filter yenilənsin
             _catalog.Products.CollectionChanged += Products_CollectionChanged;
         }
 
@@ -58,7 +54,6 @@ namespace MetanetA_MobileApp.ViewModels.Sales
             FilteredProducts.Clear();
 
             var key = (SearchText ?? "").Trim();
-
             var query = _catalog.Products.AsEnumerable();
 
             if (!string.IsNullOrWhiteSpace(key))
@@ -84,8 +79,8 @@ namespace MetanetA_MobileApp.ViewModels.Sales
             if (product == null)
                 return;
 
-            // Əgər eyni məhsul varsa sayını artırmaq istəyirsənsə CartService-də Increase logic olmalıdır.
-            // Sənin hazırki variantında birbaşa yeni item əlavə olunur:
+            // eyni məhsulu təkrar əlavə edəndə birləşdirmək istəyirsənsə,
+            // CartService-də Increase/Find logic olmalıdır.
             _cartService.Items.Add(new CartLineItem(product, 1));
 
             // 1) Haptic feedback
@@ -100,7 +95,6 @@ namespace MetanetA_MobileApp.ViewModels.Sales
             }
             catch
             {
-                // fallback toast
                 var toast = Toast.Make("Səbətə əlavə olundu ✅", ToastDuration.Short, 14);
                 await toast.Show();
             }
