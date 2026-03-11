@@ -18,7 +18,7 @@ namespace MetanetA_MobileApp.ViewModels
 
         [ObservableProperty] private IUserSession userSession;
 
-        public float CurrentBonus => ProfileBonus.CollectedBonus - ProfileBonus.UsedBonus;
+        public float CurrentBonus => UserSession.CurrentUser.BonusOfProfile.CurrentBonus;
 
         public ObservableCollection<BonusTransaction> BonusHistory { get; } = new();
 

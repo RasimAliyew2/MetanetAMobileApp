@@ -7,6 +7,7 @@ using CommunityToolkit.Mvvm.Input;
 using MetanetA_MobileApp.Model;
 using MetanetA_MobileApp.Services.Abstractions;
 using MetanetA_MobileApp.Services.UIState;
+using MetanetA_MobileApp.View;
 using Microsoft.Maui.Storage;
 
 namespace MetanetA_MobileApp.ViewModels;
@@ -43,13 +44,13 @@ public partial class ProfileViewModel : BaseViewModel
 
         // Demo alış tarixçəsi
   
-        PurchaseHistory.Add(new PurchaseHistoryItem
-        {
-            Date = DateTime.Now.AddDays(-5),
-            Title = "Boya (Rokol)",
-            Quantity = 2,
-            Price = 40
-        });
+        //PurchaseHistory.Add(new PurchaseHistoryItem
+        //{
+        //    Date = DateTime.Now.AddDays(-5),
+        //    Title = "Boya (Rokol)",
+        //    Quantity = 2,
+        //    Price = 40
+        //});
     }
 
     private void CaptureSnapshot()
@@ -96,6 +97,11 @@ public partial class ProfileViewModel : BaseViewModel
     }
 
     [RelayCommand]
+    private async Task PersonalInfo()
+    {
+        await Shell.Current.GoToAsync($"//{nameof(ProfileUserPage)}");
+    }
+  [RelayCommand]
     private async Task ChangePhoto()
     {
         try
@@ -127,7 +133,7 @@ public partial class ProfileViewModel : BaseViewModel
     private async Task Orders()
     {
         // hələlik boş – amma event var
-        await Shell.Current.DisplayAlert("Sifarişlərim", "Bu bölmə tezliklə əlavə olunacaq.", "OK");
+        await Shell.Current.DisplayAlert("Sifarişlərim", "96bölmə tezliklə əlavə olunacaq.", "OK");
     }
 
     [RelayCommand]

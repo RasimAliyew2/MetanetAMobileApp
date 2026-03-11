@@ -25,9 +25,9 @@ public partial class QrScannerViewModel : BaseViewModel
     //    //    ["QrValue"] = value
     //    //});
     //}
-    public QrScannerViewModel(UserInfo userInfo, BonusesViewModel bonusViewModel, BottomMenuState bottomMenu) : base(bottomMenu)
+    public QrScannerViewModel(IUserSession userSession, BonusesViewModel bonusViewModel, BottomMenuState bottomMenu) : base(bottomMenu)
     {
-        _userInfo = userInfo;
+        _userInfo = userSession.CurrentUser;
         _bonusesViewModel = bonusViewModel;
     }
     [RelayCommand]
@@ -56,7 +56,7 @@ public partial class QrScannerViewModel : BaseViewModel
                 {
                     var bonus = GetbonusBasedOnProductType(value);
                     _userInfo.Bonus += bonus;
-                    _userInfo.BonusOfProfile.CurrentBonus += bonus;
+                  
                     _userInfo.BonusOfProfile.CollectedBonus += bonus;
                     _bonusesViewModel.BonusHistory.Add(new BonusTransaction
                     {

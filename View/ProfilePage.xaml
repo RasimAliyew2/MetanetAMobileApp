@@ -146,7 +146,7 @@
 
                         <Grid.GestureRecognizers>
                             <!-- Qeyd: burda sən OrdersCommand yazmısan, istəyirsənsə PersonalInfoCommand elə -->
-                            <TapGestureRecognizer Command="{Binding OrdersCommand}"/>
+                            <TapGestureRecognizer Command="{Binding PersonalInfoCommand}"/>
                         </Grid.GestureRecognizers>
 
                     </Grid>

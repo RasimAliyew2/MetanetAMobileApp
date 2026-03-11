@@ -92,11 +92,6 @@
 
 
 
-
-
-
-
-
                     <!-- Current -->
                     <Label Grid.Row="2" Grid.Column="0"
                            Text="Cari bonus"

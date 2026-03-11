@@ -88,7 +88,7 @@
                                    TextColor="#111827"
                                    HorizontalTextAlignment="Center"/>
 
-                            <Label Text="{Binding Price, StringFormat='{0} ₼'}"
+                            <Label Text="{Binding Price, StringFormat='{0} Bonus'}"
                                    FontSize="13"
                                    TextColor="#6B7280"
                                    HorizontalTextAlignment="Center"/>

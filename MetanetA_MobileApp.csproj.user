@@ -45,6 +45,9 @@
     <MauiXaml Update="View\Products\ProductPreSelectedPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="View\ProfileUserPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="View\QrCodeAccepted.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>

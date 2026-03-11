@@ -125,6 +125,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.Pr
 build_metadata.AdditionalFiles.TargetPath = View\ProfilePage.xaml
 build_metadata.AdditionalFiles.RelativePath = View\ProfilePage.xaml
 
+[C:/Users/Rasim/source/repos/MetanetA_MobileApp/MetanetA_MobileApp/View/ProfileUserPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.ProfileUserPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\ProfileUserPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\ProfileUserPage.xaml
+
 [C:/Users/Rasim/source/repos/MetanetA_MobileApp/MetanetA_MobileApp/View/QrCodeAccepted.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.QrCodeAccepted.xaml

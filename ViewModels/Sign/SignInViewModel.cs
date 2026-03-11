@@ -18,7 +18,6 @@ namespace MetanetA_MobileApp.ViewModel
     public partial class SignInViewModel : ObservableObject
     {
 
-
         public Bonus UserBonus;
 
         [ObservableProperty]
@@ -53,10 +52,10 @@ namespace MetanetA_MobileApp.ViewModel
         {
             if (string.IsNullOrEmpty(PhoneNumber) || string.IsNullOrEmpty(Password))
                 return;
-
-
+            
+            
             PhoneNumber = AdjustUserInfo.AdjustPhoneNumber(PhoneNumber);
-
+            
             string text = await GetAndPostAllDataForUser.GetAsyncUserInfo(new UserInfo() { Password = password, PhoneNumber = phoneNumber });
             if (string.IsNullOrEmpty(text))
             {
@@ -71,7 +70,7 @@ namespace MetanetA_MobileApp.ViewModel
             else
             {
                 userSession.CurrentUser = JsonSerializer.Deserialize<UserInfo[]>(text)[0];
-                await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+              await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
             }
 
         }

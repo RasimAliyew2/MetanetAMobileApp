@@ -36,6 +36,11 @@
 
     <ShellContent
        Title=""
+       ContentTemplate="{DataTemplate local:ProfileUserPage}"
+       Route="ProfileUserPage"/>
+
+    <ShellContent
+       Title=""
        ContentTemplate="{DataTemplate local:ProfilePage}"
        Route="ProfilePage"/>
 

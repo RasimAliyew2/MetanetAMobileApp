@@ -1,177 +1,110 @@
-﻿using System;
+﻿// ViewModels/ProductsViewModels/ProductViewModel.cs (REPLACE)
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Reflection;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MetanetA_MobileApp.Model;
 using MetanetA_MobileApp.Services.UIState;
 
-namespace MetanetA_MobileApp.ViewModels.ProductsViewModels
+namespace MetanetA_MobileApp.ViewModels.ProductsViewModels;
+
+[QueryProperty(nameof(CategoryKey), "CategoryKey")]
+
+public partial class ProductViewModel : BaseViewModel
 {
-    public partial class ProductViewModel : BaseViewModel
+    public ObservableCollection<ProductSubCategorySection> SubCategories { get; } = new();
+
+    [ObservableProperty]
+    private string categoryKey;
+    [ObservableProperty] private string selectedRootCategoryTitle = "Kateqori.ya seçin";
+
+    public ProductViewModel(BottomMenuState menuState) : base(menuState)
     {
-        // Full list
-        public ObservableCollection<ProductItem> Products { get; } = new();
+        // İstəsən burada default bir kateqoriya da aça bilərsən:
+       // LoadRootCategory("INSAAT");
+    }
 
-        // Filtered list (UI bunu göstərir)
-        public ObservableCollection<ProductItem> FilteredProducts { get; } = new();
+    partial void OnCategoryKeyChanged(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+            return;
 
-        // Search text
-        [ObservableProperty] private string searchText;
+        LoadRootCategory(value); // sənin mövcud metodun
+    }
+    public void LoadRootCategory(string key)
+    {
+        SubCategories.Clear();
 
-        // Panel open/close
-        [ObservableProperty] private bool isCategoryPanelOpen = true;
-
-        public string CategoryPanelIcon => IsCategoryPanelOpen ? "▴" : "▾";
-
-        // Categories / SubCategories
-        public ObservableCollection<string> Categories { get; } = new();
-        public ObservableCollection<string> SubCategories { get; } = new();
-
-        [ObservableProperty] private string selectedCategory;
-        [ObservableProperty] private string selectedSubCategory;
-
-        public bool HasSubCategories => SubCategories.Any();
-
-        // Product selection
-        [ObservableProperty] private ProductItem selectedProduct;
-
-        public ProductViewModel(BottomMenuState menuState) : base(menuState)
+        if (string.IsNullOrWhiteSpace(key) || !ProductCatalog.Data.TryGetValue(key, out var data))
         {
-            // Demo (səndə serverdən gələcək)
-            Products.Add(new ProductItem { Name = "Termos", Price = 25, ImageUrl = "product.png" });
-            Products.Add(new ProductItem { Name = "Maşın", Price = 1000, ImageUrl = "product.png" });
-            Products.Add(new ProductItem { Name = "Rokol Boya", Price = 40, ImageUrl = "product.png" });
-            Products.Add(new ProductItem { Name = "Universal Alət", Price = 65, ImageUrl = "product.png" });
-
-            // Kateqoriyalar
-            Categories.Add("Hamısı");
-            Categories.Add("K1");
-            Categories.Add("K2");
-            Categories.Add("K3");
-            Categories.Add("K4");
-
-            SelectedCategory = "Hamısı";
-
-            ApplyFilters();
+            SelectedRootCategoryTitle = "Kateqoriya seçin";
+            return;
         }
 
-        partial void OnSearchTextChanged(string value) => ApplyFilters();
+        SelectedRootCategoryTitle = data.Title;
 
-        partial void OnSelectedCategoryChanged(string value)
+        // Demo üçün: hər alt kateqoriyaya 2 məhsul əlavə edirəm.
+        // Sonradan bunu API-dən gələn real məhsullarla əvəz edəcəksən.
+        var rnd = new Random();
+
+     //   sec.Products.Add(new ProductItem
+     //   {
+     //       Name = $"\"MATANAT A\" HYBRID keramika yapışdırıcısı (boz)",
+     //       Description = data.Title,
+     //       ImageUrl = "pic5.png",
+     //       Price = 25
+     //   });
+      //  SubCategories.Add(new ProductSubCategorySection("İnşaat sistemləri")) { Products.Ad};
+
+        foreach (var subName in data.SubCategories)
         {
-            BuildSubCategories(value);
-            SelectedSubCategory = null;
+            var sec = new ProductSubCategorySection(subName);
 
-            OnPropertyChanged(nameof(HasSubCategories));
-            ApplyFilters();
-        }
-
-        partial void OnSelectedSubCategoryChanged(string value) => ApplyFilters();
-
-        partial void OnIsCategoryPanelOpenChanged(bool value)
-        {
-            OnPropertyChanged(nameof(CategoryPanelIcon));
-        }
-
-        [RelayCommand]
-        private void ToggleCategoryPanel()
-        {
-            IsCategoryPanelOpen = !IsCategoryPanelOpen;
-            OnPropertyChanged(nameof(CategoryPanelIcon));
-        }
-
-        private void BuildSubCategories(string category)
-        {
-            SubCategories.Clear();
-
-            if (string.IsNullOrWhiteSpace(category) || category == "Hamısı")
-                return;
-
-            // sub kateqoriyalarını burda idarə et
-            if (category == "K1")
+            // Demo products
+            sec.Products.Add(new ProductItem
             {
-                SubCategories.Add("S1");
-                SubCategories.Add("S2");
-            }
-            else if (category == "K2")
+                Name = $"{subName} - Məhsul 1",
+                Description = data.Title,
+                ImageUrl = "product.png",
+                Price = 25
+            });
+
+            sec.Products.Add(new ProductItem
             {
-                SubCategories.Add("S3");
-                SubCategories.Add("S4");
-            }
-            else if (category == "K3")
-            {
-                SubCategories.Add("S5");
-            }
-            else if (category == "K4")
-            {
-                SubCategories.Add("S6");
-                SubCategories.Add("S7");
-            }
+                Name = $"{subName} - Məhsul 2",
+                Description = data.Title,
+                ImageUrl = "product.png",
+                Price = 20
+            });
+
+            SubCategories.Add(sec);
         }
+    }
 
-        // ProductItem-də Category/SubCategory/Description yoxdursa belə crash etməsin deyə reflection
-        private static string GetStringProp(ProductItem item, string propName)
-        {
-            if (item == null) return null;
+    [RelayCommand]
+    private void ToggleSubCategory(ProductSubCategorySection section)
+    {
+        if (section == null) return;
 
-            PropertyInfo pi = item.GetType().GetProperty(propName);
-            return pi?.GetValue(item)?.ToString();
-        }
+        // istəyirsənsə: birini açanda digərlərini bağla
+        foreach (var s in SubCategories.Where(x => x != section))
+            s.IsExpanded = false;
 
-        private void ApplyFilters()
-        {
-            var q = (SearchText ?? "").Trim().ToLowerInvariant();
+        section.IsExpanded = !section.IsExpanded;
+    }
 
-            var filtered = Products.AsEnumerable();
+    [RelayCommand]
+    private async Task SelectProductAsync(ProductItem item)
+    {
+        if (item == null) return;
 
-            // Search: Name + Description (varsa)
-            if (!string.IsNullOrWhiteSpace(q))
-            {
-                filtered = filtered.Where(p =>
-                {
-                    var name = (p.Name ?? "").ToLowerInvariant();
-                    var desc = (GetStringProp(p, "Description") ?? "").ToLowerInvariant();
-
-                    return name.Contains(q) || desc.Contains(q);
-                });
-            }
-
-            // Category filter
-            if (!string.IsNullOrWhiteSpace(SelectedCategory) && SelectedCategory != "Hamısı")
-            {
-                filtered = filtered.Where(p =>
-                {
-                    var cat = GetStringProp(p, "Category");
-                    return string.Equals(cat, SelectedCategory, StringComparison.OrdinalIgnoreCase);
-                });
-            }
-
-            // SubCategory filter
-            if (!string.IsNullOrWhiteSpace(SelectedSubCategory))
-            {
-                filtered = filtered.Where(p =>
-                {
-                    var sub = GetStringProp(p, "SubCategory");
-                    return string.Equals(sub, SelectedSubCategory, StringComparison.OrdinalIgnoreCase);
-                });
-            }
-
-            FilteredProducts.Clear();
-            foreach (var p in filtered)
-                FilteredProducts.Add(p);
-        }
-
-        partial void OnSelectedProductChanged(ProductItem value)
-        {
-            if (value is null)
-                return;
-
-            // burada istəsən detail page açarsan
-
-            // seçimi sıfırla (highlight qalmasın)
-            SelectedProduct = null;
-        }
+        // Hazırda “seçmək” üçün sadəcə məlumat göstərir.
+        // Sonra buradan ProductDetailPage və ya səbətə əlavə et logikası qoşa bilərsən.
+        await Application.Current.MainPage.DisplayAlert(
+            "Məhsul",
+            $"{item.Name}\nQiymət: {item.Price:0.##} ₼",
+            "OK");
     }
 }

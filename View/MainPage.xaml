@@ -2,6 +2,7 @@
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:MetanetA_MobileApp.Model"
     xmlns:ViewModel="clr-namespace:MetanetA_MobileApp.ViewModels"
     xmlns:controls="clr-namespace:MetanetA_MobileApp.View"
     x:DataType="ViewModel:MainViewModel"
@@ -40,6 +41,15 @@
             <Setter Property="HeightRequest" Value="44"/>
         </Style>
 
+        <!-- Suggestions container -->
+        <Style x:Key="SuggestCard" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="Stroke" Value="{StaticResource BorderGray}"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="StrokeShape" Value="RoundRectangle 18"/>
+            <Setter Property="Padding" Value="10"/>
+        </Style>
+
         <!-- Top icon -->
         <Style x:Key="TopIconStyle" TargetType="ImageButton">
             <Setter Property="WidthRequest" Value="40"/>
@@ -62,19 +72,6 @@
             </Setter>
         </Style>
 
-        <!-- Tile card -->
-        <Style x:Key="TileCard" TargetType="Border">
-            <Setter Property="BackgroundColor" Value="White"/>
-            <Setter Property="StrokeThickness" Value="0"/>
-            <Setter Property="StrokeShape" Value="RoundRectangle 18"/>
-            <Setter Property="Padding" Value="0"/>
-            <Setter Property="Shadow">
-                <Setter.Value>
-                    <Shadow Opacity="0.10" Radius="14" Offset="0,6"/>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
         <!-- Transparent tile button (text overlay) -->
         <Style x:Key="TileOverlayButton" TargetType="Button">
             <Setter Property="BackgroundColor" Value="Transparent"/>
@@ -93,8 +90,8 @@
                         <VisualState x:Name="Normal"/>
                         <VisualState x:Name="Pressed">
                             <VisualState.Setters>
-                                <Setter Property="Opacity" Value="0.85"/>
-                                <Setter Property="Scale" Value="0.985"/>
+                                <Setter Property="Opacity" Value="1"/>
+                                <Setter Property="Scale" Value="1"/>
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -102,11 +99,7 @@
             </Setter>
         </Style>
 
-        <!-- Big promo card -->
-        <Style x:Key="PromoCard" TargetType="Border" BasedOn="{StaticResource TileCard}">
-            <Setter Property="StrokeShape" Value="RoundRectangle 20"/>
-        </Style>
-
+        <!-- Promo overlay button (BasedOn MUST come after TileOverlayButton) -->
         <Style x:Key="PromoOverlayButton" TargetType="Button" BasedOn="{StaticResource TileOverlayButton}">
             <Setter Property="HeightRequest" Value="158"/>
             <Setter Property="FontSize" Value="22"/>
@@ -114,24 +107,29 @@
             <Setter Property="Padding" Value="18"/>
         </Style>
 
-        <Style x:Key="SectionTitle" TargetType="Label">
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="FontAttributes" Value="Bold"/>
-            <Setter Property="TextColor" Value="{StaticResource TextDark}"/>
-            <Setter Property="Margin" Value="2,6,0,0"/>
+        <!-- Tile card -->
+        <Style x:Key="TileCard" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="StrokeThickness" Value="0"/>
+            <Setter Property="StrokeShape" Value="RoundRectangle 18"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Shadow">
+                <Setter.Value>
+                    <Shadow Opacity="0.10" Radius="14" Offset="0,6"/>
+                </Setter.Value>
+            </Setter>
         </Style>
 
     </ContentPage.Resources>
 
-    <!-- ✅ Root grid: TopBar / Content / BottomMenu -->
     <Grid RowDefinitions="Auto,*,Auto"
           Padding="18"
           RowSpacing="14">
 
-        <!-- ✅ TOP BAR -->
-        <Border Grid.Row="0" Style="{StaticResource TopCard}" >
+        <!-- TOP BAR -->
+        <Border Grid.Row="0" Style="{StaticResource TopCard}">
 
-            <Grid RowDefinitions="Auto,Auto"
+            <Grid RowDefinitions="Auto,Auto,Auto"
                   RowSpacing="12">
 
                 <!-- Row 0: Logo + icons -->
@@ -148,13 +146,11 @@
 
                     <!-- Basket + Badge -->
                     <Grid Grid.Column="1" WidthRequest="40" HeightRequest="40" Margin="10">
-
                         <ImageButton Source="basket.png"
-                 Style="{StaticResource TopIconStyle}"
-                 Command="{Binding OpenCartCommand}" />
+                                     Style="{StaticResource TopIconStyle}"
+                                     Command="{Binding OpenCartCommand}" />
 
-                        <Border IsVisible="True"
-                                BackgroundColor="#EF4444"
+                        <Border BackgroundColor="#EF4444"
                                 StrokeThickness="0"
                                 StrokeShape="RoundRectangle 999"
                                 HorizontalOptions="End"
@@ -162,7 +158,6 @@
                                 Margin="0,-6,-6,0"
                                 WidthRequest="18"
                                 HeightRequest="18">
-                                
                             <Border.Triggers>
                                 <DataTrigger TargetType="Border"
                                              Binding="{Binding CartService.TotalCount}"
@@ -177,36 +172,110 @@
                                    HorizontalTextAlignment="Center"
                                    VerticalTextAlignment="Center"/>
                         </Border>
-
-
                     </Grid>
-
 
                     <ImageButton Grid.Column="2"
                                  Source="noticifation_button.png"
                                  Style="{StaticResource TopIconStyle}" />
                 </Grid>
 
-                <!-- ✅ Row 1: Full width search -->
+                <!-- Row 1: Search -->
                 <Border Grid.Row="1" Style="{StaticResource SearchContainer}">
-                    <SearchBar Placeholder="Axtarış..."
-                               HeightRequest="44"
-                               BackgroundColor="Transparent"
-                               CancelButtonColor="{StaticResource TextGray}"
-                               TextColor="{StaticResource TextDark}"
-                               PlaceholderColor="#9CA3AF" />
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10" VerticalOptions="Center">
+                        <SearchBar Placeholder="Məhsul axtar..."
+                                   HeightRequest="44"
+                                   BackgroundColor="Transparent"
+                                   CancelButtonColor="{StaticResource TextGray}"
+                                   TextColor="{StaticResource TextDark}"
+                                   PlaceholderColor="#9CA3AF"
+                                   Text="{Binding SearchText}" />
+
+                        <ImageButton Grid.Column="1"
+                                     Source="close_icon.png"
+                                     BackgroundColor="Transparent"
+                                     WidthRequest="28"
+                                     HeightRequest="28"
+                                     Command="{Binding ClearMainSearchCommand}"
+                                     Opacity="0.70"
+                                     Padding="0">
+                            <ImageButton.Triggers>
+                                <DataTrigger TargetType="ImageButton" Binding="{Binding SearchText}" Value="">
+                                    <Setter Property="IsVisible" Value="False"/>
+                                </DataTrigger>
+                                <DataTrigger TargetType="ImageButton" Binding="{Binding SearchText}" Value="{x:Null}">
+                                    <Setter Property="IsVisible" Value="False"/>
+                                </DataTrigger>
+                            </ImageButton.Triggers>
+                        </ImageButton>
+                    </Grid>
+                </Border>
+
+                <!-- Row 2: Suggestions -->
+                <Border Grid.Row="2"
+                        Style="{StaticResource SuggestCard}"
+                        IsVisible="{Binding IsSearchResultsVisible}"
+                        Padding="0">
+                    <CollectionView ItemsSource="{Binding SearchResults}"
+                                    HeightRequest="260"
+                                    SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:SalesItem">
+                                <Border Stroke="#F3F4F6"
+                                        StrokeThickness="1"
+                                        StrokeShape="RoundRectangle 14"
+                                        Padding="10"
+                                        Margin="10,8,10,0"
+                                        BackgroundColor="White">
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding BindingContext.OpenSuggestedProductCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                            CommandParameter="{Binding .}" />
+                                    </Border.GestureRecognizers>
+
+                                    <Grid ColumnDefinitions="52,*,Auto" ColumnSpacing="10">
+                                        <Border BackgroundColor="#F9FAFB"
+                                                Stroke="#E5E7EB"
+                                                StrokeThickness="1"
+                                                StrokeShape="RoundRectangle 12"
+                                                Padding="6"
+                                                WidthRequest="52"
+                                                HeightRequest="52">
+                                            <Image Source="{Binding Image}" Aspect="AspectFit"/>
+                                        </Border>
+
+                                        <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                            <Label Text="{Binding Name}"
+                                                   FontSize="14"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#111827"
+                                                   LineBreakMode="TailTruncation"/>
+                                            <Label Text="Məhsul"
+                                                   FontSize="12"
+                                                   TextColor="#6B7280"/>
+                                        </VerticalStackLayout>
+
+                                        <Label Grid.Column="2"
+                                               Text="{Binding Price, StringFormat='{0:0.##} ₼'}"
+                                               FontSize="14"
+                                               FontAttributes="Bold"
+                                               TextColor="#0F766E"
+                                               VerticalTextAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
                 </Border>
 
             </Grid>
 
         </Border>
 
-        <!-- ✅ CONTENT -->
+        <!-- CONTENT -->
         <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Always">
             <VerticalStackLayout Spacing="14">
 
- 
-                <!-- ✅ Quick actions 2x2 -->
+                <!-- Quick actions 2x2 -->
                 <Grid ColumnDefinitions="*,*"
                       RowDefinitions="Auto,Auto"
                       ColumnSpacing="12"
@@ -218,8 +287,7 @@
                             <Image Source="sales"
                                    Aspect="AspectFill"
                                    InputTransparent="True"/>
-                            <Button 
-                                    Style="{StaticResource TileOverlayButton}"
+                            <Button Style="{StaticResource TileOverlayButton}"
                                     Command="{Binding ShopCommand}" />
                         </Grid>
                     </Border>
@@ -230,8 +298,7 @@
                             <Image Source="bonuses"
                                    Aspect="AspectFill"
                                    InputTransparent="True"/>
-                            <Button 
-                                    Style="{StaticResource TileOverlayButton}"
+                            <Button Style="{StaticResource TileOverlayButton}"
                                     Command="{Binding GoTobonusPageCommand}" />
                         </Grid>
                     </Border>
@@ -242,8 +309,7 @@
                             <Image Source="gifts"
                                    Aspect="AspectFill"
                                    InputTransparent="True"/>
-                            <Button
-                                    Style="{StaticResource TileOverlayButton}"
+                            <Button Style="{StaticResource TileOverlayButton}"
                                     Command="{Binding GiftsCommand}" />
                         </Grid>
                     </Border>
@@ -254,38 +320,31 @@
                             <Image Source="tutorial"
                                    Aspect="AspectFill"
                                    InputTransparent="True"/>
-                            <Button
-                                    Style="{StaticResource TileOverlayButton}"
+                            <Button Style="{StaticResource TileOverlayButton}"
                                     Command="{Binding TrainingCommand}" />
                         </Grid>
                     </Border>
 
                 </Grid>
 
+                <!-- Reklamlar -->
+                <Border Style="{StaticResource TileCard}">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AdsCommand}" />
+                    </Border.GestureRecognizers>
 
-                <!-- ✅ Reklamlar -->
-                <Border Style="{StaticResource PromoCard}">
-                    <Grid>
-                        <Image Source="news"
-                               Aspect="AspectFill"
-                               InputTransparent="True"/>
-                        <Button
-                                Style="{StaticResource PromoOverlayButton}"
-                                Command="{Binding AdsCommand}" />
-                    </Grid>
+                    <Image Source="news"
+                           Aspect="AspectFill"/>
                 </Border>
 
+                <!-- Kampaniyalar -->
+                <Border Style="{StaticResource TileCard}">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CampaignsCommand}" />
+                    </Border.GestureRecognizers>
 
-                <!-- ✅ Kampaniyalar -->
-                <Border Style="{StaticResource PromoCard}">
-                    <Grid>
-                        <Image Source="Campaigns.png"
-                               Aspect="AspectFill"
-                               InputTransparent="True"/>
-                        <Button
-                                Style="{StaticResource PromoOverlayButton}"
-                                Command="{Binding CampaignsCommand}" />
-                    </Grid>
+                    <Image Source="Campaigns.png"
+                           Aspect="AspectFill"/>
                 </Border>
 
                 <!-- bottom menu üçün biraz boşluq -->
@@ -294,10 +353,9 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- ✅ Bottom menu fixed -->
+        <!-- Bottom menu -->
         <controls:BottomMenu Grid.Row="2"
                              VerticalOptions="End"
                              Margin="0,0,0,6"/>
     </Grid>
-
 </ContentPage>

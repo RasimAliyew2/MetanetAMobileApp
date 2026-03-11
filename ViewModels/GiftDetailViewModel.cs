@@ -24,9 +24,9 @@ namespace MetanetA_MobileApp.ViewModels
 
         // Əgər GiftItem-də Description əlavə etsən:
         // public string Description => Gift?.Description;
-        public GiftDetailViewModel(UserInfo userInfo, BottomMenuState bottomMenu) : base(bottomMenu)
+        public GiftDetailViewModel(IUserSession userSession, BottomMenuState bottomMenu) : base(bottomMenu)
         {
-            this.userInfo = userInfo;
+            this.userInfo = userSession.CurrentUser;
         }
         [RelayCommand]
         public async Task Buy()

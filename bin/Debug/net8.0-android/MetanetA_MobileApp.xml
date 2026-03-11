@@ -301,12 +301,37 @@
             <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
         </member>
         <member name="P:MetanetA_MobileApp.ViewModels.MainViewModel.Cart">
             <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.MainViewModel.cart"/>
         </member>
         <member name="P:MetanetA_MobileApp.ViewModels.MainViewModel.CartService">
             <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.MainViewModel.cartService"/>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.MainViewModel.SearchText">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.MainViewModel.searchText"/>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.MainViewModel.IsSearchResultsVisible">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.MainViewModel.isSearchResultsVisible"/>
+        </member>
+        <member name="M:MetanetA_MobileApp.ViewModels.MainViewModel.OnSearchTextChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:MetanetA_MobileApp.ViewModels.MainViewModel.SearchText"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:MetanetA_MobileApp.ViewModels.MainViewModel.SearchText"/> is changed.</remarks>
+        </member>
+        <member name="F:MetanetA_MobileApp.ViewModels.MainViewModel.clearMainSearchCommand">
+            <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.MainViewModel.ClearMainSearchCommand"/>.</summary>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.MainViewModel.ClearMainSearchCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.MainViewModel.ClearMainSearch"/>.</summary>
+        </member>
+        <member name="F:MetanetA_MobileApp.ViewModels.MainViewModel.openSuggestedProductCommand">
+            <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.MainViewModel.OpenSuggestedProductCommand"/>.</summary>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.MainViewModel.OpenSuggestedProductCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.MainViewModel.OpenSuggestedProductAsync(MetanetA_MobileApp.Model.SalesItem)"/>.</summary>
         </member>
         <member name="F:MetanetA_MobileApp.ViewModels.MainViewModel.openCartCommand">
             <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.MainViewModel.OpenCartCommand"/>.</summary>
@@ -358,63 +383,74 @@
         <member name="T:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductPreSelectedViewModel">
             <inheritdoc/>
         </member>
-        <member name="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductPreSelectedViewModel.openProductsCommand">
-            <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductPreSelectedViewModel.OpenProductsCommand"/>.</summary>
+        <member name="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductPreSelectedViewModel.selectRootCategoryCommand">
+            <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductPreSelectedViewModel.SelectRootCategoryCommand"/>.</summary>
         </member>
-        <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductPreSelectedViewModel.OpenProductsCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductPreSelectedViewModel.OpenProducts(MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductTypeItem)"/>.</summary>
+        <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductPreSelectedViewModel.SelectRootCategoryCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductPreSelectedViewModel.SelectRootCategoryAsync(System.String)"/>.</summary>
+        </member>
+        <member name="T:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductSubCategorySection">
+            <inheritdoc/>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductSubCategorySection.IsExpanded">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductSubCategorySection.isExpanded"/>
         </member>
         <member name="T:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel">
             <inheritdoc/>
             <inheritdoc/>
+            <inheritdoc/>
         </member>
-        <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.SearchText">
-            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.searchText"/>
+        <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.CategoryKey">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.categoryKey"/>
         </member>
-        <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.IsCategoryPanelOpen">
-            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.isCategoryPanelOpen"/>
+        <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.SelectedRootCategoryTitle">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.selectedRootCategoryTitle"/>
         </member>
-        <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.SelectedCategory">
-            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.selectedCategory"/>
-        </member>
-        <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.SelectedSubCategory">
-            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.selectedSubCategory"/>
-        </member>
-        <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.SelectedProduct">
-            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.selectedProduct"/>
-        </member>
-        <member name="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.OnSearchTextChanged(System.String)">
-            <summary>Executes the logic for when <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.SearchText"/> just changed.</summary>
+        <member name="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.OnCategoryKeyChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.CategoryKey"/> just changed.</summary>
             <param name="value">The new property value that was set.</param>
-            <remarks>This method is invoked right after the value of <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.SearchText"/> is changed.</remarks>
+            <remarks>This method is invoked right after the value of <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.CategoryKey"/> is changed.</remarks>
         </member>
-        <member name="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.OnIsCategoryPanelOpenChanged(System.Boolean)">
-            <summary>Executes the logic for when <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.IsCategoryPanelOpen"/> just changed.</summary>
-            <param name="value">The new property value that was set.</param>
-            <remarks>This method is invoked right after the value of <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.IsCategoryPanelOpen"/> is changed.</remarks>
+        <member name="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.toggleSubCategoryCommand">
+            <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ToggleSubCategoryCommand"/>.</summary>
         </member>
-        <member name="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.OnSelectedCategoryChanged(System.String)">
-            <summary>Executes the logic for when <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.SelectedCategory"/> just changed.</summary>
-            <param name="value">The new property value that was set.</param>
-            <remarks>This method is invoked right after the value of <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.SelectedCategory"/> is changed.</remarks>
+        <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ToggleSubCategoryCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ToggleSubCategory(MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductSubCategorySection)"/>.</summary>
         </member>
-        <member name="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.OnSelectedSubCategoryChanged(System.String)">
-            <summary>Executes the logic for when <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.SelectedSubCategory"/> just changed.</summary>
-            <param name="value">The new property value that was set.</param>
-            <remarks>This method is invoked right after the value of <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.SelectedSubCategory"/> is changed.</remarks>
+        <member name="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.selectProductCommand">
+            <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.SelectProductCommand"/>.</summary>
         </member>
-        <member name="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.OnSelectedProductChanged(MetanetA_MobileApp.Model.ProductItem)">
-            <summary>Executes the logic for when <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.SelectedProduct"/> just changed.</summary>
-            <param name="value">The new property value that was set.</param>
-            <remarks>This method is invoked right after the value of <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.SelectedProduct"/> is changed.</remarks>
+        <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.SelectProductCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.SelectProductAsync(MetanetA_MobileApp.Model.ProductItem)"/>.</summary>
         </member>
-        <member name="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.toggleCategoryPanelCommand">
-            <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ToggleCategoryPanelCommand"/>.</summary>
+        <member name="T:MetanetA_MobileApp.ViewModels.ProfileUserViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
         </member>
-        <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ToggleCategoryPanelCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ToggleCategoryPanel"/>.</summary>
+        <member name="P:MetanetA_MobileApp.ViewModels.ProfileUserViewModel.Draft">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ProfileUserViewModel.draft"/>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.ProfileUserViewModel.HasChanges">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ProfileUserViewModel.hasChanges"/>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.ProfileUserViewModel.IsBusy">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ProfileUserViewModel.isBusy"/>
+        </member>
+        <member name="F:MetanetA_MobileApp.ViewModels.ProfileUserViewModel.saveCommand">
+            <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.ProfileUserViewModel.SaveCommand"/>.</summary>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.ProfileUserViewModel.SaveCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.ProfileUserViewModel.SaveAsync"/>.</summary>
+        </member>
+        <member name="F:MetanetA_MobileApp.ViewModels.ProfileUserViewModel.cancelCommand">
+            <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.ProfileUserViewModel.CancelCommand"/>.</summary>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.ProfileUserViewModel.CancelCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.ProfileUserViewModel.CancelAsync"/>.</summary>
         </member>
         <member name="T:MetanetA_MobileApp.ViewModels.ProfileViewModel">
+            <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
@@ -437,6 +473,12 @@
         </member>
         <member name="P:MetanetA_MobileApp.ViewModels.ProfileViewModel.TogglePersonalInfoCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.ProfileViewModel.TogglePersonalInfo"/>.</summary>
+        </member>
+        <member name="F:MetanetA_MobileApp.ViewModels.ProfileViewModel.personalInfoCommand">
+            <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.ProfileViewModel.PersonalInfoCommand"/>.</summary>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.ProfileViewModel.PersonalInfoCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.ProfileViewModel.PersonalInfo"/>.</summary>
         </member>
         <member name="F:MetanetA_MobileApp.ViewModels.ProfileViewModel.changePhotoCommand">
             <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.ProfileViewModel.ChangePhotoCommand"/>.</summary>
@@ -1149,20 +1191,29 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CartService">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CartService" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsSearchResultsVisible">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsSearchResultsVisible" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ProductItem">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ProductItem" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsCategoryPanelOpen">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsCategoryPanelOpen" generated properties.</summary>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsExpanded">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsExpanded" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedCategory">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedCategory" generated properties.</summary>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CategoryKey">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CategoryKey" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedSubCategory">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedSubCategory" generated properties.</summary>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedRootCategoryTitle">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedRootCategoryTitle" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedProduct">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedProduct" generated properties.</summary>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Draft">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Draft" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HasChanges">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HasChanges" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsBusy">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsBusy" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ProfileImage">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ProfileImage" generated properties.</summary>
@@ -1416,20 +1467,29 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CartService">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CartService" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsSearchResultsVisible">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsSearchResultsVisible" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ProductItem">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ProductItem" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsCategoryPanelOpen">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsCategoryPanelOpen" generated properties.</summary>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsExpanded">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsExpanded" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedCategory">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedCategory" generated properties.</summary>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CategoryKey">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CategoryKey" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedSubCategory">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedSubCategory" generated properties.</summary>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedRootCategoryTitle">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedRootCategoryTitle" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedProduct">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedProduct" generated properties.</summary>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Draft">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Draft" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HasChanges">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HasChanges" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsBusy">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsBusy" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ProfileImage">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ProfileImage" generated properties.</summary>

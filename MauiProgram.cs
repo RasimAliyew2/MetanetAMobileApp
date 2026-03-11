@@ -125,6 +125,7 @@ namespace MetanetA_MobileApp
             builder.Services.AddSingleton<ConfrimTheSMS>(); 
             builder.Services.AddSingleton<ProfilePage>();
             builder.Services.AddSingleton<OthersPage>();
+            builder.Services.AddSingleton<ProfileUserPage>();
             builder.Services.AddSingleton<QrCodeAccepted>();
             builder.Services.AddSingleton<QRCodeNotAccepted>();
             builder.Services.AddSingleton<ForgetPasswordPage>(); 
@@ -145,7 +146,8 @@ namespace MetanetA_MobileApp
             builder.Services.AddTransient<MainViewModel>();
             builder.Services.AddTransient<VideosViewModel>();
             builder.Services.AddTransient<ProductPreSelectedViewModel>();
-
+            builder.Services.AddTransient<ProfileUserViewModel>();
+            
 
 
 

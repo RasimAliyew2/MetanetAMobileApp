@@ -121,6 +121,9 @@
 	  <MauiXaml Update="View\Products\ProductPreSelectedPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\ProfileUserPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\QrCodeAccepted.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

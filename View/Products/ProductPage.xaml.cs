@@ -4,18 +4,33 @@ namespace MetanetA_MobileApp.View.Products;
 
 public partial class ProductPage : ContentPage
 {
-	public ProductPage(ProductViewModel vm)
-	{
-		InitializeComponent();
-		BindingContext = vm;
-	}
+    private readonly ProductViewModel _vm;
+
+    public ProductPage(ProductViewModel vm)
+    {
+        InitializeComponent();
+        _vm = vm;
+        BindingContext = _vm;
+    }
+
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        if (query == null) return;
+
+        if (query.TryGetValue("categoryKey", out var raw) && raw != null)
+        {
+            var key = raw.ToString();
+            _vm.LoadRootCategory(key);
+        }
+    }
     protected override bool OnBackButtonPressed()
     {
         MainThread.BeginInvokeOnMainThread(async () =>
         {
-            await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+            await Shell.Current.GoToAsync($"//{nameof(ProductPreSelectedPage)}");
         });
 
         return true; // default back işləməsin, app çıxmasın
     }
 }
+

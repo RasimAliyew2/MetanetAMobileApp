@@ -1,35 +1,32 @@
-﻿using System.Collections.ObjectModel;
+﻿// ViewModels/ProductsViewModels/ProductPreSelectedViewModel.cs  (REPLACE)
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MetanetA_MobileApp.Services.UIState;
+using MetanetA_MobileApp.View.Products;
 
-namespace MetanetA_MobileApp.ViewModels.ProductsViewModels
+namespace MetanetA_MobileApp.ViewModels.ProductsViewModels;
+
+public partial class ProductPreSelectedViewModel : BaseViewModel
 {
-    public partial class ProductPreSelectedViewModel : BaseViewModel
+    public ProductPreSelectedViewModel(BottomMenuState menuState) : base(menuState) { }
+
+    [RelayCommand]
+    private async Task SelectRootCategoryAsync(string key)
     {
-        public ObservableCollection<ProductTypeItem> ProductTypes { get; } = new();
+        if (string.IsNullOrWhiteSpace(key))
+            return;
 
-        public ProductPreSelectedViewModel(BottomMenuState menuState) : base(menuState)
-        {
-            ProductTypes.Add(new ProductTypeItem { Title = "Tip 1", ImageSource = "product_type1" });
-            ProductTypes.Add(new ProductTypeItem { Title = "Tip 2", ImageSource = "product_type2" });
-            ProductTypes.Add(new ProductTypeItem { Title = "Tip 3", ImageSource = "product_type3" });
-            ProductTypes.Add(new ProductTypeItem { Title = "Tip 4", ImageSource = "product_type4" });
-        }
+        // ✅ ProductPage səndə bottom-tab (Shell element) kimi açılırsa:
+        await Shell.Current.GoToAsync($"//{nameof(ProductPage)}",
+            new Dictionary<string, object>
+            {
+                ["CategoryKey"] = key
+            });
 
-        [RelayCommand]
-        private async Task OpenProducts(ProductTypeItem selectedType)
-        {
-            // Hansına basılırsa basılsın ProductPage açılır ✅
-            // BottomMenu selection düzgün işləsin deyə BaseViewModel-in Products() metodundan istifadə edirik.
-            await Products();
-        }
-    }
 
-    public class ProductTypeItem
-    {
-        public string Title { get; set; }
-        public string ImageSource { get; set; }
+        // Əgər səndə ProductPage Shell-də tab DEYİL, sadəcə Routing.RegisterRoute ilə açılırsa,
+        // yuxarı sətri kommentə al, bunu aç:
+        // await Shell.Current.GoToAsync(nameof(ProductPage), new Dictionary<string, object> { ["categoryKey"] = key });
     }
 }
