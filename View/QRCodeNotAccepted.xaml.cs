@@ -8,4 +8,13 @@ public partial class QRCodeNotAccepted : ContentPage   // ContentPage
         InitializeComponent();
         BindingContext = notAccepted;
     }
+    protected override bool OnBackButtonPressed()
+    {
+        MainThread.BeginInvokeOnMainThread(async () =>
+        {
+            await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+        });
+
+        return true; // default back işləməsin, app çıxmasın
+    }
 }

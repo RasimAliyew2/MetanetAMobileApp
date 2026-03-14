@@ -6,6 +6,7 @@ using CommunityToolkit.Mvvm.Input;
 using MetanetA_MobileApp.Model;
 using MetanetA_MobileApp.Services.Abstractions;
 using MetanetA_MobileApp.Services.UIState;
+using MetanetA_MobileApp.View.Gifts;
 
 namespace MetanetA_MobileApp.ViewModels
 {
@@ -18,12 +19,23 @@ namespace MetanetA_MobileApp.ViewModels
 
         [ObservableProperty] private IUserSession userSession;
 
-        public float CurrentBonus => UserSession.CurrentUser.BonusOfProfile.CurrentBonus;
+        [ObservableProperty] private float currentBonus;
 
+        private IGiftPurchaseNotifier purchaseNotifier;
+
+        private IQRBonusNotifier QRBonusNotifier;
         public ObservableCollection<BonusTransaction> BonusHistory { get; } = new();
 
-        public BonusesViewModel(IUserSession userSession,ProfileBonus profileBonus, BottomMenuState bottomMenu) : base(bottomMenu)
+        public BonusesViewModel(IUserSession userSession,ProfileBonus profileBonus, BottomMenuState bottomMenu,
+            IGiftPurchaseNotifier giftPurchaseNotifier, 
+            IQRBonusNotifier bonusNotifier) : base(bottomMenu)
         {
+            this.QRBonusNotifier = bonusNotifier;
+            this.QRBonusNotifier.QRBonusAdded += row => AddBonusRow(row);
+
+            purchaseNotifier = giftPurchaseNotifier;
+            purchaseNotifier.GiftPurchaseAdded += row => SpendBonusRow(row);
+
             UserSession = userSession;
             this.ProfileBonus = profileBonus;
             // Əgər sənin real datan varsa buradan götürə bilərsən:
@@ -31,13 +43,7 @@ namespace MetanetA_MobileApp.ViewModels
             // BonusSpent = userSession?.CurrentUser?.BonusOfProfile?.BonusUsed ?? 0;
 
             // Demo tarixçə (sonra API-dən doldurarsan)
-            //BonusHistory.Add(new BonusTransaction
-            //{
-            //    Date = System.DateTime.Today.AddDays(-3),
-            //    Type = BonusTransactionType.Earned,
-            //    Amount = 30,
-            //    Description = "Alış-veriş bonusu"
-            //});
+       
 
             //BonusHistory.Add(new BonusTransaction
             //{
@@ -58,6 +64,32 @@ namespace MetanetA_MobileApp.ViewModels
             RecalculateTotals();
         }
 
+        public void SpendBonusRow(BonusTransaction row)
+        {
+            BonusHistory.Add(new BonusTransaction
+            {
+                Date = System.DateTime.Today,
+                Type = BonusTransactionType.Spent,
+                Amount = row.Amount,
+                Description = row.Description
+            });
+            RefreshBonus();
+        }
+        public void AddBonusRow(BonusTransaction row)
+        {
+            BonusHistory.Add(new BonusTransaction
+            {
+                Date = System.DateTime.Today,
+                Type = BonusTransactionType.Earned,
+                Amount = row.Amount,
+                Description = row.Description
+            });
+            RefreshBonus();
+        }
+        public void RefreshBonus()
+        {
+            CurrentBonus = UserSession.CurrentUser.BonusOfProfile.CurrentBonus;
+        }
         partial void OnBonusCollectedChanged(float value) => OnPropertyChanged(nameof(CurrentBonus));
         partial void OnBonusSpentChanged(float value) => OnPropertyChanged(nameof(CurrentBonus));
 
@@ -84,24 +116,23 @@ namespace MetanetA_MobileApp.ViewModels
                     "Məlumat",
                     "Hədiyyəyə çevirmək üçün kifayət qədər bonus yoxdur.",
                     "OK");
+
                 return;
             }
 
-            await App.Current.MainPage.DisplayAlert(
-                "Uğurlu",
-                "Bonus hədiyyəyə çevrildi.",
-                "OK");
+    
 
             // example: hamısını xərclə (demo)
-            BonusHistory.Add(new BonusTransaction
-            {
-                Date = System.DateTime.Now,
-                Type = BonusTransactionType.Spent,
-                Amount = CurrentBonus,
-                Description = "Hədiyyəyə çevrildi"
-            });
+            //BonusHistory.Add(new BonusTransaction
+            //{
+            //    Date = System.DateTime.Now,
+            //    Type = BonusTransactionType.Spent,
+            //    Amount = CurrentBonus,
+            //    Description = "Hədiyyəyə çevrildi"
+            //});
 
             RecalculateTotals();
+            await Shell.Current.GoToAsync($"//{nameof(GiftsPage)}");
         }
     }
 }

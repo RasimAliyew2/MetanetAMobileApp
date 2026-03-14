@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MetanetA_MobileApp.Model;
 using MetanetA_MobileApp.Services.Abstractions;
@@ -16,23 +17,36 @@ namespace MetanetA_MobileApp.ViewModels
 
         [ObservableProperty]
         public bool isVisible;
+
+        private IGiftPurchaseNotifier purchaseNotifier;
         private UserInfo userInfo;
         // İstəyirsənsə, rahat binding üçün ayrıca readonly property-lər də aça bilərsən
         public string Name => Gift?.Name;
         public string ImageUrl => Gift?.ImageUrl;
         public float Price => Gift?.Price ?? 0;
 
-        // Əgər GiftItem-də Description əlavə etsən:
-        // public string Description => Gift?.Description;
-        public GiftDetailViewModel(IUserSession userSession, BottomMenuState bottomMenu) : base(bottomMenu)
+        public GiftDetailViewModel(IUserSession userSession, BottomMenuState bottomMenu, IGiftPurchaseNotifier giftPurchaseNotifier) : base(bottomMenu)
         {
+
+            purchaseNotifier = giftPurchaseNotifier;
             this.userInfo = userSession.CurrentUser;
         }
         [RelayCommand]
         public async Task Buy()
         {
             if (userInfo.BonusOfProfile.CurrentBonus > Price)
+            {
+                userInfo.BonusOfProfile.CurrentBonus = userInfo.BonusOfProfile.CurrentBonus - Price;
+                purchaseNotifier.PublishNewGiftPurchase(new BonusTransaction
+                {
+                    Date = System.DateTime.Now,
+                    Type = BonusTransactionType.Spent,
+                    Amount = Price,
+                    Description = $"Bonus hədiyyəyə çevrildi \n alınan hədiyyə:{Name} "
+                });
                 await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+
+            }
             else
                 IsVisible = true;
             

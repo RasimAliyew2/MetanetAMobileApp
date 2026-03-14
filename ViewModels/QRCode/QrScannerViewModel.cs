@@ -13,6 +13,7 @@ public partial class QrScannerViewModel : BaseViewModel
     bool _handling;
     public UserInfo _userInfo;
     public BonusesViewModel _bonusesViewModel;
+    private IQRBonusNotifier QRBonusNotifier;
     //private async void QrDetected(string? value)
     //{
     //    if (handled || string.IsNullOrWhiteSpace(value)) return;
@@ -25,10 +26,14 @@ public partial class QrScannerViewModel : BaseViewModel
     //    //    ["QrValue"] = value
     //    //});
     //}
-    public QrScannerViewModel(IUserSession userSession, BonusesViewModel bonusViewModel, BottomMenuState bottomMenu) : base(bottomMenu)
+    public QrScannerViewModel(IUserSession userSession, BonusesViewModel bonusViewModel, 
+        BottomMenuState bottomMenu,
+        IQRBonusNotifier bonusNotifier) : base(bottomMenu)
     {
+        QRBonusNotifier = bonusNotifier;
         _userInfo = userSession.CurrentUser;
         _bonusesViewModel = bonusViewModel;
+        QrDetected("1234-12345");
     }
     [RelayCommand]
     private void QrDetected(string? value)
@@ -55,16 +60,18 @@ public partial class QrScannerViewModel : BaseViewModel
                 else if(isValid && !used)
                 {
                     var bonus = GetbonusBasedOnProductType(value);
-                    _userInfo.Bonus += bonus;
+                    _userInfo.BonusOfProfile.CurrentBonus += bonus;
                   
                     _userInfo.BonusOfProfile.CollectedBonus += bonus;
-                    _bonusesViewModel.BonusHistory.Add(new BonusTransaction
+
+                    QRBonusNotifier.PublishNewQRBonus(new BonusTransaction
                     {
                         Date = System.DateTime.Today,
                         Type = BonusTransactionType.Earned,
                         Amount = bonus,
                         Description = "QrCode bonus"
                     });
+
 
                     _bonusesViewModel.RecalculateTotals();
 
@@ -106,7 +113,7 @@ public partial class QrScannerViewModel : BaseViewModel
     }
     private float GetbonusBasedOnProductType(string productTypeCode)
     {
-        return 20f;
+        return 100f;
     }
     private bool IsThisBonusUsed(string QrCode)
     {

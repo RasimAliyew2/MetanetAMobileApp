@@ -25,11 +25,16 @@ namespace MetanetA_MobileApp.ViewModels.GiftsViewModels
         public GiftsViewModel(BottomMenuState menuState) : base(menuState)
         {
             // demo data (özün URL-ləri sonra ViewModel-dən dəyişərsən)
-            allGifts.Add(new GiftItem { Name = "Termos", Price = 25, ImageUrl = "termos.png" });
-            //allGifts.Add(new GiftItem { Name = "Maşın", Price = 1000, ImageUrl = "product.png" });
-            //allGifts.Add(new GiftItem { Name = "Smart Saat", Price = 120, ImageUrl = "product.png" });
-            //allGifts.Add(new GiftItem { Name = "Bluetooth qulaqcıq", Price = 65, ImageUrl = "product.png" });
-
+            allGifts.Add(new GiftItem { Name = "BYD Seal 05, 1.5 L, 2025", Price = 1000000, ImageUrl = "gift1.jpg" });
+            allGifts.Add(new GiftItem { Name = "iPhone 17 Pro Max 256 GB", Price = 250000, ImageUrl = "gift2.jpg" });
+            allGifts.Add(new GiftItem { Name = "iPhone 17 Pro 256 GB", Price = 230000, ImageUrl = "gift3.jpg" });
+            allGifts.Add(new GiftItem { Name = "Samsung Galaxy S25 12/256 GB Silver", Price = 220000, ImageUrl = "gift4.jpg" });
+            allGifts.Add(new GiftItem { Name = "Samsung Galaxy A56 8/128 GB Green", Price = 200000, ImageUrl = "gift5.jpg" });
+            allGifts.Add(new GiftItem { Name = "Samsung Galaxy A16 4GB/128GB", Price = 180000, ImageUrl = "gift6.jpg" });
+            allGifts.Add(new GiftItem { Name = "Honor 400 8GB/256GB", Price = 150000, ImageUrl = "gift7.jpg" });
+            allGifts.Add(new GiftItem { Name = "HONOR 400 Pro 12 GB / 256 GB", Price = 170000, ImageUrl = "gift8.jpg" });
+            allGifts.Add(new GiftItem { Name = "Xiaomi Redmi Note 15 6GB/128GB", Price = 150000, ImageUrl = "gift9.jpg" });
+            allGifts.Add(new GiftItem { Name = "Notbuk Apple MacBook Air 13 M1 Space Gray", Price = 180000, ImageUrl = "gift10.jpg" });
             ApplyFilter();
         }
 

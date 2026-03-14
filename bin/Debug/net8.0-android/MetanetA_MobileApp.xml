@@ -221,6 +221,9 @@
         <member name="P:MetanetA_MobileApp.ViewModels.BonusesViewModel.UserSession">
             <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.BonusesViewModel.userSession"/>
         </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.BonusesViewModel.CurrentBonus">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.BonusesViewModel.currentBonus"/>
+        </member>
         <member name="M:MetanetA_MobileApp.ViewModels.BonusesViewModel.OnBonusCollectedChanged(System.Single)">
             <summary>Executes the logic for when <see cref="P:MetanetA_MobileApp.ViewModels.BonusesViewModel.BonusCollected"/> just changed.</summary>
             <param name="value">The new property value that was set.</param>
@@ -622,6 +625,7 @@
             <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
+            <inheritdoc/>
         </member>
         <member name="P:MetanetA_MobileApp.ViewModels.Sales.SalesViewModel.SearchText">
             <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.Sales.SalesViewModel.searchText"/>
@@ -630,6 +634,12 @@
             <summary>Executes the logic for when <see cref="P:MetanetA_MobileApp.ViewModels.Sales.SalesViewModel.SearchText"/> just changed.</summary>
             <param name="value">The new property value that was set.</param>
             <remarks>This method is invoked right after the value of <see cref="P:MetanetA_MobileApp.ViewModels.Sales.SalesViewModel.SearchText"/> is changed.</remarks>
+        </member>
+        <member name="F:MetanetA_MobileApp.ViewModels.Sales.SalesViewModel.toggleMainCategoryCommand">
+            <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.Sales.SalesViewModel.ToggleMainCategoryCommand"/>.</summary>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.Sales.SalesViewModel.ToggleMainCategoryCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.Sales.SalesViewModel.ToggleMainCategory(MetanetA_MobileApp.ViewModels.Sales.SalesMainCategoryGroup)"/>.</summary>
         </member>
         <member name="F:MetanetA_MobileApp.ViewModels.Sales.SalesViewModel.clearSearchCommand">
             <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.Sales.SalesViewModel.ClearSearchCommand"/>.</summary>
@@ -648,6 +658,12 @@
         </member>
         <member name="P:MetanetA_MobileApp.ViewModels.Sales.SalesViewModel.OpenDetailCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.Sales.SalesViewModel.OpenDetailAsync(MetanetA_MobileApp.Model.SalesItem)"/>.</summary>
+        </member>
+        <member name="T:MetanetA_MobileApp.ViewModels.Sales.SalesMainCategoryGroup">
+            <inheritdoc/>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.Sales.SalesMainCategoryGroup.IsExpanded">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.Sales.SalesMainCategoryGroup.isExpanded"/>
         </member>
         <member name="T:MetanetA_MobileApp.ViewModels.ConfrimSMSViewModel">
             <inheritdoc/>

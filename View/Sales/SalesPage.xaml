@@ -12,19 +12,44 @@
 
     <ContentPage.Resources>
 
-        <!-- Card -->
+        <!-- Product Card -->
         <Style x:Key="Card" TargetType="Border">
             <Setter Property="BackgroundColor" Value="White"/>
             <Setter Property="Stroke" Value="#E5E7EB"/>
             <Setter Property="StrokeThickness" Value="1"/>
             <Setter Property="StrokeShape" Value="RoundRectangle 18"/>
             <Setter Property="Padding" Value="12"/>
-            <Setter Property="Margin" Value="0,0,0,12"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
             <Setter Property="Shadow">
                 <Setter.Value>
-                    <Shadow Opacity="0.10" Radius="14" Offset="0,6"/>
+                    <Shadow Opacity="0.08" Radius="12" Offset="0,4"/>
                 </Setter.Value>
             </Setter>
+        </Style>
+
+        <!-- Main Category Card -->
+        <Style x:Key="MainCategoryCard" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="Stroke" Value="#D1D5DB"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="StrokeShape" Value="RoundRectangle 20"/>
+            <Setter Property="Padding" Value="14"/>
+            <Setter Property="Margin" Value="0,0,0,14"/>
+            <Setter Property="Shadow">
+                <Setter.Value>
+                    <Shadow Opacity="0.08" Radius="14" Offset="0,4"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Sub Category Card -->
+        <Style x:Key="SubCategoryCard" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="#F9FAFB"/>
+            <Setter Property="Stroke" Value="#E5E7EB"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="StrokeShape" Value="RoundRectangle 16"/>
+            <Setter Property="Padding" Value="12"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
         </Style>
 
         <!-- Search pill -->
@@ -89,7 +114,7 @@
                        VerticalOptions="Center"/>
 
                 <Entry Grid.Column="1"
-                       Placeholder="Məhsul axtar..."
+                       Placeholder="Məhsul, kateqoriya və ya sub kateqoriya axtar..."
                        Text="{Binding SearchText}"
                        FontSize="14"
                        TextColor="#111827"
@@ -121,8 +146,9 @@
 
         <!-- CONTENT -->
         <CollectionView Grid.Row="1"
-                        ItemsSource="{Binding FilteredProducts}"
-                        SelectionMode="None">
+                        ItemsSource="{Binding FilteredCategories}"
+                        SelectionMode="None"
+                        ItemSizingStrategy="MeasureAllItems">
 
             <CollectionView.EmptyView>
                 <VerticalStackLayout Padding="20" Spacing="6" HorizontalOptions="Center">
@@ -139,66 +165,169 @@
             </CollectionView.EmptyView>
 
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="model:SalesItem">
-                    <Border Style="{StaticResource Card}">
+                <DataTemplate x:DataType="vm:SalesMainCategoryGroup">
+                    <Border Style="{StaticResource MainCategoryCard}">
+                        <VerticalStackLayout Spacing="12">
 
-                        <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="10">
+                            <!-- Main Category Header -->
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ToggleMainCategoryCommand}"
+                                        CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>
 
-                            <!-- ✅ Image (Tap = open detail) -->
-                            <Border BackgroundColor="#F9FAFB"
-                                    Stroke="#E5E7EB"
-                                    StrokeThickness="1"
-                                    StrokeShape="RoundRectangle 16"
-                                    Padding="10">
-
-                                <!-- Bu Grid-in üstünə basanda detail açılacaq -->
-                                <Grid>
-                                    <Grid.GestureRecognizers>
-                                        <TapGestureRecognizer
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenDetailCommand}"
-                                            CommandParameter="{Binding .}" />
-                                    </Grid.GestureRecognizers>
-
-                                    <Image Source="{Binding Image}"
-                                           HeightRequest="140"
-                                           Aspect="AspectFit"
-                                           HorizontalOptions="Center" />
-                                </Grid>
-
-                            </Border>
-
-                            <!-- Title + Price -->
-                            <Grid Grid.Row="1" ColumnDefinitions="*,Auto" ColumnSpacing="10">
                                 <Label Text="{Binding Name}"
-                                       FontSize="16"
+                                       FontSize="18"
                                        FontAttributes="Bold"
-                                       TextColor="#111827"
-                                       LineBreakMode="TailTruncation"/>
+                                       TextColor="#065F46"
+                                       VerticalOptions="Center" />
 
                                 <Label Grid.Column="1"
-                                       Text="{Binding Price, StringFormat='{0:0.##} AZN'}"
-                                       FontSize="16"
-                                       FontAttributes="Bold"
-                                       TextColor="#0F766E"
-                                       VerticalTextAlignment="Center"/>
+                                       Text="⌄"
+                                       FontSize="22"
+                                       TextColor="#065F46"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="End">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label"
+                                                     Binding="{Binding IsExpanded}"
+                                                     Value="False">
+                                            <Setter Property="Text" Value="›"/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
                             </Grid>
 
-                            <!-- Buttons -->
-                            <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,6,0,0">
-                                <Button Grid.Column="0"
-                                        Text="Ətraflı"
-                                        Style="{StaticResource SecondaryButton}"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenDetailCommand}"
-                                        CommandParameter="{Binding .}" />
+                            <!-- Main Category Content -->
+                            <VerticalStackLayout IsVisible="{Binding IsExpanded}"
+                                                 BindableLayout.ItemsSource="{Binding SubCategories}"
+                                                 Spacing="12">
 
-                                <Button Grid.Column="1"
-                                        Text="Səbətə əlavə et"
-                                        Style="{StaticResource AddToCartButton}"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AddToCartCommand}"
-                                        CommandParameter="{Binding .}" />
-                            </Grid>
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="vm:SalesSubCategoryGroup">
+                                        <Border Style="{StaticResource SubCategoryCard}">
+                                            <VerticalStackLayout Spacing="10">
 
-                        </Grid>
+                                                <!-- Sub Category -->
+                                                <Label Text="{Binding Name}"
+                                                       FontSize="15"
+                                                       FontAttributes="Bold"
+                                                       TextColor="#111827" />
+
+                                                <!-- Empty text -->
+                                                <Label Text="Bu bölmədə hələ məhsul yoxdur."
+                                                       FontSize="13"
+                                                       TextColor="#6B7280"
+                                                       IsVisible="False">
+                                                    <Label.Triggers>
+                                                        <DataTrigger TargetType="Label"
+                                                                     Binding="{Binding Products.Count}"
+                                                                     Value="0">
+                                                            <Setter Property="IsVisible" Value="True"/>
+                                                        </DataTrigger>
+                                                    </Label.Triggers>
+                                                </Label>
+
+                                                <!-- Products -->
+                                                <VerticalStackLayout BindableLayout.ItemsSource="{Binding Products}"
+                                                                     Spacing="10">
+
+                                                    <BindableLayout.ItemTemplate>
+                                                        <DataTemplate x:DataType="model:SalesItem">
+                                                            <Border Style="{StaticResource Card}">
+                                                                <Grid RowDefinitions="Auto,Auto,Auto"
+                                                                      RowSpacing="10">
+
+                                                                    <!-- Image -->
+                                                                    <Border BackgroundColor="#F9FAFB"
+                                                                            Stroke="#E5E7EB"
+                                                                            StrokeThickness="1"
+                                                                            StrokeShape="RoundRectangle 16"
+                                                                            Padding="10">
+
+                                                                        <Grid>
+                                                                            <Grid.GestureRecognizers>
+                                                                                <TapGestureRecognizer
+                                                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenDetailCommand}"
+                                                                                    CommandParameter="{Binding .}" />
+                                                                            </Grid.GestureRecognizers>
+
+                                                                            <Image Source="{Binding Image}"
+                                                                                   HeightRequest="140"
+                                                                                   Aspect="AspectFit"
+                                                                                   HorizontalOptions="Center" />
+                                                                        </Grid>
+
+                                                                    </Border>
+
+                                                                    <!-- Title + Weight + Price -->
+                                                                    <Grid Grid.Row="1"
+                                                                          ColumnDefinitions="*,Auto"
+                                                                          ColumnSpacing="10">
+
+                                                                        <VerticalStackLayout Spacing="2">
+                                                                            <Label Text="{Binding Name}"
+                                                                                   FontSize="16"
+                                                                                   FontAttributes="Bold"
+                                                                                   TextColor="#111827"
+                                                                                   LineBreakMode="WordWrap"/>
+
+                                                                            <Label Text="{Binding Weight}"
+                                                                                   FontSize="13"
+                                                                                   TextColor="#6B7280"/>
+                                                                        </VerticalStackLayout>
+
+                                                                        <VerticalStackLayout Grid.Column="1"
+                                                                                             Spacing="2"
+                                                                                             HorizontalOptions="End">
+                                                                            <Label Text="{Binding Price, StringFormat='{0:0.##} AZN'}"
+                                                                                   FontSize="16"
+                                                                                   FontAttributes="Bold"
+                                                                                   TextColor="#0F766E"
+                                                                                   HorizontalTextAlignment="End"/>
+
+                                                                            <Label Text="{Binding OldPrice, StringFormat='{0:0.##} AZN'}"
+                                                                                   FontSize="12"
+                                                                                   TextColor="#9CA3AF"
+                                                                                   TextDecorations="Strikethrough"
+                                                                                   HorizontalTextAlignment="End"/>
+                                                                        </VerticalStackLayout>
+                                                                    </Grid>
+
+                                                                    <!-- Buttons -->
+                                                                    <Grid Grid.Row="2"
+                                                                          ColumnDefinitions="*,*"
+                                                                          ColumnSpacing="10"
+                                                                          Margin="0,6,0,0">
+                                                                        <Button Grid.Column="0"
+                                                                                Text="Ətraflı"
+                                                                                Style="{StaticResource SecondaryButton}"
+                                                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenDetailCommand}"
+                                                                                CommandParameter="{Binding .}" />
+
+                                                                        <Button Grid.Column="1"
+                                                                                Text="Səbətə əlavə et"
+                                                                                Style="{StaticResource AddToCartButton}"
+                                                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AddToCartCommand}"
+                                                                                CommandParameter="{Binding .}" />
+                                                                    </Grid>
+
+                                                                </Grid>
+                                                            </Border>
+                                                        </DataTemplate>
+                                                    </BindableLayout.ItemTemplate>
+
+                                                </VerticalStackLayout>
+
+                                            </VerticalStackLayout>
+                                        </Border>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+
+                            </VerticalStackLayout>
+
+                        </VerticalStackLayout>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

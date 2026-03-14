@@ -13,6 +13,7 @@ namespace MetanetA_MobileApp.Services.Sales
             Products.Add(new SalesItem
             {
                 Name = "\"MATANAT A\" HYBRID keramika yapışdırıcısı (boz)",
+                SubCategory = "Plitə yapışdırıcıları",
                 Description = "\"MATANAT A\" HYBRID keramika yapışdırıcısı (boz)",
                 Price = 20m,
                 Image = "pic5.png"
@@ -21,6 +22,7 @@ namespace MetanetA_MobileApp.Services.Sales
             Products.Add(new SalesItem
             {
                 Name = "Rokol silikon boya 3.5 Kg",
+                SubCategory  = "Plitə yapışdırıcıları",
                 Description = "Fasad boyaları",
                 Price = 15.17m,
                 Image = "pic1.png"
@@ -29,14 +31,16 @@ namespace MetanetA_MobileApp.Services.Sales
             Products.Add(new SalesItem
             {
                 Name = "Rokol silikon boya 10 Kg",
+                SubCategory = "Plitə yapışdırıcıları",
                 Description = "Fasad boyaları",
                 Price = 41.36m,
-                Image = "pic2.png"
+               Image = "pic2.png"
             });
 
             Products.Add(new SalesItem
             {
                 Name = "Rokol silikon boya 25 Kg",
+                SubCategory = "Plitə yapışdırıcıları",
                 Description = "Fasad boyaları",
                 Price = 97.47m,
                 Image = "pic3.png"
@@ -45,6 +49,7 @@ namespace MetanetA_MobileApp.Services.Sales
             Products.Add(new SalesItem
             {
                 Name = "Rokol akrilik fasad boya 3.5 Kg",
+                SubCategory = "Plitə yapışdırıcıları",
                 Description = "Fasad boyaları",
                 Price = 9.50m,
                 Image = "pic4.png"

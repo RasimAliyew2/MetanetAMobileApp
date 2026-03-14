@@ -80,15 +80,6 @@
 
 
 
-                    <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Spacing="10" HorizontalOptions="End">
-
-                        <Button Text="Məhsullar"
-                                Style="{StaticResource PrimaryButton}"
-                                HeightRequest="38"
-                                Padding="14,0"
-                                Command="{Binding ProductsCommand}" />
-
-                    </HorizontalStackLayout>
 
 
 

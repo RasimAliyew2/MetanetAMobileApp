@@ -161,7 +161,7 @@ namespace MetanetA_MobileApp
             builder.Services.AddTransient<SignUpViewModel>();
             builder.Services.AddTransient<ProductDetailViewModel>();
             builder.Services.AddTransient<SetPasswordViewModel>();
-            builder.Services.AddSingleton<BonusesViewModel>();
+            builder.Services.AddSingleton<BonusesViewModel>(); //AddSingleton AddTransient Rasim
             builder.Services.AddTransient<ConfrimSMSViewModel>();
             builder.Services.AddTransient<QrScannerViewModel>(); 
             builder.Services.AddTransient<ProfileViewModel>();
@@ -173,9 +173,11 @@ namespace MetanetA_MobileApp
             builder.Services.AddTransient<RequestAcceptedViewModel>();
             builder.Services.AddTransient<QRCodeNotAcceptedViewModel>();
             builder.Services.AddTransient<QRCodeAcceptedViewModel>();
-            
+
 
             //Services
+            builder.Services.AddSingleton<IGiftPurchaseNotifier, GiftPurchaseNotifier>();
+            builder.Services.AddSingleton<IQRBonusNotifier, QRBonusNotifier>(); 
             builder.Services.AddSingleton<IUserSession, UserSession>();  
             builder.Services.AddSingleton<IQrCode, QrCode>();
             builder.Services.AddSingleton<BottomMenuState>(); 

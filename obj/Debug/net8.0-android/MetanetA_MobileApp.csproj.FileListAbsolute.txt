@@ -1127,3 +1127,13 @@ C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Debug\net8
 C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Debug\net8.0-android\android\marshal_methods.x86_64.o
 C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Debug\net8.0-android\android\jni_remap.x86_64.o
 C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Debug\net8.0-android\app_shared_libraries\x86_64\libxamarin-app.so
+C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Debug\net8.0-android\resizetizer\r\drawable\gift1.jpg
+C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Debug\net8.0-android\resizetizer\r\drawable\gift10.jpg
+C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Debug\net8.0-android\resizetizer\r\drawable\gift2.jpg
+C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Debug\net8.0-android\resizetizer\r\drawable\gift3.jpg
+C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Debug\net8.0-android\resizetizer\r\drawable\gift4.jpg
+C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Debug\net8.0-android\resizetizer\r\drawable\gift5.jpg
+C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Debug\net8.0-android\resizetizer\r\drawable\gift6.jpg
+C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Debug\net8.0-android\resizetizer\r\drawable\gift7.jpg
+C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Debug\net8.0-android\resizetizer\r\drawable\gift8.jpg
+C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\obj\Debug\net8.0-android\resizetizer\r\drawable\gift9.jpg
