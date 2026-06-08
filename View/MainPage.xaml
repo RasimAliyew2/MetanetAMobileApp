@@ -23,7 +23,7 @@
             <Setter Property="BackgroundColor" Value="White"/>
             <Setter Property="StrokeThickness" Value="0"/>
             <Setter Property="StrokeShape" Value="RoundRectangle 22"/>
-            <Setter Property="Padding" Value="14"/>
+            <Setter Property="Padding" Value="5"/>
             <Setter Property="Shadow">
                 <Setter.Value>
                     <Shadow Opacity="0.12" Radius="18" Offset="0,8" />
@@ -133,19 +133,19 @@
                   RowSpacing="12">
 
                 <!-- Row 0: Logo + icons -->
-                <Grid Grid.Row="0"
+                <Grid Grid.Row="0" Padding="14"
                       ColumnDefinitions="*,Auto,Auto"
                       ColumnSpacing="10"
                       VerticalOptions="Center">
 
                     <Image Source="masters_club_icon.png"
-                           WidthRequest="180"
-                           HeightRequest="40"
+                           WidthRequest="200"
+                           HeightRequest="50"
                            Aspect="AspectFit"
                            VerticalOptions="Center"/>
 
                     <!-- Basket + Badge -->
-                    <Grid Grid.Column="1" WidthRequest="40" HeightRequest="40" Margin="10">
+                    <!--<Grid Grid.Column="1" WidthRequest="40" HeightRequest="40" Margin="10">
                         <ImageButton Source="basket.png"
                                      Style="{StaticResource TopIconStyle}"
                                      Command="{Binding OpenCartCommand}" />
@@ -172,7 +172,7 @@
                                    HorizontalTextAlignment="Center"
                                    VerticalTextAlignment="Center"/>
                         </Border>
-                    </Grid>
+                    </Grid>-->
 
                     <ImageButton Grid.Column="2"
                                  Source="noticifation_button.png"
@@ -181,7 +181,7 @@
 
                 <!-- Row 1: Search -->
                 <Border Grid.Row="1" Style="{StaticResource SearchContainer}">
-                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10" VerticalOptions="Center">
+                    <Grid ColumnDefinitions="*,Auto" >
                         <SearchBar Placeholder="Məhsul axtar..."
                                    HeightRequest="44"
                                    BackgroundColor="Transparent"
@@ -190,23 +190,6 @@
                                    PlaceholderColor="#9CA3AF"
                                    Text="{Binding SearchText}" />
 
-                        <ImageButton Grid.Column="1"
-                                     Source="close_icon.png"
-                                     BackgroundColor="Transparent"
-                                     WidthRequest="28"
-                                     HeightRequest="28"
-                                     Command="{Binding ClearMainSearchCommand}"
-                                     Opacity="0.70"
-                                     Padding="0">
-                            <ImageButton.Triggers>
-                                <DataTrigger TargetType="ImageButton" Binding="{Binding SearchText}" Value="">
-                                    <Setter Property="IsVisible" Value="False"/>
-                                </DataTrigger>
-                                <DataTrigger TargetType="ImageButton" Binding="{Binding SearchText}" Value="{x:Null}">
-                                    <Setter Property="IsVisible" Value="False"/>
-                                </DataTrigger>
-                            </ImageButton.Triggers>
-                        </ImageButton>
                     </Grid>
                 </Border>
 
@@ -272,86 +255,63 @@
         </Border>
 
         <!-- CONTENT -->
-        <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Always">
-            <VerticalStackLayout Spacing="14">
+        <Grid Grid.Row="1"
+              RowDefinitions="*,*,*,*"
+              RowSpacing="12">
 
-                <!-- Quick actions 2x2 -->
-                <Grid ColumnDefinitions="*,*"
-                      RowDefinitions="Auto,Auto"
-                      ColumnSpacing="12"
-                      RowSpacing="12">
+            <!-- Bonus -->
+            <Border Grid.Row="0"
+                    Style="{StaticResource TileCard}"
+                    VerticalOptions="Fill"
+                    HorizontalOptions="Fill">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoTobonusPageCommand}" />
+                </Border.GestureRecognizers>
 
-                    <!-- Alış-veriş -->
-                    <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource TileCard}">
-                        <Grid>
-                            <Image Source="sales"
-                                   Aspect="AspectFill"
-                                   InputTransparent="True"/>
-                            <Button Style="{StaticResource TileOverlayButton}"
-                                    Command="{Binding ShopCommand}" />
-                        </Grid>
-                    </Border>
+                <Image Source="bonuses"
+                       Aspect="AspectFill"/>
+            </Border>
 
-                    <!-- Bonus -->
-                    <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource TileCard}">
-                        <Grid>
-                            <Image Source="bonuses"
-                                   Aspect="AspectFill"
-                                   InputTransparent="True"/>
-                            <Button Style="{StaticResource TileOverlayButton}"
-                                    Command="{Binding GoTobonusPageCommand}" />
-                        </Grid>
-                    </Border>
+            <!-- Təlim -->
+            <Border Grid.Row="1"
+                    Style="{StaticResource TileCard}"
+                    VerticalOptions="Fill"
+                    HorizontalOptions="Fill">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding TrainingCommand}" />
+                </Border.GestureRecognizers>
 
-                    <!-- Hədiyyələr -->
-                    <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource TileCard}">
-                        <Grid>
-                            <Image Source="gifts"
-                                   Aspect="AspectFill"
-                                   InputTransparent="True"/>
-                            <Button Style="{StaticResource TileOverlayButton}"
-                                    Command="{Binding GiftsCommand}" />
-                        </Grid>
-                    </Border>
+                <Image Source="tutorial"
+                       Aspect="AspectFill"/>
+            </Border>
 
-                    <!-- Təlim -->
-                    <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource TileCard}">
-                        <Grid>
-                            <Image Source="tutorial"
-                                   Aspect="AspectFill"
-                                   InputTransparent="True"/>
-                            <Button Style="{StaticResource TileOverlayButton}"
-                                    Command="{Binding TrainingCommand}" />
-                        </Grid>
-                    </Border>
+            <!-- Yeniliklər -->
+            <Border Grid.Row="2"
+                    Style="{StaticResource TileCard}"
+                    VerticalOptions="Fill"
+                    HorizontalOptions="Fill">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding AdsCommand}" />
+                </Border.GestureRecognizers>
 
-                </Grid>
+                <Image Source="news"
+                       Aspect="AspectFill"/>
+            </Border>
 
-                <!-- Reklamlar -->
-                <Border Style="{StaticResource TileCard}">
-                    <Border.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding AdsCommand}" />
-                    </Border.GestureRecognizers>
+            <!-- Kampaniyalar -->
+            <Border Grid.Row="3"
+                    Style="{StaticResource TileCard}"
+                    VerticalOptions="Fill"
+                    HorizontalOptions="Fill">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CampaignsCommand}" />
+                </Border.GestureRecognizers>
 
-                    <Image Source="news"
-                           Aspect="AspectFill"/>
-                </Border>
+                <Image Source="Campaigns.png"
+                       Aspect="AspectFill"/>
+            </Border>
 
-                <!-- Kampaniyalar -->
-                <Border Style="{StaticResource TileCard}">
-                    <Border.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding CampaignsCommand}" />
-                    </Border.GestureRecognizers>
-
-                    <Image Source="Campaigns.png"
-                           Aspect="AspectFill"/>
-                </Border>
-
-                <!-- bottom menu üçün biraz boşluq -->
-                <BoxView HeightRequest="10" Opacity="0"/>
-
-            </VerticalStackLayout>
-        </ScrollView>
+        </Grid>
 
         <!-- Bottom menu -->
         <controls:BottomMenu Grid.Row="2"

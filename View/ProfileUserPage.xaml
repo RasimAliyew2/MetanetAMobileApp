@@ -11,6 +11,30 @@
 
     <ContentPage.Resources>
 
+        <!-- Eye icon style -->
+        <Style x:Key="EyeButtonStyle" TargetType="ImageButton">
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="WidthRequest" Value="28"/>
+            <Setter Property="HeightRequest" Value="28"/>
+            <Setter Property="HorizontalOptions" Value="End"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="Opacity" Value="0.8"/>
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal"/>
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="Opacity" Value="0.55"/>
+                                <Setter Property="Scale" Value="0.92"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+
         <!-- ✅ Converter (Release-də trim problemindən qaçmaq üçün səhifənin içində yaradılır) -->
         <conv:InverseBoolConverter x:Key="InverseBoolConverter" />
 
@@ -192,10 +216,25 @@
                         <VerticalStackLayout Spacing="0">
                             <Label Text="Şifrə" Style="{StaticResource FieldLabel}"/>
                             <Border Style="{StaticResource FieldBorder}">
-                                <Entry Style="{StaticResource FieldEntry}"
+                                <Grid ColumnDefinitions="*,34">
+                                    <Entry Style="{StaticResource FieldEntry}"
                                        Placeholder="Şifrə"
-                                       IsPassword="True"
+                                         IsPassword="{Binding IsPasswordHidden}"
                                        Text="{Binding Draft.Password, Mode=TwoWay}" />
+
+                                    <ImageButton Grid.Column="1"
+                                           Source="eye_icon.png"
+                                           Style="{StaticResource EyeButtonStyle}"
+                                           Command="{Binding TogglePasswordVisibilityCommand}">
+                                                                    <ImageButton.Triggers>
+                                                                        <DataTrigger TargetType="ImageButton"
+                                                   Binding="{Binding IsPasswordHidden}"
+                                                   Value="False">
+                                                <Setter Property="Source" Value="closed_eye_icon.png" />
+                                            </DataTrigger>
+                                        </ImageButton.Triggers>
+                                    </ImageButton>
+                                </Grid>
                             </Border>
                         </VerticalStackLayout>
 
@@ -211,7 +250,7 @@
                                        TextColor="#065F46"
                                        VerticalTextAlignment="Center"/>
                                 <Label Grid.Column="1"
-                                       Text="{Binding Draft.Bonus, StringFormat='{0:0.##}'}"
+                                       Text="{Binding Draft.BonusOfProfile.CurrentBonus, StringFormat='{0:0.##}'}"
                                        FontAttributes="Bold"
                                        TextColor="#065F46"
                                        VerticalTextAlignment="Center"/>

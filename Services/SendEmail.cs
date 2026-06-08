@@ -50,8 +50,8 @@ namespace MetanetA_MobileApp.Services
 
         public static async Task<string> SendSmsAsync(string phoneNumber)
         {
-            var login = "matanata";
-            var password = "Xf2ep4Zb";          // gerçek şifren
+            var login = "NotTheRealDoNotWorry";
+            var password = "NotTheRealPasswordDoNotWorry";          // gerçek şifren
             var msisdn = phoneNumber;
             var text = "";
             var sender = "Matanata";              // sağlayıcıda tanımlı başlık

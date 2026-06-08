@@ -15,7 +15,8 @@ public partial class QrScannerPage : ContentPage
     {
         MainThread.BeginInvokeOnMainThread(async () =>
         {
-            await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+            await (BindingContext as QrScannerViewModel).Home();
+         //   await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
         });
 
         return true; // default back işləməsin, app çıxmasın

@@ -3,8 +3,10 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MetanetA_MobileApp.Model;
 using MetanetA_MobileApp.Services.Abstractions;
+using MetanetA_MobileApp.Services.GetDataFromServer;
 using MetanetA_MobileApp.Services.UIState;
 using MetanetA_MobileApp.View;
+
 
 namespace MetanetA_MobileApp.ViewModels;
 
@@ -14,18 +16,8 @@ public partial class QrScannerViewModel : BaseViewModel
     public UserInfo _userInfo;
     public BonusesViewModel _bonusesViewModel;
     private IQRBonusNotifier QRBonusNotifier;
-    //private async void QrDetected(string? value)
-    //{
-    //    if (handled || string.IsNullOrWhiteSpace(value)) return;
-    //    handled = true; // aynı QR'ı iki kez işlememek için
-    //    if(CheckTheQRCode(value))
-    //        await Shell.Current.GoToAsync($"//{nameof(QRCodeNotAccepted)}");
-    //    // Sonucu önceki sayfaya geri gönder ve sayfayı kapat
-    //    //  await Shell.Current.GoToAsync("..", new Dictionary<string, object>
-    //    //{
-    //    //    ["QrValue"] = value
-    //    //});
-    //}
+    private float bonus;
+ 
     public QrScannerViewModel(IUserSession userSession, BonusesViewModel bonusViewModel, 
         BottomMenuState bottomMenu,
         IQRBonusNotifier bonusNotifier) : base(bottomMenu)
@@ -33,7 +25,8 @@ public partial class QrScannerViewModel : BaseViewModel
         QRBonusNotifier = bonusNotifier;
         _userInfo = userSession.CurrentUser;
         _bonusesViewModel = bonusViewModel;
-        QrDetected("1234-12345");
+         QrDetected("1234-12345");
+
     }
     [RelayCommand]
     private void QrDetected(string? value)
@@ -59,7 +52,8 @@ public partial class QrScannerViewModel : BaseViewModel
                 }
                 else if(isValid && !used)
                 {
-                    var bonus = GetbonusBasedOnProductType(value);
+                     bonus = GetbonusBasedOnProductType(value);
+
                     _userInfo.BonusOfProfile.CurrentBonus += bonus;
                   
                     _userInfo.BonusOfProfile.CollectedBonus += bonus;
@@ -75,7 +69,12 @@ public partial class QrScannerViewModel : BaseViewModel
 
                     _bonusesViewModel.RecalculateTotals();
 
-                    await Shell.Current.GoToAsync($"//{nameof(QrCodeAccepted)}");
+                    string text = await GetAndPostAllDataForUser.PostAsyncUserInfoUnique(_userInfo,"ChangeTheUser");
+                    //await Shell.Current.GoToAsync($"//{nameof(QrCodeAccepted)}");
+                    await Shell.Current.GoToAsync($"//{nameof(QrCodeAccepted)}", new Dictionary<string, object>
+                    {
+                        ["Bonus"] = "100"
+                    });
                 }
             }
             catch (Exception ex)

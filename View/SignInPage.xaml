@@ -73,7 +73,7 @@
                                 StrokeThickness="1"
                                 StrokeShape="RoundRectangle 14"
                                 Padding="12,10">
-                            <Entry Placeholder="994XXXXXXXXX"
+                            <Entry Placeholder="+994 XX XXX XX"
                                    Keyboard="Numeric"
                                    Text="{Binding PhoneNumber}"
                                    FontSize="14"
@@ -83,7 +83,7 @@
                         </Border>
 
                         <!-- Password -->
-                        <Label Text="Parol"
+                        <Label Text="Şifrə"
                                FontSize="13"
                                TextColor="#6B7280"
                                Margin="2,6,0,0"/>
@@ -96,7 +96,7 @@
                             <!-- Entry + Eye -->
                             <Grid ColumnDefinitions="*,34" ColumnSpacing="8">
                                 <Entry Grid.Column="0"
-                                       Placeholder="Parol"
+                                       Placeholder="Şifrə"
                                        IsPassword="{Binding IsPasswordHidden}"
                                        Text="{Binding Password}"
                                        FontSize="14"

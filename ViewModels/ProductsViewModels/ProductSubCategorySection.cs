@@ -1,5 +1,4 @@
-﻿// ViewModels/ProductsViewModels/ProductSubCategorySection.cs
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using MetanetA_MobileApp.Model;
 
@@ -14,7 +13,8 @@ public partial class ProductSubCategorySection : ObservableObject
 
     public string Name { get; }
 
-    [ObservableProperty] private bool isExpanded;
+    [ObservableProperty]
+    private bool isExpanded;
 
     public ObservableCollection<ProductItem> Products { get; } = new();
 }

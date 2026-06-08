@@ -5,6 +5,7 @@ using MetanetA_MobileApp.Model;
 using MetanetA_MobileApp.Services.Abstractions;
 using MetanetA_MobileApp.Services.UIState;
 using MetanetA_MobileApp.View;
+using UserInfo = MetanetA_MobileApp.Model.UserInfo;
 
 namespace MetanetA_MobileApp.ViewModels
 {
@@ -36,6 +37,7 @@ namespace MetanetA_MobileApp.ViewModels
         {
             if (userInfo.BonusOfProfile.CurrentBonus > Price)
             {
+                userInfo.BonusOfProfile.UsedBonus += Price;
                 userInfo.BonusOfProfile.CurrentBonus = userInfo.BonusOfProfile.CurrentBonus - Price;
                 purchaseNotifier.PublishNewGiftPurchase(new BonusTransaction
                 {
@@ -44,6 +46,13 @@ namespace MetanetA_MobileApp.ViewModels
                     Amount = Price,
                     Description = $"Bonus hədiyyəyə çevrildi \n alınan hədiyyə:{Name} "
                 });
+
+                
+
+                await Application.Current.MainPage.DisplayAlert(
+                    "Əlavə edildi",
+                    "Hədiyyə sifariş olundu.",
+                    "OK");
                 await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
 
             }

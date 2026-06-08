@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using MetanetA_MobileApp.Model;
+using MetanetA_MobileApp.Services.Abstractions;
 using MetanetA_MobileApp.Services.UIState;
 
 namespace MetanetA_MobileApp.ViewModels.GiftsViewModels
@@ -22,8 +23,13 @@ namespace MetanetA_MobileApp.ViewModels.GiftsViewModels
         [ObservableProperty]
         private string searchText;
 
-        public GiftsViewModel(BottomMenuState menuState) : base(menuState)
+        public string Bonus => "Cari bonus:" + UserInfo.BonusOfProfile.CurrentBonus;
+
+        [ObservableProperty]
+        private UserInfo userInfo;
+        public GiftsViewModel(IUserSession userInfo,BottomMenuState menuState) : base(menuState)
         {
+            this.UserInfo = userInfo.CurrentUser;
             // demo data (özün URL-ləri sonra ViewModel-dən dəyişərsən)
             allGifts.Add(new GiftItem { Name = "BYD Seal 05, 1.5 L, 2025", Price = 1000000, ImageUrl = "gift1.jpg" });
             allGifts.Add(new GiftItem { Name = "iPhone 17 Pro Max 256 GB", Price = 250000, ImageUrl = "gift2.jpg" });
@@ -34,10 +40,14 @@ namespace MetanetA_MobileApp.ViewModels.GiftsViewModels
             allGifts.Add(new GiftItem { Name = "Honor 400 8GB/256GB", Price = 150000, ImageUrl = "gift7.jpg" });
             allGifts.Add(new GiftItem { Name = "HONOR 400 Pro 12 GB / 256 GB", Price = 170000, ImageUrl = "gift8.jpg" });
             allGifts.Add(new GiftItem { Name = "Xiaomi Redmi Note 15 6GB/128GB", Price = 150000, ImageUrl = "gift9.jpg" });
-            allGifts.Add(new GiftItem { Name = "Notbuk Apple MacBook Air 13 M1 Space Gray", Price = 180000, ImageUrl = "gift10.jpg" });
+            allGifts.Add(new GiftItem { Name = "Notbuk Apple MacBook Air 13 M1 Space Gray", Price = 10, ImageUrl = "gift10.jpg" });
             ApplyFilter();
         }
 
+        partial void OnUserInfoChanged(UserInfo value)
+        {
+            OnPropertyChanged(nameof(Bonus));
+        }
         partial void OnSelectedGiftChanged(GiftItem value)
         {
             if (value is null)

@@ -50,7 +50,7 @@ namespace MetanetA_MobileApp.ViewModels
         public async Task Products()
         {
             MenuState.Select(BottomTab.Products);
-            await Shell.Current.GoToAsync($"//{nameof(ProductPreSelectedPage)}");
+            await Shell.Current.GoToAsync($"//{nameof(ProductPage)}");
         }
         [RelayCommand]
         public async Task Other()

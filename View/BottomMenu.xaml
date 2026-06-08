@@ -5,130 +5,186 @@
              HeightRequest="70"
              BackgroundColor="White">
 
-    <Border>
+    <ContentView.Resources>
+        <!-- Whole menu cell: this makes the clickable area much bigger than the icon itself. -->
+        <Style x:Key="BottomMenuItem" TargetType="Grid">
+            <Setter Property="Padding" Value="0,5" />
+            <Setter Property="MinimumHeightRequest" Value="58" />
+            <Setter Property="HorizontalOptions" Value="Fill" />
+            <Setter Property="VerticalOptions" Value="Fill" />
+        </Style>
+
+        <Style x:Key="BottomMenuIcon" TargetType="Image">
+            <Setter Property="WidthRequest" Value="28" />
+            <Setter Property="HeightRequest" Value="28" />
+            <Setter Property="Aspect" Value="AspectFit" />
+            <Setter Property="InputTransparent" Value="True" />
+        </Style>
+
+        <Style x:Key="BottomMenuText" TargetType="Label">
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="InputTransparent" Value="True" />
+        </Style>
+
+        <!-- Transparent full-cell button. It sits above the icon and label. -->
+        <Style x:Key="BottomMenuTapButton" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="Text" Value="" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="BorderWidth" Value="0" />
+            <Setter Property="CornerRadius" Value="14" />
+            <Setter Property="HorizontalOptions" Value="Fill" />
+            <Setter Property="VerticalOptions" Value="Fill" />
+            <Setter Property="MinimumHeightRequest" Value="58" />
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="Opacity" Value="0.55" />
+                                <Setter Property="Scale" Value="0.96" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentView.Resources>
+
+    <Border StrokeThickness="0"
+            BackgroundColor="White">
         <Grid ColumnDefinitions="*,*,*,*,*"
-              Padding="20,6"
-              VerticalOptions="Center">
+              Padding="10,6"
+              ColumnSpacing="0"
+              VerticalOptions="Fill">
 
             <!-- Home -->
-            <VerticalStackLayout Grid.Column="0"
-                                 Spacing="2"
-                                 HorizontalOptions="Center">
-                <ImageButton
-                    Source="house_button.png"
-                    Style="{StaticResource BottomIconStyle}"
-                    Command="{Binding HomeCommand}">
-                    <ImageButton.Triggers>
-                        <DataTrigger  TargetType="ImageButton" Value="True"  Binding="{Binding MenuState.IsHomeSelected}">
-                            <Setter Property="Source" Value="house_button_green"/>
-                        </DataTrigger>
-                    </ImageButton.Triggers>
-                </ImageButton>
-                <Label
-                    Text="Əsas"
-                    FontSize="10"
-                    TextColor="Black"
-                    HorizontalTextAlignment="Center"/>
-            </VerticalStackLayout>
+            <Grid Grid.Column="0" Style="{StaticResource BottomMenuItem}">
+                <VerticalStackLayout Spacing="2"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center"
+                                     InputTransparent="True">
+                    <Image Source="house_button.png"
+                           Style="{StaticResource BottomMenuIcon}">
+                        <Image.Triggers>
+                            <DataTrigger TargetType="Image"
+                                         Binding="{Binding MenuState.IsHomeSelected}"
+                                         Value="True">
+                                <Setter Property="Source" Value="house_button_green" />
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
+
+                    <Label Text="Əsas"
+                           Style="{StaticResource BottomMenuText}" />
+                </VerticalStackLayout>
+
+                <Button Style="{StaticResource BottomMenuTapButton}"
+                        Command="{Binding HomeCommand}" />
+            </Grid>
 
             <!-- Products -->
-            <VerticalStackLayout Grid.Column="1"
-                                 Spacing="2"
-                                 HorizontalOptions="Center">
-                <ImageButton
-                    Source="products.png"
-                    Style="{StaticResource BottomIconStyle}"
-                    Command="{Binding ProductsCommand}" >
+            <Grid Grid.Column="1" Style="{StaticResource BottomMenuItem}">
+                <VerticalStackLayout Spacing="2"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center"
+                                     InputTransparent="True">
+                    <Image Source="products.png"
+                           Style="{StaticResource BottomMenuIcon}">
+                        <Image.Triggers>
+                            <DataTrigger TargetType="Image"
+                                         Binding="{Binding MenuState.IsProductsSelected}"
+                                         Value="True">
+                                <Setter Property="Source" Value="products_green.png" />
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
 
+                    <Label Text="Məhsullar"
+                           Style="{StaticResource BottomMenuText}" />
+                </VerticalStackLayout>
 
-                    <ImageButton.Triggers>
-                        <DataTrigger TargetType="ImageButton"
-                     Binding="{Binding MenuState.IsProductsSelected}"
-                     Value="True">
-                            <Setter Property="Source" Value="products_green.png" />
-                        </DataTrigger>
-                    </ImageButton.Triggers>
-                </ImageButton>
-                
-                <Label
-                    Text="Məhsullar"
-                    FontSize="10"
-                    TextColor="Black"
-                    HorizontalTextAlignment="Center"/>
-            </VerticalStackLayout>
+                <Button Style="{StaticResource BottomMenuTapButton}"
+                        Command="{Binding ProductsCommand}" />
+            </Grid>
 
             <!-- QR -->
-            <VerticalStackLayout Grid.Column="2"
-                                 Spacing="2"
-                                 HorizontalOptions="Center">
-                <ImageButton
-                    Source="qr_code.png"
-                    Style="{StaticResource BottomIconStyle}"
-                    Command="{Binding QrCommand}">
-                    <ImageButton.Triggers>
-                        <DataTrigger TargetType="ImageButton"
-                                     Binding="{Binding MenuState.IsQrSelected}"
-                                     Value="True">
-                            <Setter Property="Source" Value="qr_code_green.png" />
-                        </DataTrigger>
-                    </ImageButton.Triggers>
-                </ImageButton>
+            <Grid Grid.Column="2" Style="{StaticResource BottomMenuItem}">
+                <VerticalStackLayout Spacing="2"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center"
+                                     InputTransparent="True">
+                    <Image Source="qr_code.png"
+                           Style="{StaticResource BottomMenuIcon}">
+                        <Image.Triggers>
+                            <DataTrigger TargetType="Image"
+                                         Binding="{Binding MenuState.IsQrSelected}"
+                                         Value="True">
+                                <Setter Property="Source" Value="qr_code_green.png" />
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
 
-                <Label
-                    Text="QR"
-                    FontSize="10"
-                    TextColor="Black"
-                    HorizontalTextAlignment="Center"/>
-            </VerticalStackLayout>
+                    <Label Text="QR"
+                           Style="{StaticResource BottomMenuText}" />
+                </VerticalStackLayout>
+
+                <Button Style="{StaticResource BottomMenuTapButton}"
+                        Command="{Binding QrCommand}" />
+            </Grid>
 
             <!-- Profile -->
-            <VerticalStackLayout Grid.Column="3"
-                                 Spacing="2"
-                                 HorizontalOptions="Center">
-                <ImageButton
-                    Source="profile.png"
-                    Style="{StaticResource BottomIconStyle}"
-                    Command="{Binding ProfileCommand}">
-                    <ImageButton.Triggers>
-                        <DataTrigger TargetType="ImageButton"
-                                     Binding="{Binding MenuState.IsProfileSelected}"
-                                     Value="True">
-                            <Setter Property="Source" Value="profile_green.png" />
-                        </DataTrigger>
-                    </ImageButton.Triggers>
-                </ImageButton>
-                <Label
-                    Text="Profil"
-                    FontSize="10"
-                    TextColor="Black"
-                    HorizontalTextAlignment="Center"/>
-            </VerticalStackLayout>
+            <Grid Grid.Column="3" Style="{StaticResource BottomMenuItem}">
+                <VerticalStackLayout Spacing="2"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center"
+                                     InputTransparent="True">
+                    <Image Source="profile.png"
+                           Style="{StaticResource BottomMenuIcon}">
+                        <Image.Triggers>
+                            <DataTrigger TargetType="Image"
+                                         Binding="{Binding MenuState.IsProfileSelected}"
+                                         Value="True">
+                                <Setter Property="Source" Value="profile_green.png" />
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
+
+                    <Label Text="Profil"
+                           Style="{StaticResource BottomMenuText}" />
+                </VerticalStackLayout>
+
+                <Button Style="{StaticResource BottomMenuTapButton}"
+                        Command="{Binding ProfileCommand}" />
+            </Grid>
 
             <!-- Other -->
-            <VerticalStackLayout Grid.Column="4"
-                                 Spacing="2"
-                                 HorizontalOptions="Center">
-                <ImageButton
-                                 Source="other_icon.png"
-                                 Style="{StaticResource BottomIconStyle}"
-                                 Command="{Binding OtherCommand}">
+            <Grid Grid.Column="4" Style="{StaticResource BottomMenuItem}">
+                <VerticalStackLayout Spacing="2"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center"
+                                     InputTransparent="True">
+                    <Image Source="other_icon.png"
+                           Style="{StaticResource BottomMenuIcon}">
+                        <Image.Triggers>
+                            <DataTrigger TargetType="Image"
+                                         Binding="{Binding MenuState.IsOtherSelected}"
+                                         Value="True">
+                                <Setter Property="Source" Value="other_green.png" />
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
 
-                    <ImageButton.Triggers>
-                        <DataTrigger TargetType="ImageButton"
-                     Binding="{Binding MenuState.IsOtherSelected}"
-                     Value="True">
-                            <Setter Property="Source" Value="other_green.png" />
-                        </DataTrigger>
-                    </ImageButton.Triggers>
-                </ImageButton>
+                    <Label Text="Digər"
+                           Style="{StaticResource BottomMenuText}" />
+                </VerticalStackLayout>
 
-
-                <Label
-                    Text="Digər"
-                    FontSize="10"
-                    TextColor="Black"
-                    HorizontalTextAlignment="Center"/>
-            </VerticalStackLayout>
+                <Button Style="{StaticResource BottomMenuTapButton}"
+                        Command="{Binding OtherCommand}" />
+            </Grid>
 
         </Grid>
     </Border>

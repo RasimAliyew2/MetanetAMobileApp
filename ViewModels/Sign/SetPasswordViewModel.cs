@@ -55,7 +55,7 @@ namespace MetanetA_MobileApp.ViewModels.Sign
             var pwd = (Password ?? string.Empty).Trim();
 
             // 8 simvol
-            bool minLen = pwd.Length >= 8;
+            bool minLen = pwd.Length >= 4;
 
             // 1 böyük hərf
             bool hasUpper = pwd.Any(char.IsUpper);
@@ -68,16 +68,16 @@ namespace MetanetA_MobileApp.ViewModels.Sign
                 return;
             }
 
-            if (!minLen || !hasUpper)
+            if (!minLen) //|| !hasUpper)
             {
                 IsPasswordRuleInvalid = true;
 
-                if (!minLen && !hasUpper)
-                    PasswordRuleText = "Parol minimum 8 simvol olmalı və ən azı 1 böyük hərf (A-Z) içərməlidir.";
+                if (!minLen)// && !hasUpper)
+                    PasswordRuleText = "Parol minimum 4 simvol olmalıdır";// və ən azı 1 böyük hərf (A-Z) içərməlidir.";
                 else if (!minLen)
-                    PasswordRuleText = "Parol minimum 8 simvol olmalıdır.";
-                else
-                    PasswordRuleText = "Parolda ən azı 1 böyük hərf (A-Z) olmalıdır.";
+                    PasswordRuleText = "Parol minimum 4 simvol olmalıdır.";
+              // else
+              //     PasswordRuleText = "Parolda ən azı 1 böyük hərf (A-Z) olmalıdır.";
             }
             else
             {

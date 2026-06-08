@@ -4,10 +4,12 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MetanetA_MobileApp.View"
+    xmlns:localOrders="clr-namespace:MetanetA_MobileApp.View.Orders"
     xmlns:localGifts="clr-namespace:MetanetA_MobileApp.View.Gifts"
     xmlns:localProducts="clr-namespace:MetanetA_MobileApp.View.Products"
     xmlns:localSing="clr-namespace:MetanetA_MobileApp.View.Sign"
     xmlns:localSales="clr-namespace:MetanetA_MobileApp.View.Sales"
+    xmlns:localMap="clr-namespace:MetanetA_MobileApp.View.Map"
     Shell.FlyoutBehavior="Disabled"
     Title="MetanetA_MobileApp">
 
@@ -29,6 +31,11 @@
         ContentTemplate="{DataTemplate local:ConfrimTheSMS}"
         Route="ConfrimTheSMS"/>
 
+    <ShellContent
+       Title=""
+       ContentTemplate="{DataTemplate local:FaqPage}"
+       Route="FaqPage"/>
+    
     <ShellContent
        Title=""
        ContentTemplate="{DataTemplate local:QrScannerPage}"
@@ -62,6 +69,12 @@
 
     <ShellContent
     Title=""
+    ContentTemplate="{DataTemplate localOrders:OrdersPage}"
+    Route="OrdersPage"/>
+    
+    
+    <ShellContent
+    Title=""
     ContentTemplate="{DataTemplate localGifts:GiftsPage}"
     Route="GiftsPage"/>
 
@@ -82,8 +95,9 @@
 
     <ShellContent
     Title=""
-    ContentTemplate="{DataTemplate localProducts:ProductPreSelectedPage}"
-    Route="ProductPreSelectedPage"/>
+    ContentTemplate="{DataTemplate localMap:LocationMapPage}"
+    Route="LocationMapPage"/>
+    
 
     <ShellContent
    Title=""

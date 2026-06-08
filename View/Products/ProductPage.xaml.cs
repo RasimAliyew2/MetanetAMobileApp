@@ -5,7 +5,7 @@ namespace MetanetA_MobileApp.View.Products;
 public partial class ProductPage : ContentPage
 {
     private readonly ProductViewModel _vm;
-
+    private bool _isLoaded;
     public ProductPage(ProductViewModel vm)
     {
         InitializeComponent();
@@ -20,17 +20,26 @@ public partial class ProductPage : ContentPage
         if (query.TryGetValue("categoryKey", out var raw) && raw != null)
         {
             var key = raw.ToString();
-            _vm.LoadRootCategory(key);
+           // _vm.LoadRootCategory(key);
         }
     }
     protected override bool OnBackButtonPressed()
     {
         MainThread.BeginInvokeOnMainThread(async () =>
         {
-            await Shell.Current.GoToAsync($"//{nameof(ProductPreSelectedPage)}");
+            await _vm.Home();
+         //   await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
         });
 
         return true; // default back işləməsin, app çıxmasın
+    }
+    private async void ContentPage_Loaded(object sender, EventArgs e)
+    {
+        if (_isLoaded)
+            return;
+      
+        _isLoaded = true;
+        await _vm.LoadAsync();
     }
 }
 

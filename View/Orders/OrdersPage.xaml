@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:MetanetA_MobileApp.ViewModels.Sales"
+    xmlns:model="clr-namespace:MetanetA_MobileApp.Model"
+    xmlns:controls="clr-namespace:MetanetA_MobileApp.View"
+    x:Class="MetanetA_MobileApp.View.Orders.OrdersPage"
+    x:Name="ThisPage"
+    x:DataType="vm:OrdersViewModel"
+    Title="Sifarişlər"
+    BackgroundColor="#F3F4F6">
+
+    <Grid RowDefinitions="*,Auto" Padding="16">
+
+        <CollectionView Grid.Row="0"
+                        ItemsSource="{Binding Orders}"
+                        SelectionMode="None">
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout VerticalOptions="Center"
+                                     HorizontalOptions="Center"
+                                     Spacing="8">
+                    <Label Text="Sifariş yoxdur"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="Black"
+                           HorizontalTextAlignment="Center"/>
+                    <Label Text="Yeni sifariş verdikdən sonra burada görünəcək."
+                           FontSize="14"
+                           TextColor="Gray"
+                           HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:OrderItem">
+                    <Border Stroke="#DCDCDC"
+                            StrokeThickness="1"
+                            BackgroundColor="White"
+                            Margin="0,0,0,12"
+                            Padding="14">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="16"/>
+                        </Border.StrokeShape>
+
+                        <VerticalStackLayout Spacing="10">
+
+                            <Label Text="{Binding OrderNumber}"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="Black"/>
+
+                            <Label Text="{Binding Status}"
+                                   FontSize="15"
+                                   FontAttributes="Bold">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label"
+                                                 Binding="{Binding Status}"
+                                                 Value="Hazırlanır">
+                                        <Setter Property="TextColor" Value="DarkOrange"/>
+                                    </DataTrigger>
+
+                                    <DataTrigger TargetType="Label"
+                                                 Binding="{Binding Status}"
+                                                 Value="Ləğv edildi">
+                                        <Setter Property="TextColor" Value="Red"/>
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+
+                            <Label Text="{Binding CreatedAt, StringFormat='Tarix: {0:dd.MM.yyyy HH:mm}'}"
+                                   FontSize="13"
+                                   TextColor="Gray"/>
+
+                            <Label Text="{Binding TotalPrice, StringFormat='Ümumi: {0:0.##} AZN'}"
+                                   FontSize="15"
+                                   FontAttributes="Bold"
+                                   TextColor="Green"/>
+
+                            <VerticalStackLayout BindableLayout.ItemsSource="{Binding Products}"
+                                                 Spacing="6">
+
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="model:OrderLineItem">
+                                        <Grid ColumnDefinitions="*,Auto"
+                                              ColumnSpacing="10">
+
+                                            <Label Text="{Binding Name}"
+                                                   FontSize="14"
+                                                   TextColor="Black"/>
+
+                                            <Label Grid.Column="1"
+                                                   Text="{Binding Quantity, StringFormat='x{0}'}"
+                                                   FontSize="14"
+                                                   TextColor="Gray"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+
+                            </VerticalStackLayout>
+
+
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <controls:BottomMenu Grid.Row="1"
+                             VerticalOptions="End"
+                             Margin="0,8,0,6"/>
+    </Grid>
+</ContentPage>

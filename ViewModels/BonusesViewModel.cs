@@ -30,11 +30,13 @@ namespace MetanetA_MobileApp.ViewModels
             IGiftPurchaseNotifier giftPurchaseNotifier, 
             IQRBonusNotifier bonusNotifier) : base(bottomMenu)
         {
+            
             this.QRBonusNotifier = bonusNotifier;
             this.QRBonusNotifier.QRBonusAdded += row => AddBonusRow(row);
-
-            purchaseNotifier = giftPurchaseNotifier;
+           // this.QRBonusNotifier.DeleteQRBonus -= row => AddBonusRow(row);
+           purchaseNotifier = giftPurchaseNotifier;
             purchaseNotifier.GiftPurchaseAdded += row => SpendBonusRow(row);
+
 
             UserSession = userSession;
             this.ProfileBonus = profileBonus;
@@ -62,11 +64,12 @@ namespace MetanetA_MobileApp.ViewModels
             //});
 
             RecalculateTotals();
+            RefreshBonus();
         }
 
         public void SpendBonusRow(BonusTransaction row)
         {
-            BonusHistory.Add(new BonusTransaction
+            BonusHistory.Insert(0,new BonusTransaction
             {
                 Date = System.DateTime.Today,
                 Type = BonusTransactionType.Spent,
@@ -77,9 +80,9 @@ namespace MetanetA_MobileApp.ViewModels
         }
         public void AddBonusRow(BonusTransaction row)
         {
-            BonusHistory.Add(new BonusTransaction
+            BonusHistory.Insert(0, new BonusTransaction
             {
-                Date = System.DateTime.Today,
+                Date = DateTime.Today,
                 Type = BonusTransactionType.Earned,
                 Amount = row.Amount,
                 Description = row.Description
@@ -89,6 +92,8 @@ namespace MetanetA_MobileApp.ViewModels
         public void RefreshBonus()
         {
             CurrentBonus = UserSession.CurrentUser.BonusOfProfile.CurrentBonus;
+            BonusSpent = UserSession.CurrentUser.BonusOfProfile.UsedBonus;
+            BonusCollected = UserSession.CurrentUser.BonusOfProfile.CollectedBonus;
         }
         partial void OnBonusCollectedChanged(float value) => OnPropertyChanged(nameof(CurrentBonus));
         partial void OnBonusSpentChanged(float value) => OnPropertyChanged(nameof(CurrentBonus));

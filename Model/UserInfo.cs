@@ -9,6 +9,7 @@ namespace MetanetA_MobileApp.Model
 {
     public partial class UserInfo : ObservableObject
     {
+
         [ObservableProperty]
         private string name;
         [ObservableProperty]
@@ -21,6 +22,8 @@ namespace MetanetA_MobileApp.Model
         private string job;
         [ObservableProperty]
         private string phoneNumber;
+        [ObservableProperty]
+        BonusTransaction bonusHistory = new BonusTransaction();
         [ObservableProperty]
         private DateTime birthDate = DateTime.Today;
         [ObservableProperty]

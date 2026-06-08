@@ -13,10 +13,12 @@ obj\Release\net8.0-android\android-arm\aot\Microsoft.Extensions.Options.dll.so
 obj\Release\net8.0-android\android-arm\aot\Microsoft.Extensions.Primitives.dll.so
 obj\Release\net8.0-android\android-arm\aot\Microsoft.Maui.Controls.Compatibility.dll.so
 obj\Release\net8.0-android\android-arm\aot\Microsoft.Maui.Controls.dll.so
+obj\Release\net8.0-android\android-arm\aot\Microsoft.Maui.Controls.Maps.dll.so
 obj\Release\net8.0-android\android-arm\aot\Microsoft.Maui.Controls.Xaml.dll.so
 obj\Release\net8.0-android\android-arm\aot\Microsoft.Maui.dll.so
 obj\Release\net8.0-android\android-arm\aot\Microsoft.Maui.Essentials.dll.so
 obj\Release\net8.0-android\android-arm\aot\Microsoft.Maui.Graphics.dll.so
+obj\Release\net8.0-android\android-arm\aot\Microsoft.Maui.Maps.dll.so
 obj\Release\net8.0-android\android-arm\aot\System.Diagnostics.DiagnosticSource.dll.so
 obj\Release\net8.0-android\android-arm\aot\Xamarin.AndroidX.Activity.dll.so
 obj\Release\net8.0-android\android-arm\aot\Xamarin.AndroidX.AppCompat.dll.so
@@ -48,6 +50,10 @@ obj\Release\net8.0-android\android-arm\aot\Xamarin.AndroidX.ViewPager.dll.so
 obj\Release\net8.0-android\android-arm\aot\Xamarin.AndroidX.ViewPager2.dll.so
 obj\Release\net8.0-android\android-arm\aot\Xamarin.Google.Android.Material.dll.so
 obj\Release\net8.0-android\android-arm\aot\Xamarin.Google.Guava.ListenableFuture.dll.so
+obj\Release\net8.0-android\android-arm\aot\Xamarin.GooglePlayServices.Base.dll.so
+obj\Release\net8.0-android\android-arm\aot\Xamarin.GooglePlayServices.Basement.dll.so
+obj\Release\net8.0-android\android-arm\aot\Xamarin.GooglePlayServices.Maps.dll.so
+obj\Release\net8.0-android\android-arm\aot\Xamarin.GooglePlayServices.Tasks.dll.so
 obj\Release\net8.0-android\android-arm\aot\Xamarin.Kotlin.StdLib.dll.so
 obj\Release\net8.0-android\android-arm\aot\Xamarin.KotlinX.Coroutines.Core.Jvm.dll.so
 obj\Release\net8.0-android\android-arm\aot\zxing.dll.so

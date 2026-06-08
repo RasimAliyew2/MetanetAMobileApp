@@ -57,11 +57,11 @@
 
                     <!-- Collected -->
                     <Label Grid.Row="0" Grid.Column="0"
-                           Text="Qazanılan bonus"
+                           Text="Ümumi bonus"
                            Style="{StaticResource SmallGray}"/>
 
                     <Label Grid.Row="0" Grid.Column="1"
-                           Text="{Binding ProfileBonus.BonusCollected, StringFormat='{0:0.##}'}"
+                           Text="{Binding BonusCollected, StringFormat='{0:0.##}'}"
                            FontSize="14"
                            FontAttributes="Bold"
                            TextColor="#111827"/>
@@ -72,10 +72,10 @@
                            Style="{StaticResource SmallGray}"/>
 
                     <Label Grid.Row="1" Grid.Column="1"
-                           Text="{Binding ProfileBonus.UsedBonus, StringFormat='{0:0.##}'}"
+                           Text="{Binding BonusSpent, StringFormat='{0:0.##}'}"
                            FontSize="14"
                            FontAttributes="Bold"
-                           TextColor="#111827"/>
+                           TextColor="Red"/>
 
 
 

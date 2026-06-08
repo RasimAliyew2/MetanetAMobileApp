@@ -1,25 +1,32 @@
 ﻿using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using System.Text.Json;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MetanetA_MobileApp.Model;
+using MetanetA_MobileApp.Services.Abstractions;
 using MetanetA_MobileApp.Services.Cart;
+using MetanetA_MobileApp.Services.GetDataFromServer;
+using MetanetA_MobileApp.Services.Sales;
 using MetanetA_MobileApp.Services.UIState;
+using MetanetA_MobileApp.View.Orders;
+using MetanetA_MobileApp.View.Sales;
 
 namespace MetanetA_MobileApp.ViewModels.Sales
 {
     public partial class CartViewModel : BaseViewModel
     {
         private readonly CartService cart;
+        private readonly OrdersService ordersService;
 
         public System.Collections.ObjectModel.ObservableCollection<CartLineItem> Items => cart.Items;
 
         [ObservableProperty]
         private bool isEmpty;
 
-        // ✅ Button enable/disable üçün
         public bool HasItems => !IsEmpty;
+        private UserInfo userInfo;
 
         [ObservableProperty]
         private bool isOrderPopupVisible;
@@ -27,9 +34,15 @@ namespace MetanetA_MobileApp.ViewModels.Sales
         public decimal TotalPrice => cart.TotalPrice;
         public int TotalCount => cart.TotalCount;
 
-        public CartViewModel(CartService cart, BottomMenuState menuState) : base(menuState)
+        public CartViewModel(
+            CartService cart,
+            BottomMenuState menuState,
+            IUserSession userSession,
+            OrdersService ordersService) : base(menuState)
         {
             this.cart = cart;
+            this.ordersService = ordersService;
+            this.userInfo = userSession.CurrentUser;
 
             Refresh();
 
@@ -66,7 +79,6 @@ namespace MetanetA_MobileApp.ViewModels.Sales
             OnPropertyChanged(nameof(TotalPrice));
             OnPropertyChanged(nameof(TotalCount));
 
-            // ✅ bottom badge
             MenuState.CartCount = TotalCount;
         }
 
@@ -92,17 +104,25 @@ namespace MetanetA_MobileApp.ViewModels.Sales
         }
 
         [RelayCommand]
-        private void CompleteOrder()
+        private async Task CompleteOrder()
         {
             if (!cart.Items.Any())
                 return;
 
-            // ✅ cart təmizlə (page boş görünsün)
+            var jsonCart = JsonSerializer.Serialize(cart);
+            string text = await GetAndPostAllDataForUser.PostAsync(
+                "http://webrequests.matanata.com/InfoBase/hs/WebRequestForMobileApp/tasks?Type=SendEmail",
+                jsonCart);
+
+            // Əvvəl sifarişi Orders-ə əlavə et
+            ordersService.AddOrderFromCart(cart);
+
+            // Sonra səbəti təmizlə
             cart.Clear();
             Refresh();
 
-            // ✅ böyük pop-up göstər
-            IsOrderPopupVisible = true;
+            // Orders səhifəsinə keç
+            await Shell.Current.GoToAsync($"//{nameof(OrdersPage)}");
         }
 
         [RelayCommand]

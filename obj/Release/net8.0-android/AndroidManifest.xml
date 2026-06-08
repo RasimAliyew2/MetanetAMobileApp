@@ -11,6 +11,8 @@
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.CAMERA" />
   <application android:icon="@mipmap/appicon" android:roundIcon="@mipmap/appicon" android:usesCleartextTraffic="true" android:name="crc64e3396b20b1df5ee9.MainApplication" android:allowBackup="true" android:label="MatanatA" android:extractNativeLibs="true">
+    <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyAKnKYY1GL3NzINdGEgcptRwVtoh-FU9to" />
+    <uses-library android:name="org.apache.http.legacy" android:required="false" />
     <provider android:authorities="com.companyname.metaneta_mobileapp.fileProvider" android:exported="false" android:grantUriPermissions="true" android:name="microsoft.maui.essentials.fileProvider">
       <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/microsoft_maui_essentials_fileprovider_file_paths" />
     </provider>

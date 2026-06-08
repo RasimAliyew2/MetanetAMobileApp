@@ -4,19 +4,21 @@ using System.ComponentModel;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using MetanetA_MobileApp.Model;
+using MetanetA_MobileApp.Services.Abstractions;
 
 namespace MetanetA_MobileApp.Services.Cart
 {
     public partial class CartService : ObservableObject
     {
         public ObservableCollection<CartLineItem> Items { get; } = new();
-
+        public UserInfo User { get; set; }
         public int TotalCount => Items.Sum(x => x.Quantity);
         public decimal TotalPrice => Items.Sum(x => x.LineTotal);
 
-        public CartService()
+        public CartService(IUserSession userSession)
         {
             Items.CollectionChanged += Items_CollectionChanged;
+            User = userSession.CurrentUser;
         }
 
         private void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

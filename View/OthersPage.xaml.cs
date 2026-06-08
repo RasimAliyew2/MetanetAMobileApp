@@ -1,4 +1,5 @@
-﻿using MetanetA_MobileApp.ViewModels;
+﻿using MetanetA_MobileApp.View.Map;
+using MetanetA_MobileApp.ViewModels;
 
 namespace MetanetA_MobileApp.View;
 
@@ -29,4 +30,16 @@ public partial class OthersPage : ContentPage
     {
         await Launcher.Default.OpenAsync(new Uri("https://www.linkedin.com/company/matanat-a-official/posts/?feedView=all"));
     }
+    private async void Map_Tapped(object sender, TappedEventArgs e)
+    {
+        await Shell.Current.GoToAsync($"//{nameof(LocationMapPage)}");
+    }
+    private async void Faq_Tapped(object sender, TappedEventArgs e)
+    {
+        await Shell.Current.GoToAsync($"//{nameof(FaqPage)}");
+    }
+
+
+    
+
 }

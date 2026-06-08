@@ -24,6 +24,13 @@ namespace MetanetA_MobileApp.ViewModels
         [ObservableProperty]
         private bool isBusy;
 
+        // Eye toggle state-lər
+        [ObservableProperty]
+        private bool isPasswordHidden = true;
+
+        [ObservableProperty]
+        private bool isConfirmPasswordHidden = true;
+
         public ProfileUserViewModel(IUserSession session, BottomMenuState menuState)
             : base(menuState)
         {
@@ -40,6 +47,11 @@ namespace MetanetA_MobileApp.ViewModels
             EvaluateChanges();
         }
 
+        [RelayCommand]
+        private void TogglePasswordVisibility()
+        {
+            IsPasswordHidden = !IsPasswordHidden;
+        }
         private void Draft_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             // Hər dəyişiklikdə HasChanges hesabla

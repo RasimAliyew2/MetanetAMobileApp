@@ -88,7 +88,7 @@
                     <Label Grid.Column="2" Text="›" FontSize="22" TextColor="#9CA3AF" VerticalTextAlignment="Center"/>
                 </Grid>
                 <Border.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="LinkedIn_Tapped"/>
+                    <TapGestureRecognizer Tapped="Faq_Tapped"/>
                 </Border.GestureRecognizers>
             </Border>
 
@@ -104,7 +104,7 @@
                     <Label Grid.Column="2" Text="›" FontSize="22" TextColor="#9CA3AF" VerticalTextAlignment="Center"/>
                 </Grid>
                 <Border.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="LinkedIn_Tapped"/>
+                    <TapGestureRecognizer Tapped="Map_Tapped"/>
                 </Border.GestureRecognizers>
             </Border>
 

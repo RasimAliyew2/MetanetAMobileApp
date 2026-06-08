@@ -1,110 +1,262 @@
-﻿// ViewModels/ProductsViewModels/ProductViewModel.cs (REPLACE)
-using System;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MetanetA_MobileApp.Model;
 using MetanetA_MobileApp.Services.UIState;
+using MetanetA_MobileApp.View.Products;
 
 namespace MetanetA_MobileApp.ViewModels.ProductsViewModels;
 
 [QueryProperty(nameof(CategoryKey), "CategoryKey")]
-
 public partial class ProductViewModel : BaseViewModel
 {
-    public ObservableCollection<ProductSubCategorySection> SubCategories { get; } = new();
+    public ObservableCollection<ProductRootCategorySection> RootCategories { get; } = new();
+    public ObservableCollection<ProductItem> SearchResults { get; } = new();
 
     [ObservableProperty]
     private string categoryKey;
-    [ObservableProperty] private string selectedRootCategoryTitle = "Kateqori.ya seçin";
+
+    [ObservableProperty]
+    private string searchText;
+
+    [ObservableProperty]
+    private bool isBusy;
+
+    private bool _isDataLoaded;
+
+    public bool IsSearchActive => !string.IsNullOrWhiteSpace(SearchText);
+    public bool IsCategoryViewVisible => !IsSearchActive;
 
     public ProductViewModel(BottomMenuState menuState) : base(menuState)
     {
-        // İstəsən burada default bir kateqoriya da aça bilərsən:
-       // LoadRootCategory("INSAAT");
+        // Burada artıq LoadAllCategories çağırmırıq.
+        // Çünki constructor UI thread-də işləyir və page açılışını dondururdu.
     }
 
+    public async Task LoadAsync()
+    {
+        if (_isDataLoaded)
+            return;
+
+        try
+        {
+            IsBusy = true;
+
+            await Task.Yield();
+
+            LoadAllCategoriesLight();
+
+            _isDataLoaded = true;
+
+            if (!string.IsNullOrWhiteSpace(CategoryKey))
+                ExpandRootCategory(CategoryKey);
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
+
+    [RelayCommand]
+    private void ToggleRootCategory(ProductRootCategorySection section)
+    {
+        if (section == null)
+            return;
+
+        var willExpand = !section.IsExpanded;
+
+        foreach (var cat in RootCategories)
+            cat.IsExpanded = false;
+
+        section.IsExpanded = willExpand;
+    }
+    [RelayCommand]
+    private void ToggleSubCategory(ProductSubCategorySection section)
+    {
+        if (section == null)
+            return;
+
+        var parent = RootCategories.FirstOrDefault(root =>
+            root.SubCategories.Contains(section));
+
+        if (parent == null)
+            return;
+
+        var willExpand = !section.IsExpanded;
+
+        foreach (var sub in parent.SubCategories)
+            sub.IsExpanded = false;
+
+        section.IsExpanded = willExpand;
+    }
     partial void OnCategoryKeyChanged(string value)
     {
         if (string.IsNullOrWhiteSpace(value))
             return;
 
-        LoadRootCategory(value); // sənin mövcud metodun
-    }
-    public void LoadRootCategory(string key)
-    {
-        SubCategories.Clear();
-
-        if (string.IsNullOrWhiteSpace(key) || !ProductCatalog.Data.TryGetValue(key, out var data))
-        {
-            SelectedRootCategoryTitle = "Kateqoriya seçin";
+        if (!_isDataLoaded)
             return;
-        }
 
-        SelectedRootCategoryTitle = data.Title;
+        ExpandRootCategory(value);
+    }
 
-        // Demo üçün: hər alt kateqoriyaya 2 məhsul əlavə edirəm.
-        // Sonradan bunu API-dən gələn real məhsullarla əvəz edəcəksən.
-        var rnd = new Random();
+    partial void OnSearchTextChanged(string value)
+    {
+        ApplySearch(value);
 
-     //   sec.Products.Add(new ProductItem
-     //   {
-     //       Name = $"\"MATANAT A\" HYBRID keramika yapışdırıcısı (boz)",
-     //       Description = data.Title,
-     //       ImageUrl = "pic5.png",
-     //       Price = 25
-     //   });
-      //  SubCategories.Add(new ProductSubCategorySection("İnşaat sistemləri")) { Products.Ad};
+        OnPropertyChanged(nameof(IsSearchActive));
+        OnPropertyChanged(nameof(IsCategoryViewVisible));
+    }
 
-        foreach (var subName in data.SubCategories)
+    private void ApplySearch(string value)
+    {
+        SearchResults.Clear();
+
+        if (string.IsNullOrWhiteSpace(value))
+            return;
+
+        var text = value.Trim();
+
+        var results = RootCategories
+            .SelectMany(root => root.SubCategories)
+            .SelectMany(sub => sub.Products)
+            .Where(product =>
+                !string.IsNullOrWhiteSpace(product.Name) &&
+                product.Name.Contains(text, StringComparison.OrdinalIgnoreCase))
+            .OrderBy(product => product.Name.StartsWith(text, StringComparison.OrdinalIgnoreCase) ? 0 : 1)
+            .ThenBy(product => product.Name)
+            .ToList();
+
+        foreach (var item in results)
+            SearchResults.Add(item);
+    }
+
+    private void LoadAllCategoriesLight()
+    {
+        RootCategories.Clear();
+
+        foreach (var key in GetRootCategoryOrder())
         {
-            var sec = new ProductSubCategorySection(subName);
+            if (!ProductCatalog.Data.TryGetValue(key, out var data))
+                continue;
 
-            // Demo products
-            sec.Products.Add(new ProductItem
+            var root = new ProductRootCategorySection(
+                key,
+                data.Title,
+                GetCategoryImage(key));
+
+            foreach (var subName in data.SubCategories)
             {
-                Name = $"{subName} - Məhsul 1",
-                Description = data.Title,
-                ImageUrl = "product.png",
-                Price = 25
-            });
+                var sub = new ProductSubCategorySection(subName);
 
-            sec.Products.Add(new ProductItem
-            {
-                Name = $"{subName} - Məhsul 2",
-                Description = data.Title,
-                ImageUrl = "product.png",
-                Price = 20
-            });
+                if (sub.Name == "Plitə yapışdırıcıları")
+                {
+                    sub.Products.Add(CreateProduct(
+                        "Keramika və Mozoik yapıştırıcısı",
+                        data.Title,
+                        "plite1.jpg",
+                        25));
 
-            SubCategories.Add(sec);
+                    sub.Products.Add(CreateProduct(
+                        "Keramika və dekorativ daş yapıştırıcısı",
+                        data.Title,
+                        "plite2.jpg",
+                        16));
+
+                    sub.Products.Add(CreateProduct(
+                        "Elastik və yüksək performanslı plitə yapıştırıcısı",
+                        data.Title,
+                        "plite3.jpg",
+                        50));
+
+                    sub.Products.Add(CreateProduct(
+                        "Keramika yapıştırıcısı",
+                        data.Title,
+                        "plite4.jpg",
+                        30));
+                }
+
+                root.SubCategories.Add(sub);
+            }
+
+            RootCategories.Add(root);
         }
     }
 
-    [RelayCommand]
-    private void ToggleSubCategory(ProductSubCategorySection section)
+    private static ProductItem CreateProduct(
+        string name,
+        string description,
+        string imageUrl,
+        float price)
     {
-        if (section == null) return;
+        return new ProductItem
+        {
+            Name = name,
+            Description = description,
+            ImageUrl = imageUrl,
+            Price = price,
 
-        // istəyirsənsə: birini açanda digərlərini bağla
-        foreach (var s in SubCategories.Where(x => x != section))
-            s.IsExpanded = false;
+            // Əsas optimizasiya:
+            // Siyahı açılarkən böyük HTML yüklənmir.
+            AboutTheProduct = string.Empty
+        };
+    }
 
-        section.IsExpanded = !section.IsExpanded;
+    private void ExpandRootCategory(string key)
+    {
+        var target = RootCategories.FirstOrDefault(x =>
+            string.Equals(x.Key, key, StringComparison.OrdinalIgnoreCase));
+
+        if (target == null)
+            return;
+
+        foreach (var cat in RootCategories.Where(x => x != target))
+        {
+            cat.IsExpanded = false;
+
+            foreach (var sub in cat.SubCategories)
+                sub.IsExpanded = false;
+        }
+
+        target.IsExpanded = true;
+    }
+
+    private static IEnumerable<string> GetRootCategoryOrder()
+    {
+        return new[] { "INSAAT", "FASAD", "YER", "QATQI" };
+    }
+
+    private static string GetCategoryImage(string key)
+    {
+        return key switch
+        {
+            "INSAAT" => "product_type3.png",
+            "FASAD" => "product_type4.png",
+            "YER" => "product_type1.png",
+            "QATQI" => "product_type2.png",
+            _ => "product.png"
+        };
+    }
+
+ 
+   
+    [RelayCommand]
+    private void ClearSearch()
+    {
+        SearchText = string.Empty;
     }
 
     [RelayCommand]
     private async Task SelectProductAsync(ProductItem item)
     {
-        if (item == null) return;
+        if (item == null)
+            return;
 
-        // Hazırda “seçmək” üçün sadəcə məlumat göstərir.
-        // Sonra buradan ProductDetailPage və ya səbətə əlavə et logikası qoşa bilərsən.
-        await Application.Current.MainPage.DisplayAlert(
-            "Məhsul",
-            $"{item.Name}\nQiymət: {item.Price:0.##} ₼",
-            "OK");
+        item.AboutTheProduct = ProductHtmlStore.GetHtml(item.Name);
+
+        await Shell.Current.GoToAsync($"//{nameof(ProductDetailPage)}", new Dictionary<string, object>
+        {
+            ["ProductItem"] = item
+        });
     }
 }

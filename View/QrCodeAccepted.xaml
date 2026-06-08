@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="MetanetA_MobileApp.View.QrCodeAccepted"
+    x:Name="ThisPage"
     Title=""
     BackgroundColor="#F3FDF6">
 
@@ -16,7 +17,7 @@
 
     <ContentPage.Resources>
         <Style x:Key="TitleLabelStyle" TargetType="Label">
-            <Setter Property="FontSize" Value="28" />
+            <Setter Property="FontSize" Value="32" />
             <Setter Property="FontAttributes" Value="Bold" />
             <Setter Property="TextColor" Value="#14532D" />
             <Setter Property="HorizontalTextAlignment" Value="Center" />
@@ -37,24 +38,24 @@
             <Setter Property="CornerRadius" Value="16" />
             <Setter Property="HeightRequest" Value="54" />
             <Setter Property="Padding" Value="22,0" />
+            <Setter Property="HorizontalOptions" Value="Fill" />
         </Style>
     </ContentPage.Resources>
 
-    <Grid Padding="24">
+    <Grid>
         <ScrollView>
-            <VerticalStackLayout
-                VerticalOptions="Center"
-                HorizontalOptions="Center"
-                Spacing="22">
+            <Grid
+                Padding="24"
+                MinimumHeightRequest="{Binding Source={x:Reference ThisPage}, Path=Height}">
 
-                <!-- Əsas kart -->
                 <Border
                     StrokeThickness="1"
                     Stroke="#D1FAE5"
                     BackgroundColor="White"
-                    Padding="28"
+                    Padding="80"
                     HorizontalOptions="Center"
-                    MaximumWidthRequest="420">
+                    VerticalOptions="Center"
+                    MaximumWidthRequest="500">
 
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="28" />
@@ -70,7 +71,6 @@
 
                     <VerticalStackLayout Spacing="22">
 
-                        <!-- Üst badge -->
                         <Border
                             BackgroundColor="#DCFCE7"
                             StrokeThickness="0"
@@ -89,35 +89,10 @@
                                 HorizontalTextAlignment="Center" />
                         </Border>
 
-                        <!-- Şəkil üçün dairəvi vurğu -->
-                        <Grid HorizontalOptions="Center">
-                            <Border
-                                WidthRequest="180"
-                                HeightRequest="180"
-                                BackgroundColor="#F0FDF4"
-                                Stroke="#BBF7D0"
-                                StrokeThickness="1">
-
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="90" />
-                                </Border.StrokeShape>
-
-                                <Image
-                                    Source="green_bird.png"
-                                    WidthRequest="120"
-                                    HeightRequest="120"
-                                    Aspect="AspectFit"
-                                    HorizontalOptions="Center"
-                                    VerticalOptions="Center" />
-                            </Border>
-                        </Grid>
-
-                        <!-- Başlıq -->
                         <Label
                             Text="Təbrik edirik"
                             Style="{StaticResource TitleLabelStyle}" />
 
-                        <!-- Bonus sahəsi -->
                         <Border
                             BackgroundColor="#F9FAFB"
                             Stroke="#E5E7EB"
@@ -149,7 +124,7 @@
                                         VerticalTextAlignment="Center" />
 
                                     <Label
-                                        Text="əlavə olundu"
+                                        Text="{Binding BonusText}"
                                         FontSize="20"
                                         FontAttributes="Bold"
                                         TextColor="#111827"
@@ -159,12 +134,6 @@
                             </VerticalStackLayout>
                         </Border>
 
-                        <!-- Açıqlama -->
-                        <Label
-                            Text="Bonus məbləği hesabınıza uğurla əlavə edildi. Davam etmək üçün əsas səhifəyə keçin."
-                            Style="{StaticResource SubtitleLabelStyle}" />
-
-                        <!-- Düymə -->
                         <Button
                             Text="Əsas səhifəyə keç"
                             Style="{StaticResource PrimaryButtonStyle}"
@@ -173,7 +142,7 @@
                     </VerticalStackLayout>
                 </Border>
 
-            </VerticalStackLayout>
+            </Grid>
         </ScrollView>
     </Grid>
 </ContentPage>

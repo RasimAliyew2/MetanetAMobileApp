@@ -75,6 +75,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.Co
 build_metadata.AdditionalFiles.TargetPath = View\ConfrimTheSMS.xaml
 build_metadata.AdditionalFiles.RelativePath = View\ConfrimTheSMS.xaml
 
+[C:/Users/Rasim/source/repos/MetanetA_MobileApp/MetanetA_MobileApp/View/FaqPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.FaqPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\FaqPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\FaqPage.xaml
+
 [C:/Users/Rasim/source/repos/MetanetA_MobileApp/MetanetA_MobileApp/View/ForgetPasswordPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.ForgetPasswordPage.xaml
@@ -98,6 +104,18 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.MainPage.xaml
 build_metadata.AdditionalFiles.TargetPath = View\MainPage.xaml
 build_metadata.AdditionalFiles.RelativePath = View\MainPage.xaml
+
+[C:/Users/Rasim/source/repos/MetanetA_MobileApp/MetanetA_MobileApp/View/Map/LocationMapPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.Map.LocationMapPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\Map\LocationMapPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\Map\LocationMapPage.xaml
+
+[C:/Users/Rasim/source/repos/MetanetA_MobileApp/MetanetA_MobileApp/View/Orders/OrdersPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.Orders.OrdersPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\Orders\OrdersPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\Orders\OrdersPage.xaml
 
 [C:/Users/Rasim/source/repos/MetanetA_MobileApp/MetanetA_MobileApp/View/OthersPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml

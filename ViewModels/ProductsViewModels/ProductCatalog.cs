@@ -11,7 +11,6 @@ public static class ProductCatalog
         {
             ["INSAAT"] = ("İNŞAAT SİSTEMLƏRİ", new[]
             {
-                "\"MATANAT A\" HYBRID keramika yapışdırıcısı (boz)",
                 "Plitə yapışdırıcıları",
                 "Plitə aralıq doldurucuları",
                 "Təmir, Grout və Ankraj qarışıqları",

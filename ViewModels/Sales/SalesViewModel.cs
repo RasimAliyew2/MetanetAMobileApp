@@ -12,6 +12,7 @@ using MetanetA_MobileApp.Model;
 using MetanetA_MobileApp.Services.Cart;
 using MetanetA_MobileApp.Services.Sales;
 using MetanetA_MobileApp.Services.UIState;
+using MetanetA_MobileApp.View.Products;
 using MetanetA_MobileApp.View.Sales;
 using Microsoft.Maui.ApplicationModel;
 
@@ -298,6 +299,14 @@ namespace MetanetA_MobileApp.ViewModels.Sales
                     ["Item"] = product
                 });
             });
+
+          // MainThread.BeginInvokeOnMainThread(async () =>
+          // {
+          //     await Shell.Current.GoToAsync($"//{nameof(ProductDetailPage)}", new Dictionary<string, object>
+          //     {
+          //         ["Item"] = product
+          //     });
+          // });
         }
     }
 

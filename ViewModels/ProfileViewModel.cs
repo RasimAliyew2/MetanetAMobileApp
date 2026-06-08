@@ -8,6 +8,7 @@ using MetanetA_MobileApp.Model;
 using MetanetA_MobileApp.Services.Abstractions;
 using MetanetA_MobileApp.Services.UIState;
 using MetanetA_MobileApp.View;
+using MetanetA_MobileApp.View.Orders;
 using Microsoft.Maui.Storage;
 
 namespace MetanetA_MobileApp.ViewModels;
@@ -132,8 +133,9 @@ public partial class ProfileViewModel : BaseViewModel
     [RelayCommand]
     private async Task Orders()
     {
+         await Shell.Current.GoToAsync($"//{nameof(OrdersPage)}");
         // hələlik boş – amma event var
-        await Shell.Current.DisplayAlert("Sifarişlərim", "96bölmə tezliklə əlavə olunacaq.", "OK");
+      //  await Shell.Current.DisplayAlert("Sifarişlərim", "96bölmə tezliklə əlavə olunacaq.", "OK");
     }
 
     [RelayCommand]

@@ -9,9 +9,9 @@ namespace MetanetA_MobileApp.Services.Abstractions
 {
     public interface IQRBonusNotifier
     {
-        event Action<BonusTransaction> QRBonusAdded;
-
+        event Action<BonusTransaction> QRBonusAdded;       
         void PublishNewQRBonus(BonusTransaction row);
+        
     }
 }
 

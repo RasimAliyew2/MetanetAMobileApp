@@ -20,5 +20,7 @@ namespace MetanetA_MobileApp.Model
         public string imageUrl;
         [ObservableProperty]
         public float price;
+        [ObservableProperty]
+        public bool bought;
     }
 }

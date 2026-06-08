@@ -21,6 +21,8 @@ using MetanetA_MobileApp.ViewModels.Sales;
 using MetanetA_MobileApp.Services.Sales;
 using MetanetA_MobileApp.Services.Cart;
 using MetanetA_MobileApp.ViewModels.GiftsViewModels;
+using MetanetA_MobileApp.View.Map;
+using MetanetA_MobileApp.View.Orders;
 
 
 #if ANDROID
@@ -50,6 +52,7 @@ namespace MetanetA_MobileApp
             var builder = MauiApp.CreateBuilder();
             builder
              .UseMauiApp<App>()
+             .UseMauiMaps()
              .UseBarcodeReader()          // ZXing 0.4.0
              .UseMauiCommunityToolkit();
 
@@ -131,21 +134,19 @@ namespace MetanetA_MobileApp
             builder.Services.AddSingleton<ForgetPasswordPage>(); 
             builder.Services.AddSingleton<RequestAcceptedPage>();
 
-
-            builder.Services.AddSingleton<CartState>();
+            builder.Services.AddTransient<FaqPage>();
             builder.Services.AddTransient<SalesPage>();
             builder.Services.AddTransient<CartPage>();
+            builder.Services.AddTransient<LocationMapPage>();
             builder.Services.AddTransient<SalesDetailPage>();
-            builder.Services.AddTransient<ProductPreSelectedPage>();
 
 
             //View Models
 
-            builder.Services.AddTransient<OthersPage>();
             builder.Services.AddTransient<BaseViewModel>(); 
             builder.Services.AddTransient<MainViewModel>();
             builder.Services.AddTransient<VideosViewModel>();
-            builder.Services.AddTransient<ProductPreSelectedViewModel>();
+            builder.Services.AddTransient<LocationMapViewModel>();
             builder.Services.AddTransient<ProfileUserViewModel>();
             
 
@@ -157,6 +158,7 @@ namespace MetanetA_MobileApp
             builder.Services.AddTransient<SalesDetailViewModel>();
             builder.Services.AddTransient<CartViewModel>();
 
+            builder.Services.AddTransient<FaqPageViewModel>();
             builder.Services.AddTransient<SignInViewModel>();
             builder.Services.AddTransient<SignUpViewModel>();
             builder.Services.AddTransient<ProductDetailViewModel>();
@@ -166,6 +168,7 @@ namespace MetanetA_MobileApp
             builder.Services.AddTransient<QrScannerViewModel>(); 
             builder.Services.AddTransient<ProfileViewModel>();
             builder.Services.AddTransient<GiftsViewModel>();
+            builder.Services.AddTransient<OrdersViewModel>();
             builder.Services.AddTransient<ProductViewModel>();
             builder.Services.AddTransient<GiftDetailViewModel>();
             builder.Services.AddTransient<ForgetPasswordViewModel>();
@@ -187,13 +190,18 @@ namespace MetanetA_MobileApp
 
             //Models
             builder.Services.AddSingleton<IBonus, Bonus>();
+            builder.Services.AddSingleton<IGiftItem, GiftItem>();
+            builder.Services.AddSingleton<OrdersService>();
+            builder.Services.AddTransient<OrdersPage>();
             builder.Services.AddSingleton<UserInfo>();
             builder.Services.AddSingleton<ProfileBonus>();
-            builder.Services.AddSingleton<IGiftItem, GiftItem>();
 
-
-
-            return builder.Build();
+         
+            
+            var Myapp = builder.Build();
+            
+            return Myapp;
         }
+
     }
 }

@@ -4,7 +4,7 @@
              xmlns:controls="clr-namespace:MetanetA_MobileApp.View"
              x:Class="MetanetA_MobileApp.View.Gifts.GiftsPage"
              BackgroundColor="#F3F4F6"
-             Title="Hədiyyələr">
+             Title="">
 
     <ContentPage.Resources>
 
@@ -37,10 +37,15 @@
         <Border Grid.Row="0" Style="{StaticResource Card}" Padding="14,12">
             <VerticalStackLayout Spacing="10">
 
-                <Label Text="Hədiyyələr"
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Text="Hədiyyələr"
                        FontSize="22"
                        FontAttributes="Bold"
                        TextColor="#111827"/>
+
+                    <Label Grid.Column="1" Text="{Binding Bonus}" HorizontalOptions="End"
+                           VerticalOptions="End"/>
+                </Grid>
 
                 <Border Style="{StaticResource SearchBorder}">
                     <SearchBar Placeholder="Axtarış..."

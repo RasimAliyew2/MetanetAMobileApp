@@ -19,7 +19,8 @@ namespace MetanetA_MobileApp.Model
         public string imageUrl;
         [ObservableProperty]
         public float price;
-
+        [ObservableProperty]
+        public string aboutTheProduct;
         // Filter üçün:
         public string Category { get; set; }
         public string SubCategory { get; set; }
