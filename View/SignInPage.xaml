@@ -72,14 +72,28 @@
                         <Border Stroke="#E5E7EB"
                                 StrokeThickness="1"
                                 StrokeShape="RoundRectangle 14"
-                                Padding="12,10">
-                            <Entry Placeholder="+994 XX XXX XX"
-                                   Keyboard="Numeric"
-                                   Text="{Binding PhoneNumber}"
-                                   FontSize="14"
-                                   TextColor="#111827"
-                                   PlaceholderColor="#9CA3AF"
-                                   BackgroundColor="Transparent" />
+                                Padding="8,6">
+
+                            <Grid ColumnDefinitions="120,*" ColumnSpacing="8">
+                                <Picker Grid.Column="0"
+                                        ItemsSource="{Binding Prefixes}"
+                                        SelectedItem="{Binding SelectedPrefix}"
+                                        Title="Prefix"
+                                        FontSize="14"
+                                        TextColor="#111827"
+                                        BackgroundColor="Transparent" />
+                                    
+                                                        <Entry Grid.Column="1"
+                                       Placeholder="XXX XX XX"
+                                       Keyboard="Numeric"
+                                       MaxLength="7"
+                                       Text="{Binding LineNumber}"
+                                       FontSize="14"
+                                       TextColor="#111827"
+                                       PlaceholderColor="#9CA3AF"
+                                       BackgroundColor="Transparent" />
+                            </Grid>
+
                         </Border>
 
                         <!-- Password -->

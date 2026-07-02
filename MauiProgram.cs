@@ -110,8 +110,18 @@ namespace MetanetA_MobileApp
                     // Cache təmiz (test üçün)
                     wv.ClearCache(true);
 #endif
-                });
+
+#if IOS
+                var wv = handler.PlatformView;
+                wv.Configuration.AllowsInlineMediaPlayback = true;
+
+                if (OperatingSystem.IsIOSVersionAtLeast(10))
+                    wv.Configuration.MediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypes.None;
+
+                wv.AllowsBackForwardNavigationGestures = true;
+#endif
             });
+        });
 
             //Pages
             builder.Services.AddSingleton<MainPage>();
@@ -205,3 +215,4 @@ namespace MetanetA_MobileApp
 
     }
 }
+

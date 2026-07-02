@@ -1,5 +1,4 @@
-﻿using MetanetA_MobileApp.View.Gifts;
-using MetanetA_MobileApp.ViewModels;
+﻿using MetanetA_MobileApp.ViewModels;
 
 namespace MetanetA_MobileApp.View;
 
@@ -9,32 +8,34 @@ public partial class QrScannerPage : ContentPage
     {
         InitializeComponent();
         BindingContext = vm;
-        //Resources.Add("FirstBarcodeValueConverter", new Converters.FirstBarcodeValueConverter());
     }
+
     protected override bool OnBackButtonPressed()
     {
         MainThread.BeginInvokeOnMainThread(async () =>
         {
-            await (BindingContext as QrScannerViewModel).Home();
-         //   await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+            if (BindingContext is QrScannerViewModel vm)
+                await vm.Home();
         });
 
-        return true; // default back işləməsin, app çıxmasın
+        return true;
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
 
-        // Kamera icazəsi (bəzən resume zamanı yenidən tələb olunur kimi davranır)
         var status = await Permissions.CheckStatusAsync<Permissions.Camera>();
+
         if (status != PermissionStatus.Granted)
             status = await Permissions.RequestAsync<Permissions.Camera>();
 
         if (status != PermissionStatus.Granted)
+        {
+            await DisplayAlert("Kamera icazÉ™si", "QR kodu skan etmÉ™k Ã¼Ã§Ã¼n kamera icazÉ™si verilmÉ™lidir.", "OK");
             return;
+        }
 
-        // Preview-ni yenidən start et
         MainThread.BeginInvokeOnMainThread(() =>
         {
             Scanner.IsEnabled = true;
@@ -44,11 +45,12 @@ public partial class QrScannerPage : ContentPage
 
     protected override void OnDisappearing()
     {
-        // Preview-ni stop et ki, kamera resursu buraxılsın
-        Scanner.IsDetecting = false;
-        Scanner.IsEnabled = false;
+        if (Scanner is not null)
+        {
+            Scanner.IsDetecting = false;
+            Scanner.IsEnabled = false;
+        }
 
         base.OnDisappearing();
     }
-
 }

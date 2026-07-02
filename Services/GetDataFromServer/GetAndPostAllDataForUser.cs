@@ -12,8 +12,8 @@ namespace MetanetA_MobileApp.Services.GetDataFromServer
 {
     public static class GetAndPostAllDataForUser
     {
-        private static string Username = "Test";
-        private static string Password = "Test";
+        private static string Username = "rasim";
+        private static string Password = "1";
 
         public static async Task<string> PostAsyncUserInfo(UserInfo userInfo)
         {
@@ -23,7 +23,7 @@ namespace MetanetA_MobileApp.Services.GetDataFromServer
         }
         public static async Task<string> PostAsyncUserInfoUnique(UserInfo userInfo,string type)
         {
-            string url = "http://test" + type;
+            string url = "http://webrequests.matanata.com/InfoBase/hs/WebRequestForMobileApp/tasks?Type=" + type;
             var data = JsonSerializer.Serialize(userInfo);
             return await PostAsync(url, data);
         }
@@ -31,7 +31,7 @@ namespace MetanetA_MobileApp.Services.GetDataFromServer
 
         public static async Task<string> GetAsyncUserInfo(UserInfo userInfo)
         {
-            string url = "http://test";
+            string url = "http://webrequests.matanata.com/InfoBase/hs/WebRequestForMobileApp/tasks?Type=GetUserInfo";
             var data = JsonSerializer.Serialize(userInfo);
             return await PostAsync(url, data);
         }
