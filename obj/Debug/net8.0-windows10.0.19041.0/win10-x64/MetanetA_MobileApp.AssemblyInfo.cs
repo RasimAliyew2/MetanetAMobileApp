@@ -11,14 +11,14 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyMetadataAttribute("Microsoft.Maui.ApplicationModel.AppInfo.PackageName", "com.companyname.metaneta_mobileapp")]
+[assembly: System.Reflection.AssemblyMetadataAttribute("Microsoft.Maui.ApplicationModel.AppInfo.PackageName", "com.MatanatAUstalalarKlubuMatanatA.UstalarKlubuUstalaralarKlubu")]
 [assembly: System.Reflection.AssemblyMetadataAttribute("Microsoft.Maui.ApplicationModel.AppInfo.PublisherName", "User Name")]
-[assembly: System.Reflection.AssemblyMetadataAttribute("Microsoft.Maui.ApplicationModel.AppInfo.Name", "MatanatA")]
+[assembly: System.Reflection.AssemblyMetadataAttribute("Microsoft.Maui.ApplicationModel.AppInfo.Name", "UstalarKlubu ")]
 [assembly: System.Reflection.AssemblyMetadataAttribute("Microsoft.Maui.ApplicationModel.AppInfo.Version", "1.0.0.1")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("MetanetA_MobileApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+18863b466dbc8b656d175ba66814445a9223d066")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+724bc03020b6368ffdfe70310de9fc5d36b91760")]
 [assembly: System.Reflection.AssemblyProductAttribute("MetanetA_MobileApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MetanetA_MobileApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

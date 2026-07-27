@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
@@ -33,10 +33,15 @@
     <string>Assets.xcassets/appicon.appiconset</string>
 
     <key>NSCameraUsageDescription</key>
-    <string>QR kodu skan etmÉ™k Ã¼Ã§Ã¼n kamera icazÉ™si lazÄ±mdÄ±r.</string>
+    <string>QR kodu skan etmək üçün kamera icazəsi lazımdır.</string>
 
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>XÉ™ritÉ™dÉ™ yaxÄ±n mÉ™ntÉ™qÉ™lÉ™ri gÃ¶stÉ™rmÉ™k Ã¼Ã§Ã¼n mÉ™kan icazÉ™si lazÄ±mdÄ±r.</string>
+    <string>Xəritədə yaxın məntəqələri göstərmək üçün məkan icazəsi lazımdır.</string>
+
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>remote-notification</string>
+    </array>
 
     <key>NSAppTransportSecurity</key>
     <dict>

@@ -1,5 +1,6 @@
-﻿using MetanetA_MobileApp.Services;
+using MetanetA_MobileApp.Services;
 using MetanetA_MobileApp.Services.Abstractions;
+using MetanetA_MobileApp.Services.Notifications;
 using MetanetA_MobileApp.View;
 using MetanetA_MobileApp.ViewModels;
 using Microsoft.Extensions.Logging;
@@ -9,6 +10,7 @@ using MetanetA_MobileApp.Model;
 using MetanetA_MobileApp.ViewModels.QRCode;
 
 using Microsoft.Maui.Handlers;
+using Microsoft.Maui.LifecycleEvents;
 using MetanetA_MobileApp.View.Gifts;
 using MetanetA_MobileApp.View.Products;
 using MetanetA_MobileApp.ViewModels.ProductsViewModels;
@@ -23,21 +25,23 @@ using MetanetA_MobileApp.Services.Cart;
 using MetanetA_MobileApp.ViewModels.GiftsViewModels;
 using MetanetA_MobileApp.View.Map;
 using MetanetA_MobileApp.View.Orders;
+using Microsoft.Maui.LifecycleEvents;
+using Plugin.Firebase;
+using Plugin.Firebase.CloudMessaging;
 
 
 #if ANDROID
 using Android.Webkit;
 using Android.OS;
-
+using Plugin.Firebase.Core.Platforms.Android;
 #endif
 
 #if IOS
 using WebKit;
 using Microsoft.Maui.Platform;
+using Plugin.Firebase.Core.Platforms.iOS;
+using Plugin.Firebase.CloudMessaging.Platforms.iOS;
 #endif
-
-
-
 
 #if ANDROID
 using AndroidX.AppCompat.Widget;
@@ -54,7 +58,27 @@ namespace MetanetA_MobileApp
              .UseMauiApp<App>()
              .UseMauiMaps()
              .UseBarcodeReader()          // ZXing 0.4.0
-             .UseMauiCommunityToolkit();
+             .UseMauiCommunityToolkit()
+             .RegisterFirebaseServices();
+
+            builder.ConfigureLifecycleEvents(events =>
+            {
+#if ANDROID
+    events.AddAndroid(android => android.OnCreate((activity, bundle) =>
+    {
+        CrossFirebase.Initialize(activity);
+    }));
+#endif
+
+#if IOS
+    events.AddiOS(ios => ios.FinishedLaunching((app, launchOptions) =>
+    {
+        CrossFirebase.Initialize();
+        FirebaseCloudMessagingImplementation.Initialize();
+        return false;
+    }));
+#endif
+            });
 
 #if ANDROID
         EntryHandler.Mapper.AppendToMapping("NoUnderline", (handler, view) =>
@@ -70,9 +94,6 @@ namespace MetanetA_MobileApp
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
-
-
-
 
             builder.ConfigureMauiHandlers(handlers =>
             {
@@ -112,16 +133,16 @@ namespace MetanetA_MobileApp
 #endif
 
 #if IOS
-                var wv = handler.PlatformView;
-                wv.Configuration.AllowsInlineMediaPlayback = true;
+                    var wv = handler.PlatformView;
+                    wv.Configuration.AllowsInlineMediaPlayback = true;
 
-                if (OperatingSystem.IsIOSVersionAtLeast(10))
-                    wv.Configuration.MediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypes.None;
+                    if (OperatingSystem.IsIOSVersionAtLeast(10))
+                        wv.Configuration.MediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypes.None;
 
-                wv.AllowsBackForwardNavigationGestures = true;
+                    wv.AllowsBackForwardNavigationGestures = true;
 #endif
+                });
             });
-        });
 
             //Pages
             builder.Services.AddSingleton<MainPage>();
@@ -150,18 +171,12 @@ namespace MetanetA_MobileApp
             builder.Services.AddTransient<LocationMapPage>();
             builder.Services.AddTransient<SalesDetailPage>();
 
-
             //View Models
-
             builder.Services.AddTransient<BaseViewModel>(); 
             builder.Services.AddTransient<MainViewModel>();
             builder.Services.AddTransient<VideosViewModel>();
             builder.Services.AddTransient<LocationMapViewModel>();
             builder.Services.AddTransient<ProfileUserViewModel>();
-            
-
-
-
 
             builder.Services.AddSingleton<CartState>();
             builder.Services.AddTransient<SalesViewModel>();
@@ -187,7 +202,6 @@ namespace MetanetA_MobileApp
             builder.Services.AddTransient<QRCodeNotAcceptedViewModel>();
             builder.Services.AddTransient<QRCodeAcceptedViewModel>();
 
-
             //Services
             builder.Services.AddSingleton<IGiftPurchaseNotifier, GiftPurchaseNotifier>();
             builder.Services.AddSingleton<IQRBonusNotifier, QRBonusNotifier>(); 
@@ -196,7 +210,7 @@ namespace MetanetA_MobileApp
             builder.Services.AddSingleton<BottomMenuState>(); 
             builder.Services.AddSingleton<SalesCatalogService>();
             builder.Services.AddSingleton<CartService>();
-            
+            builder.Services.AddSingleton<IFirebaseNotificationService, FirebaseNotificationService>();
 
             //Models
             builder.Services.AddSingleton<IBonus, Bonus>();
@@ -206,13 +220,31 @@ namespace MetanetA_MobileApp
             builder.Services.AddSingleton<UserInfo>();
             builder.Services.AddSingleton<ProfileBonus>();
 
-         
-            
             var Myapp = builder.Build();
-            
             return Myapp;
         }
 
+        private static MauiAppBuilder RegisterFirebaseServices(this MauiAppBuilder builder)
+        {
+#if IOS || ANDROID
+            builder.ConfigureLifecycleEvents(events =>
+            {
+#if IOS
+                events.AddiOS(iOS => iOS.WillFinishLaunching((_, __) =>
+                {
+                    CrossFirebase.Initialize();
+                    FirebaseCloudMessagingImplementation.Initialize();
+                    return false;
+                }));
+#elif ANDROID
+                events.AddAndroid(android => android.OnCreate((activity, _) =>
+                {
+                    CrossFirebase.Initialize(activity);
+                }));
+#endif
+            });
+#endif
+            return builder;
+        }
     }
 }
-

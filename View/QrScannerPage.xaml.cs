@@ -1,4 +1,4 @@
-﻿using MetanetA_MobileApp.ViewModels;
+using MetanetA_MobileApp.ViewModels;
 
 namespace MetanetA_MobileApp.View;
 
@@ -32,7 +32,7 @@ public partial class QrScannerPage : ContentPage
 
         if (status != PermissionStatus.Granted)
         {
-            await DisplayAlert("Kamera icazÉ™si", "QR kodu skan etmÉ™k Ã¼Ã§Ã¼n kamera icazÉ™si verilmÉ™lidir.", "OK");
+            await DisplayAlert("Kamera icazəsi", "QR kodu skan etmək üçün kamera icazəsi verilməlidir.", "OK");
             return;
         }
 
