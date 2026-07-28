@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "nZJqKBpY2PU=",
+  "dgSpecHash": "HddAPos65co=",
   "success": true,
   "projectFilePath": "C:\\Users\\Rasim\\source\\repos\\MetanetA_MobileApp\\MetanetA_MobileApp\\MetanetA_MobileApp.csproj",
   "expectedPackageFiles": [
@@ -44,7 +44,6 @@
     "C:\\Users\\Rasim\\.nuget\\packages\\microsoft.windowsappsdk\\1.5.240627000\\microsoft.windowsappsdk.1.5.240627000.nupkg.sha512",
     "C:\\Users\\Rasim\\.nuget\\packages\\plugin.firebase.cloudmessaging\\3.1.2\\plugin.firebase.cloudmessaging.3.1.2.nupkg.sha512",
     "C:\\Users\\Rasim\\.nuget\\packages\\plugin.firebase.core\\3.1.1\\plugin.firebase.core.3.1.1.nupkg.sha512",
-    "C:\\Users\\Rasim\\.nuget\\packages\\plugin.firebasepushnotification\\3.4.35\\plugin.firebasepushnotification.3.4.35.nupkg.sha512",
     "C:\\Users\\Rasim\\.nuget\\packages\\system.diagnostics.diagnosticsource\\9.0.0\\system.diagnostics.diagnosticsource.9.0.0.nupkg.sha512",
     "C:\\Users\\Rasim\\.nuget\\packages\\system.runtime.interopservices.nfloat.internal\\6.0.1\\system.runtime.interopservices.nfloat.internal.6.0.1.nupkg.sha512",
     "C:\\Users\\Rasim\\.nuget\\packages\\system.speech\\8.0.0\\system.speech.8.0.0.nupkg.sha512",

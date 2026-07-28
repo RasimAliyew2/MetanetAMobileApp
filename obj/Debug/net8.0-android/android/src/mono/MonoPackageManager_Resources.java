@@ -26,7 +26,6 @@ public class MonoPackageManager_Resources {
 		"Microsoft.Maui.Maps.dll",
 		"Plugin.Firebase.CloudMessaging.dll",
 		"Plugin.Firebase.Core.dll",
-		"Plugin.FirebasePushNotification.dll",
 		"System.Diagnostics.DiagnosticSource.dll",
 		"Xamarin.Android.Glide.dll",
 		"Xamarin.Android.Glide.Annotations.dll",

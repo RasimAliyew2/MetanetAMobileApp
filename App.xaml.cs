@@ -1,38 +1,18 @@
-using MetanetA_MobileApp.Services.Notifications;
-
 namespace MetanetA_MobileApp
 {
     public partial class App : Application
     {
-        private readonly IFirebaseNotificationService firebaseNotificationService;
-
-        public App(IFirebaseNotificationService firebaseNotificationService)
+        public App()
         {
             InitializeComponent();
-            this.firebaseNotificationService = firebaseNotificationService;
-            //MainPage = new AppShell();
+
+            // Firebase notification initialization must NOT run here.
+            // On Android, the App constructor can execute before FirebaseApp exists.
         }
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            var window = new Window(new AppShell());
-
-            _ = InitializeNotificationsAsync();
-
-            return window;
-        }
-
-        private async Task InitializeNotificationsAsync()
-        {
-            try
-            {
-                await Task.Delay(500);
-                await firebaseNotificationService.InitializeAsync();
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"Firebase notification initialization failed: {ex}");
-            }
+            return new Window(new AppShell());
         }
     }
 }

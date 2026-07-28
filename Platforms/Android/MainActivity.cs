@@ -4,14 +4,14 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Views;
 using Plugin.Firebase.CloudMessaging;
-using Plugin.Firebase.CloudMessaging.Platforms.Android;
+using Plugin.Firebase.Core.Platforms.Android;
+using System.Diagnostics;
 
 namespace MetanetA_MobileApp;
 
 [Activity(
     Theme = "@style/Maui.SplashTheme",
     MainLauncher = true,
-    LaunchMode = LaunchMode.SingleTop,
     ConfigurationChanges =
         ConfigChanges.ScreenSize |
         ConfigChanges.Orientation |
@@ -19,38 +19,68 @@ namespace MetanetA_MobileApp;
         ConfigChanges.ScreenLayout |
         ConfigChanges.SmallestScreenSize |
         ConfigChanges.Density,
-    WindowSoftInputMode = SoftInput.AdjustResize
-)]
+    WindowSoftInputMode = SoftInput.AdjustResize)]
 public class MainActivity : MauiAppCompatActivity
 {
-    protected override void OnCreate(Bundle savedInstanceState)
+    protected override void OnCreate(Bundle? savedInstanceState)
     {
         base.OnCreate(savedInstanceState);
 
-        // bəzi device-lərdə bunu da yazmaq daha stabil edir:
         Window?.SetSoftInputMode(SoftInput.AdjustResize);
+
+        // Bu fayl Platforms/Android altında olduğu üçün yalnız Android-də
+        // compile olunur. Firebase token sorğusundan əvvəl initialize edilir.
+        CrossFirebase.Initialize(this);
 
         CreateNotificationChannel();
         FirebaseCloudMessagingImplementation.OnNewIntent(Intent);
+
+        _ = GetAndStoreFcmTokenSafelyAsync();
     }
 
-    protected override void OnNewIntent(Intent intent)
+    protected override void OnNewIntent(Intent? intent)
     {
         base.OnNewIntent(intent);
-        FirebaseCloudMessagingImplementation.OnNewIntent(intent);
+
+        if (intent is not null)
+            FirebaseCloudMessagingImplementation.OnNewIntent(intent);
     }
 
-    private static void CreateNotificationChannel()
+    private static async Task GetAndStoreFcmTokenSafelyAsync()
+    {
+        try
+        {
+           // Debug.WriteLine("FCM: token sorğusu başladı.");
+
+            var cloudMessaging = CrossFirebaseCloudMessaging.Current;
+            await cloudMessaging.CheckIfValidAsync();
+
+            var token = await cloudMessaging.GetTokenAsync();
+
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                //Debug.WriteLine("FCM: token boş qaytarıldı.");
+                return;
+            }
+
+            await SecureStorage.Default.SetAsync("fcm_token", token);
+            //Debug.WriteLine($"FCM TOKEN: {token}");
+        }
+        catch (Exception ex)
+        {
+           // Debug.WriteLine($"FCM ERROR: {ex}");
+        }
+    }
+
+    private void CreateNotificationChannel()
     {
         if (Build.VERSION.SdkInt < BuildVersionCodes.O)
             return;
 
-        var appContext = global::Android.App.Application.Context;
-
-        var channelId = $"{appContext.PackageName}.general";
-
+        var channelId = $"{PackageName}.general";
         var notificationManager =
-            (NotificationManager?)appContext.GetSystemService(global::Android.Content.Context.NotificationService);
+            (NotificationManager?)GetSystemService(
+                global::Android.Content.Context.NotificationService);
 
         if (notificationManager is null)
             return;
@@ -64,5 +94,6 @@ public class MainActivity : MauiAppCompatActivity
         };
 
         notificationManager.CreateNotificationChannel(channel);
+        FirebaseCloudMessagingImplementation.ChannelId = channelId;
     }
 }

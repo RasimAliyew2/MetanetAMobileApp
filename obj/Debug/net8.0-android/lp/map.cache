@@ -12,7 +12,6 @@ Microsoft.Maui.Graphics.dll
 Microsoft.Maui.Maps.dll
 Plugin.Firebase.CloudMessaging.dll
 Plugin.Firebase.Core.dll
-Plugin.FirebasePushNotification.dll
 Xamarin.Android.Glide.Annotations.dll
 Xamarin.Android.Glide.DiskLruCache.dll
 Xamarin.Android.Glide.dll

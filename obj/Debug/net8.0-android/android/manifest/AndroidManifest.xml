@@ -32,7 +32,7 @@
   <!-- Required by older versions of Google Play services to create IID tokens -->
   <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
   <uses-feature android:glEsVersion="0x00020000" android:required="true" />
-  <application android:name="crc64e3396b20b1df5ee9.MainApplication" android:allowBackup="true" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:debuggable="true" android:extractNativeLibs="true" android:icon="@mipmap/appicon" android:label="UstalarKlubu " android:roundIcon="@mipmap/appicon" android:usesCleartextTraffic="true">
+  <application android:name="crc64e3396b20b1df5ee9.MainApplication" android:allowBackup="true" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:debuggable="true" android:extractNativeLibs="true" android:icon="@mipmap/appicon" android:label="MatanatA" android:roundIcon="@mipmap/appicon" android:usesCleartextTraffic="true">
     <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyAKnKYY1GL3NzINdGEgcptRwVtoh-FU9to" />
     <receiver android:name="com.google.firebase.iid.FirebaseInstanceIdInternalReceiver" android:exported="false" />
     <receiver android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" android:exported="true" android:permission="com.google.android.c2dm.permission.SEND">
@@ -46,7 +46,7 @@
       </intent-filter>
     </receiver>
     <uses-library android:name="org.apache.http.legacy" android:required="false" />
-    <activity android:name="crc64e3396b20b1df5ee9.MainActivity" android:configChanges="density|orientation|smallestScreenSize|screenLayout|screenSize|uiMode" android:exported="true" android:launchMode="singleTop" android:theme="@style/Maui.SplashTheme" android:windowSoftInputMode="stateUnspecified|adjustResize">
+    <activity android:name="crc64e3396b20b1df5ee9.MainActivity" android:configChanges="density|orientation|smallestScreenSize|screenLayout|screenSize|uiMode" android:exported="true" android:theme="@style/Maui.SplashTheme" android:windowSoftInputMode="stateUnspecified|adjustResize">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
@@ -65,13 +65,6 @@
         <action android:name="com.google.firebase.MESSAGING_EVENT" />
       </intent-filter>
     </service>
-    <service android:name="crc6494e14b9856016c30.PNFirebaseMessagingService" android:exported="false">
-      <intent-filter>
-        <action android:name="com.google.firebase.MESSAGING_EVENT" />
-      </intent-filter>
-    </service>
-    <receiver android:name="crc6494e14b9856016c30.PushNotificationActionReceiver" android:enabled="true" android:exported="false" />
-    <receiver android:name="crc6494e14b9856016c30.PushNotificationDeletedReceiver" android:enabled="true" android:exported="false" />
     <service android:name="crc64396a3fe5f8138e3f.KeepAliveService" />
     <provider android:name="mono.MonoRuntimeProvider" android:authorities="com.MatanatA.UstalarKlubu.mono.MonoRuntimeProvider.__mono_init__" android:exported="false" android:initOrder="1999999999" />
     <provider android:name="androidx.startup.InitializationProvider" android:authorities="com.MatanatA.UstalarKlubu.androidx-startup" android:exported="false" tools:node="merge">

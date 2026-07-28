@@ -563,24 +563,6 @@
           }
         }
       },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "dependencies": {
-          "Xamarin.Firebase.Common": "120.0.0.5",
-          "Xamarin.Firebase.Messaging": "122.0.0.5",
-          "Xamarin.GooglePlayServices.Base": "118.0.1"
-        },
-        "compile": {
-          "lib/monoandroid12.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/monoandroid12.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
       "System.Diagnostics.DiagnosticSource/9.0.0": {
         "type": "package",
         "compile": {
@@ -3573,24 +3555,6 @@
         "runtime": {
           "lib/net8.0-android34.0/Plugin.Firebase.Core.dll": {
             "related": ".aar;.xml"
-          }
-        }
-      },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "dependencies": {
-          "Xamarin.Firebase.Common": "120.0.0.5",
-          "Xamarin.Firebase.Messaging": "122.0.0.5",
-          "Xamarin.GooglePlayServices.Base": "118.0.1"
-        },
-        "compile": {
-          "lib/monoandroid12.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/monoandroid12.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
           }
         }
       },
@@ -6589,24 +6553,6 @@
           }
         }
       },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "dependencies": {
-          "Xamarin.Firebase.Common": "120.0.0.5",
-          "Xamarin.Firebase.Messaging": "122.0.0.5",
-          "Xamarin.GooglePlayServices.Base": "118.0.1"
-        },
-        "compile": {
-          "lib/monoandroid12.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/monoandroid12.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
       "System.Diagnostics.DiagnosticSource/9.0.0": {
         "type": "package",
         "compile": {
@@ -9599,24 +9545,6 @@
         "runtime": {
           "lib/net8.0-android34.0/Plugin.Firebase.Core.dll": {
             "related": ".aar;.xml"
-          }
-        }
-      },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "dependencies": {
-          "Xamarin.Firebase.Common": "120.0.0.5",
-          "Xamarin.Firebase.Messaging": "122.0.0.5",
-          "Xamarin.GooglePlayServices.Base": "118.0.1"
-        },
-        "compile": {
-          "lib/monoandroid12.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/monoandroid12.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
           }
         }
       },
@@ -12615,24 +12543,6 @@
           }
         }
       },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "dependencies": {
-          "Xamarin.Firebase.Common": "120.0.0.5",
-          "Xamarin.Firebase.Messaging": "122.0.0.5",
-          "Xamarin.GooglePlayServices.Base": "118.0.1"
-        },
-        "compile": {
-          "lib/monoandroid12.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/monoandroid12.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
       "System.Diagnostics.DiagnosticSource/9.0.0": {
         "type": "package",
         "compile": {
@@ -15625,24 +15535,6 @@
         "runtime": {
           "lib/net8.0-android34.0/Plugin.Firebase.Core.dll": {
             "related": ".aar;.xml"
-          }
-        }
-      },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "dependencies": {
-          "Xamarin.Firebase.Common": "120.0.0.5",
-          "Xamarin.Firebase.Messaging": "122.0.0.5",
-          "Xamarin.GooglePlayServices.Base": "118.0.1"
-        },
-        "compile": {
-          "lib/monoandroid12.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/monoandroid12.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
           }
         }
       },
@@ -18641,24 +18533,6 @@
           }
         }
       },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "dependencies": {
-          "Xamarin.Firebase.Common": "120.0.0.5",
-          "Xamarin.Firebase.Messaging": "122.0.0.5",
-          "Xamarin.GooglePlayServices.Base": "118.0.1"
-        },
-        "compile": {
-          "lib/monoandroid12.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/monoandroid12.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
       "System.Diagnostics.DiagnosticSource/9.0.0": {
         "type": "package",
         "compile": {
@@ -21651,24 +21525,6 @@
         "runtime": {
           "lib/net8.0-android34.0/Plugin.Firebase.Core.dll": {
             "related": ".aar;.xml"
-          }
-        }
-      },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "dependencies": {
-          "Xamarin.Firebase.Common": "120.0.0.5",
-          "Xamarin.Firebase.Messaging": "122.0.0.5",
-          "Xamarin.GooglePlayServices.Base": "118.0.1"
-        },
-        "compile": {
-          "lib/monoandroid12.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/monoandroid12.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
           }
         }
       },
@@ -24804,19 +24660,6 @@
           }
         }
       },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
       "System.Diagnostics.DiagnosticSource/9.0.0": {
         "type": "package",
         "compile": {
@@ -25590,19 +25433,6 @@
         "runtime": {
           "lib/net8.0-ios18.0/Plugin.Firebase.Core.dll": {
             "related": ".xml"
-          }
-        }
-      },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
           }
         }
       },
@@ -26382,19 +26212,6 @@
           }
         }
       },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
       "System.Diagnostics.DiagnosticSource/9.0.0": {
         "type": "package",
         "compile": {
@@ -27168,19 +26985,6 @@
         "runtime": {
           "lib/net8.0-ios18.0/Plugin.Firebase.Core.dll": {
             "related": ".xml"
-          }
-        }
-      },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
           }
         }
       },
@@ -27960,19 +27764,6 @@
           }
         }
       },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
       "System.Diagnostics.DiagnosticSource/9.0.0": {
         "type": "package",
         "compile": {
@@ -28746,19 +28537,6 @@
         "runtime": {
           "lib/net8.0-ios18.0/Plugin.Firebase.Core.dll": {
             "related": ".xml"
-          }
-        }
-      },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
           }
         }
       },
@@ -29538,19 +29316,6 @@
           }
         }
       },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
       "System.Diagnostics.DiagnosticSource/9.0.0": {
         "type": "package",
         "compile": {
@@ -30327,19 +30092,6 @@
           }
         }
       },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
       "System.Diagnostics.DiagnosticSource/9.0.0": {
         "type": "package",
         "compile": {
@@ -30918,48 +30670,6 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Plugin.Firebase.CloudMessaging/3.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Plugin.Firebase.Core": "3.1.1"
-        },
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.Firebase.Core/3.1.1": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
       "System.Diagnostics.DiagnosticSource/9.0.0": {
         "type": "package",
         "compile": {
@@ -31521,48 +31231,6 @@
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
-        }
-      },
-      "Plugin.Firebase.CloudMessaging/3.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Plugin.Firebase.Core": "3.1.1"
-        },
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.Firebase.Core/3.1.1": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
         }
       },
       "System.Diagnostics.DiagnosticSource/9.0.0": {
@@ -32128,48 +31796,6 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Plugin.Firebase.CloudMessaging/3.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Plugin.Firebase.Core": "3.1.1"
-        },
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.Firebase.Core/3.1.1": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
       "System.Diagnostics.DiagnosticSource/9.0.0": {
         "type": "package",
         "compile": {
@@ -32731,48 +32357,6 @@
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
-        }
-      },
-      "Plugin.Firebase.CloudMessaging/3.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Plugin.Firebase.Core": "3.1.1"
-        },
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.Firebase.Core/3.1.1": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
         }
       },
       "System.Diagnostics.DiagnosticSource/9.0.0": {
@@ -33338,48 +32922,6 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Plugin.Firebase.CloudMessaging/3.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Plugin.Firebase.Core": "3.1.1"
-        },
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.Firebase.Core/3.1.1": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
       "System.Diagnostics.DiagnosticSource/9.0.0": {
         "type": "package",
         "compile": {
@@ -33941,48 +33483,6 @@
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
-        }
-      },
-      "Plugin.Firebase.CloudMessaging/3.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Plugin.Firebase.Core": "3.1.1"
-        },
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.Firebase.Core/3.1.1": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
         }
       },
       "System.Diagnostics.DiagnosticSource/9.0.0": {
@@ -34548,48 +34048,6 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Plugin.Firebase.CloudMessaging/3.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Plugin.Firebase.Core": "3.1.1"
-        },
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.Firebase.Core/3.1.1": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
       "System.Diagnostics.DiagnosticSource/9.0.0": {
         "type": "package",
         "compile": {
@@ -35151,48 +34609,6 @@
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
-        }
-      },
-      "Plugin.Firebase.CloudMessaging/3.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Plugin.Firebase.Core": "3.1.1"
-        },
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.Firebase.Core/3.1.1": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
         }
       },
       "System.Diagnostics.DiagnosticSource/9.0.0": {
@@ -35928,48 +35344,6 @@
           }
         }
       },
-      "Plugin.Firebase.CloudMessaging/3.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Plugin.Firebase.Core": "3.1.1"
-        },
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.Firebase.Core/3.1.1": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
       "System.Diagnostics.DiagnosticSource/9.0.0": {
         "type": "package",
         "compile": {
@@ -36681,48 +36055,6 @@
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
         }
       },
-      "Plugin.Firebase.CloudMessaging/3.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Plugin.Firebase.Core": "3.1.1"
-        },
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.Firebase.Core/3.1.1": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
       "System.Diagnostics.DiagnosticSource/9.0.0": {
         "type": "package",
         "compile": {
@@ -37426,48 +36758,6 @@
         "build": {
           "buildTransitive/Microsoft.WindowsAppSDK.props": {},
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
-        }
-      },
-      "Plugin.Firebase.CloudMessaging/3.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Plugin.Firebase.Core": "3.1.1"
-        },
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.Firebase.Core/3.1.1": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
         }
       },
       "System.Diagnostics.DiagnosticSource/9.0.0": {
@@ -38175,48 +37465,6 @@
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
         }
       },
-      "Plugin.Firebase.CloudMessaging/3.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Plugin.Firebase.Core": "3.1.1"
-        },
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.Firebase.Core/3.1.1": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
       "System.Diagnostics.DiagnosticSource/9.0.0": {
         "type": "package",
         "compile": {
@@ -38920,48 +38168,6 @@
         "build": {
           "buildTransitive/Microsoft.WindowsAppSDK.props": {},
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
-        }
-      },
-      "Plugin.Firebase.CloudMessaging/3.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Plugin.Firebase.Core": "3.1.1"
-        },
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.Firebase.Core/3.1.1": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
         }
       },
       "System.Diagnostics.DiagnosticSource/9.0.0": {
@@ -39669,48 +38875,6 @@
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
         }
       },
-      "Plugin.Firebase.CloudMessaging/3.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Plugin.Firebase.Core": "3.1.1"
-        },
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.Firebase.Core/3.1.1": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
       "System.Diagnostics.DiagnosticSource/9.0.0": {
         "type": "package",
         "compile": {
@@ -40414,48 +39578,6 @@
         "build": {
           "buildTransitive/Microsoft.WindowsAppSDK.props": {},
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
-        }
-      },
-      "Plugin.Firebase.CloudMessaging/3.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Plugin.Firebase.Core": "3.1.1"
-        },
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.Firebase.Core/3.1.1": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
         }
       },
       "System.Diagnostics.DiagnosticSource/9.0.0": {
@@ -41167,48 +40289,6 @@
         "build": {
           "buildTransitive/Microsoft.WindowsAppSDK.props": {},
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
-        }
-      },
-      "Plugin.Firebase.CloudMessaging/3.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Plugin.Firebase.Core": "3.1.1"
-        },
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.CloudMessaging.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.Firebase.Core/3.1.1": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Plugin.Firebase.Core.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Plugin.FirebasePushNotification/3.4.35": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Plugin.FirebasePushNotification.dll": {
-            "related": ".pdb;.xml"
-          }
         }
       },
       "System.Diagnostics.DiagnosticSource/9.0.0": {
@@ -45237,29 +44317,6 @@
         "plugin.firebase.core.nuspec"
       ]
     },
-    "Plugin.FirebasePushNotification/3.4.35": {
-      "sha512": "utbKf6Lp89dla6/q82BVMejBnIlUsCXCgtVDW2e4+laqHsWv5yQLp1jX7qHI1poRxwbYvjy9lM/Y5cnf6GF/5Q==",
-      "type": "package",
-      "path": "plugin.firebasepushnotification/3.4.35",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE",
-        "icon.png",
-        "lib/monoandroid12.0/Plugin.FirebasePushNotification.dll",
-        "lib/monoandroid12.0/Plugin.FirebasePushNotification.pdb",
-        "lib/monoandroid12.0/Plugin.FirebasePushNotification.xml",
-        "lib/netstandard2.0/Plugin.FirebasePushNotification.dll",
-        "lib/netstandard2.0/Plugin.FirebasePushNotification.pdb",
-        "lib/netstandard2.0/Plugin.FirebasePushNotification.xml",
-        "lib/xamarinios10/Plugin.FirebasePushNotification.dll",
-        "lib/xamarinios10/Plugin.FirebasePushNotification.pdb",
-        "lib/xamarinios10/Plugin.FirebasePushNotification.xml",
-        "plugin.firebasepushnotification.3.4.35.nupkg.sha512",
-        "plugin.firebasepushnotification.nuspec",
-        "readme.txt"
-      ]
-    },
     "System.Diagnostics.DiagnosticSource/9.0.0": {
       "sha512": "ddppcFpnbohLWdYKr/ZeLZHmmI+DXFgZ3Snq+/E7SwcdW4UnvxmaugkwGywvGVWkHPGCSZjCP+MLzu23AL5SDw==",
       "type": "package",
@@ -48121,7 +47178,6 @@
       "Microsoft.Maui.Controls.Maps >= 8.0.92",
       "Microsoft.NET.ILLink.Tasks >= 8.0.11",
       "Plugin.Firebase.CloudMessaging >= 3.1.2",
-      "Plugin.FirebasePushNotification >= 3.4.35",
       "ZXing.Net.Maui.Controls >= 0.4.0"
     ],
     "net8.0-ios18.0": [
@@ -48133,7 +47189,6 @@
       "Microsoft.Maui.Controls.Maps >= 8.0.92",
       "Microsoft.NET.ILLink.Tasks >= 8.0.11",
       "Plugin.Firebase.CloudMessaging >= 3.1.2",
-      "Plugin.FirebasePushNotification >= 3.4.35",
       "ZXing.Net.Maui.Controls >= 0.4.0"
     ],
     "net8.0-maccatalyst18.0": [
@@ -48144,8 +47199,6 @@
       "Microsoft.Maui.Controls.Compatibility >= 8.0.83",
       "Microsoft.Maui.Controls.Maps >= 8.0.92",
       "Microsoft.NET.ILLink.Tasks >= 8.0.11",
-      "Plugin.Firebase.CloudMessaging >= 3.1.2",
-      "Plugin.FirebasePushNotification >= 3.4.35",
       "ZXing.Net.Maui.Controls >= 0.4.0"
     ],
     "net8.0-windows10.0.19041": [
@@ -48155,8 +47208,6 @@
       "Microsoft.Maui.Controls >= 8.0.83",
       "Microsoft.Maui.Controls.Compatibility >= 8.0.83",
       "Microsoft.Maui.Controls.Maps >= 8.0.92",
-      "Plugin.Firebase.CloudMessaging >= 3.1.2",
-      "Plugin.FirebasePushNotification >= 3.4.35",
       "ZXing.Net.Maui.Controls >= 0.4.0"
     ]
   },
@@ -48261,10 +47312,6 @@
             "target": "Package",
             "version": "[3.1.2, )"
           },
-          "Plugin.FirebasePushNotification": {
-            "target": "Package",
-            "version": "[3.4.35, )"
-          },
           "ZXing.Net.Maui.Controls": {
             "target": "Package",
             "version": "[0.4.0, )"
@@ -48350,10 +47397,6 @@
             "target": "Package",
             "version": "[3.1.2, )"
           },
-          "Plugin.FirebasePushNotification": {
-            "target": "Package",
-            "version": "[3.4.35, )"
-          },
           "ZXing.Net.Maui.Controls": {
             "target": "Package",
             "version": "[0.4.0, )"
@@ -48423,14 +47466,6 @@
             "version": "[8.0.11, )",
             "autoReferenced": true
           },
-          "Plugin.Firebase.CloudMessaging": {
-            "target": "Package",
-            "version": "[3.1.2, )"
-          },
-          "Plugin.FirebasePushNotification": {
-            "target": "Package",
-            "version": "[3.4.35, )"
-          },
           "ZXing.Net.Maui.Controls": {
             "target": "Package",
             "version": "[0.4.0, )"
@@ -48494,14 +47529,6 @@
           "Microsoft.Maui.Controls.Maps": {
             "target": "Package",
             "version": "[8.0.92, )"
-          },
-          "Plugin.Firebase.CloudMessaging": {
-            "target": "Package",
-            "version": "[3.1.2, )"
-          },
-          "Plugin.FirebasePushNotification": {
-            "target": "Package",
-            "version": "[3.4.35, )"
           },
           "ZXing.Net.Maui.Controls": {
             "target": "Package",

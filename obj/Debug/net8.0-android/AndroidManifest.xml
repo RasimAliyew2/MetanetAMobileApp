@@ -11,7 +11,7 @@
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.CAMERA" />
   <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-  <application android:icon="@mipmap/appicon" android:roundIcon="@mipmap/appicon" android:usesCleartextTraffic="true" android:name="crc64e3396b20b1df5ee9.MainApplication" android:allowBackup="true" android:label="UstalarKlubu " android:debuggable="true" android:extractNativeLibs="true">
+  <application android:icon="@mipmap/appicon" android:roundIcon="@mipmap/appicon" android:usesCleartextTraffic="true" android:name="crc64e3396b20b1df5ee9.MainApplication" android:allowBackup="true" android:label="MatanatA" android:debuggable="true" android:extractNativeLibs="true">
     <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyAKnKYY1GL3NzINdGEgcptRwVtoh-FU9to" />
     <receiver android:name="com.google.firebase.iid.FirebaseInstanceIdInternalReceiver" android:exported="false" />
     <receiver android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" android:exported="true" android:permission="com.google.android.c2dm.permission.SEND">
@@ -22,7 +22,7 @@
       </intent-filter>
     </receiver>
     <uses-library android:name="org.apache.http.legacy" android:required="false" />
-    <activity android:configChanges="density|orientation|smallestScreenSize|screenLayout|screenSize|uiMode" android:launchMode="singleTop" android:theme="@style/Maui.SplashTheme" android:windowSoftInputMode="stateUnspecified|adjustResize" android:name="crc64e3396b20b1df5ee9.MainActivity" android:exported="true">
+    <activity android:configChanges="density|orientation|smallestScreenSize|screenLayout|screenSize|uiMode" android:theme="@style/Maui.SplashTheme" android:windowSoftInputMode="stateUnspecified|adjustResize" android:name="crc64e3396b20b1df5ee9.MainActivity" android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
@@ -41,13 +41,6 @@
         <action android:name="com.google.firebase.MESSAGING_EVENT" />
       </intent-filter>
     </service>
-    <service android:exported="false" android:name="crc6494e14b9856016c30.PNFirebaseMessagingService">
-      <intent-filter>
-        <action android:name="com.google.firebase.MESSAGING_EVENT" />
-      </intent-filter>
-    </service>
-    <receiver android:enabled="true" android:exported="false" android:name="crc6494e14b9856016c30.PushNotificationActionReceiver" />
-    <receiver android:enabled="true" android:exported="false" android:name="crc6494e14b9856016c30.PushNotificationDeletedReceiver" />
     <service android:name="crc64396a3fe5f8138e3f.KeepAliveService" />
     <provider android:name="mono.MonoRuntimeProvider" android:exported="false" android:initOrder="1999999999" android:authorities="com.MatanatA.UstalarKlubu.mono.MonoRuntimeProvider.__mono_init__" />
   </application>
