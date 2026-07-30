@@ -17,7 +17,7 @@ namespace MetanetA_MobileApp.Services.GetDataFromServer
 
         public static async Task<string> PostAsyncUserInfo(UserInfo userInfo)
         {
-            string url = "http:/Test";
+            string url = "http://webrequests.matanata.com/InfoBase/hs/WebRequestForMobileApp/tasks?Type=AddNewUser";
             var data = JsonSerializer.Serialize(userInfo);
             return await PostAsync(url, data);
         }

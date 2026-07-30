@@ -34,6 +34,7 @@ namespace MetanetA_MobileApp.Model
         private string password;
         [ObservableProperty]
         private ProfileBonus bonusOfProfile = new ProfileBonus();
+        public string Token { get; set; }
     }
 }
 

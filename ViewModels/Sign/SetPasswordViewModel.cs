@@ -128,6 +128,7 @@ namespace MetanetA_MobileApp.ViewModels.Sign
             if (IsMismatch)
                 return;
 
+            userSession.CurrentUser.Token = await SecureStorage.Default.GetAsync("fcm_token");
             userSession.CurrentUser.Password = Password;
 
             if (OperationType == OperationType.SetPassword)

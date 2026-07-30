@@ -6,6 +6,8 @@ using Android.Views;
 using Plugin.Firebase.CloudMessaging;
 using Plugin.Firebase.Core.Platforms.Android;
 using System.Diagnostics;
+using NativeFirebaseApp = Firebase.FirebaseApp;
+using NativeFirebaseOptions = Firebase.FirebaseOptions;
 
 namespace MetanetA_MobileApp;
 
@@ -28,10 +30,7 @@ public class MainActivity : MauiAppCompatActivity
 
         Window?.SetSoftInputMode(SoftInput.AdjustResize);
 
-        // Bu fayl Platforms/Android altında olduğu üçün yalnız Android-də
-        // compile olunur. Firebase token sorğusundan əvvəl initialize edilir.
-        CrossFirebase.Initialize(this);
-
+        EnsureFirebaseInitialized();
         CreateNotificationChannel();
         FirebaseCloudMessagingImplementation.OnNewIntent(Intent);
 
@@ -44,6 +43,36 @@ public class MainActivity : MauiAppCompatActivity
 
         if (intent is not null)
             FirebaseCloudMessagingImplementation.OnNewIntent(intent);
+    }
+
+    private void EnsureFirebaseInitialized()
+    {
+        try
+        {
+            // google-services.json emal olunubsa FirebaseInitProvider
+            // default app-i MainActivity-dən əvvəl yaradıb.
+            _ = NativeFirebaseApp.Instance;
+            //Debug.WriteLine("FCM: Default FirebaseApp artıq initializedır.");
+            return;
+        }
+        catch (Java.Lang.IllegalStateException)
+        {
+            // Default app yoxdur. Aşağıdakı options google-services.json-dandır.
+        }
+
+        var firebaseOptions = new NativeFirebaseOptions.Builder()
+            .SetApiKey("AIzaSyCjR6-faMUiiZ97OePyg6_xajcKvCN0zOg")
+            .SetApplicationId("1:626026141732:android:ee61da48803bc84b59a0b1")
+            .SetGcmSenderId("626026141732")
+            .SetProjectId("ustalarklubu-13104")
+            .SetStorageBucket("ustalarklubu-13104.firebasestorage.app")
+            .Build();
+
+        CrossFirebase.Initialize(this, firebaseOptions);
+
+        // Initialization baş tutmasa, xəta token sorğusuna qədər gizlənməsin.
+        _ = NativeFirebaseApp.Instance;
+        ///Debug.WriteLine("FCM: Default FirebaseApp explicit options ilə yaradıldı.");
     }
 
     private static async Task GetAndStoreFcmTokenSafelyAsync()
@@ -68,7 +97,7 @@ public class MainActivity : MauiAppCompatActivity
         }
         catch (Exception ex)
         {
-           // Debug.WriteLine($"FCM ERROR: {ex}");
+            //Debug.WriteLine($"FCM ERROR: {ex}");
         }
     }
 
