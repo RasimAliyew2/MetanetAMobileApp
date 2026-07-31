@@ -81,11 +81,11 @@
             },
             "Microsoft.Maui.Controls": {
               "target": "Package",
-              "version": "[8.0.83, )"
+              "version": "[8.0.100, )"
             },
             "Microsoft.Maui.Controls.Compatibility": {
               "target": "Package",
-              "version": "[8.0.83, )"
+              "version": "[8.0.100, )"
             },
             "Microsoft.Maui.Controls.Maps": {
               "target": "Package",
@@ -120,23 +120,23 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.Android.Ref.34",
-              "version": "[34.0.145, 34.0.145]"
+              "version": "[34.0.154, 34.0.154]"
             },
             {
               "name": "Microsoft.Android.Runtime.34.android-arm",
-              "version": "[34.0.145, 34.0.145]"
+              "version": "[34.0.154, 34.0.154]"
             },
             {
               "name": "Microsoft.Android.Runtime.34.android-arm64",
-              "version": "[34.0.145, 34.0.145]"
+              "version": "[34.0.154, 34.0.154]"
             },
             {
               "name": "Microsoft.Android.Runtime.34.android-x64",
-              "version": "[34.0.145, 34.0.145]"
+              "version": "[34.0.154, 34.0.154]"
             },
             {
               "name": "Microsoft.Android.Runtime.34.android-x86",
-              "version": "[34.0.145, 34.0.145]"
+              "version": "[34.0.154, 34.0.154]"
             }
           ],
           "frameworkReferences": {
@@ -166,11 +166,11 @@
             },
             "Microsoft.Maui.Controls": {
               "target": "Package",
-              "version": "[8.0.83, )"
+              "version": "[8.0.100, )"
             },
             "Microsoft.Maui.Controls.Compatibility": {
               "target": "Package",
-              "version": "[8.0.83, )"
+              "version": "[8.0.100, )"
             },
             "Microsoft.Maui.Controls.Maps": {
               "target": "Package",
@@ -205,11 +205,11 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.iOS.Ref.net8.0_18.0",
-              "version": "[18.0.8314, 18.0.8314]"
+              "version": "[18.0.8324, 18.0.8324]"
             },
             {
               "name": "Microsoft.iOS.Runtime.ios-arm64.net8.0_18.0",
-              "version": "[18.0.8314, 18.0.8314]"
+              "version": "[18.0.8324, 18.0.8324]"
             }
           ],
           "frameworkReferences": {
@@ -239,11 +239,11 @@
             },
             "Microsoft.Maui.Controls": {
               "target": "Package",
-              "version": "[8.0.83, )"
+              "version": "[8.0.100, )"
             },
             "Microsoft.Maui.Controls.Compatibility": {
               "target": "Package",
-              "version": "[8.0.83, )"
+              "version": "[8.0.100, )"
             },
             "Microsoft.Maui.Controls.Maps": {
               "target": "Package",
@@ -275,11 +275,15 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.MacCatalyst.Ref.net8.0_18.0",
-              "version": "[18.0.8314, 18.0.8314]"
+              "version": "[18.0.8324, 18.0.8324]"
+            },
+            {
+              "name": "Microsoft.MacCatalyst.Runtime.maccatalyst-arm64.net8.0_18.0",
+              "version": "[18.0.8324, 18.0.8324]"
             },
             {
               "name": "Microsoft.MacCatalyst.Runtime.maccatalyst-x64.net8.0_18.0",
-              "version": "[18.0.8314, 18.0.8314]"
+              "version": "[18.0.8324, 18.0.8324]"
             }
           ],
           "frameworkReferences": {
@@ -309,11 +313,11 @@
             },
             "Microsoft.Maui.Controls": {
               "target": "Package",
-              "version": "[8.0.83, )"
+              "version": "[8.0.100, )"
             },
             "Microsoft.Maui.Controls.Compatibility": {
               "target": "Package",
-              "version": "[8.0.83, )"
+              "version": "[8.0.100, )"
             },
             "Microsoft.Maui.Controls.Maps": {
               "target": "Package",
@@ -337,8 +341,24 @@
           "warn": true,
           "downloadDependencies": [
             {
+              "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
+              "version": "[8.0.11, 8.0.11]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
+              "version": "[8.0.11, 8.0.11]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Runtime.win-x64",
+              "version": "[8.0.11, 8.0.11]"
+            },
+            {
               "name": "Microsoft.Windows.SDK.NET.Ref",
               "version": "[10.0.19041.54, 10.0.19041.54]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
+              "version": "[8.0.11, 8.0.11]"
             }
           ],
           "frameworkReferences": {
@@ -366,6 +386,9 @@
           "#import": []
         },
         "ios-arm64": {
+          "#import": []
+        },
+        "maccatalyst-arm64": {
           "#import": []
         },
         "maccatalyst-x64": {

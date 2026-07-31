@@ -19,6 +19,8 @@ obj\Release\net8.0-android\android-x86\aot\Microsoft.Maui.dll.so
 obj\Release\net8.0-android\android-x86\aot\Microsoft.Maui.Essentials.dll.so
 obj\Release\net8.0-android\android-x86\aot\Microsoft.Maui.Graphics.dll.so
 obj\Release\net8.0-android\android-x86\aot\Microsoft.Maui.Maps.dll.so
+obj\Release\net8.0-android\android-x86\aot\Plugin.Firebase.CloudMessaging.dll.so
+obj\Release\net8.0-android\android-x86\aot\Plugin.Firebase.Core.dll.so
 obj\Release\net8.0-android\android-x86\aot\System.Diagnostics.DiagnosticSource.dll.so
 obj\Release\net8.0-android\android-x86\aot\Xamarin.AndroidX.Activity.dll.so
 obj\Release\net8.0-android\android-x86\aot\Xamarin.AndroidX.AppCompat.dll.so
@@ -45,9 +47,14 @@ obj\Release\net8.0-android\android-x86\aot\Xamarin.AndroidX.Navigation.Runtime.d
 obj\Release\net8.0-android\android-x86\aot\Xamarin.AndroidX.Navigation.UI.dll.so
 obj\Release\net8.0-android\android-x86\aot\Xamarin.AndroidX.RecyclerView.dll.so
 obj\Release\net8.0-android\android-x86\aot\Xamarin.AndroidX.SavedState.dll.so
+obj\Release\net8.0-android\android-x86\aot\Xamarin.AndroidX.Security.SecurityCrypto.dll.so
 obj\Release\net8.0-android\android-x86\aot\Xamarin.AndroidX.SwipeRefreshLayout.dll.so
+obj\Release\net8.0-android\android-x86\aot\Xamarin.AndroidX.VersionedParcelable.dll.so
 obj\Release\net8.0-android\android-x86\aot\Xamarin.AndroidX.ViewPager.dll.so
 obj\Release\net8.0-android\android-x86\aot\Xamarin.AndroidX.ViewPager2.dll.so
+obj\Release\net8.0-android\android-x86\aot\Xamarin.Firebase.Common.dll.so
+obj\Release\net8.0-android\android-x86\aot\Xamarin.Firebase.Messaging.dll.so
+obj\Release\net8.0-android\android-x86\aot\Xamarin.Google.Android.DataTransport.TransportApi.dll.so
 obj\Release\net8.0-android\android-x86\aot\Xamarin.Google.Android.Material.dll.so
 obj\Release\net8.0-android\android-x86\aot\Xamarin.Google.Guava.ListenableFuture.dll.so
 obj\Release\net8.0-android\android-x86\aot\Xamarin.GooglePlayServices.Base.dll.so

@@ -55,7 +55,10 @@ public partial class ProductDetailViewModel : BaseViewModel
         if (string.IsNullOrWhiteSpace(htmlBody))
             htmlBody = "<p>Məhsul haqqında məlumat yoxdur.</p>";
 
-        return $"""
+        // İki $ işarəsi istifadə edilir:
+        // CSS daxilində adi { } mötərizələri literal qalır,
+        // C# interpolation isə {{htmlBody}} formasında yazılır.
+        return $$"""
 <!DOCTYPE html>
 <html lang="az">
 <head>
@@ -63,18 +66,18 @@ public partial class ProductDetailViewModel : BaseViewModel
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <style>
-        * {{
+        * {
             box-sizing: border-box;
-        }}
+        }
 
-        html, body {{
+        html, body {
             width: 100%;
             margin: 0;
             padding: 0;
             background: #ffffff;
-        }}
+        }
 
-        body {{
+        body {
             font-family: -apple-system, BlinkMacSystemFont,
                          "Segoe UI", Arial, Helvetica, sans-serif;
             font-size: 14px;
@@ -82,71 +85,71 @@ public partial class ProductDetailViewModel : BaseViewModel
             line-height: 1.65;
             padding: 14px;
             overflow-wrap: anywhere;
-        }}
+        }
 
-        h1, h2, h3, h4 {{
+        h1, h2, h3, h4 {
             color: #111827;
             line-height: 1.3;
             margin: 18px 0 8px;
-        }}
+        }
 
-        h3 {{
+        h3 {
             font-size: 18px;
-        }}
+        }
 
-        p {{
+        p {
             margin: 0 0 12px;
-        }}
+        }
 
-        ul, ol {{
+        ul, ol {
             padding-left: 22px;
-        }}
+        }
 
-        li {{
+        li {
             margin-bottom: 6px;
-        }}
+        }
 
-        img {{
+        img {
             display: block;
             max-width: 100%;
             height: auto;
             margin: 10px auto;
-        }}
+        }
 
-        table {{
+        table {
             width: 100% !important;
             max-width: 100%;
             border-collapse: collapse;
             margin: 14px 0;
             table-layout: auto;
-        }}
+        }
 
-        th, td {{
+        th, td {
             border: 1px solid #D1D5DB;
             padding: 8px;
             text-align: left;
             vertical-align: top;
             font-size: 12px;
             word-break: break-word;
-        }}
+        }
 
-        th {{
+        th {
             background: #F3F4F6;
             font-weight: 700;
-        }}
+        }
 
-        section, div {{
+        section, div {
             max-width: 100%;
-        }}
+        }
 
-        .card {{
+        .card {
             border: 0;
             padding: 0;
-        }}
+        }
     </style>
 </head>
 <body>
-    {htmlBody}
+    {{htmlBody}}
 </body>
 </html>
 """;

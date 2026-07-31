@@ -50,12 +50,9 @@ public static class ProductMapper
 
     private static float ToFloat(decimal value)
     {
-        if (value > (decimal)float.MaxValue)
-            return float.MaxValue;
-
-        if (value < (decimal)float.MinValue)
-            return float.MinValue;
-
-        return (float)value;
+        // decimal diapazonu float diapazonundan kiçikdir.
+        // Buna görə float.MaxValue-ni decimal-a çevirmək lazım deyil
+        // və həmin çevirmə CS0031 xətasına səbəb olurdu.
+        return decimal.ToSingle(value);
     }
 }

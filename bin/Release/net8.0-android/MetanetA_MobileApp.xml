@@ -98,11 +98,37 @@
         <member name="P:MetanetA_MobileApp.Model.ProductItem.ImageUrl">
             <inheritdoc cref="F:MetanetA_MobileApp.Model.ProductItem.imageUrl"/>
         </member>
+        <member name="P:MetanetA_MobileApp.Model.ProductItem.ImageBase64">
+            <inheritdoc cref="F:MetanetA_MobileApp.Model.ProductItem.imageBase64"/>
+        </member>
         <member name="P:MetanetA_MobileApp.Model.ProductItem.Price">
             <inheritdoc cref="F:MetanetA_MobileApp.Model.ProductItem.price"/>
         </member>
+        <member name="P:MetanetA_MobileApp.Model.ProductItem.Weight">
+            <inheritdoc cref="F:MetanetA_MobileApp.Model.ProductItem.weight"/>
+        </member>
         <member name="P:MetanetA_MobileApp.Model.ProductItem.AboutTheProduct">
             <inheritdoc cref="F:MetanetA_MobileApp.Model.ProductItem.aboutTheProduct"/>
+        </member>
+        <member name="M:MetanetA_MobileApp.Model.ProductItem.OnImageUrlChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:MetanetA_MobileApp.Model.ProductItem.ImageUrl"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:MetanetA_MobileApp.Model.ProductItem.ImageUrl"/> is changed.</remarks>
+        </member>
+        <member name="M:MetanetA_MobileApp.Model.ProductItem.OnImageBase64Changed(System.String)">
+            <summary>Executes the logic for when <see cref="P:MetanetA_MobileApp.Model.ProductItem.ImageBase64"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:MetanetA_MobileApp.Model.ProductItem.ImageBase64"/> is changed.</remarks>
+        </member>
+        <member name="M:MetanetA_MobileApp.Model.ProductItem.OnPriceChanged(System.Single)">
+            <summary>Executes the logic for when <see cref="P:MetanetA_MobileApp.Model.ProductItem.Price"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:MetanetA_MobileApp.Model.ProductItem.Price"/> is changed.</remarks>
+        </member>
+        <member name="M:MetanetA_MobileApp.Model.ProductItem.OnWeightChanged(System.Single)">
+            <summary>Executes the logic for when <see cref="P:MetanetA_MobileApp.Model.ProductItem.Weight"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:MetanetA_MobileApp.Model.ProductItem.Weight"/> is changed.</remarks>
         </member>
         <member name="T:MetanetA_MobileApp.Model.ProfileBonus">
             <inheritdoc/>
@@ -202,6 +228,15 @@
         <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductDetailViewModel.DeclineCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductDetailViewModel.Decline"/>.</summary>
         </member>
+        <member name="T:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductParentSection">
+            <inheritdoc/>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductParentSection.IsExpanded">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductParentSection.isExpanded"/>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductParentSection.IsMaterialized">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductParentSection.isMaterialized"/>
+        </member>
         <member name="T:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductPreSelectedViewModel">
             <inheritdoc/>
         </member>
@@ -223,6 +258,7 @@
             <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
+            <inheritdoc/>
         </member>
         <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.CategoryKey">
             <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.categoryKey"/>
@@ -233,27 +269,36 @@
         <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.IsBusy">
             <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.isBusy"/>
         </member>
-        <member name="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.OnCategoryKeyChanged(System.String)">
-            <summary>Executes the logic for when <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.CategoryKey"/> just changed.</summary>
-            <param name="value">The new property value that was set.</param>
-            <remarks>This method is invoked right after the value of <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.CategoryKey"/> is changed.</remarks>
+        <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ErrorMessage">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.errorMessage"/>
         </member>
         <member name="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.OnSearchTextChanged(System.String)">
             <summary>Executes the logic for when <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.SearchText"/> just changed.</summary>
             <param name="value">The new property value that was set.</param>
             <remarks>This method is invoked right after the value of <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.SearchText"/> is changed.</remarks>
         </member>
-        <member name="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.toggleRootCategoryCommand">
-            <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ToggleRootCategoryCommand"/>.</summary>
+        <member name="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.OnErrorMessageChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ErrorMessage"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ErrorMessage"/> is changed.</remarks>
         </member>
-        <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ToggleRootCategoryCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ToggleRootCategory(MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductRootCategorySection)"/>.</summary>
+        <member name="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.retryCommand">
+            <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.RetryCommand"/>.</summary>
         </member>
-        <member name="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.toggleSubCategoryCommand">
-            <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ToggleSubCategoryCommand"/>.</summary>
+        <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.RetryCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.RetryAsync"/>.</summary>
         </member>
-        <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ToggleSubCategoryCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ToggleSubCategory(MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductSubCategorySection)"/>.</summary>
+        <member name="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.refreshCommand">
+            <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.RefreshCommand"/>.</summary>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.RefreshCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.RefreshAsync"/>.</summary>
+        </member>
+        <member name="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.toggleParentCommand">
+            <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ToggleParentCommand"/>.</summary>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ToggleParentCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ToggleParent(MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductParentSection)"/>.</summary>
         </member>
         <member name="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.clearSearchCommand">
             <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ClearSearchCommand"/>.</summary>
@@ -1100,6 +1145,12 @@
         <member name="P:MetanetA_MobileApp.ViewModel.SignInViewModel.PhoneNumber">
             <inheritdoc cref="F:MetanetA_MobileApp.ViewModel.SignInViewModel.phoneNumber"/>
         </member>
+        <member name="P:MetanetA_MobileApp.ViewModel.SignInViewModel.LineNumber">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModel.SignInViewModel.lineNumber"/>
+        </member>
+        <member name="P:MetanetA_MobileApp.ViewModel.SignInViewModel.SelectedPrefix">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModel.SignInViewModel.selectedPrefix"/>
+        </member>
         <member name="P:MetanetA_MobileApp.ViewModel.SignInViewModel.Password">
             <inheritdoc cref="F:MetanetA_MobileApp.ViewModel.SignInViewModel.password"/>
         </member>
@@ -1114,6 +1165,16 @@
         </member>
         <member name="P:MetanetA_MobileApp.ViewModel.SignInViewModel.IsConfirmPasswordHidden">
             <inheritdoc cref="F:MetanetA_MobileApp.ViewModel.SignInViewModel.isConfirmPasswordHidden"/>
+        </member>
+        <member name="M:MetanetA_MobileApp.ViewModel.SignInViewModel.OnLineNumberChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:MetanetA_MobileApp.ViewModel.SignInViewModel.LineNumber"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:MetanetA_MobileApp.ViewModel.SignInViewModel.LineNumber"/> is changed.</remarks>
+        </member>
+        <member name="M:MetanetA_MobileApp.ViewModel.SignInViewModel.OnSelectedPrefixChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:MetanetA_MobileApp.ViewModel.SignInViewModel.SelectedPrefix"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:MetanetA_MobileApp.ViewModel.SignInViewModel.SelectedPrefix"/> is changed.</remarks>
         </member>
         <member name="F:MetanetA_MobileApp.ViewModel.SignInViewModel.signInCommand">
             <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModel.SignInViewModel.SignInCommand"/>.</summary>
@@ -1307,6 +1368,12 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.UnitPrice">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "UnitPrice" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ImageBase64">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ImageBase64" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Weight">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Weight" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AboutTheProduct">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AboutTheProduct" generated properties.</summary>
         </member>
@@ -1421,11 +1488,17 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ProductItem">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ProductItem" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsMaterialized">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsMaterialized" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CategoryKey">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CategoryKey" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsBusy">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsBusy" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ErrorMessage">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ErrorMessage" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Draft">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Draft" generated properties.</summary>
@@ -1484,14 +1557,17 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.PasswordRuleText">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "PasswordRuleText" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.LineNumber">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "LineNumber" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedPrefix">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedPrefix" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.FillTheArea">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "FillTheArea" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.InvalidCredentials">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "InvalidCredentials" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.LineNumber">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "LineNumber" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsNameValid">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsNameValid" generated properties.</summary>
@@ -1522,9 +1598,6 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ValidationMessage">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ValidationMessage" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedPrefix">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedPrefix" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsTermsAccepted">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsTermsAccepted" generated properties.</summary>
@@ -1621,6 +1694,12 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.UnitPrice">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "UnitPrice" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ImageBase64">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ImageBase64" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Weight">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Weight" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AboutTheProduct">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AboutTheProduct" generated properties.</summary>
@@ -1736,11 +1815,17 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ProductItem">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ProductItem" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsMaterialized">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsMaterialized" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CategoryKey">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CategoryKey" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsBusy">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsBusy" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ErrorMessage">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ErrorMessage" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Draft">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Draft" generated properties.</summary>
@@ -1799,14 +1884,17 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.PasswordRuleText">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "PasswordRuleText" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.LineNumber">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "LineNumber" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedPrefix">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedPrefix" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.FillTheArea">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "FillTheArea" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.InvalidCredentials">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "InvalidCredentials" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.LineNumber">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "LineNumber" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsNameValid">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsNameValid" generated properties.</summary>
@@ -1837,9 +1925,6 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ValidationMessage">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ValidationMessage" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedPrefix">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedPrefix" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsTermsAccepted">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsTermsAccepted" generated properties.</summary>

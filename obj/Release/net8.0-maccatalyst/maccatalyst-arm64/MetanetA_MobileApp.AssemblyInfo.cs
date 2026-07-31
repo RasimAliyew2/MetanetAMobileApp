@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MetanetA_MobileApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+c845d190f9e7abb5b3bf82d6f894f659db1c3b72")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+92dd209cadbf535445dcc58f06bb55c6a41bfcd1")]
 [assembly: System.Reflection.AssemblyProductAttribute("MetanetA_MobileApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MetanetA_MobileApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -409,6 +409,9 @@ microsoft.maui.platform.MauiBoxView;crc6452ffdc5b34af3a0f.MauiBoxView
 Microsoft.Maui.Platform.MauiDatePicker, Microsoft.Maui;crc6452ffdc5b34af3a0f.MauiDatePicker
 Microsoft.Maui.Platform.MauiDatePicker;crc6452ffdc5b34af3a0f.MauiDatePicker
 microsoft.maui.platform.MauiDatePicker;crc6452ffdc5b34af3a0f.MauiDatePicker
+Microsoft.Maui.Platform.MauiLayerDrawable, Microsoft.Maui;crc6452ffdc5b34af3a0f.MauiLayerDrawable
+Microsoft.Maui.Platform.MauiLayerDrawable;crc6452ffdc5b34af3a0f.MauiLayerDrawable
+microsoft.maui.platform.MauiLayerDrawable;crc6452ffdc5b34af3a0f.MauiLayerDrawable
 Microsoft.Maui.Platform.MauiMaterialButton, Microsoft.Maui;crc6452ffdc5b34af3a0f.MauiMaterialButton
 Microsoft.Maui.Platform.MauiMaterialButton;crc6452ffdc5b34af3a0f.MauiMaterialButton
 microsoft.maui.platform.MauiMaterialButton;crc6452ffdc5b34af3a0f.MauiMaterialButton
@@ -550,6 +553,18 @@ microsoft.maui.graphics.platform.PlatformGraphicsView;crc643f2b18b2570eaa5a.Plat
 Microsoft.Maui.Maps.Handlers.MapCallbackHandler, Microsoft.Maui.Maps;crc64a5df8ade113ad624.MapCallbackHandler
 Microsoft.Maui.Maps.Handlers.MapCallbackHandler;crc64a5df8ade113ad624.MapCallbackHandler
 microsoft.maui.maps.handlers.MapCallbackHandler;crc64a5df8ade113ad624.MapCallbackHandler
+Plugin.Firebase.CloudMessaging.Platforms.Android.MyFirebaseMessagingService, Plugin.Firebase.CloudMessaging;crc64d2dcc2805d51c0a8.MyFirebaseMessagingService
+Plugin.Firebase.CloudMessaging.Platforms.Android.MyFirebaseMessagingService;crc64d2dcc2805d51c0a8.MyFirebaseMessagingService
+plugin.firebase.cloudmessaging.platforms.android.MyFirebaseMessagingService;crc64d2dcc2805d51c0a8.MyFirebaseMessagingService
+Plugin.Firebase.Core.Platforms.Android.OnCompleteListener, Plugin.Firebase.Core;crc64d20aaac0e78511d5.OnCompleteListener
+Plugin.Firebase.Core.Platforms.Android.OnCompleteListener;crc64d20aaac0e78511d5.OnCompleteListener
+plugin.firebase.core.platforms.android.OnCompleteListener;crc64d20aaac0e78511d5.OnCompleteListener
+Plugin.Firebase.Core.Platforms.Android.OnFailureListener, Plugin.Firebase.Core;crc64d20aaac0e78511d5.OnFailureListener
+Plugin.Firebase.Core.Platforms.Android.OnFailureListener;crc64d20aaac0e78511d5.OnFailureListener
+plugin.firebase.core.platforms.android.OnFailureListener;crc64d20aaac0e78511d5.OnFailureListener
+Plugin.Firebase.Core.Platforms.Android.OnSuccessListener, Plugin.Firebase.Core;crc64d20aaac0e78511d5.OnSuccessListener
+Plugin.Firebase.Core.Platforms.Android.OnSuccessListener;crc64d20aaac0e78511d5.OnSuccessListener
+plugin.firebase.core.platforms.android.OnSuccessListener;crc64d20aaac0e78511d5.OnSuccessListener
 AndroidX.Activity.ContextAware.IOnContextAvailableListener, Xamarin.AndroidX.Activity;androidx.activity.contextaware.OnContextAvailableListener
 AndroidX.Activity.ContextAware.IOnContextAvailableListener;androidx.activity.contextaware.OnContextAvailableListener
 androidx.activity.contextaware.OnContextAvailableListener;androidx.activity.contextaware.OnContextAvailableListener
@@ -814,6 +829,12 @@ androidx.core.internal.view.SupportMenuItem;androidx.core.internal.view.SupportM
 AndroidX.Core.App.ActivityCompat+IPermissionCompatDelegate, Xamarin.AndroidX.Core;androidx.core.app.ActivityCompat$PermissionCompatDelegate
 AndroidX.Core.App.ActivityCompat.IPermissionCompatDelegate;androidx.core.app.ActivityCompat$PermissionCompatDelegate
 androidx.core.app.ActivityCompat$PermissionCompatDelegate;androidx.core.app.ActivityCompat$PermissionCompatDelegate
+AndroidX.Core.App.INotificationBuilderWithBuilderAccessor, Xamarin.AndroidX.Core;androidx.core.app.NotificationBuilderWithBuilderAccessor
+AndroidX.Core.App.INotificationBuilderWithBuilderAccessor;androidx.core.app.NotificationBuilderWithBuilderAccessor
+androidx.core.app.NotificationBuilderWithBuilderAccessor;androidx.core.app.NotificationBuilderWithBuilderAccessor
+AndroidX.Core.App.NotificationCompat+IExtender, Xamarin.AndroidX.Core;androidx.core.app.NotificationCompat$Extender
+AndroidX.Core.App.NotificationCompat.IExtender;androidx.core.app.NotificationCompat$Extender
+androidx.core.app.NotificationCompat$Extender;androidx.core.app.NotificationCompat$Extender
 AndroidX.Core.App.SharedElementCallback+IOnSharedElementsReadyListener, Xamarin.AndroidX.Core;androidx.core.app.SharedElementCallback$OnSharedElementsReadyListener
 AndroidX.Core.App.SharedElementCallback.IOnSharedElementsReadyListener;androidx.core.app.SharedElementCallback$OnSharedElementsReadyListener
 androidx.core.app.SharedElementCallback$OnSharedElementsReadyListener;androidx.core.app.SharedElementCallback$OnSharedElementsReadyListener
@@ -1003,6 +1024,30 @@ androidx.viewpager.widget.ViewPager$PageTransformer;androidx.viewpager.widget.Vi
 AndroidX.ViewPager2.Widget.ViewPager2+IPageTransformer, Xamarin.AndroidX.ViewPager2;androidx.viewpager2.widget.ViewPager2$PageTransformer
 AndroidX.ViewPager2.Widget.ViewPager2.IPageTransformer;androidx.viewpager2.widget.ViewPager2$PageTransformer
 androidx.viewpager2.widget.ViewPager2$PageTransformer;androidx.viewpager2.widget.ViewPager2$PageTransformer
+Firebase.FirebaseApp+IBackgroundStateChangeListener, Xamarin.Firebase.Common;com.google.firebase.FirebaseApp$BackgroundStateChangeListener
+Firebase.FirebaseApp.IBackgroundStateChangeListener;com.google.firebase.FirebaseApp$BackgroundStateChangeListener
+com.google.firebase.FirebaseApp$BackgroundStateChangeListener;com.google.firebase.FirebaseApp$BackgroundStateChangeListener
+Firebase.FirebaseApp+IBackgroundStateChangeListenerImplementor, Xamarin.Firebase.Common;mono.com.google.firebase.FirebaseApp_BackgroundStateChangeListenerImplementor
+Firebase.FirebaseApp.IBackgroundStateChangeListenerImplementor;mono.com.google.firebase.FirebaseApp_BackgroundStateChangeListenerImplementor
+mono.com.google.firebase.FirebaseApp_BackgroundStateChangeListenerImplementor;mono.com.google.firebase.FirebaseApp_BackgroundStateChangeListenerImplementor
+Firebase.IFirebaseAppLifecycleListener, Xamarin.Firebase.Common;com.google.firebase.FirebaseAppLifecycleListener
+Firebase.IFirebaseAppLifecycleListener;com.google.firebase.FirebaseAppLifecycleListener
+com.google.firebase.FirebaseAppLifecycleListener;com.google.firebase.FirebaseAppLifecycleListener
+Firebase.IFirebaseAppLifecycleListenerImplementor, Xamarin.Firebase.Common;mono.com.google.firebase.FirebaseAppLifecycleListenerImplementor
+Firebase.IFirebaseAppLifecycleListenerImplementor;mono.com.google.firebase.FirebaseAppLifecycleListenerImplementor
+mono.com.google.firebase.FirebaseAppLifecycleListenerImplementor;mono.com.google.firebase.FirebaseAppLifecycleListenerImplementor
+Xamarin.Google.Android.DataTransport.ITransformer, Xamarin.Google.Android.DataTransport.TransportApi;com.google.android.datatransport.Transformer
+Xamarin.Google.Android.DataTransport.ITransformer;com.google.android.datatransport.Transformer
+com.google.android.datatransport.Transformer;com.google.android.datatransport.Transformer
+Xamarin.Google.Android.DataTransport.ITransport, Xamarin.Google.Android.DataTransport.TransportApi;com.google.android.datatransport.Transport
+Xamarin.Google.Android.DataTransport.ITransport;com.google.android.datatransport.Transport
+com.google.android.datatransport.Transport;com.google.android.datatransport.Transport
+Xamarin.Google.Android.DataTransport.ITransportFactory, Xamarin.Google.Android.DataTransport.TransportApi;com.google.android.datatransport.TransportFactory
+Xamarin.Google.Android.DataTransport.ITransportFactory;com.google.android.datatransport.TransportFactory
+com.google.android.datatransport.TransportFactory;com.google.android.datatransport.TransportFactory
+Xamarin.Google.Android.DataTransport.ITransportScheduleCallback, Xamarin.Google.Android.DataTransport.TransportApi;com.google.android.datatransport.TransportScheduleCallback
+Xamarin.Google.Android.DataTransport.ITransportScheduleCallback;com.google.android.datatransport.TransportScheduleCallback
+com.google.android.datatransport.TransportScheduleCallback;com.google.android.datatransport.TransportScheduleCallback
 Google.Android.Material.Shape.ICornerSize, Xamarin.Google.Android.Material;com.google.android.material.shape.CornerSize
 Google.Android.Material.Shape.ICornerSize;com.google.android.material.shape.CornerSize
 com.google.android.material.shape.CornerSize;com.google.android.material.shape.CornerSize
