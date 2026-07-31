@@ -24,33 +24,11 @@
             <Setter Property="Padding" Value="14"/>
             <Setter Property="Shadow">
                 <Setter.Value>
-                    <Shadow Opacity="0.10" Radius="14" Offset="0,6"/>
+                    <Shadow Opacity="0.10"
+                            Radius="14"
+                            Offset="0,6"/>
                 </Setter.Value>
             </Setter>
-        </Style>
-
-        <Style x:Key="SectionHeader" TargetType="Border" BasedOn="{StaticResource Card}">
-            <Setter Property="Padding" Value="12"/>
-        </Style>
-
-        <Style x:Key="RootCategoryCard" TargetType="Border" BasedOn="{StaticResource Card}">
-            <Setter Property="Padding" Value="0"/>
-        </Style>
-
-        <Style x:Key="SubCatHeader" TargetType="Border">
-            <Setter Property="BackgroundColor" Value="White"/>
-            <Setter Property="Stroke" Value="{StaticResource Stroke}"/>
-            <Setter Property="StrokeThickness" Value="1"/>
-            <Setter Property="StrokeShape" Value="RoundRectangle 16"/>
-            <Setter Property="Padding" Value="12"/>
-        </Style>
-
-        <Style x:Key="ProductCard" TargetType="Border">
-            <Setter Property="BackgroundColor" Value="White"/>
-            <Setter Property="Stroke" Value="{StaticResource Stroke}"/>
-            <Setter Property="StrokeThickness" Value="1"/>
-            <Setter Property="StrokeShape" Value="RoundRectangle 16"/>
-            <Setter Property="Padding" Value="10"/>
         </Style>
 
         <Style x:Key="SearchContainer" TargetType="Border">
@@ -60,6 +38,74 @@
             <Setter Property="StrokeShape" Value="RoundRectangle 16"/>
             <Setter Property="Padding" Value="12,8"/>
         </Style>
+
+        <DataTemplate x:Key="ProductCardTemplate"
+                      x:DataType="model:ProductItem">
+            <Border BackgroundColor="White"
+                    Stroke="{StaticResource Stroke}"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 16"
+                    Padding="10"
+                    Margin="0,0,0,10">
+
+                <Grid ColumnDefinitions="70,*,Auto"
+                      ColumnSpacing="10"
+                      VerticalOptions="Center">
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding BindingContext.SelectProductCommand,
+                                              Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                            CommandParameter="{Binding .}"/>
+                    </Grid.GestureRecognizers>
+
+                    <Border BackgroundColor="#F6FFF8"
+                            Stroke="{StaticResource Stroke}"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 14"
+                            Padding="8"
+                            HeightRequest="64"
+                            WidthRequest="64">
+
+                        <Image Source="{Binding ProductImageSource}"
+                               HeightRequest="54"
+                               WidthRequest="54"
+                               Aspect="AspectFit"/>
+                    </Border>
+
+                    <VerticalStackLayout Grid.Column="1"
+                                         Spacing="3"
+                                         VerticalOptions="Center">
+
+                        <Label Text="{Binding Name}"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource TextDark}"
+                               LineBreakMode="WordWrap"
+                               MaxLines="3"/>
+
+                        <Label Text="{Binding MetaText}"
+                               FontSize="12"
+                               TextColor="{StaticResource TextGray}">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label"
+                                             Binding="{Binding MetaText}"
+                                             Value="">
+                                    <Setter Property="IsVisible"
+                                            Value="False"/>
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </VerticalStackLayout>
+
+                    <Label Grid.Column="2"
+                           Text="›"
+                           FontSize="22"
+                           TextColor="{StaticResource TextGray}"
+                           VerticalTextAlignment="Center"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
     </ContentPage.Resources>
 
     <Grid RowDefinitions="Auto,*,Auto"
@@ -67,8 +113,12 @@
           RowSpacing="12">
 
         <!-- Header -->
-        <Border Grid.Row="0" Style="{StaticResource SectionHeader}">
-            <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="8">
+        <Border Grid.Row="0"
+                Style="{StaticResource Card}"
+                Padding="12">
+
+            <Grid RowDefinitions="Auto,Auto,Auto"
+                  RowSpacing="8">
 
                 <Label Text="Məhsul kateqoriyaları"
                        FontSize="18"
@@ -80,8 +130,11 @@
                        FontSize="13"
                        TextColor="{StaticResource TextGray}"/>
 
-                <Border Grid.Row="2" Style="{StaticResource SearchContainer}">
-                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                <Border Grid.Row="2"
+                        Style="{StaticResource SearchContainer}">
+
+                    <Grid ColumnDefinitions="Auto,*,Auto"
+                          ColumnSpacing="10">
 
                         <Label Text="⌕"
                                FontSize="18"
@@ -109,33 +162,57 @@
                                 <DataTrigger TargetType="ImageButton"
                                              Binding="{Binding SearchText}"
                                              Value="">
-                                    <Setter Property="IsVisible" Value="False"/>
+                                    <Setter Property="IsVisible"
+                                            Value="False"/>
                                 </DataTrigger>
 
                                 <DataTrigger TargetType="ImageButton"
                                              Binding="{Binding SearchText}"
                                              Value="{x:Null}">
-                                    <Setter Property="IsVisible" Value="False"/>
+                                    <Setter Property="IsVisible"
+                                            Value="False"/>
                                 </DataTrigger>
                             </ImageButton.Triggers>
                         </ImageButton>
-
                     </Grid>
                 </Border>
-
             </Grid>
         </Border>
 
         <!-- Content -->
         <Grid Grid.Row="1">
 
+            <!-- Error -->
+            <Border Style="{StaticResource Card}"
+                    IsVisible="{Binding HasError}"
+                    VerticalOptions="Start"
+                    Margin="0,6,0,0">
+
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="{Binding ErrorMessage}"
+                           FontSize="14"
+                           TextColor="#B91C1C"
+                           HorizontalTextAlignment="Center"/>
+
+                    <Button Text="Yenidən yoxla"
+                            Command="{Binding RetryCommand}"
+                            BackgroundColor="{StaticResource Primary}"
+                            TextColor="White"
+                            CornerRadius="12"
+                            HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Border>
+
             <!-- Search results -->
             <CollectionView ItemsSource="{Binding SearchResults}"
+                            ItemTemplate="{StaticResource ProductCardTemplate}"
                             SelectionMode="None"
                             IsVisible="{Binding IsSearchActive}">
 
                 <CollectionView.EmptyView>
-                    <VerticalStackLayout Padding="20" Spacing="6">
+                    <VerticalStackLayout Padding="20"
+                                         Spacing="6">
+
                         <Label Text="Axtardığınız məhsul tapılmadı"
                                FontSize="15"
                                FontAttributes="Bold"
@@ -148,73 +225,21 @@
                                HorizontalTextAlignment="Center"/>
                     </VerticalStackLayout>
                 </CollectionView.EmptyView>
-
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:ProductItem">
-
-                        <Border Style="{StaticResource ProductCard}" Margin="0,0,0,10">
-
-                            <Grid ColumnDefinitions="70,*,Auto"
-                                  ColumnSpacing="10"
-                                  VerticalOptions="Center">
-
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer
-                                        Command="{Binding BindingContext.SelectProductCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
-                                        CommandParameter="{Binding .}" />
-                                </Grid.GestureRecognizers>
-
-                                <Border BackgroundColor="#F6FFF8"
-                                        Stroke="{StaticResource Stroke}"
-                                        StrokeThickness="1"
-                                        StrokeShape="RoundRectangle 14"
-                                        Padding="8">
-
-                                    <Image Source="{Binding ImageUrl}"
-                                           HeightRequest="54"
-                                           WidthRequest="54"
-                                           Aspect="AspectFit"/>
-                                </Border>
-
-                                <VerticalStackLayout Grid.Column="1" Spacing="2">
-                                    <Label Text="{Binding Name}"
-                                           FontSize="14"
-                                           FontAttributes="Bold"
-                                           TextColor="{StaticResource TextDark}"
-                                           LineBreakMode="TailTruncation"/>
-
-                                    <Label Text="{Binding Description}"
-                                           FontSize="12"
-                                           TextColor="{StaticResource TextGray}"
-                                           LineBreakMode="TailTruncation"/>
-                                </VerticalStackLayout>
-
-                                <Label Grid.Column="2"
-                                       Text="{Binding Price, StringFormat='{0:0.##} ₼'}"
-                                       FontSize="13"
-                                       FontAttributes="Bold"
-                                       TextColor="#0F766E"
-                                       VerticalTextAlignment="Center"/>
-
-                            </Grid>
-                        </Border>
-
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <!-- Categories -->
-            <CollectionView ItemsSource="{Binding RootCategories}"
+            <!-- İlk açılışda yalnız parent-lər görünür -->
+            <CollectionView ItemsSource="{Binding ParentGroups}"
                             SelectionMode="None"
-                            IsVisible="{Binding IsCategoryViewVisible}">
+                            IsVisible="{Binding IsParentViewVisible}">
 
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="vm:ProductRootCategorySection">
+                    <DataTemplate x:DataType="vm:ProductParentSection">
 
-                        <VerticalStackLayout Spacing="8" Margin="0,0,0,12">
+                        <VerticalStackLayout Spacing="8"
+                                             Margin="0,0,0,12">
 
-                            <!-- Root category -->
-                            <Border Style="{StaticResource RootCategoryCard}">
+                            <Border Style="{StaticResource Card}"
+                                    Padding="0">
 
                                 <Grid Padding="12"
                                       ColumnDefinitions="64,*,Auto"
@@ -222,8 +247,9 @@
 
                                     <Grid.GestureRecognizers>
                                         <TapGestureRecognizer
-                                            Command="{Binding BindingContext.ToggleRootCategoryCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
-                                            CommandParameter="{Binding .}" />
+                                            Command="{Binding BindingContext.ToggleParentCommand,
+                                                              Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                            CommandParameter="{Binding .}"/>
                                     </Grid.GestureRecognizers>
 
                                     <Border BackgroundColor="#F6FFF8"
@@ -232,11 +258,10 @@
                                             StrokeShape="RoundRectangle 14"
                                             Padding="6"
                                             HeightRequest="64"
-                                            WidthRequest="64"
-                                            VerticalOptions="Center">
+                                            WidthRequest="64">
 
-                                        <Image Source="{Binding ImageUrl}"
-                                               Aspect="AspectFill"/>
+                                        <Image Source="{Binding IconSource}"
+                                               Aspect="AspectFit"/>
                                     </Border>
 
                                     <VerticalStackLayout Grid.Column="1"
@@ -246,9 +271,12 @@
                                         <Label Text="{Binding Name}"
                                                FontSize="15"
                                                FontAttributes="Bold"
-                                               TextColor="{StaticResource TextDark}"/>
+                                               TextColor="{StaticResource TextDark}"
+                                               LineBreakMode="WordWrap"
+                                               MaxLines="3"/>
 
-                                        <Label Text="{Binding SubCategories.Count, StringFormat='Alt kateqoriya sayı: {0}'}"
+                                        <Label Text="{Binding ProductCount,
+                                                              StringFormat='Məhsul sayı: {0}'}"
                                                FontSize="12"
                                                TextColor="{StaticResource TextGray}"/>
                                     </VerticalStackLayout>
@@ -263,139 +291,35 @@
                                             <DataTrigger TargetType="Label"
                                                          Binding="{Binding IsExpanded}"
                                                          Value="False">
-                                                <Setter Property="Text" Value="›"/>
+                                                <Setter Property="Text"
+                                                        Value="›"/>
                                             </DataTrigger>
                                         </Label.Triggers>
                                     </Label>
-
                                 </Grid>
                             </Border>
 
-                            <!-- Subcategories -->
-                            <CollectionView ItemsSource="{Binding SubCategories}"
+                            <!-- Products collection boş qalır.
+                                 Parent kliklənəndən sonra doldurulur. -->
+                            <CollectionView ItemsSource="{Binding Products}"
+                                            ItemTemplate="{StaticResource ProductCardTemplate}"
                                             SelectionMode="None"
-                                            IsVisible="{Binding IsExpanded}">
-
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="vm:ProductSubCategorySection">
-
-                                        <VerticalStackLayout Spacing="8">
-
-                                            <!-- Subcategory header -->
-                                            <Border Style="{StaticResource SubCatHeader}"
-                                                    Margin="12,0,12,8">
-
-                                                <Grid ColumnDefinitions="*,Auto"
-                                                      ColumnSpacing="10">
-
-                                                    <Grid.GestureRecognizers>
-                                                        <TapGestureRecognizer
-                                                            Command="{Binding BindingContext.ToggleSubCategoryCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
-                                                            CommandParameter="{Binding .}" />
-                                                    </Grid.GestureRecognizers>
-
-                                                    <Label Text="{Binding Name}"
-                                                           FontSize="14"
-                                                           FontAttributes="Bold"
-                                                           TextColor="{StaticResource TextDark}"
-                                                           VerticalTextAlignment="Center"/>
-
-                                                    <Label Grid.Column="1"
-                                                           Text="⌄"
-                                                           FontSize="18"
-                                                           TextColor="{StaticResource TextGray}"
-                                                           VerticalTextAlignment="Center">
-
-                                                        <Label.Triggers>
-                                                            <DataTrigger TargetType="Label"
-                                                                         Binding="{Binding IsExpanded}"
-                                                                         Value="False">
-                                                                <Setter Property="Text" Value="›"/>
-                                                            </DataTrigger>
-                                                        </Label.Triggers>
-                                                    </Label>
-
-                                                </Grid>
-                                            </Border>
-
-                                            <!-- Products -->
-                                            <CollectionView ItemsSource="{Binding Products}"
-                                                            SelectionMode="None"
-                                                            IsVisible="{Binding IsExpanded}"
-                                                            Margin="12,0,12,8">
-
-                                                <CollectionView.ItemTemplate>
-                                                    <DataTemplate x:DataType="model:ProductItem">
-
-                                                        <Border Style="{StaticResource ProductCard}"
-                                                                Margin="0,0,0,10">
-
-                                                            <Grid ColumnDefinitions="70,*,Auto"
-                                                                  ColumnSpacing="10"
-                                                                  VerticalOptions="Center">
-
-                                                                <Grid.GestureRecognizers>
-                                                                    <TapGestureRecognizer
-                                                                        Command="{Binding BindingContext.SelectProductCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
-                                                                        CommandParameter="{Binding .}" />
-                                                                </Grid.GestureRecognizers>
-
-                                                                <Border BackgroundColor="#F6FFF8"
-                                                                        Stroke="{StaticResource Stroke}"
-                                                                        StrokeThickness="1"
-                                                                        StrokeShape="RoundRectangle 14"
-                                                                        Padding="8">
-
-                                                                    <Image Source="{Binding ImageUrl}"
-                                                                           HeightRequest="54"
-                                                                           WidthRequest="54"
-                                                                           Aspect="AspectFit"/>
-                                                                </Border>
-
-                                                                <VerticalStackLayout Grid.Column="1"
-                                                                                     Spacing="2">
-
-                                                                    <Label Text="{Binding Name}"
-                                                                           FontSize="14"
-                                                                           FontAttributes="Bold"
-                                                                           TextColor="{StaticResource TextDark}"
-                                                                           LineBreakMode="TailTruncation"/>
-
-                                                                    <Label Text="{Binding Description}"
-                                                                           FontSize="12"
-                                                                           TextColor="{StaticResource TextGray}"
-                                                                           LineBreakMode="TailTruncation"/>
-                                                                </VerticalStackLayout>
-
-                                                                <Label Grid.Column="2"
-                                                                       Text="{Binding Price, StringFormat='{0:0.##} ₼'}"
-                                                                       FontSize="13"
-                                                                       FontAttributes="Bold"
-                                                                       TextColor="#0F766E"
-                                                                       VerticalTextAlignment="Center"/>
-
-                                                            </Grid>
-                                                        </Border>
-
-                                                    </DataTemplate>
-                                                </CollectionView.ItemTemplate>
-                                            </CollectionView>
-
-                                        </VerticalStackLayout>
-
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-
+                                            IsVisible="{Binding IsExpanded}"
+                                            Margin="12,0,12,0"/>
                         </VerticalStackLayout>
-
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"
+                               Color="{StaticResource Primary}"
+                               HeightRequest="48"
+                               WidthRequest="48"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
         </Grid>
 
-        <!-- Bottom menu -->
         <controls:BottomMenu Grid.Row="2"
                              VerticalOptions="End"
                              Margin="0,0,0,6"/>

@@ -7,11 +7,10 @@
              Title=""
              BackgroundColor="#F8FAFC">
 
-    <Grid RowDefinitions="Auto,Auto,*,Auto"
+    <Grid RowDefinitions="Auto,Auto,*"
           Padding="16"
           RowSpacing="12">
 
-        <!-- Top -->
         <Grid Grid.Row="0"
               ColumnDefinitions="Auto,*"
               VerticalOptions="Center">
@@ -21,10 +20,10 @@
                     StrokeThickness="1"
                     StrokeShape="RoundRectangle 12"
                     Padding="10"
-                    HorizontalOptions="Start"
-                    VerticalOptions="Start">
+                    HorizontalOptions="Start">
+
                 <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding DeclineCommand}" />
+                    <TapGestureRecognizer Command="{Binding DeclineCommand}"/>
                 </Border.GestureRecognizers>
 
                 <Label Text="←"
@@ -32,7 +31,7 @@
                        FontAttributes="Bold"
                        TextColor="#111827"
                        HorizontalTextAlignment="Center"
-                       VerticalTextAlignment="Center" />
+                       VerticalTextAlignment="Center"/>
             </Border>
 
             <Label Grid.Column="1"
@@ -42,10 +41,10 @@
                    TextColor="#111827"
                    HorizontalTextAlignment="Center"
                    VerticalTextAlignment="Center"
-                   Margin="0,0,36,0" />
+                   Margin="0,0,36,0"/>
         </Grid>
 
-        <!-- Product card -->
+        <!-- Şəkil və ad -->
         <Border Grid.Row="1"
                 BackgroundColor="White"
                 Stroke="#E5E7EB"
@@ -55,63 +54,30 @@
 
             <VerticalStackLayout Spacing="10">
 
-                <Image Source="{Binding ImageUrl}"
+                <Image Source="{Binding ProductImageSource}"
                        HeightRequest="180"
                        Aspect="AspectFit"
-                       HorizontalOptions="Center" />
+                       HorizontalOptions="Center"/>
 
                 <Label Text="{Binding Name}"
-                       FontSize="24"
+                       FontSize="22"
                        FontAttributes="Bold"
                        TextColor="#111827"
-                       HorizontalTextAlignment="Center" />
-
-                <!--<Label Text="{Binding Price, StringFormat='{0} ₼'}"
-                       FontSize="18"
-                       TextColor="#6B7280"
-                       HorizontalTextAlignment="Center" />-->
-
+                       HorizontalTextAlignment="Center"
+                       LineBreakMode="WordWrap"/>
             </VerticalStackLayout>
         </Border>
 
-        <!-- HTML -->
+        <!-- API-dəki HTML burada həqiqi HTML kimi render olunur -->
         <Border Grid.Row="2"
                 BackgroundColor="White"
                 Stroke="#E5E7EB"
                 StrokeThickness="1"
-                StrokeShape="RoundRectangle 0"
+                StrokeShape="RoundRectangle 16"
                 Padding="0">
 
-            <Grid RowDefinitions="*">
-                <!--<Label Grid.Row="0"
-                       Text="Məhsul haqqında məlumat"
-                       FontSize="18"
-                       FontAttributes="Bold"
-                       TextColor="#111827"
-                       Padding="0" />-->
-
-                <WebView Grid.Row="0"
-                         x:Name="AboutWebView" 
-                         Source="{Binding AboutTheProductHtml}"/>
-            </Grid>
+            <WebView x:Name="AboutWebView"
+                     Source="{Binding AboutTheProductHtml}"/>
         </Border>
-
-        <!-- Buttons -->
-        <Grid Grid.Row="3"
-              ColumnDefinitions="*,*"
-              RowDefinitions="Auto,Auto"
-              ColumnSpacing="10"
-              RowSpacing="6">
-
-
-                  
-
-            <Label Text="Hesabınızda yetərincə bonus yoxdur"
-                   Grid.Row="1"
-                   Grid.ColumnSpan="2"
-                   TextColor="Red"
-                   HorizontalTextAlignment="Center"
-                   IsVisible="{Binding IsVisible}" />
-        </Grid>
     </Grid>
 </ContentPage>

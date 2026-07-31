@@ -1,7 +1,8 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MetanetA_MobileApp.Model;
+using MetanetA_MobileApp.Services.Products;
 using MetanetA_MobileApp.Services.UIState;
 using MetanetA_MobileApp.View.Products;
 
@@ -10,46 +11,110 @@ namespace MetanetA_MobileApp.ViewModels.ProductsViewModels;
 [QueryProperty(nameof(CategoryKey), "CategoryKey")]
 public partial class ProductViewModel : BaseViewModel
 {
-    public ObservableCollection<ProductRootCategorySection> RootCategories { get; } = new();
-    public ObservableCollection<ProductItem> SearchResults { get; } = new();
+    private IReadOnlyList<ProductApiItem> _apiProducts =
+        Array.Empty<ProductApiItem>();
+
+    private bool _isDataLoaded;
+
+    public ObservableCollection<ProductParentSection> ParentGroups { get; } =
+        new();
+
+    public ObservableCollection<ProductItem> SearchResults { get; } =
+        new();
 
     [ObservableProperty]
-    private string categoryKey;
+    private string categoryKey = string.Empty;
 
     [ObservableProperty]
-    private string searchText;
+    private string searchText = string.Empty;
 
     [ObservableProperty]
     private bool isBusy;
 
-    private bool _isDataLoaded;
+    [ObservableProperty]
+    private string errorMessage = string.Empty;
 
-    public bool IsSearchActive => !string.IsNullOrWhiteSpace(SearchText);
-    public bool IsCategoryViewVisible => !IsSearchActive;
+    public bool HasError =>
+        !string.IsNullOrWhiteSpace(ErrorMessage);
 
-    public ProductViewModel(BottomMenuState menuState) : base(menuState)
+    public bool IsSearchActive =>
+        !string.IsNullOrWhiteSpace(SearchText);
+
+    public bool IsParentViewVisible =>
+        !IsSearchActive;
+
+    public ProductViewModel(BottomMenuState menuState)
+        : base(menuState)
     {
-        // Burada artıq LoadAllCategories çağırmırıq.
-        // Çünki constructor UI thread-də işləyir və page açılışını dondururdu.
     }
 
     public async Task LoadAsync()
     {
-        if (_isDataLoaded)
+        if (_isDataLoaded || IsBusy)
+            return;
+
+        await LoadProductsAsync();
+    }
+
+    [RelayCommand]
+    private async Task RetryAsync()
+    {
+        await LoadProductsAsync(forceReload: true);
+    }
+
+    [RelayCommand]
+    private async Task RefreshAsync()
+    {
+        await LoadProductsAsync(forceReload: true);
+    }
+
+    private async Task LoadProductsAsync(bool forceReload = false)
+    {
+        if (IsBusy)
+            return;
+
+        if (_isDataLoaded && !forceReload)
             return;
 
         try
         {
             IsBusy = true;
+            ErrorMessage = string.Empty;
 
-            await Task.Yield();
+            var products =
+                await ProductApiService.GetProductsAsync();
 
-            LoadAllCategoriesLight();
+            var languageProducts = products
+                .Where(item =>
+                    string.IsNullOrWhiteSpace(item.Language) ||
+                    string.Equals(
+                        item.Language,
+                        "az",
+                        StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            // API-də az dili yoxdursa, bütün datanı göstər.
+            _apiProducts = languageProducts.Count > 0
+                ? languageProducts
+                : products;
+
+            BuildParentGroups();
 
             _isDataLoaded = true;
 
-            if (!string.IsNullOrWhiteSpace(CategoryKey))
-                ExpandRootCategory(CategoryKey);
+            // Köhnə category query parametri gəlsə də parent avtomatik
+            // açılmır. İlk açılışda yalnız parent-lər vizual görünür.
+        }
+        catch (Exception ex)
+        {
+            _isDataLoaded = false;
+
+            ErrorMessage =
+                "Məhsullar serverdən yüklənmədi. " +
+                "İnternet bağlantısını yoxlayıb yenidən cəhd edin.";
+
+            System.Diagnostics.Debug.WriteLine(
+                $"Products API error: {ex}");
         }
         finally
         {
@@ -57,47 +122,59 @@ public partial class ProductViewModel : BaseViewModel
         }
     }
 
-    [RelayCommand]
-    private void ToggleRootCategory(ProductRootCategorySection section)
+    private void BuildParentGroups()
     {
-        if (section == null)
+        ParentGroups.Clear();
+        SearchResults.Clear();
+
+        var groups = _apiProducts
+            .GroupBy(
+                item =>
+                {
+                    var parent =
+                        ProductMapper.NormalizeText(item.ParentName);
+
+                    return string.IsNullOrWhiteSpace(parent)
+                        ? "Digər məhsullar"
+                        : parent;
+                },
+                StringComparer.CurrentCultureIgnoreCase)
+            .OrderBy(
+                group => group.Key,
+                StringComparer.CurrentCultureIgnoreCase);
+
+        foreach (var group in groups)
+        {
+            // Burada yalnız parent section yaradılır.
+            // Child ProductItem vizual modelləri hələ yaradılmır.
+            ParentGroups.Add(
+                new ProductParentSection(
+                    group.Key,
+                    group.ToList()));
+        }
+    }
+
+    [RelayCommand]
+    private void ToggleParent(ProductParentSection section)
+    {
+        if (section is null)
             return;
 
         var willExpand = !section.IsExpanded;
 
-        foreach (var cat in RootCategories)
-            cat.IsExpanded = false;
+        foreach (var parent in ParentGroups)
+        {
+            if (!ReferenceEquals(parent, section))
+                parent.IsExpanded = false;
+        }
+
+        if (willExpand)
+        {
+            // Child-lər yalnız parent kliklənəndə UI collection-a əlavə edilir.
+            section.EnsureProductsMaterialized();
+        }
 
         section.IsExpanded = willExpand;
-    }
-    [RelayCommand]
-    private void ToggleSubCategory(ProductSubCategorySection section)
-    {
-        if (section == null)
-            return;
-
-        var parent = RootCategories.FirstOrDefault(root =>
-            root.SubCategories.Contains(section));
-
-        if (parent == null)
-            return;
-
-        var willExpand = !section.IsExpanded;
-
-        foreach (var sub in parent.SubCategories)
-            sub.IsExpanded = false;
-
-        section.IsExpanded = willExpand;
-    }
-    partial void OnCategoryKeyChanged(string value)
-    {
-        if (string.IsNullOrWhiteSpace(value))
-            return;
-
-        if (!_isDataLoaded)
-            return;
-
-        ExpandRootCategory(value);
     }
 
     partial void OnSearchTextChanged(string value)
@@ -105,7 +182,12 @@ public partial class ProductViewModel : BaseViewModel
         ApplySearch(value);
 
         OnPropertyChanged(nameof(IsSearchActive));
-        OnPropertyChanged(nameof(IsCategoryViewVisible));
+        OnPropertyChanged(nameof(IsParentViewVisible));
+    }
+
+    partial void OnErrorMessageChanged(string value)
+    {
+        OnPropertyChanged(nameof(HasError));
     }
 
     private void ApplySearch(string value)
@@ -115,131 +197,32 @@ public partial class ProductViewModel : BaseViewModel
         if (string.IsNullOrWhiteSpace(value))
             return;
 
-        var text = value.Trim();
+        var searchValue = value.Trim();
 
-        var results = RootCategories
-            .SelectMany(root => root.SubCategories)
-            .SelectMany(sub => sub.Products)
-            .Where(product =>
-                !string.IsNullOrWhiteSpace(product.Name) &&
-                product.Name.Contains(text, StringComparison.OrdinalIgnoreCase))
-            .OrderBy(product => product.Name.StartsWith(text, StringComparison.OrdinalIgnoreCase) ? 0 : 1)
-            .ThenBy(product => product.Name)
-            .ToList();
+        // Axtarış user tərəfindən başladıldığı üçün yalnız uyğun məhsullar
+        // həmin anda visual modelə çevrilir.
+        var matches = _apiProducts
+            .Where(item =>
+                ProductMapper.NormalizeText(item.Name)
+                    .Contains(
+                        searchValue,
+                        StringComparison.CurrentCultureIgnoreCase))
+            .OrderBy(item =>
+                ProductMapper.NormalizeText(item.Name)
+                    .StartsWith(
+                        searchValue,
+                        StringComparison.CurrentCultureIgnoreCase)
+                    ? 0
+                    : 1)
+            .ThenBy(
+                item => ProductMapper.NormalizeText(item.Name),
+                StringComparer.CurrentCultureIgnoreCase)
+            .Take(100);
 
-        foreach (var item in results)
-            SearchResults.Add(item);
+        foreach (var item in matches)
+            SearchResults.Add(ProductMapper.ToProductItem(item));
     }
 
-    private void LoadAllCategoriesLight()
-    {
-        RootCategories.Clear();
-
-        foreach (var key in GetRootCategoryOrder())
-        {
-            if (!ProductCatalog.Data.TryGetValue(key, out var data))
-                continue;
-
-            var root = new ProductRootCategorySection(
-                key,
-                data.Title,
-                GetCategoryImage(key));
-
-            foreach (var subName in data.SubCategories)
-            {
-                var sub = new ProductSubCategorySection(subName);
-
-                if (sub.Name == "Plitə yapışdırıcıları")
-                {
-                    sub.Products.Add(CreateProduct(
-                        "Keramika və Mozoik yapıştırıcısı",
-                        data.Title,
-                        "plite1.jpg",
-                        25));
-
-                    sub.Products.Add(CreateProduct(
-                        "Keramika və dekorativ daş yapıştırıcısı",
-                        data.Title,
-                        "plite2.jpg",
-                        16));
-
-                    sub.Products.Add(CreateProduct(
-                        "Elastik və yüksək performanslı plitə yapıştırıcısı",
-                        data.Title,
-                        "plite3.jpg",
-                        50));
-
-                    sub.Products.Add(CreateProduct(
-                        "Keramika yapıştırıcısı",
-                        data.Title,
-                        "plite4.jpg",
-                        30));
-                }
-
-                root.SubCategories.Add(sub);
-            }
-
-            RootCategories.Add(root);
-        }
-    }
-
-    private static ProductItem CreateProduct(
-        string name,
-        string description,
-        string imageUrl,
-        float price)
-    {
-        return new ProductItem
-        {
-            Name = name,
-            Description = description,
-            ImageUrl = imageUrl,
-            Price = price,
-
-            // Əsas optimizasiya:
-            // Siyahı açılarkən böyük HTML yüklənmir.
-            AboutTheProduct = string.Empty
-        };
-    }
-
-    private void ExpandRootCategory(string key)
-    {
-        var target = RootCategories.FirstOrDefault(x =>
-            string.Equals(x.Key, key, StringComparison.OrdinalIgnoreCase));
-
-        if (target == null)
-            return;
-
-        foreach (var cat in RootCategories.Where(x => x != target))
-        {
-            cat.IsExpanded = false;
-
-            foreach (var sub in cat.SubCategories)
-                sub.IsExpanded = false;
-        }
-
-        target.IsExpanded = true;
-    }
-
-    private static IEnumerable<string> GetRootCategoryOrder()
-    {
-        return new[] { "INSAAT", "FASAD", "YER", "QATQI" };
-    }
-
-    private static string GetCategoryImage(string key)
-    {
-        return key switch
-        {
-            "INSAAT" => "product_type3.png",
-            "FASAD" => "product_type4.png",
-            "YER" => "product_type1.png",
-            "QATQI" => "product_type2.png",
-            _ => "product.png"
-        };
-    }
-
- 
-   
     [RelayCommand]
     private void ClearSearch()
     {
@@ -249,14 +232,14 @@ public partial class ProductViewModel : BaseViewModel
     [RelayCommand]
     private async Task SelectProductAsync(ProductItem item)
     {
-        if (item == null)
+        if (item is null)
             return;
 
-        item.AboutTheProduct = ProductHtmlStore.GetHtml(item.Name);
-
-        await Shell.Current.GoToAsync($"//{nameof(ProductDetailPage)}", new Dictionary<string, object>
-        {
-            ["ProductItem"] = item
-        });
+        await Shell.Current.GoToAsync(
+            $"//{nameof(ProductDetailPage)}",
+            new Dictionary<string, object>
+            {
+                ["ProductItem"] = item
+            });
     }
 }
