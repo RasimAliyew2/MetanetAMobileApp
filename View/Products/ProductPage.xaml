@@ -227,17 +227,20 @@
                 </CollectionView.EmptyView>
             </CollectionView>
 
-            <!-- İlk açılışda yalnız parent-lər görünür -->
+            <!-- İlk açılışda yalnız ən yuxarı parent folder-lər görünür -->
             <CollectionView ItemsSource="{Binding ParentGroups}"
                             SelectionMode="None"
                             IsVisible="{Binding IsParentViewVisible}">
 
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="vm:ProductParentSection">
+                    <!-- Runtime item ProductRootCategorySection-dir.
+                         Köhnə ProductParentSection typed binding-i istifadə edilmir. -->
+                    <DataTemplate x:DataType="{x:Null}">
 
                         <VerticalStackLayout Spacing="8"
                                              Margin="0,0,0,12">
 
+                            <!-- Root folder -->
                             <Border Style="{StaticResource Card}"
                                     Padding="0">
 
@@ -247,7 +250,7 @@
 
                                     <Grid.GestureRecognizers>
                                         <TapGestureRecognizer
-                                            Command="{Binding BindingContext.ToggleParentCommand,
+                                            Command="{Binding BindingContext.ToggleRootCategoryCommand,
                                                               Source={RelativeSource AncestorType={x:Type ContentPage}}}"
                                             CommandParameter="{Binding .}"/>
                                     </Grid.GestureRecognizers>
@@ -299,13 +302,89 @@
                                 </Grid>
                             </Border>
 
-                            <!-- Products collection boş qalır.
-                                 Parent kliklənəndən sonra doldurulur. -->
-                            <CollectionView ItemsSource="{Binding Products}"
-                                            ItemTemplate="{StaticResource ProductCardTemplate}"
-                                            SelectionMode="None"
-                                            IsVisible="{Binding IsExpanded}"
-                                            Margin="12,0,12,0"/>
+                            <!-- Root kliklənənə qədər SubCategories boşdur.
+                                 Klikdən sonra yalnız birbaşa child folder-lər yaranır. -->
+                            <VerticalStackLayout IsVisible="{Binding IsExpanded}"
+                                                 Spacing="8"
+                                                 Margin="12,0,12,0"
+                                                 BindableLayout.ItemsSource="{Binding SubCategories}">
+
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="{x:Null}">
+
+                                        <VerticalStackLayout Spacing="8">
+
+                                            <!-- Child folder -->
+                                            <Border BackgroundColor="White"
+                                                    Stroke="{StaticResource Stroke}"
+                                                    StrokeThickness="1"
+                                                    StrokeShape="RoundRectangle 16"
+                                                    Padding="10">
+
+                                                <Grid ColumnDefinitions="58,*,Auto"
+                                                      ColumnSpacing="10"
+                                                      VerticalOptions="Center">
+
+                                                    <Grid.GestureRecognizers>
+                                                        <TapGestureRecognizer
+                                                            Command="{Binding BindingContext.ToggleSubCategoryCommand,
+                                                                              Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                            CommandParameter="{Binding .}"/>
+                                                    </Grid.GestureRecognizers>
+
+                                                    <Border BackgroundColor="#F6FFF8"
+                                                            Stroke="{StaticResource Stroke}"
+                                                            StrokeThickness="1"
+                                                            StrokeShape="RoundRectangle 13"
+                                                            Padding="6"
+                                                            HeightRequest="54"
+                                                            WidthRequest="54">
+
+                                                        <!-- ProductSubCategorySection-də ImageUrl yoxdursa
+                                                             fallback folder şəkli göstərilir. -->
+                                                        <Image Source="{Binding ImageUrl,
+                                                                                FallbackValue=product.png,
+                                                                                TargetNullValue=product.png}"
+                                                               Aspect="AspectFit"/>
+                                                    </Border>
+
+                                                    <Label Grid.Column="1"
+                                                           Text="{Binding Name}"
+                                                           FontSize="14"
+                                                           FontAttributes="Bold"
+                                                           TextColor="{StaticResource TextDark}"
+                                                           LineBreakMode="WordWrap"
+                                                           MaxLines="3"
+                                                           VerticalTextAlignment="Center"/>
+
+                                                    <Label Grid.Column="2"
+                                                           Text="⌄"
+                                                           FontSize="21"
+                                                           TextColor="{StaticResource TextGray}"
+                                                           VerticalTextAlignment="Center">
+
+                                                        <Label.Triggers>
+                                                            <DataTrigger TargetType="Label"
+                                                                         Binding="{Binding IsExpanded}"
+                                                                         Value="False">
+                                                                <Setter Property="Text"
+                                                                        Value="›"/>
+                                                            </DataTrigger>
+                                                        </Label.Triggers>
+                                                    </Label>
+                                                </Grid>
+                                            </Border>
+
+                                            <!-- Child folder kliklənənə qədər Products boşdur.
+                                                 Klikdən sonra yalnız həmin səviyyənin obyektləri yaranır. -->
+                                            <VerticalStackLayout IsVisible="{Binding IsExpanded}"
+                                                                 Margin="10,0,0,0"
+                                                                 BindableLayout.ItemsSource="{Binding Products}"
+                                                                 BindableLayout.ItemTemplate="{StaticResource ProductCardTemplate}"/>
+                                        </VerticalStackLayout>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </VerticalStackLayout>
                         </VerticalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
