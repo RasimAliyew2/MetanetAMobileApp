@@ -1,363 +1,380 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MetanetA_MobileApp.ViewModels"
              x:Class="MetanetA_MobileApp.View.SignUpPage"
+             x:DataType="vm:SignUpViewModel"
              BackgroundColor="#F3F4F6">
 
     <ContentPage.Resources>
+        <Color x:Key="TextPrimary">#111827</Color>
+        <Color x:Key="TextSecondary">#4B5563</Color>
+        <Color x:Key="Placeholder">#6B7280</Color>
+        <Color x:Key="BorderColor">#D1D5DB</Color>
+        <Color x:Key="ErrorColor">#DC2626</Color>
+        <Color x:Key="PrimaryGreen">#16A34A</Color>
 
         <Style x:Key="Card" TargetType="Border">
             <Setter Property="BackgroundColor" Value="White"/>
-            <Setter Property="StrokeThickness" Value="0"/>
+            <Setter Property="Stroke" Value="#E5E7EB"/>
+            <Setter Property="StrokeThickness" Value="1"/>
             <Setter Property="StrokeShape" Value="RoundRectangle 18"/>
             <Setter Property="Padding" Value="16"/>
+            <Setter Property="HorizontalOptions" Value="Fill"/>
             <Setter Property="Shadow">
                 <Setter.Value>
-                    <Shadow Opacity="0.15" Radius="18" Offset="0,8"/>
+                    <Shadow Opacity="0.12" Radius="14" Offset="0,5"/>
                 </Setter.Value>
             </Setter>
         </Style>
 
         <Style x:Key="FieldBorder" TargetType="Border">
-            <Setter Property="Stroke" Value="#E5E7EB"/>
+            <Setter Property="Stroke" Value="{StaticResource BorderColor}"/>
             <Setter Property="StrokeThickness" Value="1"/>
             <Setter Property="BackgroundColor" Value="#F9FAFB"/>
             <Setter Property="StrokeShape" Value="RoundRectangle 14"/>
-            <Setter Property="Padding" Value="12,10"/>
+            <Setter Property="Padding" Value="12,5"/>
+            <Setter Property="MinimumHeightRequest" Value="52"/>
+            <Setter Property="HorizontalOptions" Value="Fill"/>
+        </Style>
+
+        <Style x:Key="FieldLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="{StaticResource TextSecondary}"/>
+            <Setter Property="FontAutoScalingEnabled" Value="False"/>
+        </Style>
+
+        <Style x:Key="RequiredMark" TargetType="Label">
+            <Setter Property="Text" Value="*"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="{StaticResource ErrorColor}"/>
+            <Setter Property="FontAutoScalingEnabled" Value="False"/>
+        </Style>
+
+        <Style x:Key="TextEntry" TargetType="Entry">
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="TextColor" Value="{StaticResource TextPrimary}"/>
+            <Setter Property="PlaceholderColor" Value="{StaticResource Placeholder}"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontAutoScalingEnabled" Value="False"/>
+            <Setter Property="MinimumHeightRequest" Value="46"/>
+            <Setter Property="HorizontalOptions" Value="Fill"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="FieldPicker" TargetType="Picker">
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="TextColor" Value="{StaticResource TextPrimary}"/>
+            <Setter Property="TitleColor" Value="{StaticResource Placeholder}"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontAutoScalingEnabled" Value="False"/>
+            <Setter Property="MinimumHeightRequest" Value="46"/>
+            <Setter Property="HorizontalOptions" Value="Fill"/>
+        </Style>
+
+        <Style x:Key="FieldDatePicker" TargetType="DatePicker">
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="TextColor" Value="{StaticResource TextPrimary}"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontAutoScalingEnabled" Value="False"/>
+            <Setter Property="MinimumHeightRequest" Value="46"/>
+            <Setter Property="HorizontalOptions" Value="Fill"/>
         </Style>
 
         <Style x:Key="PrimaryButton" TargetType="Button">
-            <Setter Property="BackgroundColor" Value="#16A34A"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource PrimaryGreen}"/>
             <Setter Property="TextColor" Value="White"/>
-            <Setter Property="HeightRequest" Value="52"/>
+            <Setter Property="HeightRequest" Value="54"/>
             <Setter Property="CornerRadius" Value="16"/>
             <Setter Property="FontAttributes" Value="Bold"/>
             <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontAutoScalingEnabled" Value="False"/>
+            <Setter Property="HorizontalOptions" Value="Fill"/>
         </Style>
-
     </ContentPage.Resources>
 
-    <Grid Padding="18">
-
+    <Grid Padding="14,8,14,14">
         <ScrollView VerticalScrollBarVisibility="Never">
-            <VerticalStackLayout VerticalOptions="Center"
-                                 Spacing="14"
-                                 Padding="0,18">
+            <VerticalStackLayout Spacing="14"
+                                 Padding="0,10,0,24"
+                                 HorizontalOptions="Fill">
 
-                <VerticalStackLayout Spacing="6">
+                <VerticalStackLayout Spacing="5" Margin="2,0">
                     <Label Text="Qeydiyyat"
                            FontSize="28"
                            FontAttributes="Bold"
-                           TextColor="#111827"/>
+                           FontAutoScalingEnabled="False"
+                           TextColor="{StaticResource TextPrimary}"/>
 
-                    <Label FontSize="13" TextColor="#6B7280">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Text=""/>
-                                <Span Text="* " TextColor="#EF4444"/>
-                                <Span Text="işarəli xanalar vacibdir."/>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
+                    <HorizontalStackLayout Spacing="3">
+                        <Label Text="*"
+                               TextColor="{StaticResource ErrorColor}"
+                               FontSize="13"
+                               FontAttributes="Bold"
+                               FontAutoScalingEnabled="False"/>
+                        <Label Text="ulduz işarəli xanalar vacibdir."
+                               FontSize="13"
+                               FontAutoScalingEnabled="False"
+                               TextColor="{StaticResource TextSecondary}"/>
+                    </HorizontalStackLayout>
                 </VerticalStackLayout>
 
                 <Border Style="{StaticResource Card}">
-                    <VerticalStackLayout Spacing="12">
+                    <VerticalStackLayout Spacing="15">
 
-                        <!-- Ad / Soyad -->
-                        <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
-
-                            <VerticalStackLayout Spacing="6">
-                                <Label FontSize="13" TextColor="#6B7280">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="Ad "/>
-                                            <Span Text="*" TextColor="#EF4444"/>
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
-
-                                <Border Style="{StaticResource FieldBorder}">
-                                    <Border.Triggers>
-                                        <MultiTrigger TargetType="Border">
-                                            <MultiTrigger.Conditions>
-                                                <BindingCondition Binding="{Binding HasSubmitted}" Value="True"/>
-                                                <BindingCondition Binding="{Binding IsNameValid}" Value="False"/>
-                                            </MultiTrigger.Conditions>
-                                            <Setter Property="Stroke" Value="#EF4444"/>
-                                            <Setter Property="BackgroundColor" Value="#FEF2F2"/>
-                                        </MultiTrigger>
-                                    </Border.Triggers>
-
-                                    <Entry Placeholder="Ad"
-                                           Text="{Binding UserInfo.Name}"
-                                           BackgroundColor="Transparent"
-                                           TextColor="#111827"
-                                           PlaceholderColor="#9CA3AF"/>
-                                </Border>
-                            </VerticalStackLayout>
-
-                            <VerticalStackLayout Grid.Column="1" Spacing="6">
-                                <Label FontSize="13" TextColor="#6B7280">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="Soyad "/>
-                                            <Span Text="*" TextColor="#EF4444"/>
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
-
-                                <Border Style="{StaticResource FieldBorder}">
-                                    <Border.Triggers>
-                                        <MultiTrigger TargetType="Border">
-                                            <MultiTrigger.Conditions>
-                                                <BindingCondition Binding="{Binding HasSubmitted}" Value="True"/>
-                                                <BindingCondition Binding="{Binding IsSurnameValid}" Value="False"/>
-                                            </MultiTrigger.Conditions>
-                                            <Setter Property="Stroke" Value="#EF4444"/>
-                                            <Setter Property="BackgroundColor" Value="#FEF2F2"/>
-                                        </MultiTrigger>
-                                    </Border.Triggers>
-
-                                    <Entry Placeholder="Soyad"
-                                           Text="{Binding UserInfo.Surname}"
-                                           BackgroundColor="Transparent"
-                                           TextColor="#111827"
-                                           PlaceholderColor="#9CA3AF"/>
-                                </Border>
-                            </VerticalStackLayout>
-
-                        </Grid>
-
-                        <!-- Ata adı (required) / Rayon (required) -->
-                        <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
-
-                            <VerticalStackLayout Spacing="6">
-                                <Label FontSize="13" TextColor="#6B7280">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="Ata adı "/>
-                                            <Span Text="*" TextColor="#EF4444"/>
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
-
-                                <Border Style="{StaticResource FieldBorder}">
-                                    <Border.Triggers>
-                                        <MultiTrigger TargetType="Border">
-                                            <MultiTrigger.Conditions>
-                                                <BindingCondition Binding="{Binding HasSubmitted}" Value="True"/>
-                                                <BindingCondition Binding="{Binding IsSFathernameValid}" Value="False"/>
-                                            </MultiTrigger.Conditions>
-                                            <Setter Property="Stroke" Value="#EF4444"/>
-                                            <Setter Property="BackgroundColor" Value="#FEF2F2"/>
-                                        </MultiTrigger>
-                                    </Border.Triggers>
-
-                                    <Entry Placeholder="Ata adı"
-                                           Text="{Binding UserInfo.FatherName}"
-                                           BackgroundColor="Transparent"
-                                           TextColor="#111827"
-                                           PlaceholderColor="#9CA3AF"/>
-                                </Border>
-                            </VerticalStackLayout>
-
-                            <VerticalStackLayout Grid.Column="1" Spacing="6">
-                                <Label FontSize="13" TextColor="#6B7280">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="Rayon "/>
-                                            <Span Text="*" TextColor="#EF4444"/>
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
-
-                                <Border Style="{StaticResource FieldBorder}" Padding="12,6">
-                                    <Border.Triggers>
-                                        <MultiTrigger TargetType="Border">
-                                            <MultiTrigger.Conditions>
-                                                <BindingCondition Binding="{Binding HasSubmitted}" Value="True"/>
-                                                <BindingCondition Binding="{Binding IsCityValid}" Value="False"/>
-                                            </MultiTrigger.Conditions>
-                                            <Setter Property="Stroke" Value="#EF4444"/>
-                                            <Setter Property="BackgroundColor" Value="#FEF2F2"/>
-                                        </MultiTrigger>
-                                    </Border.Triggers>
-
-                                    <Picker Title="Rayon seçin"
-                                            ItemsSource="{Binding Cities}"
-                                            SelectedItem="{Binding UserInfo.City, Mode=TwoWay}"/>
-                                </Border>
-                            </VerticalStackLayout>
-
-                        </Grid>
-
-                        <!-- NEW: Village (required) -->
                         <VerticalStackLayout Spacing="6">
-                            <Label FontSize="13" TextColor="#6B7280">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="Kənd "/>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-
+                            <HorizontalStackLayout Spacing="3">
+                                <Label Text="Ad" Style="{StaticResource FieldLabel}"/>
+                                <Label Style="{StaticResource RequiredMark}"/>
+                            </HorizontalStackLayout>
                             <Border Style="{StaticResource FieldBorder}">
-                                <Entry Placeholder="Kənd"
-                                       Text="{Binding UserInfo.Village}"
-                                       BackgroundColor="Transparent"
-                                       TextColor="#111827"
-                                       PlaceholderColor="#9CA3AF"/>
+                                <Border.Triggers>
+                                    <MultiTrigger TargetType="Border">
+                                        <MultiTrigger.Conditions>
+                                            <BindingCondition Binding="{Binding HasSubmitted}" Value="True"/>
+                                            <BindingCondition Binding="{Binding IsNameValid}" Value="False"/>
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="Stroke" Value="{StaticResource ErrorColor}"/>
+                                        <Setter Property="BackgroundColor" Value="#FEF2F2"/>
+                                    </MultiTrigger>
+                                </Border.Triggers>
+                                <Entry Style="{StaticResource TextEntry}"
+                                       Placeholder="Adınızı daxil edin"
+                                       Text="{Binding UserInfo.Name, Mode=TwoWay}"/>
                             </Border>
                         </VerticalStackLayout>
 
-                        <!-- Telefon -->
-                        <Label FontSize="13" TextColor="#6B7280">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="Telefon nömrəsi "/>
-                                    <Span Text="*" TextColor="#EF4444"/>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-
-                        <Grid ColumnDefinitions="140,*" ColumnSpacing="12">
-
+                        <VerticalStackLayout Spacing="6">
+                            <HorizontalStackLayout Spacing="3">
+                                <Label Text="Soyad" Style="{StaticResource FieldLabel}"/>
+                                <Label Style="{StaticResource RequiredMark}"/>
+                            </HorizontalStackLayout>
                             <Border Style="{StaticResource FieldBorder}">
                                 <Border.Triggers>
                                     <MultiTrigger TargetType="Border">
                                         <MultiTrigger.Conditions>
                                             <BindingCondition Binding="{Binding HasSubmitted}" Value="True"/>
-                                            <BindingCondition Binding="{Binding IsPhoneValid}" Value="False"/>
+                                            <BindingCondition Binding="{Binding IsSurnameValid}" Value="False"/>
                                         </MultiTrigger.Conditions>
-                                        <Setter Property="Stroke" Value="#EF4444"/>
+                                        <Setter Property="Stroke" Value="{StaticResource ErrorColor}"/>
                                         <Setter Property="BackgroundColor" Value="#FEF2F2"/>
                                     </MultiTrigger>
                                 </Border.Triggers>
-
-                                <Picker Title="Prefix"
-                                        ItemsSource="{Binding Prefixes}"
-                                        SelectedItem="{Binding SelectedPrefix, Mode=TwoWay}"/>
+                                <Entry Style="{StaticResource TextEntry}"
+                                       Placeholder="Soyadınızı daxil edin"
+                                       Text="{Binding UserInfo.Surname, Mode=TwoWay}"/>
                             </Border>
+                        </VerticalStackLayout>
 
-                            <Border Grid.Column="1" Style="{StaticResource FieldBorder}">
+                        <VerticalStackLayout Spacing="6">
+                            <HorizontalStackLayout Spacing="3">
+                                <Label Text="Ata adı" Style="{StaticResource FieldLabel}"/>
+                                <Label Style="{StaticResource RequiredMark}"/>
+                            </HorizontalStackLayout>
+                            <Border Style="{StaticResource FieldBorder}">
                                 <Border.Triggers>
                                     <MultiTrigger TargetType="Border">
                                         <MultiTrigger.Conditions>
                                             <BindingCondition Binding="{Binding HasSubmitted}" Value="True"/>
-                                            <BindingCondition Binding="{Binding IsPhoneValid}" Value="False"/>
+                                            <BindingCondition Binding="{Binding IsSFathernameValid}" Value="False"/>
                                         </MultiTrigger.Conditions>
-                                        <Setter Property="Stroke" Value="#EF4444"/>
+                                        <Setter Property="Stroke" Value="{StaticResource ErrorColor}"/>
                                         <Setter Property="BackgroundColor" Value="#FEF2F2"/>
                                     </MultiTrigger>
                                 </Border.Triggers>
-
-                                <Entry Placeholder="XXXXXXX"
-                                       Keyboard="Numeric"
-                                       MaxLength="7"
-                                       Text="{Binding LineNumber, Mode=TwoWay}"
-                                       BackgroundColor="Transparent"
-                                       TextColor="#111827"
-                                       PlaceholderColor="#9CA3AF"/>
+                                <Entry Style="{StaticResource TextEntry}"
+                                       Placeholder="Ata adını daxil edin"
+                                       Text="{Binding UserInfo.FatherName, Mode=TwoWay}"/>
                             </Border>
+                        </VerticalStackLayout>
 
-                        </Grid>
+                        <VerticalStackLayout Spacing="6">
+                            <HorizontalStackLayout Spacing="3">
+                                <Label Text="Rayon" Style="{StaticResource FieldLabel}"/>
+                                <Label Style="{StaticResource RequiredMark}"/>
+                            </HorizontalStackLayout>
+                            <Border Style="{StaticResource FieldBorder}">
+                                <Border.Triggers>
+                                    <MultiTrigger TargetType="Border">
+                                        <MultiTrigger.Conditions>
+                                            <BindingCondition Binding="{Binding HasSubmitted}" Value="True"/>
+                                            <BindingCondition Binding="{Binding IsCityValid}" Value="False"/>
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="Stroke" Value="{StaticResource ErrorColor}"/>
+                                        <Setter Property="BackgroundColor" Value="#FEF2F2"/>
+                                    </MultiTrigger>
+                                </Border.Triggers>
+                                <Picker Style="{StaticResource FieldPicker}"
+                                        Title="Rayon seçin"
+                                        ItemsSource="{Binding Cities}"
+                                        SelectedItem="{Binding UserInfo.City, Mode=TwoWay}"/>
+                            </Border>
+                        </VerticalStackLayout>
 
-                        <Label Text="{Binding FullPhoneNumber}"
-                               FontSize="13"
-                               FontAttributes="Bold"
-                               TextColor="#111827"
-                               Margin="2,0,0,0"/>
+                        <!--<VerticalStackLayout Spacing="6">
+                            <Label Text="Kənd" Style="{StaticResource FieldLabel}"/>
+                            <Border Style="{StaticResource FieldBorder}">
+                                <Entry Style="{StaticResource TextEntry}"
+                                       Placeholder="Kəndi daxil edin"
+                                       Text="{Binding UserInfo.Village, Mode=TwoWay}"/>
+                            </Border>
+                        </VerticalStackLayout>-->
 
-                        <!-- Doğum tarixi (optional) / Peşə (required) -->
-                        <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                        <VerticalStackLayout Spacing="6">
+                            <HorizontalStackLayout Spacing="3">
+                                <Label Text="Telefon nömrəsi" Style="{StaticResource FieldLabel}"/>
+                                <Label Style="{StaticResource RequiredMark}"/>
+                            </HorizontalStackLayout>
 
-                            <VerticalStackLayout Spacing="6">
-                                <Label Text="Doğum tarixi" FontSize="13" TextColor="#6B7280"/>
-                                <Border Style="{StaticResource FieldBorder}" Padding="12,6">
-                                    <DatePicker Format="dd.MM.yyyy"
-                                                Date="{Binding UserInfo.BirthDate, Mode=TwoWay}"
-                                                MinimumDate="{Binding MinBirthDate}"
-                                                MaximumDate="{Binding MaxBirthDate}"/>
-                                </Border>
-
-                                <!-- Digər seçiləndə manual input -->
-                                <Border Style="{StaticResource FieldBorder}" Grid.ColumnSpan="2"
-                   IsVisible="{Binding IsOtherJobSelected}">
-                                    <Entry Placeholder="Peşəni yazın"
-                      Text="{Binding OtherJobText, Mode=TwoWay}"
-                      BackgroundColor="Transparent"
-                      TextColor="#111827"
-                      PlaceholderColor="#9CA3AF"/>
-                                </Border>
-                            </VerticalStackLayout>
-
-                            <VerticalStackLayout Grid.Column="1" Spacing="6">
-                                <Label FontSize="13" TextColor="#6B7280">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="Peşə "/>
-                                            <Span Text="*" TextColor="#EF4444"/>
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
-
-                                <Border Style="{StaticResource FieldBorder}" Padding="12,6">
+                            <Grid ColumnDefinitions="118,*"
+                                  ColumnSpacing="10"
+                                  HorizontalOptions="Fill">
+                                <Border Style="{StaticResource FieldBorder}">
                                     <Border.Triggers>
                                         <MultiTrigger TargetType="Border">
                                             <MultiTrigger.Conditions>
                                                 <BindingCondition Binding="{Binding HasSubmitted}" Value="True"/>
-                                                <BindingCondition Binding="{Binding IsJobValid}" Value="False"/>
+                                                <BindingCondition Binding="{Binding IsPhoneValid}" Value="False"/>
                                             </MultiTrigger.Conditions>
-                                            <Setter Property="Stroke" Value="#EF4444"/>
+                                            <Setter Property="Stroke" Value="{StaticResource ErrorColor}"/>
                                             <Setter Property="BackgroundColor" Value="#FEF2F2"/>
                                         </MultiTrigger>
                                     </Border.Triggers>
-                                    <Picker Title="Peşəni seçin"
-                                            ItemsSource="{Binding Jobs}"
-                                            SelectedItem="{Binding SelectedJob, Mode=TwoWay}"/>
-
-
+                                    <Picker Style="{StaticResource FieldPicker}"
+                                            Title="Prefix"
+                                            ItemsSource="{Binding Prefixes}"
+                                            SelectedItem="{Binding SelectedPrefix, Mode=TwoWay}"/>
                                 </Border>
-                                
-        
-                            </VerticalStackLayout>
 
-                        </Grid>
-
-                        <!-- Terms (required) -->
-                        <VerticalStackLayout Spacing="8" Margin="0,6,0,0">
-
-                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
-                                <CheckBox IsChecked="{Binding IsTermsAccepted, Mode=TwoWay}" />
-
-                                <Label Grid.Column="1"
-               VerticalTextAlignment="Center"
-               TextColor="#111827"
-               FontAttributes="Bold">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="Qaydaları qəbul edirəm " />
-                                            <Span Text="*" TextColor="#EF4444" />
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
+                                <Border Grid.Column="1" Style="{StaticResource FieldBorder}">
+                                    <Border.Triggers>
+                                        <MultiTrigger TargetType="Border">
+                                            <MultiTrigger.Conditions>
+                                                <BindingCondition Binding="{Binding HasSubmitted}" Value="True"/>
+                                                <BindingCondition Binding="{Binding IsPhoneValid}" Value="False"/>
+                                            </MultiTrigger.Conditions>
+                                            <Setter Property="Stroke" Value="{StaticResource ErrorColor}"/>
+                                            <Setter Property="BackgroundColor" Value="#FEF2F2"/>
+                                        </MultiTrigger>
+                                    </Border.Triggers>
+                                    <Entry Style="{StaticResource TextEntry}"
+                                           Placeholder="XXXXXXX"
+                                           Keyboard="Numeric"
+                                           MaxLength="7"
+                                           Text="{Binding LineNumber, Mode=TwoWay}"/>
+                                </Border>
                             </Grid>
 
-                            <!-- Link: open terms popup -->
-                            <Label TextColor="#2563EB"
-           FontSize="13"
-           FontAttributes="Bold"
-           Text="Şərtlər və Məxfilik Siyasəti (oxu)">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OpenTerms_Tapped" />
-                                </Label.GestureRecognizers>
-                            </Label>
-
+                            <Label Text="{Binding FullPhoneNumber}"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   FontAutoScalingEnabled="False"
+                                   TextColor="{StaticResource TextPrimary}"
+                                   Margin="2,2,0,0"/>
                         </VerticalStackLayout>
 
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="Doğum tarixi" Style="{StaticResource FieldLabel}"/>
+                            <Border Style="{StaticResource FieldBorder}">
+                                <DatePicker Style="{StaticResource FieldDatePicker}"
+                                            Format="dd.MM.yyyy"
+                                            Date="{Binding UserInfo.BirthDate, Mode=TwoWay}"
+                                            MinimumDate="{Binding MinBirthDate}"
+                                            MaximumDate="{Binding MaxBirthDate}"/>
+                            </Border>
+                        </VerticalStackLayout>
 
-                        <!-- Warning Panel (altda) -->
+                        <VerticalStackLayout Spacing="6">
+                            <HorizontalStackLayout Spacing="3">
+                                <Label Text="Peşə" Style="{StaticResource FieldLabel}"/>
+                                <Label Style="{StaticResource RequiredMark}"/>
+                            </HorizontalStackLayout>
+                            <Border Style="{StaticResource FieldBorder}">
+                                <Border.Triggers>
+                                    <MultiTrigger TargetType="Border">
+                                        <MultiTrigger.Conditions>
+                                            <BindingCondition Binding="{Binding HasSubmitted}" Value="True"/>
+                                            <BindingCondition Binding="{Binding IsJobValid}" Value="False"/>
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="Stroke" Value="{StaticResource ErrorColor}"/>
+                                        <Setter Property="BackgroundColor" Value="#FEF2F2"/>
+                                    </MultiTrigger>
+                                </Border.Triggers>
+                                <Picker Style="{StaticResource FieldPicker}"
+                                        Title="Peşəni seçin"
+                                        ItemsSource="{Binding Jobs}"
+                                        SelectedItem="{Binding SelectedJob, Mode=TwoWay}"/>
+                            </Border>
+
+                            <Border Style="{StaticResource FieldBorder}"
+                                    IsVisible="{Binding IsOtherJobSelected}">
+                                <Entry Style="{StaticResource TextEntry}"
+                                       Placeholder="Peşəni yazın"
+                                       Text="{Binding OtherJobText, Mode=TwoWay}"/>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <Grid ColumnDefinitions="34,*"
+                              ColumnSpacing="10"
+                              Margin="0,4,0,0"
+                              Padding="2,4">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleTermsCommand}"/>
+                            </Grid.GestureRecognizers>
+
+                            <Border WidthRequest="28"
+                                    HeightRequest="28"
+                                    Padding="0"
+                                    Stroke="#6B7280"
+                                    StrokeThickness="2"
+                                    BackgroundColor="White"
+                                    StrokeShape="RoundRectangle 6"
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Center">
+                                <Border.Triggers>
+                                    <DataTrigger TargetType="Border"
+                                                 Binding="{Binding IsTermsAccepted}"
+                                                 Value="True">
+                                        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryGreen}"/>
+                                        <Setter Property="Stroke" Value="{StaticResource PrimaryGreen}"/>
+                                    </DataTrigger>
+                                </Border.Triggers>
+
+                                <Label Text="✓"
+                                       IsVisible="{Binding IsTermsAccepted}"
+                                       TextColor="White"
+                                       FontSize="18"
+                                       FontAttributes="Bold"
+                                       FontAutoScalingEnabled="False"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center"/>
+                            </Border>
+
+                            <HorizontalStackLayout Grid.Column="1"
+                                                   Spacing="3"
+                                                   VerticalOptions="Center">
+                                <Label Text="Qaydaları qəbul edirəm"
+                                       FontSize="14"
+                                       FontAttributes="Bold"
+                                       FontAutoScalingEnabled="False"
+                                       TextColor="{StaticResource TextPrimary}"/>
+                                <Label Style="{StaticResource RequiredMark}"/>
+                            </HorizontalStackLayout>
+                        </Grid>
+
+                        <Label Text="Şərtlər və Məxfilik Siyasəti (oxu)"
+                               TextColor="#2563EB"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               FontAutoScalingEnabled="False"
+                               Padding="2,4">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OpenTerms_Tapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+
                         <Border IsVisible="{Binding IsValidationVisible}"
                                 BackgroundColor="#FEF2F2"
                                 Stroke="#FCA5A5"
@@ -366,19 +383,18 @@
                                 Padding="12,10">
                             <Label Text="{Binding ValidationMessage}"
                                    TextColor="#B91C1C"
-                                   FontSize="13"/>
+                                   FontSize="13"
+                                   FontAutoScalingEnabled="False"
+                                   LineBreakMode="WordWrap"/>
                         </Border>
 
                         <Button Text="Qeydiyyatdan keç"
                                 Style="{StaticResource PrimaryButton}"
                                 Command="{Binding SignUpCommand}"
-                                Margin="0,6,0,0"/>
-
+                                Margin="0,4,0,0"/>
                     </VerticalStackLayout>
                 </Border>
-
             </VerticalStackLayout>
         </ScrollView>
-
     </Grid>
 </ContentPage>

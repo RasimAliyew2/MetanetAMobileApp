@@ -1,3 +1,0 @@
-C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\bin\Release\net8.0-android\publish\com.MatanatA.UstalarKlubu-Signed.apk
-C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\bin\Release\net8.0-android\publish\com.MatanatA.UstalarKlubu.apk
-C:\Users\Rasim\source\repos\MetanetA_MobileApp\MetanetA_MobileApp\bin\Release\net8.0-android\publish\_Microsoft.Android.Resource.Designer.dll

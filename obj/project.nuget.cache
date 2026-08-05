@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "3OYkRrvw+eM=",
+  "dgSpecHash": "e0eHrpaXsU0=",
   "success": true,
   "projectFilePath": "C:\\Users\\Rasim\\source\\repos\\MetanetA_MobileApp\\MetanetA_MobileApp\\MetanetA_MobileApp.csproj",
   "expectedPackageFiles": [
@@ -39,7 +39,7 @@
     "C:\\Users\\Rasim\\.nuget\\packages\\microsoft.maui.graphics.win2d.winui.desktop\\8.0.100\\microsoft.maui.graphics.win2d.winui.desktop.8.0.100.nupkg.sha512",
     "C:\\Users\\Rasim\\.nuget\\packages\\microsoft.maui.maps\\8.0.92\\microsoft.maui.maps.8.0.92.nupkg.sha512",
     "C:\\Users\\Rasim\\.nuget\\packages\\microsoft.maui.resizetizer\\8.0.100\\microsoft.maui.resizetizer.8.0.100.nupkg.sha512",
-    "C:\\Users\\Rasim\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.11\\microsoft.net.illink.tasks.8.0.11.nupkg.sha512",
+    "C:\\Users\\Rasim\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.29\\microsoft.net.illink.tasks.8.0.29.nupkg.sha512",
     "C:\\Users\\Rasim\\.nuget\\packages\\microsoft.windows.sdk.buildtools\\10.0.22621.756\\microsoft.windows.sdk.buildtools.10.0.22621.756.nupkg.sha512",
     "C:\\Users\\Rasim\\.nuget\\packages\\microsoft.windowsappsdk\\1.5.240802000\\microsoft.windowsappsdk.1.5.240802000.nupkg.sha512",
     "C:\\Users\\Rasim\\.nuget\\packages\\plugin.firebase.cloudmessaging\\3.1.2\\plugin.firebase.cloudmessaging.3.1.2.nupkg.sha512",
@@ -171,11 +171,11 @@
     "C:\\Users\\Rasim\\.nuget\\packages\\microsoft.maccatalyst.runtime.maccatalyst-arm64.net8.0_18.0\\18.0.8324\\microsoft.maccatalyst.runtime.maccatalyst-arm64.net8.0_18.0.18.0.8324.nupkg.sha512",
     "C:\\Users\\Rasim\\.nuget\\packages\\microsoft.maccatalyst.runtime.maccatalyst-x64.net8.0_18.0\\18.0.8324\\microsoft.maccatalyst.runtime.maccatalyst-x64.net8.0_18.0.18.0.8324.nupkg.sha512",
     "C:\\Users\\Rasim\\.nuget\\packages\\microsoft.maccatalyst.ref.net8.0_18.0\\18.0.8324\\microsoft.maccatalyst.ref.net8.0_18.0.18.0.8324.nupkg.sha512",
-    "C:\\Users\\Rasim\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\8.0.11\\microsoft.netcore.app.crossgen2.win-x64.8.0.11.nupkg.sha512",
-    "C:\\Users\\Rasim\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.54\\microsoft.windows.sdk.net.ref.10.0.19041.54.nupkg.sha512",
-    "C:\\Users\\Rasim\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\8.0.11\\microsoft.aspnetcore.app.runtime.win-x64.8.0.11.nupkg.sha512",
-    "C:\\Users\\Rasim\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\8.0.11\\microsoft.windowsdesktop.app.runtime.win-x64.8.0.11.nupkg.sha512",
-    "C:\\Users\\Rasim\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\8.0.11\\microsoft.netcore.app.runtime.win-x64.8.0.11.nupkg.sha512"
+    "C:\\Users\\Rasim\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\8.0.29\\microsoft.netcore.app.crossgen2.win-x64.8.0.29.nupkg.sha512",
+    "C:\\Users\\Rasim\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.57\\microsoft.windows.sdk.net.ref.10.0.19041.57.nupkg.sha512",
+    "C:\\Users\\Rasim\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\8.0.29\\microsoft.aspnetcore.app.runtime.win-x64.8.0.29.nupkg.sha512",
+    "C:\\Users\\Rasim\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\8.0.29\\microsoft.windowsdesktop.app.runtime.win-x64.8.0.29.nupkg.sha512",
+    "C:\\Users\\Rasim\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\8.0.29\\microsoft.netcore.app.runtime.win-x64.8.0.29.nupkg.sha512"
   ],
   "logs": []
 }
