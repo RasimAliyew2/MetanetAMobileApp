@@ -77,33 +77,58 @@ public static class GetAndPostAllDataForUser
 
     // Köhnə GET metodu başqa kodların pozulmaması üçün saxlanılıb.
     public static async Task<string> GetAsync(
-        string uri,
-        string data,
-        string contentType = "application/json")
+      string uri,
+      string data = "",
+      string contentType = "application/json")
     {
-        using HttpContent content =
-            new StringContent(data, Encoding.UTF8, contentType);
-
-        using var client = CreateAuthenticatedClient();
-
-        using var requestMessage = new HttpRequestMessage
+        using var client = new HttpClient
         {
-            Content = content,
-            Method = HttpMethod.Get,
-            RequestUri = new Uri(uri)
+            Timeout = TimeSpan.FromSeconds(60)
         };
+
+        var token = Convert.ToBase64String(
+            Encoding.UTF8.GetBytes($"{Username}:{Password}")
+        );
+
+        using var request = new HttpRequestMessage(
+            HttpMethod.Get,
+            new Uri(uri)
+        );
+
+        request.Headers.Authorization =
+            new AuthenticationHeaderValue("Basic", token);
+
+        request.Headers.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json")
+        );
 
         try
         {
-            using var response =
-                await client.SendAsync(requestMessage);
+            using var response = await client.SendAsync(
+                request,
+                HttpCompletionOption.ResponseHeadersRead
+            );
 
-            return await response.Content.ReadAsStringAsync();
+            var responseBody =
+                await response.Content.ReadAsStringAsync();
+
+            //if (!response.IsSuccessStatusCode)
+            //{
+            //    throw new HttpRequestException(
+            //        $"HTTP {(int)response.StatusCode} " +
+            //        $"{response.ReasonPhrase}\n" +
+            //        $"Response: {responseBody}"
+            //    );
+            //}
+
+            return responseBody;
         }
-        catch (HttpRequestException ex)
+        catch (Exception exception)
         {
-            System.Diagnostics.Debug.WriteLine(ex);
-            System.Diagnostics.Debug.WriteLine(ex.InnerException);
+            System.Diagnostics.Debug.WriteLine(
+                $"GET ERROR: {exception}"
+            );
+
             throw;
         }
     }

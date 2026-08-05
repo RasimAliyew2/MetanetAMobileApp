@@ -14,6 +14,12 @@ public partial class ProductViewModel : BaseViewModel
 {
     // Mövcud XAML binding-ləri dəyişmir.
     public ObservableCollection<ProductRootCategorySection> RootCategories { get; } = new();
+
+    // ProductsView.xaml-də istifadə olunan köhnə binding adı.
+    // Eyni collection qaytarılır; məlumat iki dəfə yüklənmir.
+    public ObservableCollection<ProductRootCategorySection> ParentGroups
+        => RootCategories;
+
     public ObservableCollection<ProductItem> SearchResults { get; } = new();
 
     [ObservableProperty]
@@ -56,6 +62,9 @@ public partial class ProductViewModel : BaseViewModel
         !string.IsNullOrWhiteSpace(SearchText);
 
     public bool IsCategoryViewVisible => !IsSearchActive;
+
+    // ProductsView.xaml-də istifadə olunan köhnə binding adı.
+    public bool IsParentViewVisible => IsCategoryViewVisible;
 
     public ProductViewModel(BottomMenuState menuState)
         : base(menuState)
@@ -369,6 +378,7 @@ public partial class ProductViewModel : BaseViewModel
     {
         OnPropertyChanged(nameof(IsSearchActive));
         OnPropertyChanged(nameof(IsCategoryViewVisible));
+        OnPropertyChanged(nameof(IsParentViewVisible));
 
         var version = ++_searchVersion;
         _ = ApplySearchAsync(value, version);
