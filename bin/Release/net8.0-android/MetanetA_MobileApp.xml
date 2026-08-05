@@ -130,6 +130,19 @@
             <param name="value">The new property value that was set.</param>
             <remarks>This method is invoked right after the value of <see cref="P:MetanetA_MobileApp.Model.ProductItem.Weight"/> is changed.</remarks>
         </member>
+        <member name="T:MetanetA_MobileApp.Model.ProductTreeApiResponse">
+            <summary>
+            1C API-dən gələn kök JSON obyektidir:
+            { "Products": [ ... ] }
+            </summary>
+        </member>
+        <member name="T:MetanetA_MobileApp.Model.ProductTreeApiNode">
+            <summary>
+            JSON-dakı folder və məhsul üçün ortaq model.
+            Children adi List-dir; UI collection deyil. Buna görə bütün JSON gəlsə də
+            aşağı səviyyələr visual olaraq yaradılmır.
+            </summary>
+        </member>
         <member name="T:MetanetA_MobileApp.Model.ProfileBonus">
             <inheritdoc/>
         </member>
@@ -260,6 +273,30 @@
             <inheritdoc/>
             <inheritdoc/>
         </member>
+        <member name="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.LoadOnlyRootFoldersAsync">
+            <summary>
+            İlk açılışda yalnız ən yuxarı Products elementlərini yaradır.
+            JSON-dakı sıra olduğu kimi saxlanılır; alfabetik və ya manual sort edilmir.
+            </summary>
+        </member>
+        <member name="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.LoadImmediateChildrenForRootAsync(MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductRootCategorySection)">
+            <summary>
+            Root kliklənəndə yalnız onun birbaşa child folder-ləri yaradılır.
+            Child folder-lərin içindəki Products collection boş qalır.
+            </summary>
+        </member>
+        <member name="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.LoadImmediateChildrenForSubAsync(MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductSubCategorySection)">
+            <summary>
+            Son folder kliklənəndə yalnız onun birbaşa child-ları ProductItem olur.
+            Daha dərin folder gələrsə o da kart kimi görünür və kliklə bir səviyyə açılır.
+            </summary>
+        </member>
+        <member name="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.BuildHtmlDocument(System.String,System.String)">
+            <summary>
+            API-dən gələn HTML fragmentini WebView üçün tam HTML document edir.
+            Beləliklə mətn kimi deyil, real HTML kimi render olunur.
+            </summary>
+        </member>
         <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.CategoryKey">
             <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.categoryKey"/>
         </member>
@@ -269,18 +306,21 @@
         <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.IsBusy">
             <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.isBusy"/>
         </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.HasError">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.hasError"/>
+        </member>
         <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ErrorMessage">
             <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.errorMessage"/>
+        </member>
+        <member name="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.OnCategoryKeyChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.CategoryKey"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.CategoryKey"/> is changed.</remarks>
         </member>
         <member name="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.OnSearchTextChanged(System.String)">
             <summary>Executes the logic for when <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.SearchText"/> just changed.</summary>
             <param name="value">The new property value that was set.</param>
             <remarks>This method is invoked right after the value of <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.SearchText"/> is changed.</remarks>
-        </member>
-        <member name="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.OnErrorMessageChanged(System.String)">
-            <summary>Executes the logic for when <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ErrorMessage"/> just changed.</summary>
-            <param name="value">The new property value that was set.</param>
-            <remarks>This method is invoked right after the value of <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ErrorMessage"/> is changed.</remarks>
         </member>
         <member name="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.retryCommand">
             <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.RetryCommand"/>.</summary>
@@ -288,17 +328,17 @@
         <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.RetryCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.RetryAsync"/>.</summary>
         </member>
-        <member name="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.refreshCommand">
-            <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.RefreshCommand"/>.</summary>
+        <member name="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.toggleRootCategoryCommand">
+            <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ToggleRootCategoryCommand"/>.</summary>
         </member>
-        <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.RefreshCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.RefreshAsync"/>.</summary>
+        <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ToggleRootCategoryCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ToggleRootCategory(MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductRootCategorySection)"/>.</summary>
         </member>
-        <member name="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.toggleParentCommand">
-            <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ToggleParentCommand"/>.</summary>
+        <member name="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.toggleSubCategoryCommand">
+            <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ToggleSubCategoryCommand"/>.</summary>
         </member>
-        <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ToggleParentCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ToggleParent(MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductParentSection)"/>.</summary>
+        <member name="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ToggleSubCategoryCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ToggleSubCategory(MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductSubCategorySection)"/>.</summary>
         </member>
         <member name="F:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.clearSearchCommand">
             <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.ProductsViewModels.ProductViewModel.ClearSearchCommand"/>.</summary>
@@ -1134,6 +1174,19 @@
             <param name="value">The new property value that was set.</param>
             <remarks>This method is invoked right after the value of <see cref="P:MetanetA_MobileApp.Services.UIState.BottomMenuState.SelectedTab"/> is changed.</remarks>
         </member>
+        <member name="T:MetanetA_MobileApp.Services.GetDataFromServer.ProductImageResolver">
+            <summary>
+            API Image dəyərini mövcud Image.Source string binding-i üçün hazırlayır.
+            URL, resource adı və lokal path olduğu kimi saxlanır.
+            Base64 gəlirsə cache faylına çevrilir.
+            </summary>
+        </member>
+        <member name="T:MetanetA_MobileApp.Services.GetDataFromServer.ProductTreeApiClient">
+            <summary>
+            Products JSON-unu 1C HTTP servisindən alır.
+            Endpoint fərqlidirsə yalnız ProductsEndpoint sətrini dəyişmək kifayətdir.
+            </summary>
+        </member>
         <member name="T:MetanetA_MobileApp.Services.UserSession">
             <inheritdoc/>
         </member>
@@ -1504,6 +1557,9 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsBusy">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsBusy" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HasError">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HasError" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ErrorMessage">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ErrorMessage" generated properties.</summary>
         </member>
@@ -1830,6 +1886,9 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsBusy">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsBusy" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HasError">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HasError" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ErrorMessage">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ErrorMessage" generated properties.</summary>
