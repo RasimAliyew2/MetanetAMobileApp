@@ -29,8 +29,7 @@
 			</intent-filter>
 		</receiver>
 	</application>
-	
-	
+
 
 	<!-- Android 11+ package visibility: E-posta/SMS compose için gerekli -->
 	<queries>

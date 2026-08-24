@@ -90,10 +90,7 @@ public static class GetAndPostAllDataForUser
             Encoding.UTF8.GetBytes($"{Username}:{Password}")
         );
 
-        using var request = new HttpRequestMessage(
-            HttpMethod.Get,
-            new Uri(uri)
-        );
+        using var request = new HttpRequestMessage(HttpMethod.Get, uri);
 
         request.Headers.Authorization =
             new AuthenticationHeaderValue("Basic", token);
@@ -104,22 +101,20 @@ public static class GetAndPostAllDataForUser
 
         try
         {
+
             using var response = await client.SendAsync(
                 request,
-                HttpCompletionOption.ResponseHeadersRead
+                HttpCompletionOption.ResponseContentRead
             );
+  
+            var responseBody = await response.Content.ReadAsStringAsync();
 
-            var responseBody =
-                await response.Content.ReadAsStringAsync();
-
-            //if (!response.IsSuccessStatusCode)
-            //{
-            //    throw new HttpRequestException(
-            //        $"HTTP {(int)response.StatusCode} " +
-            //        $"{response.ReasonPhrase}\n" +
-            //        $"Response: {responseBody}"
-            //    );
-            //}
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException(
+                    $"HTTP {(int)response.StatusCode} {response.ReasonPhrase}\n{responseBody}"
+                );
+            }
 
             return responseBody;
         }

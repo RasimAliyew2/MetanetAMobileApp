@@ -23,6 +23,6 @@ public partial class SignUpPage : ContentPage
     {
         await this.ShowPopupAsync(new TermsPopup());
     }
- 
+
 
 }

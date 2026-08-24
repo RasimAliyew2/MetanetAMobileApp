@@ -94,11 +94,11 @@
                                FontAttributes="Bold"
                                TextColor="#16A34A"/>
 
-                        <Button Text="Hədiyyəyə çevir"
+                        <!--<Button Text="Hədiyyəyə çevir"
                                 Style="{StaticResource PrimaryButton}"
                                 HeightRequest="38"
                                 Padding="14,0"
-                                Command="{Binding ConvertToGiftCommand}" />
+                                Command="{Binding ConvertToGiftCommand}" />-->
                         
                     </HorizontalStackLayout>
                     

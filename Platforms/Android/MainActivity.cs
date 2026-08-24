@@ -125,4 +125,5 @@ public class MainActivity : MauiAppCompatActivity
         notificationManager.CreateNotificationChannel(channel);
         FirebaseCloudMessagingImplementation.ChannelId = channelId;
     }
+    
 }
