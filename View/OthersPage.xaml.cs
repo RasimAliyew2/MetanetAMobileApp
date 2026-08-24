@@ -32,7 +32,7 @@ public partial class OthersPage : ContentPage
     }
     private async void Map_Tapped(object sender, TappedEventArgs e)
     {
-        await Shell.Current.GoToAsync($"//{nameof(LocationMapPage)}");
+        await Shell.Current.GoToAsync(nameof(LocationFoldersPage));
     }
     private async void Faq_Tapped(object sender, TappedEventArgs e)
     {

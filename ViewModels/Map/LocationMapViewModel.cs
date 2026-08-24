@@ -2,13 +2,15 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MetanetA_MobileApp.Model;
+using MetanetA_MobileApp.Services;
 using MetanetA_MobileApp.Services.UIState;
-using MetanetA_MobileApp.View;
 
 namespace MetanetA_MobileApp.ViewModels;
 
 public partial class LocationMapViewModel : BaseViewModel
 {
+    private readonly LocationCatalogService _catalog;
+
     public ObservableCollection<MapPointItem> Points { get; } = new();
 
     [ObservableProperty]
@@ -18,54 +20,35 @@ public partial class LocationMapViewModel : BaseViewModel
     private double centerLongitude = 49.8671;
 
     [ObservableProperty]
-    private double startRadiusKm = 8;
+    private double startRadiusKm = 1;
 
-    private BottomMenuState bottomMenu;
-    public LocationMapViewModel(BottomMenuState bottomMenu) : base(bottomMenu)
+    [ObservableProperty]
+    private string mapTitle = "Məkan";
+
+    public LocationMapViewModel(
+        BottomMenuState bottomMenu,
+        LocationCatalogService catalog) : base(bottomMenu)
     {
-        this.bottomMenu =  bottomMenu;
-        // Nümunə nöqtələr
-        AddPoint(
-            latitude: 40.449083,
-            longitude: 49.8920,
-            title: "İlham Qala",
-            shortInfo: "Metro və ətraf zona",
-            description: "(Rüstəmov İlham Əlməmməd oğlu)(MİQ)");
-
-        AddPoint(
-            latitude: 40.427565,
-            longitude: 49.889082,
-            title: "Fuad Qafarlı A.",
-            shortInfo: "Mərkəzi hissə",
-            description: "Fuad Qafarlı A.(Zabrat)(MİQ)");
-
-        AddPoint(
-            latitude: 40.4400086763817,
-            longitude: 49.74052193871677,
-            title: "Əzizov Sovqat",
-            shortInfo: "",
-            description: "Hökuməli (MİQ)");
+        _catalog = catalog;
     }
 
-    public void AddPoint(
-        double latitude,
-        double longitude,
-        string title,
-        string shortInfo,
-        string description)
+    public void SelectLocation(string locationId)
     {
-        Points.Add(new MapPointItem
-        {
-            Latitude = latitude,
-            Longitude = longitude,
-            Title = title,
-            ShortInfo = shortInfo,
-            Description = description
-        });
+        var location = _catalog.GetLocation(locationId);
+        if (location is null)
+            return;
+
+        Points.Clear();
+        Points.Add(location);
+
+        CenterLatitude = location.Latitude;
+        CenterLongitude = location.Longitude;
+        MapTitle = location.Title;
     }
+
     [RelayCommand]
-    public async void GoBack()
+    public async Task GoBack()
     {
-        await Shell.Current.GoToAsync($"//{nameof(OthersPage)}");
+        await Shell.Current.GoToAsync("..");
     }
 }

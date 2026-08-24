@@ -107,6 +107,18 @@ build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.Ma
 build_metadata.AdditionalFiles.TargetPath = View\MainPage.xaml
 build_metadata.AdditionalFiles.RelativePath = View\MainPage.xaml
 
+[C:/Users/Rasim/source/repos/MetanetA_MobileApp/MetanetA_MobileApp/View/Map/LocationFoldersPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.Map.LocationFoldersPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\Map\LocationFoldersPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\Map\LocationFoldersPage.xaml
+
+[C:/Users/Rasim/source/repos/MetanetA_MobileApp/MetanetA_MobileApp/View/Map/LocationListPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.Map.LocationListPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\Map\LocationListPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\Map\LocationListPage.xaml
+
 [C:/Users/Rasim/source/repos/MetanetA_MobileApp/MetanetA_MobileApp/View/Map/LocationMapPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MetanetA_MobileApp.View.Map.LocationMapPage.xaml

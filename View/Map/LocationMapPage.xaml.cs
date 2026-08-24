@@ -1,5 +1,4 @@
-﻿using System.Collections.Specialized;
-using Microsoft.Maui.Controls.Maps;
+﻿using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Devices.Sensors;
 using Microsoft.Maui.Maps;
 using MetanetA_MobileApp.Model;
@@ -9,7 +8,7 @@ using Microsoft.Maui.ApplicationModel;
 
 namespace MetanetA_MobileApp.View.Map;
 
-public partial class LocationMapPage : ContentPage
+public partial class LocationMapPage : ContentPage, IQueryAttributable
 {
     private readonly LocationMapViewModel _vm;
     private readonly Dictionary<Pin, MapPointItem> _pinLookup = new();
@@ -19,7 +18,12 @@ public partial class LocationMapPage : ContentPage
         InitializeComponent();
         BindingContext = _vm = vm;
 
-        _vm.Points.CollectionChanged += OnPointsCollectionChanged;
+    }
+
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        if (query.TryGetValue("locationId", out var value))
+            _vm.SelectLocation(value?.ToString() ?? string.Empty);
     }
 
     protected override void OnAppearing()
@@ -28,13 +32,11 @@ public partial class LocationMapPage : ContentPage
         RenderMap();
     }
 
-    private void OnPointsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
-    {
-        MainThread.BeginInvokeOnMainThread(RenderMap);
-    }
-
     private void RenderMap()
     {
+        foreach (var oldPin in MainMap.Pins)
+            oldPin.MarkerClicked -= OnPinMarkerClicked;
+
         MainMap.Pins.Clear();
         _pinLookup.Clear();
 
@@ -99,15 +101,11 @@ public partial class LocationMapPage : ContentPage
         await DisplayAlert(point.Title, point.Description, "Bağla");
     }
 
-    private async void OnBackClicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync($"//{nameof(OthersPage)}");
-    }
     protected override bool OnBackButtonPressed()
     {
         MainThread.BeginInvokeOnMainThread(async () =>
         {
-            await Shell.Current.GoToAsync($"//{nameof(OthersPage)}");
+            await Shell.Current.GoToAsync("..");
         });
 
         return true; // default back işləməsin, app çıxmasın
@@ -115,8 +113,6 @@ public partial class LocationMapPage : ContentPage
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
-        _vm.Points.CollectionChanged -= OnPointsCollectionChanged;
-
         foreach (var pin in MainMap.Pins)
             // pin.InfoWindowClicked -= OnPinInfoWindowClicked;
             pin.MarkerClicked -= OnPinMarkerClicked;

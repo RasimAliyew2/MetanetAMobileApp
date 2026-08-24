@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:MetanetA_MobileApp.Model"
+             x:Class="MetanetA_MobileApp.View.Map.LocationListPage"
+             Title=""
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F8FAFC">
+
+    <Grid RowDefinitions="Auto,*">
+        <VerticalStackLayout Grid.Row="0" Padding="18,20,18,14" Spacing="12">
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                <Button Text="←"
+                        Clicked="OnBackClicked"
+                        WidthRequest="48"
+                        HeightRequest="48"
+                        Padding="0"
+                        FontSize="24"
+                        FontAttributes="Bold"
+                        TextColor="#111827"
+                        BackgroundColor="White"
+                        BorderColor="#E5E7EB"
+                        BorderWidth="1"
+                        CornerRadius="14" />
+
+                <Label x:Name="FolderTitleLabel"
+                       Grid.Column="1"
+                       FontSize="21"
+                       FontAttributes="Bold"
+                       TextColor="#111827"
+                       LineBreakMode="WordWrap"
+                       VerticalTextAlignment="Center" />
+            </Grid>
+
+            <Label Text="Xəritədə görmək istədiyiniz məkanı seçin."
+                   FontSize="14"
+                   TextColor="#6B7280" />
+        </VerticalStackLayout>
+
+        <Grid Grid.Row="1">
+            <CollectionView x:Name="LocationsList"
+                            Margin="18,0,18,18"
+                            SelectionMode="Single"
+                            SelectionChanged="OnLocationSelected">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="12" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:MapPointItem">
+                        <Border Padding="16"
+                                BackgroundColor="White"
+                                Stroke="#E5E7EB"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 18">
+                            <Grid ColumnDefinitions="42,*,Auto" ColumnSpacing="12">
+                                <Image Source="location.png"
+                                       WidthRequest="28"
+                                       HeightRequest="28"
+                                       VerticalOptions="Center" />
+
+                                <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
+                                    <Label Text="{Binding Title}"
+                                           FontSize="16"
+                                           FontAttributes="Bold"
+                                           TextColor="#111827" />
+                                    <Label Text="{Binding ShortInfo}"
+                                           FontSize="13"
+                                           TextColor="#4B5563"
+                                           LineBreakMode="WordWrap" />
+                                    <Label Text="{Binding Description}"
+                                           FontSize="12"
+                                           TextColor="#6B7280"
+                                           LineBreakMode="WordWrap" />
+                                </VerticalStackLayout>
+
+                                <Label Grid.Column="2"
+                                       Text="›"
+                                       FontSize="24"
+                                       TextColor="#9CA3AF"
+                                       VerticalTextAlignment="Center" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <VerticalStackLayout x:Name="EmptyState"
+                                 IsVisible="False"
+                                 Spacing="10"
+                                 Padding="32"
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center">
+                <Label Text="📂"
+                       FontSize="42"
+                       HorizontalTextAlignment="Center" />
+                <Label Text="Bu qovluqda hələ məkan yoxdur."
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       TextColor="#374151"
+                       HorizontalTextAlignment="Center" />
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>

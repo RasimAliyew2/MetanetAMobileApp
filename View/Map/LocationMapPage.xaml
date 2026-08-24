@@ -7,8 +7,7 @@
              Shell.NavBarIsVisible="False"
              BackgroundColor="Black">
  
-    
-      <Grid>
+    <Grid>
         <!-- Tam ekran xəritə -->
         <maps:Map x:Name="MainMap"
                   IsScrollEnabled="True"
@@ -38,6 +37,22 @@
                     FontAttributes="Bold"
                     TextColor="#111827"
                     BackgroundColor="Transparent" />
+        </Border>
+
+        <Border HorizontalOptions="Center"
+                VerticalOptions="Start"
+                Margin="82,24,16,0"
+                Padding="16,13"
+                Stroke="#D1D5DB"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 16"
+                BackgroundColor="White"
+                ZIndex="10">
+            <Label Text="{Binding MapTitle}"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="#111827"
+                   LineBreakMode="TailTruncation" />
         </Border>
     </Grid>
 </ContentPage>

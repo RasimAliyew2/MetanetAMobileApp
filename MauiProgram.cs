@@ -157,6 +157,8 @@ namespace MetanetA_MobileApp
             builder.Services.AddTransient<SalesPage>();
             builder.Services.AddTransient<CartPage>();
             builder.Services.AddTransient<LocationMapPage>();
+            builder.Services.AddTransient<LocationFoldersPage>();
+            builder.Services.AddTransient<LocationListPage>();
             builder.Services.AddTransient<SalesDetailPage>();
 
 
@@ -205,6 +207,7 @@ namespace MetanetA_MobileApp
             builder.Services.AddSingleton<BottomMenuState>(); 
             builder.Services.AddSingleton<SalesCatalogService>();
             builder.Services.AddSingleton<CartService>();
+            builder.Services.AddSingleton<LocationCatalogService>();
             
 
             //Models

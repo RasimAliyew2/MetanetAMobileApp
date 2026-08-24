@@ -599,11 +599,14 @@
         <member name="P:MetanetA_MobileApp.ViewModels.LocationMapViewModel.StartRadiusKm">
             <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.LocationMapViewModel.startRadiusKm"/>
         </member>
+        <member name="P:MetanetA_MobileApp.ViewModels.LocationMapViewModel.MapTitle">
+            <inheritdoc cref="F:MetanetA_MobileApp.ViewModels.LocationMapViewModel.mapTitle"/>
+        </member>
         <member name="F:MetanetA_MobileApp.ViewModels.LocationMapViewModel.goBackCommand">
             <summary>The backing field for <see cref="P:MetanetA_MobileApp.ViewModels.LocationMapViewModel.GoBackCommand"/>.</summary>
         </member>
         <member name="P:MetanetA_MobileApp.ViewModels.LocationMapViewModel.GoBackCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.LocationMapViewModel.GoBack"/>.</summary>
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:MetanetA_MobileApp.ViewModels.LocationMapViewModel.GoBack"/>.</summary>
         </member>
         <member name="T:MetanetA_MobileApp.ViewModels.Sales.OrdersViewModel">
             <inheritdoc/>
@@ -1545,6 +1548,9 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.StartRadiusKm">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "StartRadiusKm" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.MapTitle">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "MapTitle" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ProductItem">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ProductItem" generated properties.</summary>
         </member>
@@ -1874,6 +1880,9 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.StartRadiusKm">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "StartRadiusKm" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.MapTitle">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "MapTitle" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ProductItem">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ProductItem" generated properties.</summary>

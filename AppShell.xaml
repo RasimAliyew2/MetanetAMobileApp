@@ -9,7 +9,6 @@
     xmlns:localProducts="clr-namespace:MetanetA_MobileApp.View.Products"
     xmlns:localSing="clr-namespace:MetanetA_MobileApp.View.Sign"
     xmlns:localSales="clr-namespace:MetanetA_MobileApp.View.Sales"
-    xmlns:localMap="clr-namespace:MetanetA_MobileApp.View.Map"
     Shell.FlyoutBehavior="Disabled"
     Title="MetanetA_MobileApp">
 
@@ -92,12 +91,6 @@
     Title=""
     ContentTemplate="{DataTemplate localProducts:ProductDetailPage}"
     Route="ProductDetailPage"/>
-
-    <ShellContent
-    Title=""
-    ContentTemplate="{DataTemplate localMap:LocationMapPage}"
-    Route="LocationMapPage"/>
-    
 
     <ShellContent
    Title=""
