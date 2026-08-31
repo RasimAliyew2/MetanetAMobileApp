@@ -1,5 +1,4 @@
-﻿using AndroidX.Camera.View.Video;
-using MetanetA_MobileApp.ViewModel;
+﻿using MetanetA_MobileApp.ViewModel;
 using MetanetA_MobileApp.ViewModels;
 
 namespace MetanetA_MobileApp.View;
@@ -44,4 +43,3 @@ public partial class SignInPage : ContentPage
 #endif
     }
 }
-

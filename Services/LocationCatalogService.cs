@@ -43,8 +43,8 @@ public sealed class LocationCatalogService
         {
             new()
             {
-                Id = "rokol-renglendirme-masinlari",
-                Title = "Rokol rəngləndirmə maşınları olan mağazalar",
+                Id = "rokol-renglendirme-makinaları",
+                Title = "Rokol rəngləndirmə makinaları olan mağazalar",
                 Locations = rokolLocations
             },
             new()
