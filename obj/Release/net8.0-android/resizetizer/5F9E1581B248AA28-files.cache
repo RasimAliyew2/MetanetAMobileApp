@@ -1,4 +1,5 @@
-﻿obj\Release\net8.0-android\resizetizer\r\drawable\basket.png
+﻿obj\Release\net8.0-android\resizetizer\r\drawable\ads.png
+obj\Release\net8.0-android\resizetizer\r\drawable\basket.png
 obj\Release\net8.0-android\resizetizer\r\drawable\bonuses.png
 obj\Release\net8.0-android\resizetizer\r\drawable\campaigns.png
 obj\Release\net8.0-android\resizetizer\r\drawable\closed_eye_icon.png
@@ -27,15 +28,6 @@ obj\Release\net8.0-android\resizetizer\r\drawable\news.png
 obj\Release\net8.0-android\resizetizer\r\drawable\noticifation_button.png
 obj\Release\net8.0-android\resizetizer\r\drawable\other_green.png
 obj\Release\net8.0-android\resizetizer\r\drawable\other_icon.png
-obj\Release\net8.0-android\resizetizer\r\drawable\pic1.jpg
-obj\Release\net8.0-android\resizetizer\r\drawable\pic2.jpg
-obj\Release\net8.0-android\resizetizer\r\drawable\pic3.jpg
-obj\Release\net8.0-android\resizetizer\r\drawable\pic4.jpg
-obj\Release\net8.0-android\resizetizer\r\drawable\pic5.png
-obj\Release\net8.0-android\resizetizer\r\drawable\plite1.png
-obj\Release\net8.0-android\resizetizer\r\drawable\plite2.png
-obj\Release\net8.0-android\resizetizer\r\drawable\plite3.png
-obj\Release\net8.0-android\resizetizer\r\drawable\plite4.png
 obj\Release\net8.0-android\resizetizer\r\drawable\products.png
 obj\Release\net8.0-android\resizetizer\r\drawable\products_green.png
 obj\Release\net8.0-android\resizetizer\r\drawable\product_type1.jpg

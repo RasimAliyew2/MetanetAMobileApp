@@ -16,16 +16,35 @@ public partial class LocationListPage : ContentPage, IQueryAttributable
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
         if (!query.TryGetValue("folderId", out var value))
+        {
+            ShowEmptyFolder();
             return;
+        }
 
-        var folder = _catalog.GetFolder(value?.ToString() ?? string.Empty);
+        var encodedFolderId = value?.ToString() ?? string.Empty;
+        var folderId = Uri.UnescapeDataString(encodedFolderId);
+        var folder = _catalog.GetFolder(folderId);
+
         if (folder is null)
+        {
+            ShowEmptyFolder();
             return;
+        }
 
         FolderTitleLabel.Text = folder.Title;
         LocationsList.ItemsSource = folder.Locations;
-        EmptyState.IsVisible = folder.Locations.Count == 0;
-        LocationsList.IsVisible = folder.Locations.Count > 0;
+
+        var hasLocations = folder.Locations.Count > 0;
+        EmptyState.IsVisible = !hasLocations;
+        LocationsList.IsVisible = hasLocations;
+    }
+
+    private void ShowEmptyFolder()
+    {
+        FolderTitleLabel.Text = string.Empty;
+        LocationsList.ItemsSource = null;
+        LocationsList.IsVisible = false;
+        EmptyState.IsVisible = true;
     }
 
     private async void OnLocationSelected(object? sender, SelectionChangedEventArgs e)

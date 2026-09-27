@@ -43,7 +43,9 @@ public sealed class LocationCatalogService
         {
             new()
             {
-                Id = "rokol-renglendirme-makinaları",
+                // Route/query identifiers must stay ASCII. The visible title may
+                // contain any Azerbaijani characters without affecting navigation.
+                Id = "rokol-renglendirme-makinalari",
                 Title = "Rokol rəngləndirmə makinaları olan mağazalar",
                 Locations = rokolLocations
             },

@@ -256,7 +256,7 @@
 
         <!-- CONTENT -->
         <Grid Grid.Row="1"
-              RowDefinitions="*,*,*,*"
+              RowDefinitions="*,*,*,*,*"
               RowSpacing="12">
 
             <!-- Bonus -->
@@ -309,6 +309,19 @@
 
                 <Image Source="Campaigns.png"
                        Aspect="AspectFill"/>
+            </Border>
+
+            <!-- Kampaniyalar -->
+            <Border Grid.Row="4"
+                   Style="{StaticResource TileCard}"
+                   VerticalOptions="Fill"
+                   HorizontalOptions="Fill">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CampaignsCommand}" />
+                </Border.GestureRecognizers>
+
+                <Image Source="ads.png"
+                      Aspect="AspectFill"/>
             </Border>
 
         </Grid>
