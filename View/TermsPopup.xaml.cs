@@ -1,4 +1,5 @@
 using System;
+using CommunityToolkit.Maui.Extensions;
 using CommunityToolkit.Maui.Views;
 
 namespace MetanetA_MobileApp.View
@@ -10,9 +11,9 @@ namespace MetanetA_MobileApp.View
             InitializeComponent();
         }
 
-        private void Close_Clicked(object sender, EventArgs e)
+        private async void Close_Clicked(object sender, EventArgs e)
         {
-            Close();
+            await Shell.Current.ClosePopupAsync();
         }
     }
 }

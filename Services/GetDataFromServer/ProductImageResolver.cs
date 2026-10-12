@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -10,6 +11,16 @@ namespace MetanetA_MobileApp.Services.GetDataFromServer;
 /// </summary>
 public static class ProductImageResolver
 {
+    public static bool TryGetRemoteUri(
+        string? image,
+        [NotNullWhen(true)] out Uri? uri)
+    {
+        return Uri.TryCreate(image?.Trim(), UriKind.Absolute, out uri) &&
+               (uri.Scheme == Uri.UriSchemeHttp ||
+                uri.Scheme == Uri.UriSchemeHttps) &&
+               !string.IsNullOrWhiteSpace(uri.Host);
+    }
+
     public static async Task<string> ResolveAsync(
         string? image,
         string fallback = "product.png")
@@ -19,10 +30,11 @@ public static class ProductImageResolver
 
         var value = image.Trim();
 
+        if (TryGetRemoteUri(value, out _))
+            return value;
+
         if (Uri.TryCreate(value, UriKind.Absolute, out var uri) &&
-            (uri.Scheme == Uri.UriSchemeHttp ||
-             uri.Scheme == Uri.UriSchemeHttps ||
-             uri.Scheme == Uri.UriSchemeFile))
+            uri.Scheme == Uri.UriSchemeFile)
         {
             return value;
         }

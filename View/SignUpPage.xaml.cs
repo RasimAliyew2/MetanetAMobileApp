@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Extensions;
 using MetanetA_MobileApp.ViewModels;
 
 namespace MetanetA_MobileApp.View;
@@ -21,7 +22,10 @@ public partial class SignUpPage : ContentPage
     }
     private async void OpenTerms_Tapped(object sender, TappedEventArgs e)
     {
-        await this.ShowPopupAsync(new TermsPopup());
+        await this.ShowPopupAsync(new TermsPopup(), new PopupOptions
+        {
+            CanBeDismissedByTappingOutsideOfPopup = true
+        });
     }
 
 

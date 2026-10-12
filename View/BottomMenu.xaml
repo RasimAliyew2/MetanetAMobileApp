@@ -2,16 +2,18 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MetanetA_MobileApp.View.BottomMenu"
-             HeightRequest="70"
-             BackgroundColor="White">
+             MinimumHeightRequest="72"
+             BackgroundColor="White"
+             SafeAreaEdges="None">
 
     <ContentView.Resources>
-        <!-- Whole menu cell: this makes the clickable area much bigger than the icon itself. -->
         <Style x:Key="BottomMenuItem" TargetType="Grid">
-            <Setter Property="Padding" Value="0,5" />
-            <Setter Property="MinimumHeightRequest" Value="58" />
+            <Setter Property="Padding" Value="2,0" />
+            <Setter Property="MinimumHeightRequest" Value="56" />
+            <Setter Property="MinimumWidthRequest" Value="0" />
             <Setter Property="HorizontalOptions" Value="Fill" />
             <Setter Property="VerticalOptions" Value="Fill" />
+            <Setter Property="SafeAreaEdges" Value="None" />
         </Style>
 
         <Style x:Key="BottomMenuIcon" TargetType="Image">
@@ -22,13 +24,15 @@
         </Style>
 
         <Style x:Key="BottomMenuText" TargetType="Label">
+            <Setter Property="FontFamily" Value="OpenSansRegular" />
             <Setter Property="FontSize" Value="10" />
-            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="TextColor" Value="#69756F" />
             <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
             <Setter Property="InputTransparent" Value="True" />
         </Style>
 
-        <!-- Transparent full-cell button. It sits above the icon and label. -->
+        <!-- Full-cell buttons preserve accessible, generous touch targets. -->
         <Style x:Key="BottomMenuTapButton" TargetType="Button">
             <Setter Property="BackgroundColor" Value="Transparent" />
             <Setter Property="Text" Value="" />
@@ -37,15 +41,23 @@
             <Setter Property="CornerRadius" Value="14" />
             <Setter Property="HorizontalOptions" Value="Fill" />
             <Setter Property="VerticalOptions" Value="Fill" />
-            <Setter Property="MinimumHeightRequest" Value="58" />
+            <Setter Property="MinimumHeightRequest" Value="56" />
+            <Setter Property="MinimumWidthRequest" Value="0" />
             <Setter Property="VisualStateManager.VisualStateGroups">
                 <VisualStateGroupList>
                     <VisualStateGroup x:Name="CommonStates">
-                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="Transparent" />
+                                <Setter Property="Opacity" Value="1" />
+                                <Setter Property="Scale" Value="1" />
+                            </VisualState.Setters>
+                        </VisualState>
                         <VisualState x:Name="Pressed">
                             <VisualState.Setters>
-                                <Setter Property="Opacity" Value="0.55" />
-                                <Setter Property="Scale" Value="0.96" />
+                                <Setter Property="BackgroundColor" Value="#1815803D" />
+                                <Setter Property="Opacity" Value="0.75" />
+                                <Setter Property="Scale" Value="0.98" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -54,18 +66,42 @@
         </Style>
     </ContentView.Resources>
 
-    <Border StrokeThickness="0"
-            BackgroundColor="White">
-        <Grid ColumnDefinitions="*,*,*,*,*"
-              Padding="10,6"
-              ColumnSpacing="0"
-              VerticalOptions="Fill">
+    <Grid RowDefinitions="1,Auto"
+          RowSpacing="0"
+          BackgroundColor="White"
+          SafeAreaEdges="None">
+        <BoxView Grid.Row="0"
+                 HeightRequest="1"
+                 BackgroundColor="#E6EBE9"
+                 InputTransparent="True" />
 
-            <!-- Home -->
-            <Grid Grid.Column="0" Style="{StaticResource BottomMenuItem}">
-                <VerticalStackLayout Spacing="2"
+        <Grid Grid.Row="1"
+              ColumnDefinitions="*,*,*,*,*"
+              Padding="8,7,8,8"
+              ColumnSpacing="0"
+              VerticalOptions="Fill"
+              SafeAreaEdges="None">
+
+            <Grid Grid.Column="0"
+                  Style="{StaticResource BottomMenuItem}">
+                <Border StrokeThickness="0"
+                        StrokeShape="RoundRectangle 14"
+                        BackgroundColor="Transparent"
+                        SafeAreaEdges="None"
+                        InputTransparent="True">
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border"
+                                     Binding="{Binding MenuState.IsHomeSelected}"
+                                     Value="True">
+                            <Setter Property="BackgroundColor" Value="#E8F7ED" />
+                        </DataTrigger>
+                    </Border.Triggers>
+                </Border>
+
+                <VerticalStackLayout Spacing="4"
                                      HorizontalOptions="Center"
                                      VerticalOptions="Center"
+                                     SafeAreaEdges="None"
                                      InputTransparent="True">
                     <Image Source="house_button.png"
                            Style="{StaticResource BottomMenuIcon}">
@@ -73,24 +109,48 @@
                             <DataTrigger TargetType="Image"
                                          Binding="{Binding MenuState.IsHomeSelected}"
                                          Value="True">
-                                <Setter Property="Source" Value="house_button_green" />
+                                <Setter Property="Source" Value="house_button_green.png" />
                             </DataTrigger>
                         </Image.Triggers>
                     </Image>
 
                     <Label Text="Əsas"
-                           Style="{StaticResource BottomMenuText}" />
+                           Style="{StaticResource BottomMenuText}">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label"
+                                         Binding="{Binding MenuState.IsHomeSelected}"
+                                         Value="True">
+                                <Setter Property="TextColor" Value="#15803D" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
                 </VerticalStackLayout>
 
                 <Button Style="{StaticResource BottomMenuTapButton}"
-                        Command="{Binding HomeCommand}" />
+                        Command="{Binding HomeCommand}"
+                        SemanticProperties.Description="Əsas səhifə" />
             </Grid>
 
-            <!-- Products -->
-            <Grid Grid.Column="1" Style="{StaticResource BottomMenuItem}">
-                <VerticalStackLayout Spacing="2"
+            <Grid Grid.Column="1"
+                  Style="{StaticResource BottomMenuItem}">
+                <Border StrokeThickness="0"
+                        StrokeShape="RoundRectangle 14"
+                        BackgroundColor="Transparent"
+                        SafeAreaEdges="None"
+                        InputTransparent="True">
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border"
+                                     Binding="{Binding MenuState.IsProductsSelected}"
+                                     Value="True">
+                            <Setter Property="BackgroundColor" Value="#E8F7ED" />
+                        </DataTrigger>
+                    </Border.Triggers>
+                </Border>
+
+                <VerticalStackLayout Spacing="4"
                                      HorizontalOptions="Center"
                                      VerticalOptions="Center"
+                                     SafeAreaEdges="None"
                                      InputTransparent="True">
                     <Image Source="products.png"
                            Style="{StaticResource BottomMenuIcon}">
@@ -104,18 +164,42 @@
                     </Image>
 
                     <Label Text="Məhsullar"
-                           Style="{StaticResource BottomMenuText}" />
+                           Style="{StaticResource BottomMenuText}">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label"
+                                         Binding="{Binding MenuState.IsProductsSelected}"
+                                         Value="True">
+                                <Setter Property="TextColor" Value="#15803D" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
                 </VerticalStackLayout>
 
                 <Button Style="{StaticResource BottomMenuTapButton}"
-                        Command="{Binding ProductsCommand}" />
+                        Command="{Binding ProductsCommand}"
+                        SemanticProperties.Description="Məhsullar" />
             </Grid>
 
-            <!-- QR -->
-            <Grid Grid.Column="2" Style="{StaticResource BottomMenuItem}">
-                <VerticalStackLayout Spacing="2"
+            <Grid Grid.Column="2"
+                  Style="{StaticResource BottomMenuItem}">
+                <Border StrokeThickness="0"
+                        StrokeShape="RoundRectangle 14"
+                        BackgroundColor="Transparent"
+                        SafeAreaEdges="None"
+                        InputTransparent="True">
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border"
+                                     Binding="{Binding MenuState.IsQrSelected}"
+                                     Value="True">
+                            <Setter Property="BackgroundColor" Value="#E8F7ED" />
+                        </DataTrigger>
+                    </Border.Triggers>
+                </Border>
+
+                <VerticalStackLayout Spacing="4"
                                      HorizontalOptions="Center"
                                      VerticalOptions="Center"
+                                     SafeAreaEdges="None"
                                      InputTransparent="True">
                     <Image Source="qr_code.png"
                            Style="{StaticResource BottomMenuIcon}">
@@ -129,18 +213,42 @@
                     </Image>
 
                     <Label Text="QR"
-                           Style="{StaticResource BottomMenuText}" />
+                           Style="{StaticResource BottomMenuText}">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label"
+                                         Binding="{Binding MenuState.IsQrSelected}"
+                                         Value="True">
+                                <Setter Property="TextColor" Value="#15803D" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
                 </VerticalStackLayout>
 
                 <Button Style="{StaticResource BottomMenuTapButton}"
-                        Command="{Binding QrCommand}" />
+                        Command="{Binding QrCommand}"
+                        SemanticProperties.Description="QR kodu skan et" />
             </Grid>
 
-            <!-- Profile -->
-            <Grid Grid.Column="3" Style="{StaticResource BottomMenuItem}">
-                <VerticalStackLayout Spacing="2"
+            <Grid Grid.Column="3"
+                  Style="{StaticResource BottomMenuItem}">
+                <Border StrokeThickness="0"
+                        StrokeShape="RoundRectangle 14"
+                        BackgroundColor="Transparent"
+                        SafeAreaEdges="None"
+                        InputTransparent="True">
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border"
+                                     Binding="{Binding MenuState.IsProfileSelected}"
+                                     Value="True">
+                            <Setter Property="BackgroundColor" Value="#E8F7ED" />
+                        </DataTrigger>
+                    </Border.Triggers>
+                </Border>
+
+                <VerticalStackLayout Spacing="4"
                                      HorizontalOptions="Center"
                                      VerticalOptions="Center"
+                                     SafeAreaEdges="None"
                                      InputTransparent="True">
                     <Image Source="profile.png"
                            Style="{StaticResource BottomMenuIcon}">
@@ -154,18 +262,42 @@
                     </Image>
 
                     <Label Text="Profil"
-                           Style="{StaticResource BottomMenuText}" />
+                           Style="{StaticResource BottomMenuText}">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label"
+                                         Binding="{Binding MenuState.IsProfileSelected}"
+                                         Value="True">
+                                <Setter Property="TextColor" Value="#15803D" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
                 </VerticalStackLayout>
 
                 <Button Style="{StaticResource BottomMenuTapButton}"
-                        Command="{Binding ProfileCommand}" />
+                        Command="{Binding ProfileCommand}"
+                        SemanticProperties.Description="Profil" />
             </Grid>
 
-            <!-- Other -->
-            <Grid Grid.Column="4" Style="{StaticResource BottomMenuItem}">
-                <VerticalStackLayout Spacing="2"
+            <Grid Grid.Column="4"
+                  Style="{StaticResource BottomMenuItem}">
+                <Border StrokeThickness="0"
+                        StrokeShape="RoundRectangle 14"
+                        BackgroundColor="Transparent"
+                        SafeAreaEdges="None"
+                        InputTransparent="True">
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border"
+                                     Binding="{Binding MenuState.IsOtherSelected}"
+                                     Value="True">
+                            <Setter Property="BackgroundColor" Value="#E8F7ED" />
+                        </DataTrigger>
+                    </Border.Triggers>
+                </Border>
+
+                <VerticalStackLayout Spacing="4"
                                      HorizontalOptions="Center"
                                      VerticalOptions="Center"
+                                     SafeAreaEdges="None"
                                      InputTransparent="True">
                     <Image Source="other_icon.png"
                            Style="{StaticResource BottomMenuIcon}">
@@ -179,13 +311,21 @@
                     </Image>
 
                     <Label Text="Digər"
-                           Style="{StaticResource BottomMenuText}" />
+                           Style="{StaticResource BottomMenuText}">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label"
+                                         Binding="{Binding MenuState.IsOtherSelected}"
+                                         Value="True">
+                                <Setter Property="TextColor" Value="#15803D" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
                 </VerticalStackLayout>
 
                 <Button Style="{StaticResource BottomMenuTapButton}"
-                        Command="{Binding OtherCommand}" />
+                        Command="{Binding OtherCommand}"
+                        SemanticProperties.Description="Digər bölmələr" />
             </Grid>
-
         </Grid>
-    </Border>
+    </Grid>
 </ContentView>

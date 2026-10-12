@@ -4,6 +4,8 @@ namespace MetanetA_MobileApp
     {
         public App()
         {
+            // Keep brand surfaces and native controls consistent on both platforms.
+            UserAppTheme = AppTheme.Light;
             InitializeComponent();
 
             // Firebase notification initialization must NOT run here.

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ui="clr-namespace:MetanetA_MobileApp.View.Controls"
+             x:Class="MetanetA_MobileApp.View.Controls.DashboardCard"
+             x:Name="Card" x:DataType="ui:DashboardCard" SafeAreaEdges="None">
+    <Border Style="{StaticResource BrandCard}" Padding="0" MinimumHeightRequest="100">
+        <Grid SafeAreaEdges="None">
+            <Grid ColumnDefinitions="64,*,24" ColumnSpacing="14" Padding="14,12" SafeAreaEdges="None" InputTransparent="True">
+                <Image Source="{Binding Artwork, Source={x:Reference Card}}" WidthRequest="64" HeightRequest="64"
+                       Aspect="AspectFit" VerticalOptions="Center" />
+                <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center" SafeAreaEdges="None">
+                    <Label Text="{Binding Title, Source={x:Reference Card}}" FontFamily="OpenSansSemibold"
+                           FontSize="16" TextColor="{StaticResource BrandInk}" LineBreakMode="WordWrap" />
+                    <Label Text="{Binding Subtitle, Source={x:Reference Card}}" FontFamily="OpenSansRegular"
+                           FontSize="12" TextColor="{StaticResource BrandMuted}" LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
+                <Image Grid.Column="2" Source="brand_chevron.png" WidthRequest="18" HeightRequest="18"
+                       VerticalOptions="Center" Aspect="AspectFit" />
+            </Grid>
+            <Button Text="" BackgroundColor="Transparent" BorderWidth="0" Padding="0" CornerRadius="22"
+                    MinimumWidthRequest="0" MinimumHeightRequest="64"
+                    Command="{Binding Command, Source={x:Reference Card}}"
+                    SemanticProperties.Description="{Binding Title, Source={x:Reference Card}}">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters><Setter Property="BackgroundColor" Value="Transparent" /></VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters><Setter Property="BackgroundColor" Value="#0D15803D" /></VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </Button>
+        </Grid>
+    </Border>
+</ContentView>

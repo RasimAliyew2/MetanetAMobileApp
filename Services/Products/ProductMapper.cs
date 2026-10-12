@@ -1,6 +1,7 @@
 using System.Net;
 using System.Text.RegularExpressions;
 using MetanetA_MobileApp.Model;
+using MetanetA_MobileApp.Services.GetDataFromServer;
 
 namespace MetanetA_MobileApp.Services.Products;
 
@@ -13,6 +14,8 @@ public static class ProductMapper
     {
         var cleanName = NormalizeText(source.Name);
         var cleanParent = NormalizeText(source.ParentName);
+        var image = source.Image?.Trim() ?? string.Empty;
+        var isRemoteImage = ProductImageResolver.TryGetRemoteUri(image, out _);
 
         return new ProductItem
         {
@@ -28,8 +31,9 @@ public static class ProductMapper
             Price = ToFloat(source.Price),
             Weight = ToFloat(source.Weight),
 
-            ImageBase64 = source.Image ?? string.Empty,
-            ImageUrl = string.Empty,
+            // Image sahəsi URL və ya əvvəlki Base64 dəyəri ola bilər.
+            ImageUrl = isRemoteImage ? image : string.Empty,
+            ImageBase64 = isRemoteImage ? string.Empty : image,
 
             // HTML WebView-də render ediləcək, plain string kimi göstərilmir.
             AboutTheProduct = source.Html ?? string.Empty

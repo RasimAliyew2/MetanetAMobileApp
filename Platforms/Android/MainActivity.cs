@@ -68,7 +68,10 @@ public class MainActivity : MauiAppCompatActivity
             .SetStorageBucket("ustalarklubu-13104.firebasestorage.app")
             .Build();
 
-        CrossFirebase.Initialize(this, firebaseOptions);
+        CrossFirebase.Initialize(
+            this,
+            () => Platform.CurrentActivity ?? this,
+            firebaseOptions: firebaseOptions);
 
         // Initialization baş tutmasa, xəta token sorğusuna qədər gizlənməsin.
         _ = NativeFirebaseApp.Instance;

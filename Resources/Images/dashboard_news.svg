@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
+  <defs>
+    <linearGradient id="paper" x1="22" y1="17" x2="61" y2="66" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/><stop offset="1" stop-color="#EDE5FD"/>
+    </linearGradient>
+    <linearGradient id="photo" x1="44" y1="29" x2="62" y2="44" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B19AE9"/><stop offset="1" stop-color="#8261CC"/>
+    </linearGradient>
+  </defs>
+  <circle cx="40" cy="39" r="34" fill="#F1EBFC"/>
+  <ellipse cx="41" cy="70" rx="25" ry="4" fill="#CAB8EA" opacity=".35"/>
+  <rect x="14" y="23" width="45" height="45" rx="7" fill="#CEBEEB" transform="rotate(-7 36 45)"/>
+  <path d="M23 15h39a5 5 0 0 1 5 5v44a5 5 0 0 1-5 5H23a7 7 0 0 1-7-7V22a7 7 0 0 1 7-7Z" fill="url(#paper)" stroke="#D4C5ED" stroke-width="1.5"/>
+  <path d="M23 20v43a6 6 0 0 1-6 6" fill="none" stroke="#E2D7F3" stroke-width="2"/>
+  <rect x="29" y="23" width="29" height="4" rx="2" fill="#7753BD"/>
+  <rect x="29" y="33" width="11" height="3" rx="1.5" fill="#A18ACA"/>
+  <rect x="29" y="39" width="11" height="3" rx="1.5" fill="#B8A5D9"/>
+  <rect x="29" y="45" width="11" height="3" rx="1.5" fill="#B8A5D9"/>
+  <rect x="44" y="32" width="15" height="16" rx="3" fill="url(#photo)"/>
+  <path d="m46 44 4-5 3 3 4-6v8Z" fill="#D8CBF4"/>
+  <circle cx="49" cy="36" r="1.5" fill="#F5EFFF"/>
+  <path d="M29 54h29M29 60h23" stroke="#B8A5D9" stroke-width="3" stroke-linecap="round"/>
+  <path d="M10 17h5m-2.5-2.5v5" stroke="#B19AE0" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="68" cy="48" r="2.5" fill="#CAB5EA"/>
+</svg>

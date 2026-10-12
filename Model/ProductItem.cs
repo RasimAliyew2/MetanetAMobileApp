@@ -1,4 +1,5 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using MetanetA_MobileApp.Services.GetDataFromServer;
 using Microsoft.Maui.Controls;
 
 namespace MetanetA_MobileApp.Model;
@@ -17,11 +18,11 @@ public partial class ProductItem : ObservableObject
     [ObservableProperty]
     private string title = string.Empty;
 
-    // Köhnə lokal/URL image istifadəsi ilə uyğunluq üçün saxlanılıb.
+    // API-dən gələn HTTP/HTTPS linki və ya lokal şəkil adı.
     [ObservableProperty]
     private string imageUrl = string.Empty;
 
-    // API-dən gələcək Base64 image dəyəri burada saxlanılır.
+    // Əvvəlki API cavabları ilə uyğunluq üçün Base64 dəstəyi.
     [ObservableProperty]
     private string imageBase64 = string.Empty;
 
@@ -103,6 +104,14 @@ public partial class ProductItem : ObservableObject
         string? base64Value,
         string? fallbackUrlOrFile)
     {
+        // URL Base64 kimi decode edilmir. Köhnə modeldə URL ImageBase64
+        // sahəsinə yazılıbsa belə, siyahı və detal onu göstərə bilir.
+        if (ProductImageResolver.TryGetRemoteUri(fallbackUrlOrFile, out var remoteUri) ||
+            ProductImageResolver.TryGetRemoteUri(base64Value, out remoteUri))
+        {
+            return ImageSource.FromUri(remoteUri);
+        }
+
         if (!string.IsNullOrWhiteSpace(base64Value))
         {
             try
@@ -135,17 +144,7 @@ public partial class ProductItem : ObservableObject
 
         if (!string.IsNullOrWhiteSpace(fallbackUrlOrFile))
         {
-            if (Uri.TryCreate(
-                    fallbackUrlOrFile,
-                    UriKind.Absolute,
-                    out var imageUri) &&
-                (imageUri.Scheme == Uri.UriSchemeHttp ||
-                 imageUri.Scheme == Uri.UriSchemeHttps))
-            {
-                return ImageSource.FromUri(imageUri);
-            }
-
-            return ImageSource.FromFile(fallbackUrlOrFile);
+            return ImageSource.FromFile(fallbackUrlOrFile.Trim());
         }
 
         return ImageSource.FromFile("product.png");

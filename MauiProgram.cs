@@ -61,9 +61,27 @@ namespace MetanetA_MobileApp
             builder
              .UseMauiApp<App>()
              .UseMauiMaps()
-             .UseBarcodeReader()          // ZXing 0.4.0
+             .UseBarcodeReader()
              .UseMauiCommunityToolkit()
+             .ConfigureFonts(fonts =>
+             {
+                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+             })
              .RegisterFirebaseServices();
+
+            EntryHandler.Mapper.AppendToMapping("BrandSearchChrome", (handler, view) =>
+            {
+                if (view is not View.Controls.BrandSearchEntry)
+                    return;
+#if IOS || MACCATALYST
+                handler.PlatformView.BorderStyle = UIKit.UITextBorderStyle.None;
+                handler.PlatformView.BackgroundColor = UIKit.UIColor.Clear;
+#elif ANDROID
+                handler.PlatformView.Background = null;
+                handler.PlatformView.SetPadding(0, 0, 0, 0);
+#endif
+            });
 
 #if ANDROID
         EntryHandler.Mapper.AppendToMapping("NoUnderline", (handler, view) =>
@@ -232,7 +250,9 @@ namespace MetanetA_MobileApp
             {
 #if ANDROID
                 events.AddAndroid(android => android.OnCreate((activity, _) =>
-                    CrossFirebase.Initialize(activity)));
+                    CrossFirebase.Initialize(
+                        activity,
+                        () => Platform.CurrentActivity ?? activity)));
 #elif IOS
                 events.AddiOS(ios => ios.WillFinishLaunching((_, _) =>
                 {
