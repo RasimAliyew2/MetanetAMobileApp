@@ -25,7 +25,7 @@ public partial class QrScannerViewModel : BaseViewModel
         QRBonusNotifier = bonusNotifier;
         _userInfo = userSession.CurrentUser;
         _bonusesViewModel = bonusViewModel;
-         QrDetected("1234-12345");
+        // QrDetected("1234-12345");
 
     }
     [RelayCommand]
@@ -80,7 +80,7 @@ public partial class QrScannerViewModel : BaseViewModel
             catch (Exception ex)
             {
                 // nəsə səhv getsə görmək üçün
-                await Application.Current.MainPage.DisplayAlert("Xəta", ex.Message, "OK");
+                await Application.Current.MainPage.DisplayAlertAsync("Xəta", ex.Message, "OK");
             }
             finally
             {

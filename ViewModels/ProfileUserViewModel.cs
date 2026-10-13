@@ -141,7 +141,7 @@ namespace MetanetA_MobileApp.ViewModels
                 _originalSnapshot = CloneUser(Draft);
                 EvaluateChanges();
 
-                await Application.Current.MainPage.DisplayAlert(
+                await Application.Current.MainPage.DisplayAlertAsync(
                     "Hazır",
                     "Məlumatlar yadda saxlanıldı.",
                     "OK");

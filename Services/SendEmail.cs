@@ -17,7 +17,7 @@ namespace MetanetA_MobileApp.Services
         {
             if (!Email.Default.IsComposeSupported)
             {
-                await Application.Current.MainPage.DisplayAlert(
+                await Application.Current.MainPage.DisplayAlertAsync(
                     "E-posta", "Bu cihazda e-posta uygulaması yok ya da yapılandırılmamış.", "Tamam");
                 return;
             }
@@ -36,7 +36,7 @@ namespace MetanetA_MobileApp.Services
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("E-posta hatası", ex.Message, "Tamam");
+                await Application.Current.MainPage.DisplayAlertAsync("E-posta hatası", ex.Message, "Tamam");
             }
         }
         static string Md5Hex(string s)

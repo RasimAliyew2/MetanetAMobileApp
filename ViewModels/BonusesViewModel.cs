@@ -117,7 +117,7 @@ namespace MetanetA_MobileApp.ViewModels
         {
             if (CurrentBonus <= 0)
             {
-                await App.Current.MainPage.DisplayAlert(
+                await App.Current.MainPage.DisplayAlertAsync(
                     "Məlumat",
                     "Hədiyyəyə çevirmək üçün kifayət qədər bonus yoxdur.",
                     "OK");

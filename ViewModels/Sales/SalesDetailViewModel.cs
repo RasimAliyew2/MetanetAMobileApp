@@ -28,7 +28,7 @@ namespace MetanetA_MobileApp.ViewModels.Sales
 
             cart.Add(Item);
 
-            await Application.Current.MainPage.DisplayAlert(
+            await Application.Current.MainPage.DisplayAlertAsync(
                 "Əlavə edildi",
                 "Məhsul səbətə əlavə olundu.",
                 "OK");

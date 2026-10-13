@@ -126,7 +126,7 @@ public partial class ProfileViewModel : BaseViewModel
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Xəta", $"Şəkil seçilmədi: {ex.Message}", "OK");
+            await Shell.Current.DisplayAlertAsync("Xəta", $"Şəkil seçilmədi: {ex.Message}", "OK");
         }
     }
 
@@ -135,14 +135,14 @@ public partial class ProfileViewModel : BaseViewModel
     {
          await Shell.Current.GoToAsync($"//{nameof(OrdersPage)}");
         // hələlik boş – amma event var
-      //  await Shell.Current.DisplayAlert("Sifarişlərim", "96bölmə tezliklə əlavə olunacaq.", "OK");
+      //  await Shell.Current.DisplayAlertAsync("Sifarişlərim", "96bölmə tezliklə əlavə olunacaq.", "OK");
     }
 
     [RelayCommand]
     private async Task Cards()
     {
         // hələlik boş – amma event var
-        await Shell.Current.DisplayAlert("Kartlarım", "Bu bölmə tezliklə əlavə olunacaq.", "OK");
+        await Shell.Current.DisplayAlertAsync("Kartlarım", "Bu bölmə tezliklə əlavə olunacaq.", "OK");
     }
 
     [RelayCommand]
@@ -150,7 +150,7 @@ public partial class ProfileViewModel : BaseViewModel
     {
         // TODO: burda API/DB save edəcəksən
         CaptureSnapshot();
-        await Shell.Current.DisplayAlert("Yadda saxlanıldı", "Məlumatlar yadda saxlanıldı.", "OK");
+        await Shell.Current.DisplayAlertAsync("Yadda saxlanıldı", "Məlumatlar yadda saxlanıldı.", "OK");
     }
 
     [RelayCommand]

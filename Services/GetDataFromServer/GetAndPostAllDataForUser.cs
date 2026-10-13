@@ -69,7 +69,7 @@ public static class GetAndPostAllDataForUser
             var message = ex.ToString();
 
             await MainThread.InvokeOnMainThreadAsync(() =>
-                Shell.Current.DisplayAlert("HTTP ERROR", message, "OK"));
+                Shell.Current.DisplayAlertAsync("HTTP ERROR", message, "OK"));
 
             throw;
         }

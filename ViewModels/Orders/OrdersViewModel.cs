@@ -28,7 +28,7 @@ namespace MetanetA_MobileApp.ViewModels.Sales
             if (order.Status == "Ləğv edildi")
                 return;
 
-            bool answer = await Shell.Current.DisplayAlert(
+            bool answer = await Shell.Current.DisplayAlertAsync(
                 "Sifarişin ləğvi",
                 $"{order.OrderNumber} nömrəli sifarişi ləğv etmək istəyirsiniz?",
                 "Bəli",

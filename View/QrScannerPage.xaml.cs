@@ -32,7 +32,7 @@ public partial class QrScannerPage : ContentPage
 
         if (status != PermissionStatus.Granted)
         {
-            await DisplayAlert("Kamera icazəsi", "QR kodu skan etmək üçün kamera icazəsi verilməlidir.", "OK");
+            await DisplayAlertAsync("Kamera icazəsi", "QR kodu skan etmək üçün kamera icazəsi verilməlidir.", "OK");
             return;
         }
 

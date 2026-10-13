@@ -87,7 +87,7 @@ public partial class LocationMapPage : ContentPage, IQueryAttributable
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Xəta", $"Waze açıla bilmədi: {ex.Message}", "OK");
+            await DisplayAlertAsync("Xəta", $"Waze açıla bilmədi: {ex.Message}", "OK");
         }
     }
     private async void OnPinInfoWindowClicked(object? sender, PinClickedEventArgs e)
@@ -98,7 +98,7 @@ public partial class LocationMapPage : ContentPage, IQueryAttributable
         if (!_pinLookup.TryGetValue(pin, out var point))
             return;
 
-        await DisplayAlert(point.Title, point.Description, "Bağla");
+        await DisplayAlertAsync(point.Title, point.Description, "Bağla");
     }
 
     protected override bool OnBackButtonPressed()

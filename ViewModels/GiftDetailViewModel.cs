@@ -49,7 +49,7 @@ namespace MetanetA_MobileApp.ViewModels
 
                 
 
-                await Application.Current.MainPage.DisplayAlert(
+                await Application.Current.MainPage.DisplayAlertAsync(
                     "Əlavə edildi",
                     "Hədiyyə sifariş olundu.",
                     "OK");
